@@ -7,7 +7,6 @@ public class PursueBrain : Brain
     public bool avoidObstacle = true;
     public float minRange = 1.5f;
     public float avoidDistance = 4;
-    public LayerMask obstacleLayer;
 
     protected Animator animator;
     protected AliveEntity entityComp;
@@ -23,7 +22,7 @@ public class PursueBrain : Brain
     public override Vector3? Think(ThinkParam? param = null)
     {
         float distanceFromTarget = Vector2.Distance(transform.position, target.transform.position);
-        
+
         if (distanceFromTarget < minRange)
         {
             return Vector3.zero;
@@ -31,29 +30,16 @@ public class PursueBrain : Brain
 
         return target.transform.position;
 
-        /*
         Vector3 direction = target.transform.position - transform.position;
         float distanceToPlayer = direction.magnitude;
         direction.Normalize();
 
-        if (avoidObstacle && distanceToPlayer <= detectionRange)
+        if (avoidObstacle)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, distanceToPlayer, obstacleLayer);
-
-            if (hit.collider != null
-                && hit.distance <= avoidDistance
-            ) {
-                Vector3 avoidDirection = Vector3.Cross(Vector3.forward, direction);
-                
-                if (hit.normal.x > 0)
-                {
-                    direction = avoidDirection *= -1;
-                }
-            }
+            //
         }
 
         return direction;
-        */
     }
 
     public override short? Behave(BehaveParam? param = null)
@@ -72,5 +58,30 @@ public class PursueBrain : Brain
 
         return null;
     }
+
+    /*
+    private void Update()
+    {
+        if (target != null)
+        {
+            navMeshAgent.SetDestination(target.position);
+        }
+    }
+
+    // This method is called when the NavMeshAgent encounters an obstacle
+    private void OnObstacleAvoidanceEvent(List<Vector3> corners)
+    {
+        // Recalculate path to avoid obstacle
+        navMeshAgent.CalculatePath(target.position, new NavMeshPath());
+
+        // Loop through new corners and set the path
+        for (int i = 0; i < corners.Count - 1; i++)
+        {
+            NavMeshPath path = new NavMeshPath();
+            navMeshAgent.CalculatePath(corners[i + 1], path);
+            navMeshAgent.SetPath(path);
+        }
+    }
+    */
 
 }

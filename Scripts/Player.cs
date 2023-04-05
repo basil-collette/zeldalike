@@ -33,6 +33,9 @@ public class Player : AliveEntity
             return;
         }
 
+        direction.x = Input.GetAxis("Horizontal");
+        direction.y = Input.GetAxis("Vertical");
+
         Vector2 joystickInput = playerInputs.actions["Move"].ReadValue<Vector2>();
         if (joystickInput != Vector2.zero)
         {

@@ -10,17 +10,14 @@ public class Sign : MonoBehaviour
     public string dialog;
     public bool playerInRange;
 
-    //InputAction clickB;
-    //bool isButtonDown = false;
+    public Text debugText;
 
+    protected Animator animatorComp;
     protected bool isFacing = false;
 
     private void Start()
     {
-        /*
-        clickB = GetComponent<PlayerInput>().actions["B"];
-        clickB.canceled += OnUnpress;
-        */
+        
     }
 
     void Update()
@@ -28,10 +25,7 @@ public class Sign : MonoBehaviour
         if (playerInRange
             && isFacing
             && Gamepad.current[GamepadButton.South].wasPressedThisFrame
-            //&& clickB.ReadValue<float>() > 0//Input.GetMouseButtonDown(1)
         ) {
-            //isButtonDown = true;
-
             if (dialogBox.activeInHierarchy)
             {
                 dialogBox.SetActive(false);
@@ -43,30 +37,27 @@ public class Sign : MonoBehaviour
             }
         }
     }
-
-/*
-    void OnUnpress(InputAction.CallbackContext ctx) {
-        isButtonDown = false;
-    }
-*/
-    void OnTriggerEnter2D(Collider2D playerCollider)
+    
+    void OnTriggerEnter2D(Collider2D collider)
     {
-        if (playerCollider.CompareTag("Player"))
+        if (collider.CompareTag("Player"))
         {
             playerInRange = true;
 
-            SetIsFacing(playerCollider);
+            animatorComp = collider.GetComponent<Animator>();
+
+            SetIsFacing();
         }
     }
 
-    void OnTriggerExit2D(Collider2D playerCollider)
+    void OnTriggerExit2D(Collider2D collider)
     {
-        if (playerCollider.CompareTag("Player"))
+        if (collider.CompareTag("Player"))
         {
             playerInRange = false;
+            animatorComp = null;
             dialogBox.SetActive(false);
-
-            SetIsFacing(playerCollider);
+            isFacing = false;
         }
     }
 
@@ -74,13 +65,13 @@ public class Sign : MonoBehaviour
     {
         if (playerCollider.CompareTag("Player"))
         {
-            SetIsFacing(playerCollider);
+            SetIsFacing();
         }
     }
 
-    void SetIsFacing(Collider2D playerCollider)
+    void SetIsFacing()
     {
-        Animator animatorComp = playerCollider.GetComponent<Animator>();
+        //debugText.text = (animatorComp != null) ? "True" : "False";
         if (animatorComp != null)
         {
             AnimatorClipInfo[] animStateInfo = animatorComp.GetCurrentAnimatorClipInfo(0);
@@ -89,22 +80,13 @@ public class Sign : MonoBehaviour
                 || animStateInfo[0].clip.name == "walkUp")
             {
                 isFacing = true;
+                //debugText.text = "True";
                 return;
             }
         }
 
         isFacing = false;
+        //debugText.text = "False";
     }
 
-    /*
-        void OnDestroy()
-        {
-            clickB.canceled -= OnUnpress;
-        }
-
-        void OnDisable()
-        {
-            clickB.canceled -= OnUnpress;
-        }
-    */
 }

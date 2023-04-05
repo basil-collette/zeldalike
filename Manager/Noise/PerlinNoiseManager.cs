@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PerlinHelper : MonoBehaviour
+public class PerlinNoiseManager : MonoBehaviour
 {
     public int width = 256;
     public int height = 256;

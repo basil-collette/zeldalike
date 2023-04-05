@@ -1,11 +1,14 @@
+using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class LogThinker : Bot
 {
-    ChaseBrain chaseBrain;
-    SleeperBrain sleeperBrain;
-    PursueBrain pursueBrain;
-    //public AttackBrain attackBrain;
+    protected ChaseBrain chaseBrain;
+    protected SleeperBrain sleeperBrain;
+    protected PursueBrain pursueBrain;
+    protected AttackBrain attackBrain;
+    protected BoxCollider2D attackCollider;
 
     new void Start()
     {
@@ -14,7 +17,9 @@ public class LogThinker : Bot
         this.chaseBrain = GetComponent<ChaseBrain>();
         this.sleeperBrain = GetComponent<SleeperBrain>();
         this.pursueBrain = GetComponent<PursueBrain>();
-        //this.attackBrain = GetComponent<AttackBrain>();
+        this.attackBrain = GetComponent<AttackBrain>();
+
+        this.attackCollider = transform.GetChild(0).GetComponentInChildren<BoxCollider2D>();
 
         SetState(EntityState.sleep);
     }
@@ -25,28 +30,39 @@ public class LogThinker : Bot
             return;
 
         direction = chaseBrain.Think() ?? Vector3.zero;
-        
-        direction = sleeperBrain.Think(new SleeperThinkParam(direction != Vector3.zero)) ?? Vector3.zero;
 
         //On target not inside chaseRadius
-        if (direction == Vector3.zero)
+        if (sleeperBrain.Think(new SleeperThinkParam(direction != Vector3.zero)) == Vector3.zero)
         {
             return;
         }
 
-        if (currentEntityState != EntityState.sleep)
+        if (currentEntityState == EntityState.sleep)
         {
-            direction = pursueBrain.Think() ?? Vector3.zero;
-            //On target not inside attackRadius
-            if (direction != Vector3.zero)
-            {
-                SetState(EntityState.walk);
-                return;
-            }
-
-            animator.SetBool("moving", false);
-            SetState(EntityState.idle);
+            return;
         }
+
+        direction = pursueBrain.Think() ?? Vector3.zero;
+        //On target not inside attackRadius
+        if (direction != Vector3.zero)
+        {
+            SetState(EntityState.walk);
+            return;
+        }
+
+        AttackThinkParam para = new AttackThinkParam()
+        {
+            targetPos = target.position,
+            attackCollider = this.attackCollider
+        };
+        if (attackBrain.Think(para) != Vector3.zero)
+        {
+            SetState(EntityState.attack);
+            animator.SetBool("moving", false);
+            return;
+        }
+        
+        SetState(EntityState.idle);
     }
 
     void FixedUpdate()
@@ -68,9 +84,13 @@ public class LogThinker : Bot
             case EntityState.attack:
                 if (!animator.GetBool("attacking"))
                 {
-                    //AttackBehaveParam params = new AttackBehaveParam();
-                    //attackBrain.Behave(params);
-                    animator.SetBool("attacking", true);
+                    AttackBehaveParam para = new AttackBehaveParam()
+                    {
+                        attackDuration = 1,
+                        cooldown = 1,
+                        attackCollider = this.attackCollider
+                    };
+                    attackBrain.Behave();
                 }
                 break;
 

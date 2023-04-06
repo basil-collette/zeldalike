@@ -8,12 +8,15 @@ public class Player : AliveEntity
     public int baseAttack = 1;
     public HoldableItem hand;
     public List<HoldableItem> hotbar = new List<HoldableItem>();
+    public VectorValue startingPosition;
 
     PlayerInput playerInputs;
 
     void Start()
     {
         base.Start();
+
+        transform.position = startingPosition.initalValue;
 
         SetState(EntityState.walk);
 

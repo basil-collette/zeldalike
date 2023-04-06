@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "ScriptableObject/Float")]
+[CreateAssetMenu(menuName="ScriptableObject/Float")]
 public class FloatValue : ScriptableObject, ISerializationCallbackReceiver
 {
     public float initialValue = 1;

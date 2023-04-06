@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RoomMove : MonoBehaviour
+public class RoomTransitor : MonoBehaviour
 {
     //public Vector2 cameraChange; //Pas besoin grace aux minPos et maxPos
     public Vector3 playerChange;

@@ -6,7 +6,7 @@ public abstract class AliveEntity : Entity
     public float moveSpeed = 1;
     public float nearRadius = 1;
 
-    protected Vector3 direction;
+    [HideInInspector] public Vector3 direction;
     protected Animator animator;
 
     protected void Start()

@@ -44,12 +44,17 @@ public abstract class TransformHelper
 
     public static Vector3 GetAxis(Vector3 position)
     {
+        if (position == Vector3.zero)
+        {
+            return Vector3.zero;
+        }
+
         float angleUp = Vector3.Angle(position, Vector3.up);
         float angleLeft = Vector3.Angle(position, Vector3.left);
         float angleRight = Vector3.Angle(position, Vector3.right);
         float angleDown = Vector3.Angle(position, Vector3.down);
 
-        float minAngle = Mathf.Min(angleUp, angleLeft, angleRight, angleDown);
+        float minAngle = Mathf.Min(angleDown, angleLeft, angleRight, angleUp);
 
         if (minAngle == angleUp) { return Vector3.up; }
         else if (minAngle == angleLeft) { return Vector3.left; }

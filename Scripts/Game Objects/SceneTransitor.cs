@@ -1,93 +1,89 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class SceneTransitor : MonoBehaviour
 {
     public string sceneToLoad;
-    public Vector2 playerPosition;
-    public VectorValue playerStorage;
+    bool usePreload;
+    public bool needPreload = false;
+    public Vector2 playerNextPosition;
+    public VectorValue playerPositionStorage;
 
-    public void OnTriggerEnter2D(Collider2D other)
+    void Start()
+    {
+        var askedScene = SceneManager.GetSceneByName(sceneToLoad);
+        if (askedScene.IsValid())
+        {
+            throw new InvalidOperationException("Cannot find the scene named : \"" + sceneToLoad + "\".");
+        }
+
+        if (needPreload)
+        {
+            usePreload = false;
+            StartCoroutine(PreloadScene());
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (needPreload && !usePreload)
+        {
+            SceneManager.UnloadSceneAsync(sceneToLoad);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !other.isTrigger)
         {
-            playerStorage.initalValue = playerPosition;
-            SceneManager.LoadScene(sceneToLoad);
-            //StartCoroutine(ResetSceneAsync());
-        }
-    }
+            playerPositionStorage.initalValue = playerNextPosition;
 
-    IEnumerator ResetSceneAsync()
-    {
-        /*
-        if (SceneManager.sceneCount > 1)
-        {
-            AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync("LevelScene");
-            while (!asyncUnload.isDone)
+            AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+            unloadOp.completed += (AsyncOperation op) =>
             {
-                yield return null;
-            }
-            Resources.UnloadUnusedAssets();
-        }
-        */
-
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneToLoad));
-        /*
-        m_LevelBuilder.Build();
-
-        m_Player = FindObjectOfType<Player>();
-        this.boxes = FindObjectsOfType<Box>();
-        this.m_Player = FindObjectOfType<Player>();
-        */
-    }
-
-    /*
-    public void NextLevel()
-    {
-        Build();
-        StartCoroutine(ResetSceneAsync());
-    }
-
-    public void Build()
-    {
-        m_Level = GetComponent<Levels>().m_Levels[m_CurrentLevel];
-
-        int startX = -m_Level.Width / 2;
-        int x = startX;
-        int y = -m_Level.Height / 2;
-
-        foreach (var row in m_Level.m_Rows)
-        {
-            foreach (var ch in row)
-            {
-                LevelElement levelPrefab = GetPrefab(ch);
-                if (levelPrefab != null)
+                if (needPreload)
                 {
-                    GameObject gameObject = Instantiate(levelPrefab.m_Prefab, new Vector3(x, y, 0), Quaternion.identity);
-
-                    Renderer renderer = gameObject.GetComponent<Renderer>();
-                    if (renderer != null) renderer.sortingOrder = levelPrefab.layerOrder;
+                    usePreload = true;
                 }
-                x++;
-            }
-            y++;
-
-            x = startX;
+                else
+                {
+                    AsyncOperation loadOp = SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
+                    loadOp.completed += (AsyncOperation op) =>
+                    {
+                        SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneToLoad));
+                    };
+                }
+            };
         }
     }
 
-    public void ResetScene()
+    IEnumerator PreloadScene()
     {
-        StartCoroutine(ResetSceneAsync());
+        yield return null;
+
+        AsyncOperation asyncLoadOp = SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
+        asyncLoadOp.allowSceneActivation = false;
+
+        while (!asyncLoadOp.isDone)
+        {
+            //Debug.Log("Loading progress: " + (asyncLoadOp.progress * 100) + "%");
+
+            if (asyncLoadOp.progress >= 0.9f)
+            {
+                if (usePreload)
+                {
+                    asyncLoadOp.allowSceneActivation = true;
+
+                    yield return null;
+
+                    SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneToLoad));
+                }
+            }
+
+            yield return new WaitForFixedUpdate();
+        }
     }
-    */
 
 }

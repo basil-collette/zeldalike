@@ -30,6 +30,7 @@ public class PursueBrain : Brain
 
         return target.transform.position;
 
+        /*
         Vector3 direction = target.transform.position - transform.position;
         float distanceToPlayer = direction.magnitude;
         direction.Normalize();
@@ -40,6 +41,7 @@ public class PursueBrain : Brain
         }
 
         return direction;
+        */
     }
 
     public override short? Behave(BehaveParam? param = null)

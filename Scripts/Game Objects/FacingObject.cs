@@ -3,8 +3,8 @@
 public abstract class FacingObject : MonoBehaviour
 {
     protected bool playerInRange;
-    protected Animator animatorComp;
     protected bool isFacing = false;
+    protected AliveEntity entity;
 
     private void Start()
     {
@@ -14,10 +14,13 @@ public abstract class FacingObject : MonoBehaviour
     void FixedUpdate()
     {
         if (playerInRange
-            && isFacing
-        )
+            && isFacing)
         {
             OnFacing();
+        }
+        else
+        {
+            OnQuitFacing();
         }
     }
 
@@ -25,10 +28,17 @@ public abstract class FacingObject : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
+            entity = collider.GetComponent<AliveEntity>();
             playerInRange = true;
 
-            animatorComp = collider.GetComponent<Animator>();
+            SetIsFacing();
+        }
+    }
 
+    private void OnTriggerStay2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Player"))
+        {
             SetIsFacing();
         }
     }
@@ -38,33 +48,21 @@ public abstract class FacingObject : MonoBehaviour
         if (collider.CompareTag("Player"))
         {
             playerInRange = false;
-            animatorComp = null;
+            isFacing = false;
 
             OnQuitFacing();
         }
     }
 
-    private void OnTriggerStay2D(Collider2D playerCollider)
-    {
-        if (playerCollider.CompareTag("Player"))
-        {
-            SetIsFacing();
-        }
-    }
-
     void SetIsFacing()
     {
-        //debugText.text = (animatorComp != null) ? "True" : "False";
-        if (animatorComp != null)
+        if (TransformHelper.GetAxis(entity.direction) == Vector3.up)
         {
-            AnimatorClipInfo[] animStateInfo = animatorComp.GetCurrentAnimatorClipInfo(0);
-
-            if (animStateInfo[0].clip.name == "idleUp"
-                || animStateInfo[0].clip.name == "walkUp")
-            {
-                isFacing = true;
-            }
+            isFacing = true;
+            return;
         }
+
+        isFacing = false;
     }
 
     protected abstract void OnFacing();

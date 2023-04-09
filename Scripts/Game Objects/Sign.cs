@@ -5,14 +5,15 @@ public class Sign : FacingObject
 {
     public GameObject dialogBox;
     public Text dialogText;
+
     public string dialog;
-    public Text debugText;
 
     protected bool isShowed = false;
 
     private void Start()
     {
-        //
+        dialogBox = FindGameObjectHelper.FindInactiveObjectByName("DialogBox");
+        dialogText = dialogBox.GetComponentInChildren<Text>();
     }
 
     void Update()

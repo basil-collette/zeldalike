@@ -52,15 +52,6 @@ public class Player : AliveEntity
         }
     }
 
-    public void Attack()
-    {
-        if (currentEntityState != EntityState.attack
-            && currentEntityState != EntityState.unavailable)
-        {
-            SetState(EntityState.attack);
-        }
-    }
-
     void FixedUpdate()
     {
         if (currentEntityState == EntityState.unavailable)
@@ -96,6 +87,74 @@ public class Player : AliveEntity
         else
         {
             Imobilize();
+        }
+    }
+
+    /*
+    void Update()
+    {
+        if (currentEntityState == EntityState.unavailable)
+            return;
+
+        direction = Vector3.zero;
+
+        if (currentEntityState == EntityState.attack)
+        {
+            Imobilize();
+            return;
+        }
+
+        direction.x = Input.GetAxis("Horizontal");
+        direction.y = Input.GetAxis("Vertical");
+
+        Vector2 joystickInput = playerInputs.actions["Move"].ReadValue<Vector2>();
+        if (joystickInput != Vector2.zero)
+        {
+            direction.x = joystickInput.x;
+            direction.y = joystickInput.y;
+        }
+
+        if (direction != Vector3.zero)
+        {
+            SetState(EntityState.walk);
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (currentEntityState == EntityState.unavailable)
+            return;
+
+        if (currentEntityState != EntityState.walk
+            || direction == Vector3.zero)
+        {
+            Imobilize();
+        }
+
+        if (currentEntityState == EntityState.attack
+            && !animator.GetBool("attacking"))
+        {
+            StartCoroutine(AttackCo());
+        }
+
+        direction.Normalize();
+
+        //rigidbody.MovePosition(transform.position + (direction.normalized * moveSpeed * Time.fixedDeltaTime));
+
+        rigidbody.velocity = new Vector2(direction.x * moveSpeed, direction.y * moveSpeed);
+
+        animator.SetFloat("moveX", direction.x);
+        animator.SetFloat("moveY", direction.y);
+        animator.SetBool("moving", true);
+    }
+    */
+
+    public void Attack()
+    {
+        if (currentEntityState != EntityState.attack
+            && currentEntityState != EntityState.unavailable)
+        {
+            SetState(EntityState.attack);
         }
     }
 

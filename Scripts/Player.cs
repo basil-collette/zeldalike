@@ -29,11 +29,20 @@ public class Player : AliveEntity
         if (currentEntityState == EntityState.unavailable)
             return;
 
+        if (currentEntityState == EntityState.attack)
+        {
+            Imobilize();
+            return;
+        }
+
         direction = Vector3.zero;
 
         if (Gamepad.current[GamepadButton.East].wasPressedThisFrame)
         {
-            SetState(EntityState.attack);
+            if (currentEntityState != EntityState.unavailable)
+            {
+                SetState(EntityState.attack);
+            }
             return;
         }
 
@@ -62,8 +71,10 @@ public class Player : AliveEntity
         {
             if (!animator.GetBool("attacking"))
             {
+                animator.SetBool("attacking", true);
                 StartCoroutine(AttackCo());
             }
+            return;
         }
 
         if (currentEntityState == EntityState.walk)
@@ -121,23 +132,14 @@ public class Player : AliveEntity
     }
     */
 
-    public void Attack()
-    {
-        if (currentEntityState != EntityState.attack
-            && currentEntityState != EntityState.unavailable)
-        {
-            SetState(EntityState.attack);
-        }
-    }
-
     public IEnumerator AttackCo()
     {
-        animator.SetBool("attacking", true);
-
         yield return new WaitForSecondsRealtime(.25f);
 
-        SetState(EntityState.walk);
         animator.SetBool("attacking", false);
+
+        if (currentEntityState != EntityState.unavailable)
+            SetState(EntityState.walk);
     }
 
     public bool IsAttackingAnimation(AnimatorStateInfo animStateInfo)

@@ -5,7 +5,6 @@ public class Sign : FacingObject
 {
     public GameObject dialogBox;
     public Text dialogText;
-
     public string dialog;
 
     protected bool isShowed = false;

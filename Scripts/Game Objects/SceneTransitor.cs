@@ -11,8 +11,12 @@ public class SceneTransitor : MonoBehaviour
     public Vector2 playerNextPosition;
     public VectorValue playerPositionStorage;
 
+    SceneLoadingManager sceneManager;
+
     void Start()
     {
+        sceneManager = GetComponent<SceneLoadingManager>();
+
         var askedScene = SceneManager.GetSceneByName(sceneToLoad);
         if (askedScene.IsValid())
         {
@@ -40,6 +44,17 @@ public class SceneTransitor : MonoBehaviour
         {
             playerPositionStorage.initalValue = playerNextPosition;
 
+            SceneManager.UnloadScene(SceneManager.GetActiveScene());
+            if (needPreload)
+            {
+                usePreload = true;
+            }
+            else
+            {
+                SceneManager.LoadScene(sceneToLoad); //, LoadSceneMode.Additive
+                SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneToLoad));
+            }
+            /*
             AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
             unloadOp.completed += (AsyncOperation op) =>
             {
@@ -49,13 +64,14 @@ public class SceneTransitor : MonoBehaviour
                 }
                 else
                 {
-                    AsyncOperation loadOp = SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
+                    AsyncOperation loadOp = SceneManager.LoadSceneAsync(sceneToLoad); //, LoadSceneMode.Additive
                     loadOp.completed += (AsyncOperation op) =>
                     {
                         SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneToLoad));
                     };
                 }
             };
+            */
         }
     }
 
@@ -65,7 +81,7 @@ public class SceneTransitor : MonoBehaviour
 
         AsyncOperation asyncLoadOp = SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
         asyncLoadOp.allowSceneActivation = false;
-
+        
         while (!asyncLoadOp.isDone)
         {
             //Debug.Log("Loading progress: " + (asyncLoadOp.progress * 100) + "%");

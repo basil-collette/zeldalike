@@ -13,12 +13,20 @@ public class StartGameManager : MonoBehaviour //SignletonGameObject<StartGameMan
     {
         initialPlayerPos.initalValue = START_PLAYER_POS;
 
-        AsyncOperation loadOp = SceneManager.LoadSceneAsync(START_SCENE_NAME, LoadSceneMode.Additive);
-        loadOp.completed += (AsyncOperation op) =>
+        StartCoroutine(StartFirstSceneCo());
+    }
+
+    IEnumerator StartFirstSceneCo()
+    {
+        AsyncOperation loadOp = SceneManager.LoadSceneAsync(START_SCENE_NAME, LoadSceneMode.Single); //, LoadSceneMode.Additive
+
+        while (!loadOp.isDone)
         {
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(START_SCENE_NAME));
-            DestroyImmediate(gameObject);
-        };
+            yield return null;
+        }
+
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(START_SCENE_NAME));
+        //DestroyImmediate(gameObject);
     }
 
 }

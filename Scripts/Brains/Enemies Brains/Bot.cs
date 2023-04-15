@@ -2,6 +2,7 @@
 
 public abstract class Bot : AliveEntity
 {
+    public string targetTag = "Player";
     public Transform target;
     public float chaseRadius = 6f;
     public float attackRadius = 1f;
@@ -25,7 +26,7 @@ public abstract class Bot : AliveEntity
 
         this.targetting = false;
         //target = FindObjectOfType<Player>();
-        this.target = GameObject.FindGameObjectWithTag("Player").transform;
+        this.target = GameObject.FindGameObjectWithTag(targetTag).transform;
 
         this.nearRadius = this.attackRadius;
     }

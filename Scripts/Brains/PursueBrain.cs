@@ -1,89 +1,114 @@
+using System;
 using UnityEngine;
 
 public class PursueBrain : Brain
 {
-    public string targetTag = "Player";
-    public GameObject target;
+    public float pursueDistance = 4;
+    public float meleeDistance = 1.5f;
     public bool avoidObstacle = true;
-    public float minRange = 1.5f;
-    public float avoidDistance = 4;
 
     protected Animator animator;
-    protected AliveEntity entityComp;
+    protected float targetMoveSpeed;
+    protected float selfColliderSize;
+    protected bool preferClockwise = true;
 
     private void Start()
     {
-        this.target = GameObject.FindGameObjectWithTag(targetTag);
-
-        this.animator = GetComponent<Animator>();
-        this.entityComp = GetComponent<AliveEntity>();
+        targetMoveSpeed = GetComponent<AliveEntity>().moveSpeed;
+        animator = GetComponent<Animator>();
+        
+        Vector2 collidArea = GetComponent<BoxCollider2D>().size;
+        selfColliderSize = Math.Max(collidArea.x, collidArea.y) / 2;
     }
 
     public override Vector3? Think(ThinkParam? param = null)
     {
-        float distanceFromTarget = Vector2.Distance(transform.position, target.transform.position);
+        Transform target = ((TargetThinkParam)param).target;
+        Vector3 targetPos = target.position;
 
-        if (distanceFromTarget < minRange)
+        float distanceFromTarget = Vector2.Distance(transform.position, targetPos);
+
+        if (distanceFromTarget < meleeDistance)
         {
             return Vector3.zero;
         }
 
-        return target.transform.position;
-
-        /*
-        Vector3 direction = target.transform.position - transform.position;
-        float distanceToPlayer = direction.magnitude;
-        direction.Normalize();
-
-        if (avoidObstacle)
+        if (!avoidObstacle)
         {
-            //
+            return targetPos;
         }
 
-        return direction;
-        */
+        return GetAvoidingDirection(target);
     }
 
-    public override short? Behave(BehaveParam? param = null)
+    public override short? Behave(BehaveParam param = null)
     {
-        Vector3 direction = ((PursueBehaveParam)param).direction;
+        Vector3 targetPos = ((TargetPosBehaveParam)param).targetPos;
 
         //pursueComp.MoveTowardsTarget(direction);
-        transform.position = Vector2.MoveTowards(transform.position, direction, entityComp.moveSpeed * Time.fixedDeltaTime);
         //rigidBody.velocity = Vector2.MoveTowards(transform.position, direction, entityComp.moveSpeed * Time.fixedDeltaTime);
 
-        Vector3 directionAnim = (direction - transform.position).normalized;
+        transform.position = Vector2.MoveTowards(
+            transform.position,
+            targetPos,
+            targetMoveSpeed * Time.fixedDeltaTime);
 
-        animator.SetBool("moving", true);
-        animator.SetFloat("moveX", directionAnim.x);
-        animator.SetFloat("moveY", directionAnim.y);
+        SetAnimation(DirectionHelper.GetRelativeAxis(transform.position, targetPos).normalized);
 
         return null;
     }
 
-    /*
-    private void Update()
+    protected void SetAnimation(Vector3 direction)
     {
-        if (target != null)
-        {
-            navMeshAgent.SetDestination(target.position);
-        }
+        animator.SetBool("moving", true);
+        animator.SetFloat("moveX", direction.x);
+        animator.SetFloat("moveY", direction.y);
     }
 
-    // This method is called when the NavMeshAgent encounters an obstacle
-    private void OnObstacleAvoidanceEvent(List<Vector3> corners)
+    protected Vector3 GetAvoidingDirection(Transform target)
     {
-        // Recalculate path to avoid obstacle
-        navMeshAgent.CalculatePath(target.position, new NavMeshPath());
+        Vector3 targetPos = target.position;
+        Vector3 direction = DirectionHelper.GetDirection(transform.position, targetPos);
 
-        // Loop through new corners and set the path
-        for (int i = 0; i < corners.Count - 1; i++)
+        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, direction, pursueDistance);
+        if (hitInfo.collider == null
+            || ReferenceEquals(hitInfo.transform.gameObject, target.gameObject))
         {
-            NavMeshPath path = new NavMeshPath();
-            navMeshAgent.CalculatePath(corners[i + 1], path);
-            navMeshAgent.SetPath(path);
+            return targetPos;
         }
+
+        float angle = GetAngleDependingOfObstacleDistance(hitInfo.distance);
+
+        return GetAvoidingAngledDirection(direction, angle);
     }
-    */
+
+    public Vector3 GetAvoidingAngledDirection(Vector3 direction, float angle)
+    {
+        Vector3 clockwiseDirection = DirectionHelper.RotateVector3DirectionByAngle(direction, angle);
+        Vector3 antiClockwiseDirection = DirectionHelper.RotateVector3DirectionByAngle(direction, -angle);
+
+        bool clockwiseIsBetter;
+        if (preferClockwise)
+        {
+            clockwiseIsBetter = ColliderHelper.FirstDirectionHaveLessCollisions(clockwiseDirection, antiClockwiseDirection, transform.position, meleeDistance);
+            preferClockwise = clockwiseIsBetter;
+        }
+        else
+        {
+            clockwiseIsBetter = ColliderHelper.FirstDirectionHaveLessCollisions(antiClockwiseDirection, clockwiseDirection, transform.position, meleeDistance);
+            preferClockwise = !clockwiseIsBetter;
+        }
+
+        return ((preferClockwise) ? clockwiseDirection : antiClockwiseDirection) + transform.position;
+
+        //Debug.DrawRay(transform.position, direction, Color.red, 0.01f);
+    }
+
+    protected float GetAngleDependingOfObstacleDistance(float colliderDistance)
+    {        
+        float angle = 95f; // max angle degree of side rotation
+        float colliderDistancePercentile = 100f - (Math.Max(0, colliderDistance - selfColliderSize) / pursueDistance) * 100f; // (100 - result) to invert the percentile
+        return angle / 100f * colliderDistancePercentile;
+    }
 
 }

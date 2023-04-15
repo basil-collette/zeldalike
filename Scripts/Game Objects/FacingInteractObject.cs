@@ -5,7 +5,7 @@ using UnityEngine.InputSystem.LowLevel;
 public abstract class FacingInteractObject : MonoBehaviour
 {
     protected bool playerInRange;
-    protected Animator animatorComp;
+    protected AliveEntity entity;
     protected bool isFacing = false;
 
     void FixedUpdate()
@@ -25,7 +25,7 @@ public abstract class FacingInteractObject : MonoBehaviour
         {
             playerInRange = true;
 
-            animatorComp = collider.GetComponent<Animator>();
+            entity = collider.GetComponent<AliveEntity>();
 
             SetIsFacing();
         }
@@ -36,7 +36,6 @@ public abstract class FacingInteractObject : MonoBehaviour
         if (collider.CompareTag("Player"))
         {
             playerInRange = false;
-            animatorComp = null;
             isFacing = false;
 
             OnQuitFacing();
@@ -53,16 +52,9 @@ public abstract class FacingInteractObject : MonoBehaviour
 
     protected virtual void SetIsFacing()
     {
-        //debugText.text = (animatorComp != null) ? "True" : "False";
-        if (animatorComp != null)
+        if (DirectionHelper.IsFacingUp(entity.direction))
         {
-            AnimatorClipInfo[] animStateInfo = animatorComp.GetCurrentAnimatorClipInfo(0);
-
-            if (animStateInfo[0].clip.name == "idleUp"
-                || animStateInfo[0].clip.name == "walkUp")
-            {
-                isFacing = true;
-            }
+            isFacing = true;
         }
     }
 

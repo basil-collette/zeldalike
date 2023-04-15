@@ -17,6 +17,7 @@ public class StartGameManager : MonoBehaviour //SignletonGameObject<StartGameMan
         loadOp.completed += (AsyncOperation op) =>
         {
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(START_SCENE_NAME));
+            DestroyImmediate(gameObject);
         };
     }
 

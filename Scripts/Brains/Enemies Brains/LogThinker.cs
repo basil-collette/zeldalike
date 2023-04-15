@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 public class LogThinker : Bot
 {
@@ -14,13 +12,12 @@ public class LogThinker : Bot
     {
         base.Start();
 
-        this.chaseBrain = GetComponent<ChaseBrain>();
-        this.sleeperBrain = GetComponent<SleeperBrain>();
-        this.pursueBrain = GetComponent<PursueBrain>();
-        this.attackBrain = GetComponent<AttackBrain>();
-
-        this.attackCollider = transform.GetChild(0).GetComponentInChildren<BoxCollider2D>();
-
+        attackCollider = transform.GetChild(0).GetComponentInChildren<BoxCollider2D>();
+        chaseBrain = GetComponent<ChaseBrain>();
+        sleeperBrain = GetComponent<SleeperBrain>();
+        pursueBrain = GetComponent<PursueBrain>();
+        attackBrain = GetComponent<AttackBrain>();
+        
         SetState(EntityState.sleep);
     }
 
@@ -29,7 +26,7 @@ public class LogThinker : Bot
         if (currentEntityState == EntityState.unavailable)
             return;
 
-        direction = chaseBrain.Think() ?? Vector3.zero;
+        direction = chaseBrain.Think(new TargetThinkParam() { target = this.target }) ?? Vector3.zero;
 
         //On target not inside chaseRadius
         if (sleeperBrain.Think(new SleeperThinkParam(direction != Vector3.zero)) == Vector3.zero)
@@ -42,7 +39,7 @@ public class LogThinker : Bot
             return;
         }
 
-        direction = pursueBrain.Think() ?? Vector3.zero;
+        direction = pursueBrain.Think(new TargetThinkParam() { target = this.target }) ?? Vector3.zero;
         //On target not inside attackRadius
         if (direction != Vector3.zero)
         {
@@ -71,6 +68,7 @@ public class LogThinker : Bot
             return;
 
         rigidbody.velocity = Vector3.zero;
+        rigidbody.inertia = 0;
 
         switch (currentEntityState)
         {
@@ -90,13 +88,12 @@ public class LogThinker : Bot
                         cooldown = 1,
                         attackCollider = this.attackCollider
                     };
-                    attackBrain.Behave();
+                    attackBrain.Behave(para);
                 }
                 break;
 
             case EntityState.walk:
-                pursueBrain.Behave(new PursueBehaveParam()
-                    { direction = this.direction });
+                pursueBrain.Behave(new TargetPosBehaveParam() { targetPos = this.direction });
                 break;
 
             default: break;

@@ -56,7 +56,7 @@ public abstract class FacingObject : MonoBehaviour
 
     void SetIsFacing()
     {
-        if (TransformHelper.GetAxis(entity.direction) == Vector3.up)
+        if (DirectionHelper.IsFacingUp(entity.direction))
         {
             isFacing = true;
             return;

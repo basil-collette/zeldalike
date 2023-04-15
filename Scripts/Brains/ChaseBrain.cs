@@ -2,23 +2,41 @@
 
 public class ChaseBrain : Brain
 {
-    public string targetTag = "Player";
-    public GameObject target;
     public float detectionRange = 4;
+    public bool needDirectSee = true;
+
+    protected Vector3 lastPositionKnown;
 
     private void Start()
     {
-        this.target = GameObject.FindGameObjectWithTag(targetTag);
+        //
     }
 
-    public override Vector3? Think(ThinkParam param = null)
+    public override Vector3? Think(ThinkParam param)
     {
-        if (Vector2.Distance(transform.position, target.transform.position) > detectionRange)
+        Transform target = ((TargetThinkParam)param).target;
+        Vector3 targetPos = target.position;
+
+        if (Vector2.Distance(transform.position, targetPos) > detectionRange)
         {
             return Vector3.zero;
         }
 
-        return target.transform.position;
+        if (!needDirectSee)
+        {
+            return targetPos;
+        }
+
+        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, (targetPos - transform.position), detectionRange);
+        if (hitInfo == null
+            || ReferenceEquals(hitInfo.transform.gameObject, target.gameObject))
+        {
+            lastPositionKnown = targetPos;
+
+            return lastPositionKnown;
+        }
+
+        return lastPositionKnown;
     }
 
     public override short? Behave(BehaveParam param)

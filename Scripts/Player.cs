@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 
 public class Player : AliveEntity
 {
@@ -30,9 +31,9 @@ public class Player : AliveEntity
 
         direction = Vector3.zero;
 
-        if (currentEntityState == EntityState.attack)
+        if (Gamepad.current[GamepadButton.East].wasPressedThisFrame)
         {
-            Imobilize();
+            SetState(EntityState.attack);
             return;
         }
 
@@ -91,35 +92,6 @@ public class Player : AliveEntity
     }
 
     /*
-    void Update()
-    {
-        if (currentEntityState == EntityState.unavailable)
-            return;
-
-        direction = Vector3.zero;
-
-        if (currentEntityState == EntityState.attack)
-        {
-            Imobilize();
-            return;
-        }
-
-        direction.x = Input.GetAxis("Horizontal");
-        direction.y = Input.GetAxis("Vertical");
-
-        Vector2 joystickInput = playerInputs.actions["Move"].ReadValue<Vector2>();
-        if (joystickInput != Vector2.zero)
-        {
-            direction.x = joystickInput.x;
-            direction.y = joystickInput.y;
-        }
-
-        if (direction != Vector3.zero)
-        {
-            SetState(EntityState.walk);
-        }
-    }
-
     void FixedUpdate()
     {
         if (currentEntityState == EntityState.unavailable)
@@ -162,22 +134,10 @@ public class Player : AliveEntity
     {
         animator.SetBool("attacking", true);
 
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSecondsRealtime(.25f);
 
         SetState(EntityState.walk);
         animator.SetBool("attacking", false);
-
-        /*
-        animator.SetBool("attacking", true);
-        
-
-        AnimatorStateInfo animStateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        if (IsAttackingAnimation(animStateInfo)
-            && animStateInfo.normalizedTime == 1.0f)
-        {
-            SetState(EntityState.idle);
-        }
-        */
     }
 
     public bool IsAttackingAnimation(AnimatorStateInfo animStateInfo)

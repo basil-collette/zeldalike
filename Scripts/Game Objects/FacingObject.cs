@@ -62,6 +62,11 @@ public abstract class FacingObject : MonoBehaviour
             return;
         }
 
+        if (isFacing && entity.direction == Vector3.zero)
+        {
+            return;
+        }
+
         isFacing = false;
     }
 

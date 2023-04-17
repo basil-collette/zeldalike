@@ -12,9 +12,16 @@ public class SceneTransitor : MonoBehaviour
     public VectorValue playerPositionStorage;
 
     SceneLoadingManager sceneManager;
+    Canvas canvas;
+    public GameObject fadeInPanel;
 
     void Start()
     {
+        /*canvas = FindAnyObjectByType<Canvas>();
+        GameObject panel = Instantiate(fadeInPanel, Vector3.zero, Quaternion.identity);
+        panel.transform.SetParent(canvas.transform, false);
+        Destroy(panel, 1);*/
+
         sceneManager = GetComponent<SceneLoadingManager>();
 
         var askedScene = SceneManager.GetSceneByName(sceneToLoad);
@@ -44,16 +51,20 @@ public class SceneTransitor : MonoBehaviour
         {
             playerPositionStorage.initalValue = playerNextPosition;
 
-            SceneManager.UnloadScene(SceneManager.GetActiveScene());
-            if (needPreload)
-            {
-                usePreload = true;
-            }
-            else
-            {
-                SceneManager.LoadScene(sceneToLoad); //, LoadSceneMode.Additive
-                SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneToLoad));
-            }
+            Action onEndingUnloadSceneAction = () => {
+                if (needPreload)
+                {
+                    usePreload = true;
+                }
+                else
+                {
+                    Action onEndingLoadSceneAction = () => { SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneToLoad)); };
+                    sceneManager.LoadScene(sceneToLoad, onEndingLoadSceneAction);
+                }
+            };
+
+            sceneManager.UnloadScene(SceneManager.GetActiveScene().name, onEndingUnloadSceneAction);
+
             /*
             AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
             unloadOp.completed += (AsyncOperation op) =>

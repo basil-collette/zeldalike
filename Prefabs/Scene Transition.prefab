@@ -71,6 +71,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abc48b0d76e5c084b91f22d6533522ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: HomeScene
-  playerPosition: {x: 0, y: 0}
-  playerStorage: {fileID: 11400000, guid: 6998fd47cd0ad4d4eb8a85262c147f3f, type: 2}
+  sceneToLoad: 
+  needPreload: 0
+  playerNextPosition: {x: 0, y: 0}
+  playerPositionStorage: {fileID: 11400000, guid: 6998fd47cd0ad4d4eb8a85262c147f3f, type: 2}
+  fadeInPanel: {fileID: 0}

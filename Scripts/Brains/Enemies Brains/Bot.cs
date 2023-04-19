@@ -17,11 +17,16 @@ public abstract class Bot : AliveEntity
         Health healthComp = GetComponent<Health>();
         if (healthComp != null)
         {
+            healthComp.health = ScriptableObject.CreateInstance<FloatValue>();
+            healthComp.health.initialValue = this.health;
+            healthComp.health.RuntimeValue = this.health;
+            /*
             healthComp.health = new FloatValue()
-             {
-                 initialValue = this.health,
-                 RuntimeValue = this.health
-             };
+            {
+                initialValue = this.health,
+                RuntimeValue = this.health
+            };
+            */
         }
 
         this.targetting = false;

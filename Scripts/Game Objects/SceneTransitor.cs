@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class SceneTransitor : MonoBehaviour
 {
@@ -12,12 +10,6 @@ public class SceneTransitor : MonoBehaviour
 
     void Start()
     {
-        var askedScene = SceneManager.GetSceneByName(sceneToLoad);
-        if (askedScene.IsValid())
-        {
-            throw new InvalidOperationException("Cannot find the scene named : \"" + sceneToLoad + "\".");
-        }
-
         if (needPreload)
         {
             _sceneManager.PreloadScene(sceneToLoad);
@@ -36,7 +28,7 @@ public class SceneTransitor : MonoBehaviour
             }
             else
             {
-                _sceneManager.Test(sceneToLoad);
+                _sceneManager.SwitchScene(sceneToLoad);
             }
         }
     }

@@ -22,6 +22,7 @@ public class SceneLoadManager : MonoBehaviour
 
     void Start()
     {
+        Resources.UnloadUnusedAssets();
         /*
         canvas = FindAnyObjectByType<Canvas>();
         GameObject panel = Instantiate(fadeInPanel, Vector3.zero, Quaternion.identity);
@@ -32,42 +33,19 @@ public class SceneLoadManager : MonoBehaviour
 
     void OnDestroy()
     {
-        foreach (PreloadedScene pScene in preloadedScenes)
-        {
-            if (pScene.useScene == false)
-            {
-                pScene.canceled = true;
-            }
-        }
+        //
     }
 
-    public void Test(string sceneName)
+    IEnumerator LoadSceneCo(string sceneName)
     {
-        StartCoroutine(TestCo(sceneName));
-    }
-
-    IEnumerator TestCo(string sceneName)
-    {
-        Scene scene = SceneManager.GetSceneByName(gameObject.scene.name);
-
-        GameObject[] rootObjects = scene.GetRootGameObjects();
-        foreach (GameObject obj in rootObjects)
-        {
-            obj.SetActive(false);
-        }
-
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
-
-        SceneManager.UnloadScene(scene);
-
-        Resources.UnloadUnusedAssets();
 
         yield return null;
 
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
     }
 
-    IEnumerator LoadSceneCo(string sceneName, LoadSceneMode loadmode, Action resultCallback = null)
+    IEnumerator AsyncLoadSceneCo(string sceneName, LoadSceneMode loadmode, Action resultCallback = null)
     {
         AsyncOperation loadOp = SceneManager.LoadSceneAsync(sceneName, loadmode);
 
@@ -75,6 +53,8 @@ public class SceneLoadManager : MonoBehaviour
         {
             yield return null;
         }
+
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
 
         if (resultCallback != null) resultCallback();
     }
@@ -89,54 +69,87 @@ public class SceneLoadManager : MonoBehaviour
             obj.SetActive(false);
         }
 
-        AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(scene);
-
-        while (!unloadOp.isDone)
-        {
-            yield return null;
-        }
+        SceneManager.UnloadScene(scene);
 
         Resources.UnloadUnusedAssets();
 
         if (resultCallback != null) resultCallback();
+
+        return null;
     }
 
-    IEnumerator PreloadScene(string sceneName, Func<string, bool> UseSceneCallback)
+    IEnumerator PreloadScene(string sceneName, Func<string, bool> UseSceneCallback, Func<string, bool> IsCanceledCallBack, Action<string> RemovePreloadedSceneCallback, Func<int> GetPreloadedScenesCountCallback)
     {
         AsyncOperation asyncLoadOp = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         asyncLoadOp.allowSceneActivation = false;
 
         while (!asyncLoadOp.isDone)
         {
-            //Debug.Log("Loading progress: " + (asyncLoadOp.progress * 100) + "%");
+            //Debug.Log(sceneName + " scene is loading progress: " + (asyncLoadOp.progress * 100) + "%");
 
-            if (asyncLoadOp.progress >= 0.9f)
+            if (IsCanceledCallBack(sceneName))
             {
-                if (UseSceneCallback(sceneName))
+                asyncLoadOp.allowSceneActivation = true;
+
+                Scene scene = SceneManager.GetSceneByName(sceneName);
+                while(!scene.isLoaded)
                 {
-                    Scene scene = SceneManager.GetSceneByName(gameObject.scene.name);
-
-                    GameObject[] rootObjects = scene.GetRootGameObjects();
-                    foreach (GameObject obj in rootObjects)
-                    {
-                        obj.SetActive(false);
-                    }
-
-                    asyncLoadOp.allowSceneActivation = true;
-
-                    SceneManager.UnloadScene(scene);
-
-                    Resources.UnloadUnusedAssets();
-
+                    scene = SceneManager.GetSceneByName(sceneName);
                     yield return null;
-
-                    Debug.Log(preloadedScenes.ToArray().ToString());
-
-                    SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
                 }
-            }
 
-            yield return new WaitForFixedUpdate();
+                GameObject[] rootObjects = scene.GetRootGameObjects();
+                foreach (GameObject obj in rootObjects)
+                {
+                    obj.SetActive(false);
+                }
+
+                SceneManager.UnloadScene(scene);
+
+                Resources.UnloadUnusedAssets();
+
+                RemovePreloadedSceneCallback(sceneName);
+            }
+            else
+            {
+                if (asyncLoadOp.progress >= 0.9f)
+                {
+                    if (UseSceneCallback(sceneName))
+                    {
+                        foreach (PreloadedScene pScene in preloadedScenes)
+                        {
+                            if (pScene.useScene == false)
+                            {
+                                pScene.canceled = true;
+                            }
+                        }
+
+                        asyncLoadOp.allowSceneActivation = true;
+
+                        while (GetPreloadedScenesCountCallback() > 1)
+                        {
+                            yield return null;
+                        }
+
+                        Scene scene = SceneManager.GetSceneByName(gameObject.scene.name);
+
+                        foreach (GameObject obj in scene.GetRootGameObjects())
+                        {
+                            obj.SetActive(false);
+                        }
+
+                        SceneManager.UnloadScene(scene);
+
+                        Resources.UnloadUnusedAssets();
+
+                        yield return null;
+
+                        SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
+                    }
+                }
+
+                yield return new WaitForFixedUpdate();
+            }
         }
     }
 
@@ -145,17 +158,56 @@ public class SceneLoadManager : MonoBehaviour
         preloadedScenes.Find(pScene => pScene.Name == sceneName).useScene = true;
     }
 
+    public bool IsCanceled(string sceneName)
+    {
+        return preloadedScenes.Find(pScene => pScene.Name == sceneName).canceled;
+    }
+
     bool MustUsePreloadedScene(string sceneName)
     {
         return preloadedScenes.Find(pScene => pScene.Name == sceneName).useScene;
     }
 
-    #region CALLS
+    int GetPreloadedScenesCount()
+    {
+        return preloadedScenes.Count;
+    }
+
+    void RemovePreloadedScene(string sceneName)
+    {
+        preloadedScenes.Remove(preloadedScenes.Find(pScene => pScene.Name == sceneName));
+    }
+
+    public void SwitchScene(string sceneName)
+    {
+        StartCoroutine(AsyncLoadSceneCo(sceneName));
+    }
+
+    IEnumerator AsyncLoadSceneCo(string sceneName)
+    {
+        Scene scene = SceneManager.GetSceneByName(gameObject.scene.name);
+
+        GameObject[] rootObjects = scene.GetRootGameObjects();
+        foreach (GameObject obj in rootObjects)
+        {
+            obj.SetActive(false);
+        }
+
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+
+        yield return null;
+
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
+        
+        SceneManager.UnloadScene(scene);
+
+        Resources.UnloadUnusedAssets();
+    }
 
     public void UnloadScene(string sceneName, Action resultCallback = null)
     {
         var askedScene = SceneManager.GetSceneByName(sceneName);
-        if (askedScene.IsValid())
+        if (!askedScene.IsValid())
         {
             throw new InvalidOperationException("Cannot find the scene named : \"" + sceneName + "\".");
         }
@@ -163,41 +215,23 @@ public class SceneLoadManager : MonoBehaviour
         StartCoroutine(UnloadSceneCo(sceneName, resultCallback));
     }
 
-    public void LoadScene(string sceneName, Action resultCallback = null)
+    public void AsyncAdditiveLoadScene(string sceneName, Action resultCallback = null)
     {
-        LoadScene(sceneName, LoadSceneMode.Single, resultCallback);
+        AsyncLoadScene(sceneName, LoadSceneMode.Additive, resultCallback);
     }
 
-    public void LoadScene(string sceneName, LoadSceneMode loadmode, Action resultCallback = null)
+    public void AsyncLoadScene(string sceneName, Action resultCallback = null)
     {
-        var askedScene = SceneManager.GetSceneByName(sceneName);
-        if (askedScene.IsValid())
-        {
-            throw new InvalidOperationException("Cannot find the scene named : \"" + sceneName + "\".");
-        }
-
-        StartCoroutine(LoadSceneCo(sceneName, loadmode, resultCallback));
+        AsyncLoadScene(sceneName, LoadSceneMode.Single, resultCallback);
     }
 
-    public void AdditiveLoadScene(string sceneName, Action resultCallback = null)
+    public void AsyncLoadScene(string sceneName, LoadSceneMode loadmode, Action resultCallback = null)
     {
-        var askedScene = SceneManager.GetSceneByName(sceneName);
-        if (askedScene.IsValid())
-        {
-            throw new InvalidOperationException("Cannot find the scene named : \"" + sceneName + "\".");
-        }
-
-        StartCoroutine(LoadSceneCo(sceneName, LoadSceneMode.Additive, resultCallback));
+        StartCoroutine(AsyncLoadSceneCo(sceneName, loadmode, resultCallback));
     }
 
     public void PreloadScene(string sceneName)
     {
-        var askedScene = SceneManager.GetSceneByName(sceneName);
-        if (askedScene.IsValid())
-        {
-            throw new InvalidOperationException("Cannot find the scene named : \"" + sceneName + "\".");
-        }
-
         //Check if allready in preloaded list
         if (preloadedScenes.Find(pScene => pScene.Name == sceneName) != null) return;
 
@@ -206,47 +240,7 @@ public class SceneLoadManager : MonoBehaviour
             useScene = false
         });
 
-        Debug.Log(preloadedScenes.ToArray().ToString());
-
-        StartCoroutine(PreloadScene(sceneName, MustUsePreloadedScene));
+        StartCoroutine(PreloadScene(sceneName, MustUsePreloadedScene, IsCanceled, RemovePreloadedScene, GetPreloadedScenesCount));
     }
-
-    #endregion
 
 }
-
-/*
-PreloadedScene pScene = preloadedScenes.Find(pScene => pScene.Name == sceneName);
-
-if (pScene.useScene)
-{
-    Debug.Log(sceneName + " " + pScene.canceled);
-    if (pScene.canceled)
-    {
-        SceneManager.UnloadScene(sceneName);
-    }
-    else
-    {
-        Scene scene = SceneManager.GetSceneByName(gameObject.scene.name);
-
-        /*
-        GameObject[] rootObjects = scene.GetRootGameObjects();
-        foreach (GameObject obj in rootObjects)
-        {
-            obj.SetActive(false);
-        }
-        */
-        /*
-
-        asyncLoadOp.allowSceneActivation = true;
-
-        SceneManager.UnloadScene(scene);
-
-        Resources.UnloadUnusedAssets();
-
-        yield return null;
-
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
-    }
-}
-*/

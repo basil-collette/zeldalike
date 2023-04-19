@@ -19,7 +19,7 @@ public class StartGameManager : MonoBehaviour //SignletonGameObject<StartGameMan
             }
         }
 
-        GetComponent<SceneLoadManager>().AdditiveLoadScene(START_SCENE_NAME, () => {
+        GetComponent<SceneLoadManager>().AsyncAdditiveLoadScene(START_SCENE_NAME, () => {
             DestroyImmediate(gameObject);
         });
     }

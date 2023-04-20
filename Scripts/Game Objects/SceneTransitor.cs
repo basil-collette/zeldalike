@@ -2,17 +2,19 @@ using UnityEngine;
 
 public class SceneTransitor : MonoBehaviour
 {
-    public string sceneToLoad;
-    public bool needPreload = false;
     public Vector2 playerNextPosition;
     public VectorValue playerPositionStorage;
-    public SceneLoadManager _sceneManager;
+    public TargetScene targetScene;
+
+    ScenesManager sceneManager;
 
     void Start()
     {
-        if (needPreload)
+        sceneManager = FindAnyObjectByType<ScenesManager>();
+
+        if (targetScene.needPreload)
         {
-            _sceneManager.PreloadScene(sceneToLoad);
+            sceneManager.PreloadScene(targetScene);
         }
     }
 
@@ -22,14 +24,7 @@ public class SceneTransitor : MonoBehaviour
         {
             playerPositionStorage.initalValue = playerNextPosition;
 
-            if (needPreload)
-            {
-                _sceneManager.UsePreloadedScene(sceneToLoad);
-            }
-            else
-            {
-                _sceneManager.SwitchScene(sceneToLoad);
-            }
+            sceneManager.SwitchScene(targetScene);
         }
     }
 

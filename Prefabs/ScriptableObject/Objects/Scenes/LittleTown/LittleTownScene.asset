@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: LittleTownScene
   m_EditorClassIdentifier: 
   name: LittleTownScene
-  needPreload: 0
+  needPreload: 1
   scenesNeedingPreloadNames:
   - HomeScene

@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 185778905}
   - component: {fileID: 185778904}
   - component: {fileID: 185778903}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ScreenGuiCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,10 +247,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -275,7 +275,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -333,7 +333,7 @@ RectTransform:
   m_GameObject: {fileID: 322495171}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.43489584, y: 0.43489584, z: 0.43489584}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2095443425}
@@ -342,7 +342,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 64.36456, y: -45.664062}
+  m_AnchoredPosition: {x: 163, y: -112}
   m_SizeDelta: {x: 256, y: 192}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &322495173
@@ -961,7 +961,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 128, y: 128}
+  m_AnchoredPosition: {x: 110, y: 110}
   m_SizeDelta: {x: 192, y: 192}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1350470103
@@ -1129,7 +1129,7 @@ GameObject:
   - component: {fileID: 1383717083}
   - component: {fileID: 1383717082}
   - component: {fileID: 1383717081}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: FadeToWhite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1166,7 +1166,7 @@ Animator:
   m_GameObject: {fileID: 1383717079}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1115a64d9b6d36e4892eb1bcb7cc4006, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5b42a0a2ebebf2a43bd1ac3069790a9d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1227,7 +1227,7 @@ GameObject:
   - component: {fileID: 1413398750}
   - component: {fileID: 1413398749}
   m_Layer: 5
-  m_Name: ScreenControlsCanvas (1)
+  m_Name: ScreenControlsCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2332,13 +2332,13 @@ GameObject:
   - component: {fileID: 8027404496659133883}
   - component: {fileID: 9125825248211700008}
   - component: {fileID: 3760371818512314525}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: FadeToVisible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3644161833582385595
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2369,7 +2369,7 @@ Animator:
   m_GameObject: {fileID: 1164153510638176276}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1115a64d9b6d36e4892eb1bcb7cc4006, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8d93744a22d36a14ea34883d0e8086d0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

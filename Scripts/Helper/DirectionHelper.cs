@@ -2,7 +2,7 @@
 
 public abstract class DirectionHelper
 {
-    public static void LookAt(Transform transform, Vector2 target)
+    public static void PointTo(Transform transform, Vector2 target)
     {
         const int ANGLE_CORRECTOR = -90; //-90 to towarding up at start
 
@@ -25,6 +25,11 @@ public abstract class DirectionHelper
     public static Vector3 GetDirection(Vector3 position, Vector3 target)
     {
         return target - position;
+    }
+
+    public static Vector3 GetPosAfterDirection(Vector3 position, Vector3 direction)
+    {
+        return position + direction;
     }
 
     public static Vector3 GetRelativeAxis(Vector3 position, Vector3 target)

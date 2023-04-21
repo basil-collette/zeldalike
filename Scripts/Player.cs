@@ -102,39 +102,9 @@ public class Player : AliveEntity
         }
     }
 
-    /*
-    void FixedUpdate()
-    {
-        if (currentEntityState == EntityState.unavailable)
-            return;
-
-        if (currentEntityState != EntityState.walk
-            || direction == Vector3.zero)
-        {
-            Imobilize();
-        }
-
-        if (currentEntityState == EntityState.attack
-            && !animator.GetBool("attacking"))
-        {
-            StartCoroutine(AttackCo());
-        }
-
-        direction.Normalize();
-
-        //rigidbody.MovePosition(transform.position + (direction.normalized * moveSpeed * Time.fixedDeltaTime));
-
-        rigidbody.velocity = new Vector2(direction.x * moveSpeed, direction.y * moveSpeed);
-
-        animator.SetFloat("moveX", direction.x);
-        animator.SetFloat("moveY", direction.y);
-        animator.SetBool("moving", true);
-    }
-    */
-
     public IEnumerator AttackCo()
     {
-        yield return new WaitForSecondsRealtime(.25f);
+        yield return new WaitForSeconds(.25f);
 
         animator.SetBool("attacking", false);
 
@@ -155,6 +125,40 @@ public class Player : AliveEntity
         direction = Vector3.zero;
         rigidbody.velocity = new Vector2(0, 0);
         animator.SetBool("moving", false);
+    }
+
+    float activeMoveSpeed;
+    float dashSpeed;
+    float dashLength = .5f;
+    float dashCooldown = 1f;
+    float dashCounter;
+    float dashCoolCounter;
+
+    void Dash()
+    {
+        if (dashCoolCounter > 0)
+        {
+            dashCoolCounter -= Time.deltaTime;
+            return;
+        }
+
+        if (Gamepad.current[GamepadButton.South].wasPressedThisFrame
+            && dashCounter <= 0)
+        {
+            activeMoveSpeed = dashSpeed;
+            dashCounter = dashLength;
+        }
+
+        if (dashCounter > 0)
+        {
+            dashCounter -= Time.deltaTime;
+
+            if (dashCounter <= 0)
+            {
+                activeMoveSpeed = moveSpeed;
+                dashCoolCounter = dashCooldown;
+            }
+        }
     }
 
 }

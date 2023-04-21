@@ -41,6 +41,11 @@ public abstract class AliveEntity : Entity
     public void SetState(EntityState state)
     {
         if (currentEntityState != state) currentEntityState = state;
+
+        if (state == EntityState.unavailable)
+        {
+            rigidbody.constraints = RigidbodyConstraints2D.None;
+        }
     }
 
 }

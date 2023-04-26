@@ -42,10 +42,13 @@ public abstract class AliveEntity : Entity
     {
         if (currentEntityState != state) currentEntityState = state;
 
+        //Seams to unlock z rotation
+        /*
         if (state == EntityState.unavailable)
         {
             rigidbody.constraints = RigidbodyConstraints2D.None;
         }
+        */
     }
 
 }

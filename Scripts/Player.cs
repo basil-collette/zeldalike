@@ -13,15 +13,21 @@ public class Player : AliveEntity
 
     PlayerInput playerInputs;
 
+    public float dashSpeed = 20;
+    public float dashTimeLength = 0.2f;
+    public float dashCooldown = 0.5f;
+    float dashCounter = 0;
+    float dashCooldownCounter = 0;
+
     void Start()
     {
         base.Start();
 
+        playerInputs = GetComponent<PlayerInput>();
+
         transform.position = startingPosition.initalValue;
 
         SetState(EntityState.walk);
-
-        playerInputs = GetComponent<PlayerInput>();
     }
 
     void Update()
@@ -36,6 +42,8 @@ public class Player : AliveEntity
         }
 
         direction = Vector3.zero;
+
+        DashUpdate();
 
         if (Gamepad.current[GamepadButton.East].wasPressedThisFrame)
         {
@@ -82,10 +90,13 @@ public class Player : AliveEntity
             if (direction != Vector3.zero)
             {
                 direction.Normalize();
-                
+
                 //rigidbody.MovePosition(transform.position + (direction.normalized * moveSpeed * Time.fixedDeltaTime));
 
-                rigidbody.velocity = new Vector2(direction.x * moveSpeed, direction.y * moveSpeed);
+                if (dashCounter <= 0)
+                {
+                    rigidbody.velocity = new Vector2(direction.x * moveSpeed, direction.y * moveSpeed);
+                }
                                 
                 animator.SetFloat("moveX", direction.x);
                 animator.SetFloat("moveY", direction.y);
@@ -127,26 +138,25 @@ public class Player : AliveEntity
         animator.SetBool("moving", false);
     }
 
-    float activeMoveSpeed;
-    float dashSpeed;
-    float dashLength = .5f;
-    float dashCooldown = 1f;
-    float dashCounter;
-    float dashCoolCounter;
-
-    void Dash()
+    void DashUpdate()
     {
-        if (dashCoolCounter > 0)
+        if (dashCounter > 0)
         {
-            dashCoolCounter -= Time.deltaTime;
+            Vector2 tempDirection = new Vector2(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+            rigidbody.velocity = new Vector3(tempDirection.x * dashSpeed, tempDirection.y * dashSpeed);
+        }
+
+        if (dashCooldownCounter > 0)
+        {
+            dashCooldownCounter -= Time.deltaTime;
             return;
         }
 
         if (Gamepad.current[GamepadButton.South].wasPressedThisFrame
             && dashCounter <= 0)
         {
-            activeMoveSpeed = dashSpeed;
-            dashCounter = dashLength;
+            //set collision active false
+            dashCounter = dashTimeLength;
         }
 
         if (dashCounter > 0)
@@ -155,10 +165,43 @@ public class Player : AliveEntity
 
             if (dashCounter <= 0)
             {
-                activeMoveSpeed = moveSpeed;
-                dashCoolCounter = dashCooldown;
+                //set colission active true
+                dashCounter = 0;
+                dashCooldownCounter = dashCooldown;
             }
         }
+    }
+
+    void Teleport()
+    {
+        bool isDashButtonDown = false;
+        if (isDashButtonDown)
+        {
+            float dashAmount = 50f;
+            Vector3 dashPosition = transform.position + direction * dashAmount;
+
+            /*
+            RaycastHit2D raycast = Physics2D.Raycast(transform.position, direction, dashAmount);
+            if (raycast.collider != null)
+            {
+                dashPosition = raycast.point;
+            }
+            */
+
+            rigidbody.MovePosition(dashPosition);
+            isDashButtonDown = false;
+
+            CreateDashEffect(dashPosition, Vector2.Distance(rigidbody.position, dashPosition));
+        }
+    }
+
+    void CreateDashEffect(Vector3 dashPosition, float dashSize)
+    {
+        /*
+        Transform dashTransform = Instantiate(GameAssets.i.pfDashEffect, dashPosition, Quaternion.identity);
+        dashTransform.localEulerAngles = new Vector3(0, 0, UtilsClass.getAngleFromVector(direction));
+        dashTransform.localScale = new Vector3(dashSize / 35f, 1, 1);
+        */
     }
 
 }

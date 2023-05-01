@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5037741023642602904}
   - component: {fileID: 4236353454559491731}
+  - component: {fileID: 8206718386061704258}
   m_Layer: 0
   m_Name: Context Clue
   m_TagString: Untagged
@@ -84,6 +85,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8206718386061704258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741199401203091216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9eb6f4eaca40946bcd4cf3d610b5c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contextClue: {fileID: 1741199401203091216}
 --- !u!1 &5620636059707414373
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,6 +114,7 @@ GameObject:
   - component: {fileID: 5620636059707414399}
   - component: {fileID: 5620636059707414394}
   - component: {fileID: 5620636059707414397}
+  - component: {fileID: -8977632066232515915}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -248,7 +263,7 @@ MonoBehaviour:
   hotbar: []
   startingPosition: {fileID: 11400000, guid: 6998fd47cd0ad4d4eb8a85262c147f3f, type: 2}
   dashSpeed: 20
-  dashLength: 0.5
+  dashTimeLength: 0.2
   dashCooldown: 1
 --- !u!114 &5620636059707414399
 MonoBehaviour:
@@ -317,6 +332,34 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &-8977632066232515915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5620636059707414373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb71e145e5fa45d4083b8051f687de29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 5c6f2bf61d6ce8a499ea5ef10264fac3, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8206718386061704258}
+        m_TargetAssemblyTypeName: ContextClue, Assembly-CSharp
+        m_MethodName: ChangeVisibility
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5620636060471748977
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,9 +9,9 @@ public class Signal : ScriptableObject
 
     public void Raise()
     {
-        for (int i = listeners.Count -1; i >= 0; i--)
+        foreach (SignalListener sl in listeners)
         {
-            listeners[i].OnSignalRaised();
+            sl.OnSignalRaised();
         }
     }
 

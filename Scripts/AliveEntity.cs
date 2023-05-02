@@ -7,6 +7,7 @@ public abstract class AliveEntity : Entity
     public float nearRadius = 1;
 
     [HideInInspector] public Vector3 direction;
+    [HideInInspector] public Vector3 orientation;
     protected Animator animator;
 
     protected void Start()

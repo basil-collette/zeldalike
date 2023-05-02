@@ -14,9 +14,4 @@ public class ContextClue : MonoBehaviour
         contextClue.SetActive(false);
     }
 
-    public void ChangeVisibility()
-    {
-        contextClue.SetActive(!contextClue.active);
-    }
-
 }

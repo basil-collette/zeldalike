@@ -43,7 +43,12 @@ public class Player : AliveEntity
 
         direction = Vector3.zero;
 
-        DashUpdate();
+        if (Gamepad.current[GamepadButton.South].wasPressedThisFrame
+            && dashCounter <= 0)
+        {
+            StartCoroutine(DashCo());
+            return;
+        }
 
         if (Gamepad.current[GamepadButton.East].wasPressedThisFrame)
         {
@@ -67,6 +72,7 @@ public class Player : AliveEntity
         if (direction != Vector3.zero)
         {
             SetState(EntityState.walk);
+            SetOrientation();
         }
     }
 
@@ -113,6 +119,11 @@ public class Player : AliveEntity
         }
     }
 
+    public void SetOrientation()
+    {
+        this.orientation = this.direction.normalized;
+    }
+
     public IEnumerator AttackCo()
     {
         yield return new WaitForSeconds(.25f);
@@ -121,14 +132,6 @@ public class Player : AliveEntity
 
         if (currentEntityState != EntityState.unavailable)
             SetState(EntityState.walk);
-    }
-
-    public bool IsAttackingAnimation(AnimatorStateInfo animStateInfo)
-    {
-        return animStateInfo.IsName("attackDown")
-            || animStateInfo.IsName("attackLeftn")
-            || animStateInfo.IsName("attackRight")
-            || animStateInfo.IsName("attackUp");
     }
 
     void Imobilize()
@@ -142,14 +145,12 @@ public class Player : AliveEntity
     {
         if (dashCounter > 0)
         {
-            Vector2 tempDirection = new Vector2(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
-            rigidbody.velocity = new Vector3(tempDirection.x * dashSpeed, tempDirection.y * dashSpeed);
+            rigidbody.velocity = new Vector3(orientation.x * dashSpeed, orientation.y * dashSpeed);
         }
 
         if (dashCooldownCounter > 0)
         {
             dashCooldownCounter -= Time.deltaTime;
-            return;
         }
 
         if (Gamepad.current[GamepadButton.South].wasPressedThisFrame
@@ -172,13 +173,38 @@ public class Player : AliveEntity
         }
     }
 
+    IEnumerator DashCo()
+    {
+        SetState(EntityState.unavailable);
+        //set colission active false GetComponent<BoxCollider2D>()
+
+        dashCounter = dashTimeLength;
+
+        while (dashCounter > 0)
+        {
+            rigidbody.velocity = new Vector3(orientation.x * dashSpeed, orientation.y * dashSpeed);
+
+            dashCounter -= Time.deltaTime;
+
+            if (dashCounter <= 0)
+            {
+                //set colission active true
+                dashCounter = 0;
+            }
+
+            yield return null;
+        }
+
+        SetState(EntityState.walk);
+    }
+
     void Teleport()
     {
         bool isDashButtonDown = false;
         if (isDashButtonDown)
         {
             float dashAmount = 50f;
-            Vector3 dashPosition = transform.position + direction * dashAmount;
+            Vector3 dashPosition = transform.position + orientation * dashAmount;
 
             /*
             RaycastHit2D raycast = Physics2D.Raycast(transform.position, direction, dashAmount);

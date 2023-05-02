@@ -10,40 +10,32 @@ namespace Assets.Scripts.Game_Objects
 
         void OnTriggerEnter2D(Collider2D collider)
         {
-            if (enterSignal != null)
+            if (enterSignal != null
+                && collider.CompareTag("Player")
+                && !collider.isTrigger)
             {
-                if (collider.CompareTag("Player")
-                    && !collider.isTrigger)
-                {
-                    enterSignal.Raise();
-                }
+                enterSignal.Raise();
             }
-            Debug.Log("enter");
         }
 
         private void OnTriggerStay2D(Collider2D collider)
         {
-            if (staySignal != null)
+            if (staySignal != null
+                && collider.CompareTag("Player")
+                && !collider.isTrigger)
             {
-                if (collider.CompareTag("Player")
-                    && !collider.isTrigger)
-                {
-                    staySignal.Raise();
-                }
+                staySignal.Raise();
             }
         }
 
         void OnTriggerExit2D(Collider2D collider)
         {
-            if (exitSignal != null)
+            if (exitSignal != null
+                && collider.CompareTag("Player")
+                && !collider.isTrigger)
             {
-                if (collider.CompareTag("Player")
-                    && !collider.isTrigger)
-                {
-                    exitSignal.Raise();
-                }
+                exitSignal.Raise();
             }
-            Debug.Log("exit");
         }
 
     }

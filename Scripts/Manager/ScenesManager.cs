@@ -20,7 +20,9 @@ public class ScenesManager : MonoBehaviour
 
     string _currentScene = string.Empty;
     List<PreloadedScene> preloadedScenes = new List<PreloadedScene>();
-    
+
+    public VectorValue playerPositionStorage;
+
     void Start()
     {
         //StartCoroutine(FadeTransitionCo(fadeToVisible));
@@ -35,19 +37,33 @@ public class ScenesManager : MonoBehaviour
 
     #region PROCESS
 
-    IEnumerator SwitchSceneCo(string sceneName)
+    IEnumerator SwitchSceneCo(TargetScene scene)
     {
+        foreach (PreloadedScene pScene in preloadedScenes)
+        {
+            if (!scene.scenesNeedingPreloadNames.Contains(pScene.scene.name))
+            {
+                pScene.canceled = true;
+            }
+        }
+
+        //Verify that there are no preloded scene that aren't needed for next scene
+        while (preloadedScenes.Select(pScene => pScene.scene.name).Any(a => !scene.scenesNeedingPreloadNames.Contains(a)))
+        {
+            yield return null;
+        }
+
         Scene currentScene = SceneManager.GetSceneByName(_currentScene);
 
         DisableGameObjects(currentScene);
 
         //fade to white here
 
-        yield return StartCoroutine(LoadSceneCo(sceneName, LoadSceneMode.Additive));
-
-        _currentScene = sceneName;
-
         yield return StartCoroutine(UnLoadSceneCo(currentScene));
+
+        yield return StartCoroutine(LoadSceneCo(scene.name, LoadSceneMode.Additive));
+
+        _currentScene = scene.name;
 
         //fade to transparent here
     }
@@ -78,7 +94,7 @@ public class ScenesManager : MonoBehaviour
 
         while (!asyncLoadOp.isDone)
         {
-            //Debug.Log(sceneName + " scene is loading progress: " + (asyncLoadOp.progress * 100) + "%");
+            //Debug.Log(scene.name + " scene is loading progress: " + (asyncLoadOp.progress * 100) + "%");
 
             if (IsCanceledCallBack(scene.name))
             {
@@ -162,6 +178,7 @@ public class ScenesManager : MonoBehaviour
 
         while (!unloadOp.isDone)
         {
+            Debug.Log(scene.name + " scene is loading progress: " + (unloadOp.progress * 100) + "%");
             yield return null;
         }
 
@@ -182,7 +199,7 @@ public class ScenesManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(SwitchSceneCo(targetScene.name));
+            StartCoroutine(SwitchSceneCo(targetScene));
         }
     }
 

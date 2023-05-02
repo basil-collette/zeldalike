@@ -14,5 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: LittleTownScene
   needPreload: 1
-  scenesNeedingPreloadNames:
-  - HomeScene
+  scenesNeedingPreloadNames: []

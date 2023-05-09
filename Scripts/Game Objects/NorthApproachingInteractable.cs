@@ -2,46 +2,38 @@
 
 namespace Assets.Scripts.Game_Objects
 {
-    public class NorthApproachingInteractable : MonoBehaviour
+    public class NorthApproachingInteractable : ApproachingInteractable
     {
-        public Signal enterSignal;
-        public Signal exitSignal;
 
         void OnTriggerEnter2D(Collider2D collider)
         {
-            if (collider.CompareTag("Player")
+            if (enterSignal != null
+                && collider.CompareTag("Player")
                 && !collider.isTrigger)
             {
-                if (DirectionHelper.IsFacingUp(collider.GetComponent<Player>().orientation))
-                {
-                    enterSignal.Raise();
-                }
+                enterSignal.Raise();
+                playerInRange = true;
             }
         }
 
-        private void OnTriggerStay2D(Collider2D collider)
+        void OnTriggerStay2D(Collider2D collider)
         {
-            if (collider.CompareTag("Player")
+            if (enterSignal != null
+                && exitSignal != null
+                && collider.CompareTag("Player")
                 && !collider.isTrigger)
             {
                 if (DirectionHelper.IsFacingUp(collider.GetComponent<Player>().orientation))
                 {
-                    enterSignal.Raise();
+                    //enterSignal.Raise();
+                    playerInRange = true;
                 }
                 else
                 {
-                    exitSignal.Raise();
+                    base.OnTriggerExit2D(collider);
                 }
             }
-        }
-
-        void OnTriggerExit2D(Collider2D collider)
-        {
-            if (collider.CompareTag("Player")
-                && !collider.isTrigger)
-            {
-                exitSignal.Raise();
-            }
+            
         }
 
     }

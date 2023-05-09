@@ -8,17 +8,20 @@ namespace Assets.Scripts.Game_Objects
         public Signal staySignal;
         public Signal exitSignal;
 
-        void OnTriggerEnter2D(Collider2D collider)
+        protected bool playerInRange = false;
+
+        protected void OnTriggerEnter2D(Collider2D collider)
         {
             if (enterSignal != null
                 && collider.CompareTag("Player")
                 && !collider.isTrigger)
             {
                 enterSignal.Raise();
+                playerInRange = true;
             }
         }
 
-        private void OnTriggerStay2D(Collider2D collider)
+        protected void OnTriggerStay2D(Collider2D collider)
         {
             if (staySignal != null
                 && collider.CompareTag("Player")
@@ -28,13 +31,14 @@ namespace Assets.Scripts.Game_Objects
             }
         }
 
-        void OnTriggerExit2D(Collider2D collider)
+        protected void OnTriggerExit2D(Collider2D collider)
         {
             if (exitSignal != null
                 && collider.CompareTag("Player")
                 && !collider.isTrigger)
             {
                 exitSignal.Raise();
+                playerInRange = false;
             }
         }
 

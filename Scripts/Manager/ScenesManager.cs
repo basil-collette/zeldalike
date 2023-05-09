@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 [Serializable]
 class PreloadedScene
@@ -18,13 +19,20 @@ public class ScenesManager : MonoBehaviour
     public GameObject fadeToWhite;
     public GameObject fadeToVisible;
 
+    GameObject textBox;
+    Text placeText;
+
     string _currentScene = string.Empty;
     List<PreloadedScene> preloadedScenes = new List<PreloadedScene>();
 
+    //To keep it in memory
     public VectorValue playerPositionStorage;
 
     void Start()
     {
+        textBox = FindGameObjectHelper.FindInactiveObjectByName("PlaceName");
+        placeText = textBox.GetComponentInChildren<Text>();
+
         //StartCoroutine(FadeTransitionCo(fadeToVisible));
     }
 
@@ -178,7 +186,6 @@ public class ScenesManager : MonoBehaviour
 
         while (!unloadOp.isDone)
         {
-            Debug.Log(scene.name + " scene is loading progress: " + (unloadOp.progress * 100) + "%");
             yield return null;
         }
 
@@ -201,6 +208,8 @@ public class ScenesManager : MonoBehaviour
         {
             StartCoroutine(SwitchSceneCo(targetScene));
         }
+
+        StartCoroutine(PlaceNameCo(targetScene.name));
     }
 
     public void PreloadScene(TargetScene scene)
@@ -314,6 +323,15 @@ public class ScenesManager : MonoBehaviour
         {
             obj.SetActive(false);
         }
+    }
+
+    private IEnumerator PlaceNameCo(string text)
+    {
+        placeText.text = text;
+        textBox.SetActive(true);
+
+        yield return new WaitForSeconds(4f);
+        textBox.SetActive(false);
     }
 
     #endregion

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
@@ -7,19 +6,20 @@ using UnityEngine.InputSystem.LowLevel;
 public class Player : AliveEntity
 {
     public int baseAttack = 1;
-    public HoldableItem hand;
-    public List<HoldableItem> hotbar = new List<HoldableItem>();
-    public VectorValue startingPosition;
-
-    PlayerInput playerInputs;
-
+    //public HoldableItem hand;
+    //public List<HoldableItem> hotbar = new List<HoldableItem>();
+    public Inventory inventory;
+    //Dash Properties
     public float dashSpeed = 20;
     public float dashTimeLength = 0.2f;
     public float dashCooldown = 0.5f;
     float dashCounter = 0;
     float dashCooldownCounter = 0;
+    public VectorValue startingPosition;
 
-    void Start()
+    PlayerInput playerInputs;
+
+    new void Start()
     {
         base.Start();
 
@@ -30,7 +30,7 @@ public class Player : AliveEntity
         SetState(EntityState.walk);
     }
 
-    void Update()
+    new void Update()
     {
         if (currentEntityState == EntityState.unavailable)
             return;
@@ -76,7 +76,7 @@ public class Player : AliveEntity
         }
     }
 
-    void FixedUpdate()
+    new void FixedUpdate()
     {
         if (currentEntityState == EntityState.unavailable)
             return;
@@ -228,6 +228,12 @@ public class Player : AliveEntity
         dashTransform.localEulerAngles = new Vector3(0, 0, UtilsClass.getAngleFromVector(direction));
         dashTransform.localScale = new Vector3(dashSize / 35f, 1, 1);
         */
+    }
+
+    public void RaiseItem()
+    {
+        animator.SetBool("receivingItem", true);
+        SetState(EntityState.unavailable);
     }
 
 }

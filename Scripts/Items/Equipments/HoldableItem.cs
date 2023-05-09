@@ -1,18 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Assets.Database.Model.Design;
+using System.Data;
 
 public class HoldableItem : Item
 {
-
-    protected void Start()
+    public HoldableItem(IDataReader reader) : base(reader)
     {
-        base.Start();
-    }
-
-    protected void Update()
-    {
-        base.Update();
+        
     }
 
 }

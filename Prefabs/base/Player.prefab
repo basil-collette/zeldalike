@@ -364,11 +364,11 @@ MonoBehaviour:
   orientation: {x: 0, y: 0, z: 0}
   baseAttack: 1
   hand: {fileID: 0}
-  hotbar: []
-  startingPosition: {fileID: 11400000, guid: 6998fd47cd0ad4d4eb8a85262c147f3f, type: 2}
+  inventory: {fileID: 11400000, guid: 2b27182376eeadf4a85051c113b16f97, type: 2}
   dashSpeed: 20
   dashTimeLength: 0.2
   dashCooldown: 1
+  startingPosition: {fileID: 11400000, guid: 6998fd47cd0ad4d4eb8a85262c147f3f, type: 2}
 --- !u!114 &5620636059707414399
 MonoBehaviour:
   m_ObjectHideFlags: 0

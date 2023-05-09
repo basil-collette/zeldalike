@@ -1,35 +1,32 @@
 ﻿using Assets.Database.Model.Design;
+using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Assets.Database.Model.Repository
 {
     public sealed class ItemRepository : BaseRepository<ItemRepository, Item>
     {
-        public override Item DbDataToModel(IDataReader reader)
+        public sealed override Item DbDataToModel(IDataReader reader)
         {
             return new Item(reader);
         }
 
-        public override string GetFields()
+        public sealed override List<string> GetFields()
         {
-            return "sprite_name, rarity_code, weight, description";
-
-            /*
-            List<string> fields = new List<string>();
-
-            foreach (PropertyInfo prop in typeof(D).GetProperties())
+            List<string> fields = new List<string>()
             {
-                if (Nullable.GetUnderlyingType(prop.PropertyType) != null)
-                {
-                    fields.Add(Nullable.GetUnderlyingType(prop.PropertyType).ToString());
-                    break;
-                }
+                "sprite_name",
+                "rarity_code",
+                "weight",
+                "description"
+            };
 
-                fields.Add(Codify(prop.Name).ToLower());
-            }
+            //Adding id, name_libelle, name_code, actif
+            fields.AddRange(base.GetFields());
 
-            return String.Join(",", fields);
-            */
+            return fields;
         }
+
     }
 }

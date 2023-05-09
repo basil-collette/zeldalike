@@ -46,7 +46,7 @@ namespace Assets.Database.Model.Repository
 
                 using (SqliteConnection connexion = DatabaseHelper.GetConnexion())
                 {
-                    var command = new SqliteCommand($"SELECT id, name_libelle, name_code, {Current.GetFields()}, actif FROM {typeof(D).Name.ToLower()}", connexion);
+                    var command = new SqliteCommand($"SELECT {Current.GetFields()} FROM {typeof(D).Name.ToLower()}", connexion);
 
                     using (IDataReader reader = command.ExecuteReader())
                     {
@@ -71,8 +71,55 @@ namespace Assets.Database.Model.Repository
             {
                 using (var connexion = DatabaseHelper.GetConnexion())
                 {
-                    var command = new SqliteCommand($"SELECT id, name_libelle, name_code, {Current.GetFields()}, actif FROM {typeof(D).Name.ToLower()} WHERE {fieldName} = @Param AND actif = 1 LIMIT 1", connexion);
+                    string query =
+                        "SELECT " +
+                            $"{Current.GetFields()} " +
+                        $"FROM {typeof(D).Name.ToLower()} " +
+                        $"WHERE {fieldName} = @Param AND actif = 1 " +
+                            "LIMIT 1";
+
+                    var command = new SqliteCommand(query, connexion);
                     command.Parameters.AddWithValue("Param", fieldValue);
+
+                    using (IDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            return DbDataToModel(reader);
+                        }
+                    }
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public D GetByMany<T>(Dictionary<string, T> fields, bool isNested = false)
+        {
+            try
+            {
+                List<string> whereClauses = new List<string>();
+                foreach (KeyValuePair<string, T> field in fields)
+                {
+                    whereClauses.Add($"{field.Key} = {field.Value}");
+                }
+
+                using (var connexion = DatabaseHelper.GetConnexion())
+                {
+                    string query =
+                        "SELECT " +
+                            $"{Current.GetFields()} " +
+                        $"FROM {typeof(D).Name.ToLower()} " +
+                        $"WHERE {string.Join(" AND ", whereClauses)} AND actif = 1 " +
+                            "LIMIT 1";
+
+                    var command = new SqliteCommand(query, connexion);
+
+                    //command.Parameters.AddRange(parameters);
 
                     using (IDataReader reader = command.ExecuteReader())
                     {
@@ -97,7 +144,14 @@ namespace Assets.Database.Model.Repository
             {
                 using (var connexion = DatabaseHelper.GetConnexion())
                 {
-                    var command = new SqliteCommand($"SELECT id, name_libelle, name_code, {Current.GetFields()}, actif FROM {typeof(D).Name.ToLower()} WHERE name_code = @Code AND actif = 1 LIMIT 1", connexion);
+                    string query =
+                        "SELECT " +
+                            $"{Current.GetFields()} " +
+                        $"FROM {typeof(D).Name.ToLower()} " +
+                        "WHERE name_code = @Code AND actif = 1 " +
+                            "LIMIT 1";
+
+                    var command = new SqliteCommand(query, connexion);
                     command.Parameters.AddWithValue("Code", code);
 
                     using (IDataReader reader = command.ExecuteReader())
@@ -123,15 +177,35 @@ namespace Assets.Database.Model.Repository
             {
                 using (var connexion = DatabaseHelper.GetConnexion())
                 {
-                    var command = new SqliteCommand($"SELECT id, name_libelle, name_code, {Current.GetFields()}, actif FROM {typeof(D).Name.ToLower()} WHERE id = @Id AND actif = 1 LIMIT 1", connexion);
-                    command.Parameters.AddWithValue("Id", id);
+                    return ContextualGetById(connexion, id, isNested);
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
-                    using (IDataReader reader = command.ExecuteReader())
+        public D ContextualGetById(SqliteConnection dbcon, int id, bool isNested = false)
+        {
+            try
+            {
+                string query =
+                    "SELECT " +
+                        $"{Current.GetQueryFields()} " +
+                    $"FROM {typeof(D).Name.ToLower()} " +
+                    "WHERE id = @Id AND actif = 1 " +
+                        "LIMIT 1";
+
+                var command = new SqliteCommand(query, dbcon);
+                command.Parameters.AddWithValue("Id", id);
+
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
                     {
-                        while (reader.Read())
-                        {
-                            return DbDataToModel(reader);
-                        }
+                        return DbDataToModel(reader);
                     }
                 }
 
@@ -143,160 +217,154 @@ namespace Assets.Database.Model.Repository
             }
         }
 
+        public int Create(D model)
+        {
+            try
+            {
+                if (model == null) throw new Exception("");
+
+                using (var connexion = DatabaseHelper.GetConnexion())
+                {
+                    //entityToPersist = PrePersist(entityToPersist, model);
+                    //Validate(entityToPersist);
+
+                    string query =
+                        $"INSERT INTO {typeof(D).Name.ToLower()} " +
+                        $"({Current.GetQueryFields()}) VALUES " +
+                        $"({string.Join(",", GetFieldsValues(model))})";
+
+                    var command = new SqliteCommand(query, connexion);
+
+                    IDataReader reader = command.ExecuteReader();
+                    
+                    return model.Id;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private int Update(D model)
+        {
+            try
+            {
+                if (model == null) throw new Exception("");
+
+                List<string> fields = GetFields();
+                fields.Remove("Id");
+
+                List<string> updates = new List<string>();
+                foreach (string field in fields)
+                {
+                    updates.Add($"{field} = {GetFieldValue(field, model)}");
+                }
+
+                using (var connexion = DatabaseHelper.GetConnexion())
+                {
+                    //entityToPersist = PrePersist(entityToPersist, model);
+                    //Validate(entityToPersist);
+
+                    string query =
+                        $"UPDATE {typeof(D).Name.ToLower()} " +
+                        $"SET {string.Join("", updates)} " +
+                        $"WHERE id = {model.Id}";
+
+                    var command = new SqliteCommand(query, connexion);
+
+                    /*
+                    foreach (string field in fields)
+                    {
+                        command.Parameters.AddWithValue($"@{field}", GetFieldValue(field, model));
+                    }
+                    */
+
+                    IDataReader reader = command.ExecuteReader();
+
+                    return model.Id;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public abstract D DbDataToModel(IDataReader reader);
+
+        public virtual List<string> GetFields()
+        {
+            return new List<string>()
+            {
+                "id",
+                "name_libelle",
+                "name_code",
+                "actif"
+            };
+        }
+
+        public string GetQueryFields()
+        {
+            List<string> finalFields = GetFields();
+            finalFields.Remove("Id");
+            return string.Join(",", finalFields); //"sprite_name, rarity_code, weight, description";
+        }
+
+        public List<string> GetFieldsValues(D model)
+        {
+            List<string> values = new List<string>();
+
+            List<string> fields = GetFields();
+            fields.Remove("id");
+            foreach (string fieldName in fields)
+            {
+                var value = typeof(Item).GetProperty(fieldName).GetValue(model);
+                Type valueType = value.GetType();
+
+                switch (valueType.Name)
+                {
+                    case "string":
+                        values.Add($"'{value}'");
+                        break;
+
+                    case "int":
+                        values.Add($"{value}");
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            return values;
+        }
+
+        public string GetFieldValue(string fieldName, D model)
+        {
+            var value = typeof(Item).GetProperty(fieldName).GetValue(model);
+            Type valueType = value.GetType();
+
+            switch (valueType.Name)
+            {
+                case "string":
+                    return $"'{value}'";
+                    break;
+
+                case "int":
+                    return $"{value}";
+                    break;
+
+                default:
+                    return null;
+                    break;
+            }
+        }
+
         /*
-        public D ContextualGetById(Db_ICareContext context, int idEntity, bool isNested = false)
-        {
-            try
-            {
-                return ((isNested) ? Include(context.Set<D>()) : context.Set<D>())
-                        .FirstOrDefault(e => IsExactly(e, idEntity));
-            }
-            catch (Exception ex)
-            {
-                if (ex is ICareException) { throw ex; }
-                LogManager.Current.Error(GetType().Name, "ContextualGetById(Db_ICareContext context, int idEntity, bool isNested = false)",
-                    ex.Message, ex, new object[] { context, idEntity, isNested });
-                throw new ICareException(ICareExceptionEnum.default_get_sub_err.ToString());
-            }
-        }
-
-        #endregion
-
-        public int CreateOrUpdate(D model, OperationTypeEnum operation, bool getOutput = false)
-        {
-            try
-            {
-                if (model == null)
-                {
-                    var message = CommonExceptionEnum.param_not_nullable_null.ToString();
-                    LogManager.Current.Error(GetType().Name, "CreateOrUpdate(M model, OperationTypeEnum operation, bool getOutput = false)",
-                        message, new ICareException(), new object[] { model, operation, getOutput });
-                    throw new ICareException(message);
-                }
-
-                var dbResponse = (getOutput) ? new OutputParameter<short?>() : null;
-
-                using (var context = new Db_ICareContext())
-                {
-                    int identifier = GetId(model);
-
-                    D entityToPersist = (operation == OperationTypeEnum.Update) ?
-                         ContextualGetById(context, identifier, false)
-                         : new D() { };
-
-                    entityToPersist = PrePersist(entityToPersist, model, operation);
-
-                    Validate(entityToPersist);
-
-                    CreateOrUpdateOperation(context, entityToPersist, dbResponse, operation);
-
-                    context.SaveChanges();
-
-                    if (!string.IsNullOrEmpty(_Cache)) ClearCache();
-
-                    if (getOutput)
-                    {
-                        if (dbResponse == null || dbResponse.Value == default || !dbResponse.Value.HasValue || dbResponse.Value.Value == default || dbResponse.Value == 0 || dbResponse.Value.Value == 0)
-                        {
-                            var message = (operation == OperationTypeEnum.Create ? CommonExceptionEnum.insert_item_failed : CommonExceptionEnum.update_item_failed).ToString();
-                            LogManager.Current.Error(GetType().Name, "CreateOrUpdate(M model, OperationTypeEnum operation, bool getOutput = false)",
-                                message, new ICareException(), new object[] { model, operation, getOutput });
-                            throw new ICareException(message);
-                        }
-
-                        return dbResponse.Value.Value; //output renvoyé par le SGBD
-                    }
-
-                    return GetKey(context, entityToPersist);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (ex is ICareException) { throw ex; }
-
-                // Erreur renvoyé par le SGBD
-                if (ex is AggregateException)
-                {
-                    string concreteErrorMessage = ex.InnerException.Message;
-
-                    LogManager.Current.Error(GetType().Name, "CreateOrUpdate(M model, OperationTypeEnum operation, bool getOutput = false)", concreteErrorMessage, ex, new object[] { model, operation, getOutput });
-                    throw new ICareException(concreteErrorMessage);
-                }
-
-                String default_error = (operation == OperationTypeEnum.Create) ? ICareExceptionEnum.default_create_sub_err.ToString() : ICareExceptionEnum.default_update_sub_err.ToString();
-
-                LogManager.Current.Error(GetType().Name, "CreateOrUpdate(M model, OperationTypeEnum operation, bool getOutput = false)", ex.Message, ex, new object[] { model, operation, getOutput });
-                throw new ICareException(default_error);
-            }
-        }
-
-        public int Delete(int idEntity, bool getOutput = false)
-        {
-            try
-            {
-                var dbResponse = (getOutput) ? new OutputParameter<short?>() : null;
-
-                D entityToDelete;
-
-                using (var context = new Db_ICareContext())
-                {
-                    entityToDelete = ContextualGetById(context, idEntity, false);
-
-                    if (entityToDelete == null)
-                    {
-                        LogManager.Current.Error(GetType().Name, "Delete(int idEntity,bool getOutput = false)", ICareExceptionEnum.id_not_found.ToString(), null, new object[] { idEntity, getOutput });
-                        throw new ICareException(ICareExceptionEnum.id_not_found.ToString());
-                    }
-
-                    DeleteOperation(context, entityToDelete, dbResponse);
-
-                    context.SaveChanges();
-
-                    if (!string.IsNullOrEmpty(_Cache)) ClearCache();
-
-                    if (getOutput)
-                    {
-                        if (dbResponse == null || dbResponse.Value == default || !dbResponse.Value.HasValue || dbResponse.Value.Value == default || dbResponse.Value == 0 || dbResponse.Value.Value == 0)
-                        {
-                            LogManager.Current.Error(GetType().Name, "Delete(int idEntity, bool getOutput = false)",
-                                "", new ICareException(), new object[] { idEntity, getOutput });
-                            throw new ICareException("");
-                        }
-
-                        return dbResponse.Value.Value; //output renvoyé par le SGBD
-                    }
-
-                    return GetKey(context, entityToDelete);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (ex is ICareException) { throw ex; }
-                LogManager.Current.Error(GetType().Name, "Delete(int idEntity, bool getOutput = false)", ex.Message, ex, new object[] { idEntity, getOutput });
-                throw new ICareException(ICareExceptionEnum.default_delete_sub_err.ToString());
-            }
-        }
-
-        #region [Abstract]
-
-        public abstract bool IsActif(D data);
-
-        public abstract bool IsExactly(D data, int idEntity);
-
-        protected abstract int GetId(D model);
-
-        
-        /// <summary>
-        /// Controle la présence et le type des attributs de l'entité avant qu'elle ne soit persisté en base
-        /// </summary>
-        /// <param name="entity"></param>
         public abstract void Validate(D entity);
 
         protected abstract void DeleteOperation(Db_ICareContext context, D entity, OutputParameter<short?> outputResult);
-
-        #endregion
-
-        #region [Utils]
 
         protected virtual void CreateOrUpdateOperation(Db_ICareContext context, D entity, OutputParameter<short?> outputResult, OperationTypeEnum operation)
         {
@@ -315,47 +383,24 @@ namespace Assets.Database.Model.Repository
             context.Set<D>().Remove(entity);
         }
 
-        #endregion
-
-        void Test()
+        public override string GetFields()
         {
-			//IDbCommand cmnd = dbcon.CreateCommand();
-			//cmnd.CommandText = "INSERT INTO my_table (id, val) VALUES (0, 5)";
-			//cmnd.ExecuteNonQuery();
+            List<string> fields = new List<string>();
 
-            while (reader.Read())
+            foreach (PropertyInfo prop in typeof(D).GetProperties())
             {
-                var id = reader.GetInt32(0);
-                var value = reader.GetInt32(1);
+                if (Nullable.GetUnderlyingType(prop.PropertyType) != null)
+                {
+                    fields.Add(Nullable.GetUnderlyingType(prop.PropertyType).ToString());
+                    break;
+                }
 
-                Debug.Log("id: " + reader["id"].ToString());
-                Debug.Log("val: " + reader["val"].ToString());
-            }
-        }
-        */
-
-        public abstract D DbDataToModel(IDataReader reader);
-
-        public abstract string GetFields();
-
-        /*
-        string Codify(string text)
-        {
-            if (string.IsNullOrWhiteSpace(text))
-                return "";
-
-            StringBuilder newText = new StringBuilder(text.Length * 2);
-            newText.Append(text[0]);
-
-            for (int i = 1; i < text.Length; i++)
-            {
-                if (char.IsUpper(text[i]) && text[i - 1] != ' ')
-                    newText.Append(' ');
-                newText.Append(text[i]);
+                fields.Add(Codify(prop.Name).ToLower());
             }
 
-            return newText.ToString();
-        }
+            return String.Join(",", fields);
+         }
+
         */
 
     }

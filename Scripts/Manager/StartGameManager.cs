@@ -1,4 +1,3 @@
-using Assets.Scripts.Manager;
 using UnityEngine;
 
 public class StartGameManager : MonoBehaviour //SignletonGameObject<StartGameManager>
@@ -10,6 +9,7 @@ public class StartGameManager : MonoBehaviour //SignletonGameObject<StartGameMan
     void Start()
     {
         //DatabaseHelper.ResetTableItem();
+        //Assembly.GetAssembly(typeof(BaseRepitory<T>)).GetTypes().FirstOrDefault(testc => testc.isSubsclassOf(typeof(GenericRepitory<T>)));
 
         scenesManager.ClearScenes();
 

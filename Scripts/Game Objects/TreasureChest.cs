@@ -8,24 +8,22 @@ using UnityEngine.UI;
 
 public class TreasureChest : NorthApproachingInteractable
 {
-    public Item content;
+    [HideInInspector] public Item content;
     public Inventory inventory;
     public bool isOpen;
     public Signal raiseItem;
-
     public string itemNameCode;
 
     private GameObject dialogWindow;
     private Text dialogText;
-
-    private SpriteRenderer receivedItemContext;
+    private GameObject receivedItemContext;
     private Animator anim;
 
     void Start()
     {
         anim = GetComponent<Animator>();
 
-        receivedItemContext = GameObject.Find("received item").GetComponent<SpriteRenderer>();
+        receivedItemContext = FindGameObjectHelper.FindInactiveObjectByName("received item");
 
         dialogWindow = FindGameObjectHelper.FindInactiveObjectByName("DialogBox");
         dialogText = dialogWindow.GetComponentInChildren<Text>();
@@ -36,23 +34,30 @@ public class TreasureChest : NorthApproachingInteractable
     void Update()
     {
         if (Gamepad.current[GamepadButton.East].wasPressedThisFrame
-            && playerInRange
-            && !isOpen)
+            && playerInRange)
         {
-            dialogWindow.SetActive(true);
+            if (!isOpen)
+            {
+                dialogWindow.SetActive(true);
+                dialogText.text = content.Description;
 
-            dialogText.text = content.Description;
+                inventory.items.Add(content);
 
-            inventory.items.Add(content);
+                receivedItemContext.SetActive(true);
+                receivedItemContext.GetComponent<SpriteRenderer>().sprite = content.Sprite;
 
-            receivedItemContext.sprite = content.Sprite;
+                raiseItem.Raise();
 
-            raiseItem.Raise();
-
-            isOpen = true;
-
-            //contextclue.raise ???
+                isOpen = true;
+            }
+            else
+            {
+                raiseItem.Raise();
+                dialogWindow.SetActive(false);
+                receivedItemContext.SetActive(false);
+            }
         }
+        
     }
 
 }

@@ -232,8 +232,16 @@ public class Player : AliveEntity
 
     public void RaiseItem()
     {
-        animator.SetBool("receivingItem", true);
-        SetState(EntityState.unavailable);
+        if (!animator.GetBool("receivingItem"))
+        {
+            animator.SetBool("receivingItem", true);
+            SetState(EntityState.unavailable);
+        }
+        else
+        {
+            animator.SetBool("receivingItem", false);
+            SetState(EntityState.walk);
+        }
     }
 
 }

@@ -1,5 +1,4 @@
 ﻿using Assets.Database.Model.Design;
-using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -16,10 +15,13 @@ namespace Assets.Database.Model.Repository
         {
             List<string> fields = new List<string>()
             {
+                "name_libelle",
+                "name_code",
                 "sprite_name",
                 "rarity_code",
                 "weight",
-                "description"
+                "description",
+                "item_type"
             };
 
             //Adding id, name_libelle, name_code, actif

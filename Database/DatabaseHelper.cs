@@ -22,17 +22,18 @@ namespace Assets.Scripts.Manager
 
 		public static void CreateTables()
 		{
-			CreateTableItem();
+			ResetTableItem();
 		}
 
-		public static void CreateTableItem()
-		{
-			/*
-			IDbCommand dbcmd2 = dbcon.CreateCommand();
+		public static void ResetTableItem()
+        {
+			SqliteConnection dbConn = GetConnexion();
+
+			IDbCommand dbcmd2 = dbConn.CreateCommand();
 			dbcmd2.CommandText = "DROP TABLE item";
 			dbcmd2.ExecuteNonQuery();
-			*/
-			IDbCommand dbcmd = GetConnexion().CreateCommand();
+
+			IDbCommand dbcmd = dbConn.CreateCommand();
 			dbcmd.CommandText = "CREATE TABLE IF NOT EXISTS item (" +
 				"id INTEGER PRIMARY KEY AUTOINCREMENT," +
 				"name_libelle VARCHAR(100) UNIQUE," +
@@ -41,19 +42,28 @@ namespace Assets.Scripts.Manager
 				"rarity_code VARCHAR(20)," +
 				"weight DECIMAL(3,2)," +
 				"description VARCHAR(255)," +
+				"item_type VARCHAR(20)," +
 				"actif BOOLEAN" +
 			")";
 			dbcmd.ExecuteNonQuery();
 
 			/*
-			IDbCommand drop_cmd = dbcon.CreateCommand();
+			IDbCommand drop_cmd = dbConn.CreateCommand();
 			drop_cmd.CommandText = "DELETE FROM item";
 			drop_cmd.ExecuteNonQuery();
-			
-			IDbCommand cmnd = dbcon.CreateCommand();
-			cmnd.CommandText = "INSERT INTO item (name_libelle, name_code, sprite_name, rarity_code, weight, description, actif) VALUES ('Test', 'test_code', 'testSprite', 'common', 111.11, 'description', 1)";
-			cmnd.ExecuteNonQuery();
 			*/
+
+			IDbCommand key = dbConn.CreateCommand();
+			key.CommandText = "INSERT INTO item (name_libelle, name_code, sprite_name, rarity_code, weight, description, item_type, actif) VALUES ('Clé', 'key', 'gfx/key', 'common', 0, 'Petite Clé', 'consommable', 1)";
+			key.ExecuteNonQuery();
+
+			IDbCommand letter = dbConn.CreateCommand();
+			letter.CommandText = "INSERT INTO item (name_libelle, name_code, sprite_name, rarity_code, weight, description, item_type, actif) VALUES ('Lettre', 'letter', 'gfx/letter', 'common', 0, 'Lettre adressée à Mathilde', 'item', 1)";
+			letter.ExecuteNonQuery();
+
+			IDbCommand apple = dbConn.CreateCommand();
+			apple.CommandText = "INSERT INTO item (name_libelle, name_code, sprite_name, rarity_code, weight, description, item_type, actif) VALUES ('Pomme', 'apple', 'gfx/apple', 'common', 0, 'Pomme juteuse', 'consommable', 1)";
+			apple.ExecuteNonQuery();
 		}
 
 	}

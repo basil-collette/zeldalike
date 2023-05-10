@@ -1,3 +1,4 @@
+using Assets.Scripts.Manager;
 using UnityEngine;
 
 public class StartGameManager : MonoBehaviour //SignletonGameObject<StartGameManager>
@@ -8,12 +9,12 @@ public class StartGameManager : MonoBehaviour //SignletonGameObject<StartGameMan
 
     void Start()
     {
-        //initialPlayerPos.initalValue = START_PLAYER_POS;
+        //DatabaseHelper.ResetTableItem();
 
         scenesManager.ClearScenes();
 
         scenesManager.AdditiveLoadScene(START_SCENE_NAME, () => {
-            //DestroyImmediate(gameObject);
+            DestroyImmediate(gameObject);
 
             scenesManager.SetCurrentScene(START_SCENE_NAME);
         });

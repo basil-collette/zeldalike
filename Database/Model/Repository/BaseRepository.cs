@@ -146,7 +146,7 @@ namespace Assets.Database.Model.Repository
                 {
                     string query =
                         "SELECT " +
-                            $"{Current.GetFields()} " +
+                            $"{string.Join(",", Current.GetFields())} " +
                         $"FROM {typeof(D).Name.ToLower()} " +
                         "WHERE name_code = @Code AND actif = 1 " +
                             "LIMIT 1";
@@ -236,8 +236,8 @@ namespace Assets.Database.Model.Repository
                     var command = new SqliteCommand(query, connexion);
 
                     IDataReader reader = command.ExecuteReader();
-                    
-                    return model.Id;
+
+                    return (int)new SqliteCommand("SELECT last_insert_rowid()", connexion).ExecuteScalar();
                 }
             }
             catch (Exception ex)
@@ -298,8 +298,6 @@ namespace Assets.Database.Model.Repository
             return new List<string>()
             {
                 "id",
-                "name_libelle",
-                "name_code",
                 "actif"
             };
         }

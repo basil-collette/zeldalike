@@ -38,6 +38,8 @@ public class TreasureChest : NorthApproachingInteractable
         {
             if (!isOpen)
             {
+                exitSignal.Raise();
+
                 dialogWindow.SetActive(true);
                 dialogText.text = content.Description;
 
@@ -57,7 +59,22 @@ public class TreasureChest : NorthApproachingInteractable
                 receivedItemContext.SetActive(false);
             }
         }
-        
+    }
+
+    protected void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (!isOpen)
+        {
+            base.OnTriggerEnter2D(collider);
+        }
+    }
+
+    protected void OnTriggerStay2D(Collider2D collider)
+    {
+        if (!isOpen)
+        {
+            base.OnTriggerStay2D(collider);
+        }
     }
 
 }

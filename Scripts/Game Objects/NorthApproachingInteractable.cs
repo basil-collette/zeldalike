@@ -5,18 +5,21 @@ namespace Assets.Scripts.Game_Objects
     public class NorthApproachingInteractable : ApproachingInteractable
     {
 
-        void OnTriggerEnter2D(Collider2D collider)
+        protected void OnTriggerEnter2D(Collider2D collider)
         {
             if (enterSignal != null
                 && collider.CompareTag("Player")
                 && !collider.isTrigger)
             {
-                enterSignal.Raise();
-                playerInRange = true;
+                if (DirectionHelper.IsFacingUp(collider.GetComponent<Player>().orientation))
+                {
+                    enterSignal.Raise();
+                    playerInRange = true;
+                }
             }
         }
 
-        void OnTriggerStay2D(Collider2D collider)
+        protected void OnTriggerStay2D(Collider2D collider)
         {
             if (enterSignal != null
                 && exitSignal != null
@@ -25,7 +28,7 @@ namespace Assets.Scripts.Game_Objects
             {
                 if (DirectionHelper.IsFacingUp(collider.GetComponent<Player>().orientation))
                 {
-                    //enterSignal.Raise();
+                    base.OnTriggerEnter2D(collider);
                     playerInRange = true;
                 }
                 else

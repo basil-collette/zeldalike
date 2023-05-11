@@ -4787,6 +4787,10 @@ PrefabInstance:
       value: -0.19184184
       objectReference: {fileID: 0}
     - target: {fileID: 6710355217518163565, guid: 72820c953e7dc7444b2fb1ce5c462fee, type: 3}
+      propertyPath: needText
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710355217518163565, guid: 72820c953e7dc7444b2fb1ce5c462fee, type: 3}
       propertyPath: fadeInPanel
       value: 
       objectReference: {fileID: 9121204638812799774, guid: d23c9ed2e1f667c4a890f8836b19b6c3, type: 3}

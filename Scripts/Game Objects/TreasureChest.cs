@@ -38,6 +38,8 @@ public class TreasureChest : NorthApproachingInteractable
         {
             if (!isOpen)
             {
+                anim.SetBool("open", true);
+
                 exitSignal.Raise();
 
                 dialogWindow.SetActive(true);

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Brains/Itinirary")]
+//[CreateAssetMenu(menuName = "ScriptableObject/Brains/Itinirary")]
 public class PatrolBrain : Brain
 {
     public List<Vector2> steps = new List<Vector2>();

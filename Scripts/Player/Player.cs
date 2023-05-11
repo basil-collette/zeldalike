@@ -6,8 +6,6 @@ using UnityEngine.InputSystem.LowLevel;
 public class Player : AliveEntity
 {
     public int baseAttack = 1;
-    //public HoldableItem hand;
-    //public List<HoldableItem> hotbar = new List<HoldableItem>();
     public Inventory inventory;
     //Dash Properties
     public float dashSpeed = 20;

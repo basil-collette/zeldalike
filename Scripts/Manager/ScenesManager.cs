@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Helper;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -325,9 +326,9 @@ public class ScenesManager : MonoBehaviour
         }
     }
 
-    private IEnumerator PlaceNameCo(string text)
+    private IEnumerator PlaceNameCo(string sceneName)
     {
-        placeText.text = text;
+        placeText.text = TextHelper.Labelize(sceneName).Substring(0, sceneName.Length - 5); ;
         textBox.SetActive(true);
 
         yield return new WaitForSeconds(4f);

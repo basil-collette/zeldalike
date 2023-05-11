@@ -306,7 +306,8 @@ namespace Assets.Database.Model.Repository
         {
             List<string> finalFields = GetFields();
             finalFields.Remove("Id");
-            return string.Join(",", finalFields); //"sprite_name, rarity_code, weight, description";
+
+            return string.Join(",", finalFields);
         }
 
         public List<string> GetFieldsValues(D model)
@@ -347,39 +348,19 @@ namespace Assets.Database.Model.Repository
             {
                 case "string":
                     return $"'{value}'";
-                    break;
 
                 case "int":
                     return $"{value}";
-                    break;
 
                 default:
-                    return null;
                     break;
             }
+
+            return null;
         }
 
         /*
         public abstract void Validate(D entity);
-
-        protected abstract void DeleteOperation(Db_ICareContext context, D entity, OutputParameter<short?> outputResult);
-
-        protected virtual void CreateOrUpdateOperation(Db_ICareContext context, D entity, OutputParameter<short?> outputResult, OperationTypeEnum operation)
-        {
-            if (operation == OperationTypeEnum.Create)
-            {
-                context.Set<D>().Add(entity);
-            }
-            else if (operation == OperationTypeEnum.Update)
-            {
-                context.Set<D>().Update(entity);
-            }
-        }
-
-        protected virtual void DeleteOperation(Db_ICareContext context, D entity, OutputParameter<short?> outputResult)
-        {
-            context.Set<D>().Remove(entity);
-        }
 
         public override string GetFields()
         {

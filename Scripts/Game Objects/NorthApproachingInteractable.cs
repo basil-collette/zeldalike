@@ -29,7 +29,6 @@ namespace Assets.Scripts.Game_Objects
                 if (DirectionHelper.IsFacingUp(collider.GetComponent<Player>().orientation))
                 {
                     base.OnTriggerEnter2D(collider);
-                    playerInRange = true;
                 }
                 else
                 {

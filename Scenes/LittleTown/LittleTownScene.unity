@@ -34933,6 +34933,10 @@ PrefabInstance:
       value: -3.4
       objectReference: {fileID: 0}
     - target: {fileID: 6710355217518163565, guid: 72820c953e7dc7444b2fb1ce5c462fee, type: 3}
+      propertyPath: playerNextDirection.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710355217518163565, guid: 72820c953e7dc7444b2fb1ce5c462fee, type: 3}
       propertyPath: playerPositionStorage
       value: 
       objectReference: {fileID: 11400000, guid: 6998fd47cd0ad4d4eb8a85262c147f3f, type: 2}

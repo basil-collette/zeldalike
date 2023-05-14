@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StartGameManager : MonoBehaviour //SignletonGameObject<StartGameManager>
+public class GameManager : MonoBehaviour //SignletonGameObject<StartGameManager>
 {
     public ScenesManager scenesManager;
 
@@ -14,9 +14,8 @@ public class StartGameManager : MonoBehaviour //SignletonGameObject<StartGameMan
         scenesManager.ClearScenes();
 
         scenesManager.AdditiveLoadScene(START_SCENE_NAME, () => {
-            DestroyImmediate(gameObject);
-
             scenesManager.SetCurrentScene(START_SCENE_NAME);
+            //DestroyImmediate(gameObject);
         });
     }
 

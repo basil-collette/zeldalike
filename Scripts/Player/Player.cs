@@ -13,7 +13,9 @@ public class Player : AliveEntity
     public float dashCooldown = 0.5f;
     float dashCounter = 0;
     float dashCooldownCounter = 0;
+    //position
     public VectorValue startingPosition;
+    public VectorValue startingDirection;
 
     PlayerInput playerInputs;
 
@@ -24,6 +26,8 @@ public class Player : AliveEntity
         playerInputs = GetComponent<PlayerInput>();
 
         transform.position = startingPosition.initalValue;
+        animator.SetFloat("moveX", startingDirection.initalValue.x);
+        animator.SetFloat("moveY", startingDirection.initalValue.y);
 
         SetState(EntityState.walk);
     }

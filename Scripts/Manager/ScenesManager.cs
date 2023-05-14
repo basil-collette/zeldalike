@@ -28,6 +28,7 @@ public class ScenesManager : MonoBehaviour
 
     //To keep it in memory
     public VectorValue playerPositionStorage;
+    public VectorValue playerDirectionStorage;
 
     void Start()
     {

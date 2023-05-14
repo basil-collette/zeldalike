@@ -18,8 +18,12 @@ namespace Assets.Scripts.Helper
 
             for (int i = 1; i < text.Length; i++)
             {
-                if (char.IsUpper(text[i]) && text[i - 1] != ' ')
+                if (text[i] == ' ')
+                    break;
+
+                if (char.IsUpper(text[i]) && text[i - 1] == ' ')
                     newText.Append('_');
+
                 newText.Append(text[i]);
             }
 

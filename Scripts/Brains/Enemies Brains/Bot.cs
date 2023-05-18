@@ -41,7 +41,7 @@ public abstract class Bot : AliveEntity
         base.Update();
     }
 
-    protected void FixedUpdate()
+    protected new void FixedUpdate()
     {
         base.FixedUpdate();
     }

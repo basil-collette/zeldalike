@@ -51,14 +51,14 @@ public class ScenesManager : MonoBehaviour
     {
         foreach (PreloadedScene pScene in preloadedScenes)
         {
-            if (!scene.scenesNeedingPreloadNames.Contains(pScene.scene.name))
+            if (!scene.scenesNeedingPreloadNames.Contains(pScene.scene.libelle))
             {
                 pScene.canceled = true;
             }
         }
 
         //Verify that there are no preloded scene that aren't needed for next scene
-        while (preloadedScenes.Select(pScene => pScene.scene.name).Any(a => !scene.scenesNeedingPreloadNames.Contains(a)))
+        while (preloadedScenes.Select(pScene => pScene.scene.libelle).Any(a => !scene.scenesNeedingPreloadNames.Contains(a)))
         {
             yield return null;
         }
@@ -71,9 +71,9 @@ public class ScenesManager : MonoBehaviour
 
         yield return StartCoroutine(UnLoadSceneCo(currentScene));
 
-        yield return StartCoroutine(LoadSceneCo(scene.name, LoadSceneMode.Additive));
+        yield return StartCoroutine(LoadSceneCo(scene.libelle, LoadSceneMode.Additive));
 
-        _currentScene = scene.name;
+        _currentScene = scene.libelle;
 
         //fade to transparent here
     }
@@ -99,28 +99,28 @@ public class ScenesManager : MonoBehaviour
         Action<string> RemovePreloadedSceneCallback,
         Func<int> GetPreloadedScenesCountCallback)
     {
-        AsyncOperation asyncLoadOp = SceneManager.LoadSceneAsync(scene.name, LoadSceneMode.Additive);
+        AsyncOperation asyncLoadOp = SceneManager.LoadSceneAsync(scene.libelle, LoadSceneMode.Additive);
         asyncLoadOp.allowSceneActivation = false;
 
         while (!asyncLoadOp.isDone)
         {
             //Debug.Log(scene.name + " scene is loading progress: " + (asyncLoadOp.progress * 100) + "%");
 
-            if (IsCanceledCallBack(scene.name))
+            if (IsCanceledCallBack(scene.libelle))
             {
                 asyncLoadOp.allowSceneActivation = true;
 
-                yield return StartCoroutine(CancelPreloadCo(scene.name, RemovePreloadedSceneCallback));
+                yield return StartCoroutine(CancelPreloadCo(scene.libelle, RemovePreloadedSceneCallback));
             }
             else
             {
                 if (asyncLoadOp.progress >= 0.9f)
                 {
-                    if (MustUseSceneCallback(scene.name))
+                    if (MustUseSceneCallback(scene.libelle))
                     {
                         CancelPreloadCallback(scene.scenesNeedingPreloadNames);
 
-                        RemovePreloadedSceneCallback(scene.name);
+                        RemovePreloadedSceneCallback(scene.libelle);
 
                         DisableGameObjects(_currentScene);
 
@@ -137,13 +137,13 @@ public class ScenesManager : MonoBehaviour
 
                         yield return StartCoroutine(UnLoadSceneCo(currentScene));
 
-                        _currentScene = scene.name;
+                        _currentScene = scene.libelle;
 
                         //fade to transparent here
 
                         yield return null;
 
-                        SceneManager.SetActiveScene(SceneManager.GetSceneByName(scene.name));
+                        SceneManager.SetActiveScene(SceneManager.GetSceneByName(scene.libelle));
                     }
                 }
 
@@ -204,20 +204,20 @@ public class ScenesManager : MonoBehaviour
     {
         if (targetScene.needPreload)
         {
-            UsePreloadedScene(targetScene.name);
+            UsePreloadedScene(targetScene.libelle);
         }
         else
         {
             StartCoroutine(SwitchSceneCo(targetScene));
         }
 
-        StartCoroutine(PlaceNameCo(targetScene.name));
+        StartCoroutine(PlaceNameCo(targetScene.libelle));
     }
 
     public void PreloadScene(TargetScene scene)
     {
         //Check if allready in preloaded list
-        if (preloadedScenes.Find(pScene => pScene.scene.name == scene.name) != null)
+        if (preloadedScenes.Find(pScene => pScene.scene.libelle == scene.libelle) != null)
             return;
 
         preloadedScenes.Add(new PreloadedScene()
@@ -232,7 +232,7 @@ public class ScenesManager : MonoBehaviour
 
     public void UsePreloadedScene(string sceneName)
     {
-        preloadedScenes.Find(pScene => pScene.scene.name == sceneName).useScene = true;
+        preloadedScenes.Find(pScene => pScene.scene.libelle == sceneName).useScene = true;
     }
 
     public void AdditiveLoadScene(string sceneName, Action resultCallback = null)
@@ -252,14 +252,22 @@ public class ScenesManager : MonoBehaviour
 
     public void ClearScenes()
     {
-        if (SceneManager.sceneCount > 1)
+        
+        /*
+        for (int i = 1; i < SceneManager.sceneCount; i++)
         {
-            Scene[] scenes = SceneManager.GetAllScenes();
+            SceneManager.GetSceneAt(i);
+        }
+        */
 
-            for (int i = 1; i < scenes.Length; i++)
-            {
-                SceneManager.UnloadScene(scenes[i]);
-            }
+        //below: deprecated but up: not working
+
+        Scene[] scenes = SceneManager.GetAllScenes();
+
+        //Starting at 1, to skip first scene (GUI and scene managing stuff)
+        for (int i = 1; i < scenes.Length; i++)
+        {
+            SceneManager.UnloadScene(scenes[i]);
         }
     }
 
@@ -274,12 +282,12 @@ public class ScenesManager : MonoBehaviour
 
     bool IsCanceled(string sceneName)
     {
-        return preloadedScenes.Find(pScene => pScene.scene.name == sceneName).canceled;
+        return preloadedScenes.Find(pScene => pScene.scene.libelle == sceneName).canceled;
     }
 
     bool MustUsePreloadedScene(string sceneName)
     {
-        return preloadedScenes.Find(pScene => pScene.scene.name == sceneName).useScene;
+        return preloadedScenes.Find(pScene => pScene.scene.libelle == sceneName).useScene;
     }
 
     int GetPreloadedScenesCount()
@@ -289,14 +297,14 @@ public class ScenesManager : MonoBehaviour
 
     void RemovePreloadedScene(string sceneName)
     {
-        preloadedScenes.Remove(preloadedScenes.Find(pScene => pScene.scene.name == sceneName));
+        preloadedScenes.Remove(preloadedScenes.Find(pScene => pScene.scene.libelle == sceneName));
     }
 
     void CancelPreload(string[] scenesNeedingPreloadNames)
     {
         foreach (PreloadedScene pScene in preloadedScenes)
         {
-            if (!scenesNeedingPreloadNames.Contains(pScene.scene.name))
+            if (!scenesNeedingPreloadNames.Contains(pScene.scene.libelle))
             {
                 pScene.canceled = true;
             }

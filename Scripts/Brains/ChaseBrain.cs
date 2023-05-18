@@ -28,7 +28,7 @@ public class ChaseBrain : Brain
         }
 
         RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, (targetPos - transform.position), detectionRange);
-        if (hitInfo == null
+        if (hitInfo == false
             || ReferenceEquals(hitInfo.transform.gameObject, target.gameObject))
         {
             lastPositionKnown = targetPos;

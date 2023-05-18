@@ -4,7 +4,7 @@
 public class TargetScene : ScriptableObject //, ISerializationCallbackReceiver
 {
 
-    public string name = "Anonymous Scene";
+    public string libelle;
     public bool needPreload = false;
     public string[] scenesNeedingPreloadNames = new string[] { };
 

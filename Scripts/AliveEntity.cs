@@ -10,7 +10,7 @@ public abstract class AliveEntity : Entity
     [HideInInspector] public Vector3 orientation;
     protected Animator animator;
 
-    protected void Start()
+    protected new void Start()
     {
         base.Start();
 
@@ -23,9 +23,9 @@ public abstract class AliveEntity : Entity
         SetState(EntityState.idle);
     }
 
-    protected void Update()
+    protected new void Update()
     {
-        rigidbody.velocity = Vector3.zero;
+        GetComponent<Rigidbody2D>().velocity = Vector3.zero;
     }
 
     protected void FixedUpdate()

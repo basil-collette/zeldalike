@@ -4,7 +4,7 @@ using UnityEngine;
 public class CollideHit : Hit
 {
 
-    private void Start()
+    private new void Start()
     {
         base.Start();
     }

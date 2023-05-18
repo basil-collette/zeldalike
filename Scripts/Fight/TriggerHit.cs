@@ -3,7 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public class TriggerHit : Hit
 {
-    private void Start()
+    private new void Start()
     {
         base.Start();
     }

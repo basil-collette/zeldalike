@@ -8,19 +8,17 @@ public class PatrolBrain : Brain
     public int currentStepIndex;
     public bool isLoop = true;
 
-    protected Rigidbody2D rigidbody;
     protected AliveEntity entityComp;
 
     private void Start()
     {
-        this.rigidbody = GetComponent<Rigidbody2D>();
         this.entityComp = GetComponent<AliveEntity>();
     }
 
     public override Vector3? Think(ThinkParam param)
     {
         //On reach the step
-        if (rigidbody.position == steps[currentStepIndex])
+        if (GetComponent<Rigidbody2D>().position == steps[currentStepIndex])
         {
             if (currentStepIndex < steps.Count)
             {
@@ -62,7 +60,7 @@ public class PatrolBrain : Brain
 
         for (int i = 0; i < steps.Count; i++)
         {
-            if (Vector3.Distance(steps[i], rigidbody.position) > closestDistance)
+            if (Vector3.Distance(steps[i], GetComponent<Rigidbody2D>().position) > closestDistance)
             {
                 closestStepIndex = i;
             }

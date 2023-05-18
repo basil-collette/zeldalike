@@ -21,7 +21,7 @@ public class LogThinker : Bot
         SetState(EntityState.sleep);
     }
 
-    void Update()
+    new void Update()
     {
         if (currentEntityState == EntityState.unavailable)
             return;
@@ -62,13 +62,12 @@ public class LogThinker : Bot
         SetState(EntityState.idle);
     }
 
-    void FixedUpdate()
+    new void FixedUpdate()
     {
         if (currentEntityState == EntityState.unavailable)
             return;
 
-        rigidbody.velocity = Vector3.zero;
-        rigidbody.inertia = 0;
+        GetComponent<Rigidbody2D>().velocity = Vector3.zero;
 
         switch (currentEntityState)
         {

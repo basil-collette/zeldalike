@@ -3,7 +3,7 @@
 public class SurroundPursueBrain : PursueBrain
 {
 
-    public override Vector3? Think(ThinkParam? param = null)
+    public override Vector3? Think(ThinkParam param = null)
     {
         Vector3 direction = base.Think(param) ?? Vector3.zero;
 

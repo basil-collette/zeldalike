@@ -21,7 +21,7 @@ public class PursueBrain : Brain
         selfColliderSize = Math.Max(collidArea.x, collidArea.y) / 2;
     }
 
-    public override Vector3? Think(ThinkParam? param = null)
+    public override Vector3? Think(ThinkParam param = null)
     {
         Transform target = ((TargetThinkParam)param).target;
         Vector3 targetPos = target.position;

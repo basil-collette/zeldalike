@@ -4,13 +4,9 @@ public class Entity : Thinker
 {
     public Transform anchorPosition;
 
-    protected Rigidbody2D rigidbody;
-
     protected void Start()
     {
         this.anchorPosition = transform;
-
-        this.rigidbody = GetComponent<Rigidbody2D>();
     }
 
     protected void Update()

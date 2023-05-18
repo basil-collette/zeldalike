@@ -179,7 +179,6 @@ namespace Assets.Database.Model.Repository
                 {
                     return ContextualGetById(connexion, id, isNested);
                 }
-                return null;
             }
             catch (Exception ex)
             {
@@ -298,6 +297,7 @@ namespace Assets.Database.Model.Repository
             return new List<string>()
             {
                 "id",
+                "name_code",
                 "actif"
             };
         }

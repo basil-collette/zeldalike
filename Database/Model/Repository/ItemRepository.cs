@@ -16,7 +16,6 @@ namespace Assets.Database.Model.Repository
             List<string> fields = new List<string>()
             {
                 "name_libelle",
-                "name_code",
                 "sprite_name",
                 "rarity_code",
                 "weight",

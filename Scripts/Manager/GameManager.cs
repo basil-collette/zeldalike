@@ -4,7 +4,7 @@ public class GameManager : MonoBehaviour //SignletonGameObject<StartGameManager>
 {
     public ScenesManager scenesManager;
 
-    static readonly string START_SCENE_NAME = "HomeScene";
+    static readonly string START_SCENE_NAME = "HomeScene"; //"HomeScene";
 
     void Start()
     {

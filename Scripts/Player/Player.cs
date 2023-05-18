@@ -103,7 +103,7 @@ public class Player : AliveEntity
 
                 if (dashCounter <= 0)
                 {
-                    rigidbody.velocity = new Vector2(direction.x * moveSpeed, direction.y * moveSpeed);
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(direction.x * moveSpeed, direction.y * moveSpeed);
                 }
                                 
                 animator.SetFloat("moveX", direction.x);
@@ -139,7 +139,7 @@ public class Player : AliveEntity
     void Imobilize()
     {
         direction = Vector3.zero;
-        rigidbody.velocity = new Vector2(0, 0);
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         animator.SetBool("moving", false);
     }
 
@@ -147,7 +147,7 @@ public class Player : AliveEntity
     {
         if (dashCounter > 0)
         {
-            rigidbody.velocity = new Vector3(orientation.x * dashSpeed, orientation.y * dashSpeed);
+            GetComponent<Rigidbody2D>().velocity = new Vector3(orientation.x * dashSpeed, orientation.y * dashSpeed);
         }
 
         if (dashCooldownCounter > 0)
@@ -184,7 +184,7 @@ public class Player : AliveEntity
 
         while (dashCounter > 0)
         {
-            rigidbody.velocity = new Vector3(orientation.x * dashSpeed, orientation.y * dashSpeed);
+            GetComponent<Rigidbody2D>().velocity = new Vector3(orientation.x * dashSpeed, orientation.y * dashSpeed);
 
             dashCounter -= Time.deltaTime;
 
@@ -216,10 +216,10 @@ public class Player : AliveEntity
             }
             */
 
-            rigidbody.MovePosition(dashPosition);
+            GetComponent<Rigidbody2D>().MovePosition(dashPosition);
             isDashButtonDown = false;
 
-            CreateDashEffect(dashPosition, Vector2.Distance(rigidbody.position, dashPosition));
+            CreateDashEffect(dashPosition, Vector2.Distance(GetComponent<Rigidbody2D>().position, dashPosition));
         }
     }
 

@@ -398,6 +398,7 @@ MonoBehaviour:
   effectMods: []
   effects: []
   timedEffects: []
+  deathEffect: {fileID: 0}
 --- !u!95 &5620636059707414394
 Animator:
   serializedVersion: 5

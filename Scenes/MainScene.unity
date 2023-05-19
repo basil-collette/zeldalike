@@ -758,7 +758,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9df5d51ea0748544d9efacebe7d3ca2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firstLoadedSceneName: HomeScene
   scenesManager: {fileID: 1949270438}
+  destroyAfterLoad: 0
+  resetBDD: 0
 --- !u!1 &851023986
 GameObject:
   m_ObjectHideFlags: 0

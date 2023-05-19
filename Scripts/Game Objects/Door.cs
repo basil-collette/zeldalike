@@ -3,8 +3,6 @@ using System.Collections.Generic;
 
 public class Door : FacingInteractObject
 {
-    public bool open = false;
-
     public string keyUidString;
     public Guid? keyUid;
 
@@ -23,13 +21,24 @@ public class Door : FacingInteractObject
         }
     }
 
+    new void FixedUpdate()
+    {
+        if (enemyCountOnStart > 0
+            && enemies.Count == 0)
+        {
+            DestroyImmediate(this.gameObject);
+        }
+    }
+
     protected override void OnFacingInterfact()
     {
-        if (!open
-            && ConditionsOfTypesAreCompleted())
+        if (ConditionsOfTypesAreCompleted())
         {
-            open = true;
-            DestroyImmediate(transform.gameObject);
+            DestroyImmediate(this.gameObject);
+        }
+        else
+        {
+            // show message of need conditions
         }
     }
 
@@ -37,12 +46,6 @@ public class Door : FacingInteractObject
     {
         if (keyUidString != string.Empty
             && !FindFirstObjectByType<Player>().inventory.items.Exists(item => item.NameCode == "key" && item.Uid == keyUid))
-        {
-            return false;
-        }
-
-        if (enemyCountOnStart > 0
-            && enemies.Count > 0)
         {
             return false;
         }

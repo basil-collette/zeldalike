@@ -10,7 +10,7 @@ public class Player : AliveEntity
     //Dash Properties
     public float dashSpeed = 20;
     public float dashTimeLength = 0.2f;
-    public float dashCooldown = 0.5f;
+    public float dashCooldown = 3f;
     float dashCounter = 0;
     float dashCooldownCounter = 0;
     //position
@@ -46,7 +46,7 @@ public class Player : AliveEntity
         direction = Vector3.zero;
 
         if (Gamepad.current[GamepadButton.South].wasPressedThisFrame
-            && dashCounter <= 0)
+            && dashCooldownCounter <= 0)
         {
             StartCoroutine(DashCo());
             return;
@@ -143,11 +143,14 @@ public class Player : AliveEntity
         animator.SetBool("moving", false);
     }
 
+    /*
     void DashUpdate()
     {
         if (dashCounter > 0)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector3(orientation.x * dashSpeed, orientation.y * dashSpeed);
+
+            dashCounter -= Time.deltaTime;
         }
 
         if (dashCooldownCounter > 0)
@@ -156,24 +159,14 @@ public class Player : AliveEntity
         }
 
         if (Gamepad.current[GamepadButton.South].wasPressedThisFrame
-            && dashCounter <= 0)
+            && dashCooldownCounter <= 0)
         {
             //set collision active false
             dashCounter = dashTimeLength;
-        }
-
-        if (dashCounter > 0)
-        {
-            dashCounter -= Time.deltaTime;
-
-            if (dashCounter <= 0)
-            {
-                //set colission active true
-                dashCounter = 0;
-                dashCooldownCounter = dashCooldown;
-            }
+            dashCooldownCounter = dashCooldown;
         }
     }
+    */
 
     IEnumerator DashCo()
     {
@@ -182,22 +175,31 @@ public class Player : AliveEntity
 
         dashCounter = dashTimeLength;
 
+        StartCoroutine(DashCooldownCo());
+
         while (dashCounter > 0)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector3(orientation.x * dashSpeed, orientation.y * dashSpeed);
 
             dashCounter -= Time.deltaTime;
 
-            if (dashCounter <= 0)
-            {
-                //set colission active true
-                dashCounter = 0;
-            }
-
             yield return null;
         }
 
         SetState(EntityState.walk);
+        //set colission active true
+    }
+
+    IEnumerator DashCooldownCo()
+    {
+        dashCooldownCounter = dashCooldown;
+
+        while (dashCooldownCounter > 0)
+        {
+            dashCooldownCounter -= Time.deltaTime;
+
+            yield return null;
+        }
     }
 
     void Teleport()

@@ -16,14 +16,11 @@ public class Health : Hitable
     public List<EffectModificator> effectMods = new List<EffectModificator>();
     public List<Effect> effects;
     public List<Effect> timedEffects;
-
-    protected AliveEntity entity;
-    protected Rigidbody2D rigidBody;
+    public GameObject deathEffect;
 
     protected void Start()
     {
-        this.rigidBody = GetComponent<Rigidbody2D>();
-        this.entity = GetComponent<AliveEntity>();
+
     }
 
     public override void Hit(Vector3 attackerPos, List<Effect> hit)
@@ -108,7 +105,13 @@ public class Health : Hitable
 
     protected virtual void Die()
     {
+        if (deathEffect != null)
+        {
+            Instantiate(deathEffect, transform.position, Quaternion.identity);
+        }
+
         this.gameObject.SetActive(false);
+        Destroy(this.gameObject);
     }
 
     // EFFECT PROCESS _________________________________________________________________ EFFECT PROCESS
@@ -234,7 +237,7 @@ public class Health : Hitable
 
     IEnumerator KnockCo(Vector3 attackerPos, KnockBackEffect kbEffect)
     {
-        this.entity.SetState(EntityState.unavailable);
+        GetComponent<AliveEntity>().SetState(EntityState.unavailable);
 
         Vector3 difference = (transform.position - attackerPos).normalized
             * KnockBackEffect.THRUST
@@ -246,8 +249,8 @@ public class Health : Hitable
 
         yield return new WaitForSeconds(kbEffect.knockTime);
 
-        this.rigidBody.velocity = Vector2.zero;
-        this.entity.SetState(EntityState.idle);
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        GetComponent<AliveEntity>().SetState(EntityState.idle);
         //other.GetComponent<AliveEntity>().currentEntityState = EntityState.idle;
     }
 

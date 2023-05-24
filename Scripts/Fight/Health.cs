@@ -2,21 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class EffectModificator
-{
-    public EffectEnum effectType;
-    public float mod;
-}
-
 public class Health : Hitable
 {
-    public FloatValue health;
-    public Signal healthSignal;
-    public List<EffectModificator> effectMods = new List<EffectModificator>();
-    public List<Effect> effects;
-    public List<Effect> timedEffects;
-    public GameObject deathEffect;
+    [SerializeField] public FloatValue health;
+    [SerializeField] protected Signal healthSignal;
+    [SerializeField] public List<EffectModificator> effectMods = new List<EffectModificator>();
+    [SerializeField] public List<Effect> effects;
+    [SerializeField] public List<Effect> timedEffects;
+    [SerializeField] protected GameObject deathEffect;
+    [SerializeField] protected AudioClip deathSound;
 
     protected void Start()
     {
@@ -86,7 +80,14 @@ public class Health : Hitable
     public void Dammage(Effect effect)
     {
         health.RuntimeValue -= GetModifiedAmount(effect);
-        
+
+        var audioSource = GetComponent<AudioSource>();
+        if (audioSource != null && hitSound != null)
+        {
+            audioSource.clip = hitSound;
+            audioSource.Play();
+        }
+
         if (healthSignal != null)
         {
             healthSignal.Raise();
@@ -105,10 +106,11 @@ public class Health : Hitable
 
     protected virtual void Die()
     {
+        //Ask the sound helper to play cause this audioSource is destroyed
+        //deathSound
+
         if (deathEffect != null)
-        {
             Instantiate(deathEffect, transform.position, Quaternion.identity);
-        }
 
         this.gameObject.SetActive(false);
         Destroy(this.gameObject);
@@ -255,5 +257,12 @@ public class Health : Hitable
     }
 
 }
-    
-    
+
+[System.Serializable]
+public class EffectModificator
+{
+    public EffectEnum effectType;
+    public float mod;
+}
+
+

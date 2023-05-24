@@ -15,3 +15,4 @@ MonoBehaviour:
   libelle: CalmTownScene
   needPreload: 1
   scenesNeedingPreloadNames: []
+  musicName: fantaisy

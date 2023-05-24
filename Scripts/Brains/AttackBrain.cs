@@ -24,25 +24,19 @@ public class AttackBrain : Brain
 
     public override short? Behave(BehaveParam param = null)
     {
-        AttackBehaveParam attackBehaveParam = param as AttackBehaveParam;
-        
-        //RunCooldownCo(attackBehaveParam.attackCollider, attackBehaveParam.attackDuration, attackBehaveParam.cooldown);
+        if (canAttack)
+        {
+            AttackBehaveParam attackBehaveParam = param as AttackBehaveParam;
 
+            StartCoroutine(AttackCooldownCo(attackBehaveParam.attackDuration));
+        }
         return null;
     }
 
-    protected IEnumerator RunCooldownCo(Collider2D attackCollider, float attackDuration, float? cooldown = null)
+    protected IEnumerator AttackCooldownCo(float attackDuration)
     {
-        animator.SetBool("attacking", true);
-        attackCollider.enabled = true;
         canAttack = false;
-
         yield return new WaitForSeconds(attackDuration);
-        attackCollider.enabled = false;
-        animator.SetBool("attacking", false);
-
-        float finalCooldown = ((cooldown != null) ? (float)cooldown : this.Cooldown) - attackDuration;
-        yield return new WaitForSeconds(finalCooldown);
         canAttack = true;
     }
 

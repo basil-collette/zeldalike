@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class Entity : Thinker
 {
-    public Transform anchorPosition;
+    [HideInInspector] public Vector3 anchorPosition;
 
     protected void Start()
     {
-        this.anchorPosition = transform;
+        this.anchorPosition = transform.position;
     }
 
     protected void Update()

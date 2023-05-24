@@ -19,11 +19,13 @@ public class ChaseBrain : Brain
 
         if (Vector2.Distance(transform.position, targetPos) > detectionRange)
         {
+            GetComponent<Animator>().SetBool("targeting", false);
             return Vector3.zero;
         }
 
         if (!needDirectSee)
         {
+            GetComponent<Animator>().SetBool("targeting", true);
             return targetPos;
         }
 
@@ -33,9 +35,11 @@ public class ChaseBrain : Brain
         {
             lastPositionKnown = targetPos;
 
+            GetComponent<Animator>().SetBool("targeting", true);
             return lastPositionKnown;
         }
 
+        GetComponent<Animator>().SetBool("targeting", true);
         return lastPositionKnown;
     }
 

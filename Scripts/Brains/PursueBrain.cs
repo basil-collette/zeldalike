@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PursueBrain : Brain
 {
-    public float pursueDistance = 4;
+    public float raycastDistance = 4;
     public float meleeDistance = 1.5f;
     public bool avoidObstacle = true;
 
@@ -70,7 +70,7 @@ public class PursueBrain : Brain
         Vector3 targetPos = target.position;
         Vector3 direction = DirectionHelper.GetDirection(transform.position, targetPos);
 
-        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, direction, pursueDistance);
+        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, direction, raycastDistance);
         if (hitInfo.collider == null
             || ReferenceEquals(hitInfo.transform.gameObject, target.gameObject))
         {
@@ -107,7 +107,7 @@ public class PursueBrain : Brain
     protected float GetAngleDependingOfObstacleDistance(float colliderDistance)
     {        
         float angle = 95f; // max angle degree of side rotation
-        float colliderDistancePercentile = 100f - (Math.Max(0, colliderDistance - selfColliderSize) / pursueDistance) * 100f; // (100 - result) to invert the percentile
+        float colliderDistancePercentile = 100f - (Math.Max(0, colliderDistance - selfColliderSize) / raycastDistance) * 100f; // (100 - result) to invert the percentile
         return angle / 100f * colliderDistancePercentile;
     }
 

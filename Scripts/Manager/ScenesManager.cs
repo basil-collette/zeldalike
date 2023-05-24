@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Helper;
+using Assets.Scripts.Manager;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -47,18 +48,18 @@ public class ScenesManager : MonoBehaviour
 
     #region PROCESS
 
-    IEnumerator SwitchSceneCo(TargetScene scene)
+    IEnumerator SwitchSceneCo(TargetScene targetScene)
     {
         foreach (PreloadedScene pScene in preloadedScenes)
         {
-            if (!scene.scenesNeedingPreloadNames.Contains(pScene.scene.libelle))
+            if (!targetScene.scenesNeedingPreloadNames.Contains(pScene.scene.libelle))
             {
                 pScene.canceled = true;
             }
         }
 
         //Verify that there are no preloded scene that aren't needed for next scene
-        while (preloadedScenes.Select(pScene => pScene.scene.libelle).Any(a => !scene.scenesNeedingPreloadNames.Contains(a)))
+        while (preloadedScenes.Select(pScene => pScene.scene.libelle).Any(a => !targetScene.scenesNeedingPreloadNames.Contains(a)))
         {
             yield return null;
         }
@@ -71,23 +72,29 @@ public class ScenesManager : MonoBehaviour
 
         yield return StartCoroutine(UnLoadSceneCo(currentScene));
 
-        yield return StartCoroutine(LoadSceneCo(scene.libelle, LoadSceneMode.Additive));
+        yield return StartCoroutine(LoadSceneCo(targetScene, LoadSceneMode.Additive));
 
-        _currentScene = scene.libelle;
+        FindObjectOfType<SoundManager>().OnSceneSwitchSetMusic(targetScene);
+
+        //Play ambiance sound ??
+
+        _currentScene = targetScene.libelle;
 
         //fade to transparent here
     }
 
-    IEnumerator LoadSceneCo(string sceneName, LoadSceneMode loadmode, Action resultCallback = null)
+    IEnumerator LoadSceneCo(TargetScene targetScene, LoadSceneMode loadmode, Action resultCallback = null)
     {
-        AsyncOperation loadOp = SceneManager.LoadSceneAsync(sceneName, loadmode);
+        AsyncOperation loadOp = SceneManager.LoadSceneAsync(targetScene.libelle, loadmode);
 
         while (!loadOp.isDone)
         {
             yield return null;
         }
 
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(targetScene.libelle));
+
+        FindObjectOfType<SoundManager>().OnSceneSwitchSetMusic(targetScene);
 
         if (resultCallback != null) resultCallback();
     }
@@ -130,6 +137,8 @@ public class ScenesManager : MonoBehaviour
                         {
                             yield return null;
                         }
+
+                        FindObjectOfType<SoundManager>().OnSceneSwitchSetMusic(scene);
 
                         //fade to white here
 
@@ -235,19 +244,19 @@ public class ScenesManager : MonoBehaviour
         preloadedScenes.Find(pScene => pScene.scene.libelle == sceneName).useScene = true;
     }
 
-    public void AdditiveLoadScene(string sceneName, Action resultCallback = null)
+    public void AdditiveLoadScene(TargetScene targetScene, Action resultCallback = null)
     {
-        LoadScene(sceneName, LoadSceneMode.Additive, resultCallback);
+        LoadScene(targetScene, LoadSceneMode.Additive, resultCallback);
     }
 
-    public void LoadScene(string sceneName, Action resultCallback = null)
+    public void LoadScene(TargetScene targetScene, Action resultCallback = null)
     {
-        LoadScene(sceneName, LoadSceneMode.Single, resultCallback);
+        LoadScene(targetScene, LoadSceneMode.Single, resultCallback);
     }
 
-    public void LoadScene(string sceneName, LoadSceneMode loadmode, Action resultCallback = null)
+    public void LoadScene(TargetScene targetScene, LoadSceneMode loadmode, Action resultCallback = null)
     {
-        StartCoroutine(LoadSceneCo(sceneName, loadmode, resultCallback));
+        StartCoroutine(LoadSceneCo(targetScene, loadmode, resultCallback));
     }
 
     public void ClearScenes()

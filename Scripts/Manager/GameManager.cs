@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour //SignletonGameObject<StartGameManager>
 {
-    public string firstLoadedSceneName = "HomeScene";
+    public TargetScene firstLoadedScene;
     public ScenesManager scenesManager;
     public bool destroyAfterLoad = false;
     public bool resetBDD = false;
@@ -18,8 +18,8 @@ public class GameManager : MonoBehaviour //SignletonGameObject<StartGameManager>
 
         scenesManager.ClearScenes();
 
-        scenesManager.AdditiveLoadScene(firstLoadedSceneName, () => {
-            scenesManager.SetCurrentScene(firstLoadedSceneName);
+        scenesManager.AdditiveLoadScene(firstLoadedScene, () => {
+            scenesManager.SetCurrentScene(firstLoadedScene.libelle);
 
             if (destroyAfterLoad) {
                 DestroyImmediate(gameObject);

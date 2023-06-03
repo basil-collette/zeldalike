@@ -16,7 +16,7 @@ public class Pot : Hitable
         
     }
 
-    public override void Hit(Vector3 attackerPos, List<Effect> hit)
+    public override void Hit(GameObject attacker, List<Effect> hit)
     {
         foreach (Effect effect in hit)
         {

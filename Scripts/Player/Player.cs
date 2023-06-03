@@ -1,3 +1,5 @@
+using Assets.Scripts.Manager;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,23 +9,25 @@ public class Player : AliveEntity
 {
     public int baseAttack = 1;
     public Inventory inventory;
-    //Dash Properties
-    public float dashSpeed = 20;
-    public float dashTimeLength = 0.2f;
-    public float dashCooldown = 3f;
-    float dashCounter = 0;
-    float dashCooldownCounter = 0;
-    //position
+
+    [Header("Position Settings")]
     public VectorValue startingPosition;
     public VectorValue startingDirection;
 
+    [Header("Dash Settings")]
+    public float dashSpeed = 20;
+    public float dashDuration = 0.2f;
+    public float dashCooldown = 3f;
+
     PlayerInput playerInputs;
+    CooldownManager cooldownManager;
 
     new void Start()
     {
         base.Start();
 
         playerInputs = GetComponent<PlayerInput>();
+        cooldownManager = GetComponent<CooldownManager>();
 
         transform.position = startingPosition.initalValue;
         animator.SetFloat("moveX", startingDirection.initalValue.x);
@@ -45,10 +49,9 @@ public class Player : AliveEntity
 
         direction = Vector3.zero;
 
-        if (Gamepad.current[GamepadButton.South].wasPressedThisFrame
-            && dashCooldownCounter <= 0)
+        if (Gamepad.current[GamepadButton.South].wasPressedThisFrame)
         {
-            StartCoroutine(DashCo());
+            Dash();
             return;
         }
 
@@ -101,11 +104,12 @@ public class Player : AliveEntity
 
                 //rigidbody.MovePosition(transform.position + (direction.normalized * moveSpeed * Time.fixedDeltaTime));
 
-                if (dashCounter <= 0)
-                {
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(direction.x * moveSpeed, direction.y * moveSpeed);
-                }
-                                
+                float finalSpeed = (cooldownManager.IsAvailable("dashDuration"))
+                    ? moveSpeed
+                    : dashSpeed;
+
+                GetComponent<Rigidbody2D>().velocity = new Vector2(direction.x * finalSpeed, direction.y * finalSpeed);
+
                 animator.SetFloat("moveX", direction.x);
                 animator.SetFloat("moveY", direction.y);
                 animator.SetBool("moving", true);
@@ -126,14 +130,35 @@ public class Player : AliveEntity
         this.orientation = this.direction.normalized;
     }
 
+    void Dash()
+    {
+        if (!cooldownManager.IsAvailable("dashCooldown")
+            && cooldownManager.IsAvailable("dashDuration"))
+        {
+            return;
+        }
+
+        if (cooldownManager.IsAvailable("dashCooldown"))
+        {
+            Action OnLoop = () => { /* CreateDashEffect() */ };
+            Action OnEnd = () => { SetState(EntityState.walk); };
+
+            cooldownManager.StartCooldown("dashDuration", dashDuration, OnLoop, OnEnd);
+            cooldownManager.StartCooldown("dashCooldown", dashCooldown);
+        }
+    }
+
     public IEnumerator AttackCo()
     {
         yield return new WaitForSeconds(.25f);
 
         animator.SetBool("attacking", false);
 
-        if (currentEntityState != EntityState.unavailable)
-            SetState(EntityState.walk);
+        while (currentEntityState == EntityState.unavailable)
+        {
+            yield return null;
+        }
+        SetState(EntityState.walk);
     }
 
     void Imobilize()
@@ -143,89 +168,7 @@ public class Player : AliveEntity
         animator.SetBool("moving", false);
     }
 
-    /*
-    void DashUpdate()
-    {
-        if (dashCounter > 0)
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector3(orientation.x * dashSpeed, orientation.y * dashSpeed);
-
-            dashCounter -= Time.deltaTime;
-        }
-
-        if (dashCooldownCounter > 0)
-        {
-            dashCooldownCounter -= Time.deltaTime;
-        }
-
-        if (Gamepad.current[GamepadButton.South].wasPressedThisFrame
-            && dashCooldownCounter <= 0)
-        {
-            //set collision active false
-            dashCounter = dashTimeLength;
-            dashCooldownCounter = dashCooldown;
-        }
-    }
-    */
-
-    IEnumerator DashCo()
-    {
-        SetState(EntityState.unavailable);
-        //set colission active false GetComponent<BoxCollider2D>()
-
-        dashCounter = dashTimeLength;
-
-        StartCoroutine(DashCooldownCo());
-
-        while (dashCounter > 0)
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector3(orientation.x * dashSpeed, orientation.y * dashSpeed);
-
-            dashCounter -= Time.deltaTime;
-
-            yield return null;
-        }
-
-        SetState(EntityState.walk);
-        //set colission active true
-    }
-
-    IEnumerator DashCooldownCo()
-    {
-        dashCooldownCounter = dashCooldown;
-
-        while (dashCooldownCounter > 0)
-        {
-            dashCooldownCounter -= Time.deltaTime;
-
-            yield return null;
-        }
-    }
-
-    void Teleport()
-    {
-        bool isDashButtonDown = false;
-        if (isDashButtonDown)
-        {
-            float dashAmount = 50f;
-            Vector3 dashPosition = transform.position + orientation * dashAmount;
-
-            /*
-            RaycastHit2D raycast = Physics2D.Raycast(transform.position, direction, dashAmount);
-            if (raycast.collider != null)
-            {
-                dashPosition = raycast.point;
-            }
-            */
-
-            GetComponent<Rigidbody2D>().MovePosition(dashPosition);
-            isDashButtonDown = false;
-
-            CreateDashEffect(dashPosition, Vector2.Distance(GetComponent<Rigidbody2D>().position, dashPosition));
-        }
-    }
-
-    void CreateDashEffect(Vector3 dashPosition, float dashSize)
+    void CreateDashEffect()
     {
         /*
         Transform dashTransform = Instantiate(GameAssets.i.pfDashEffect, dashPosition, Quaternion.identity);
@@ -247,5 +190,28 @@ public class Player : AliveEntity
             SetState(EntityState.walk);
         }
     }
+
+    /*
+    void Teleport()
+    {
+        bool isDashButtonDown = false;
+        if (isDashButtonDown)
+        {
+            float dashAmount = 50f;
+            Vector3 dashPosition = transform.position + orientation * dashAmount;
+
+            RaycastHit2D raycast = Physics2D.Raycast(transform.position, direction, dashAmount);
+            if (raycast.collider != null)
+            {
+                dashPosition = raycast.point;
+            }
+
+            GetComponent<Rigidbody2D>().MovePosition(dashPosition);
+            isDashButtonDown = false;
+
+            CreateDashEffect(dashPosition, Vector2.Distance(GetComponent<Rigidbody2D>().position, dashPosition));
+        }
+    }
+    */
 
 }

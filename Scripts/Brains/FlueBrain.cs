@@ -1,17 +1,22 @@
+using Assets.Scripts.Manager;
 using System;
 using UnityEngine;
 
 public class FlueBrain : Brain
 {
-    public float flueDistance = 2;
+    public float startingFlueDistance = 2;
+    public float flueCooldown = 2;
+    public float flueDuration = 1;
 
     protected Animator animator;
     protected float selfColliderSize;
     protected bool preferClockwise = true;
+    protected CooldownManager cooldownManager;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
+        cooldownManager = GetComponent<CooldownManager>();
 
         Vector2 collidArea = GetComponent<BoxCollider2D>().size;
         selfColliderSize = Math.Max(collidArea.x, collidArea.y) / 2;
@@ -19,17 +24,25 @@ public class FlueBrain : Brain
 
     public override Vector3? Think(ThinkParam param = null)
     {
-        Transform target = ((TargetThinkParam)param).target;
-        Vector3 targetPos = target.position;
+        Vector3 targetPos = (param as TargetThinkParam).target.position;
+        Vector3 direction = DirectionHelper.GetDirection(targetPos, transform.position);
 
         float distanceFromTarget = Vector2.Distance(transform.position, targetPos);
 
-        if (distanceFromTarget > flueDistance)
+        //immobilize if target is far OR if flueCooldown is not finished
+        if ((distanceFromTarget > startingFlueDistance || !cooldownManager.IsAvailable("flueCooldown"))
+            && cooldownManager.IsAvailable("flueDuration"))
         {
             return Vector3.zero;
         }
 
-        return GetFlueDirection(DirectionHelper.GetDirection(targetPos, transform.position));
+        if (cooldownManager.IsAvailable("flueCooldown"))
+        {
+            cooldownManager.StartCooldown("flueDuration", flueDuration);
+            cooldownManager.StartCooldown("flueCooldown", flueCooldown);
+        }
+
+        return GetFlueDirection(direction);
     }
 
     public override short? Behave(BehaveParam param = null)
@@ -55,10 +68,10 @@ public class FlueBrain : Brain
 
     protected Vector3 GetFlueDirection(Vector3 direction)
     {
-        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, direction, flueDistance);
+        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, direction, startingFlueDistance);
         if (hitInfo.collider == null)
         {
-            return direction;
+            return DirectionHelper.GetPosAfterDirection(transform.position, direction);
         }
 
         float angle = GetAngleDependingOfObstacleDistance(hitInfo.distance);
@@ -74,12 +87,12 @@ public class FlueBrain : Brain
         bool clockwiseIsBetter;
         if (preferClockwise)
         {
-            clockwiseIsBetter = ColliderHelper.FirstDirectionHaveLessCollisions(clockwiseDirection, antiClockwiseDirection, transform.position, flueDistance);
+            clockwiseIsBetter = ColliderHelper.FirstDirectionHaveLessCollisions(clockwiseDirection, antiClockwiseDirection, transform.position, startingFlueDistance);
             preferClockwise = clockwiseIsBetter;
         }
         else
         {
-            clockwiseIsBetter = ColliderHelper.FirstDirectionHaveLessCollisions(antiClockwiseDirection, clockwiseDirection, transform.position, flueDistance);
+            clockwiseIsBetter = ColliderHelper.FirstDirectionHaveLessCollisions(antiClockwiseDirection, clockwiseDirection, transform.position, startingFlueDistance);
             preferClockwise = !clockwiseIsBetter;
         }
 
@@ -91,7 +104,7 @@ public class FlueBrain : Brain
     protected float GetAngleDependingOfObstacleDistance(float colliderDistance)
     {
         float angle = 95f; // max angle degree of side rotation
-        float colliderDistancePercentile = 100f - (Math.Max(0, colliderDistance - selfColliderSize) / flueDistance) * 100f; // (100 - result) to invert the percentile
+        float colliderDistancePercentile = 100f - (Math.Max(0, colliderDistance - selfColliderSize) / startingFlueDistance) * 100f; // (100 - result) to invert the percentile
         return angle / 100f * colliderDistancePercentile;
     }
 

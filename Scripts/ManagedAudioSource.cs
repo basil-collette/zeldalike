@@ -5,13 +5,11 @@ using UnityEngine;
 
 public class ManagedAudioSource : MonoBehaviour
 {
-    AudioSource audioSource;
     List<AudioClip> repetitivesSounds = new List<AudioClip>();
 
     void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
-        audioSource.volume = FindObjectOfType<SoundManager>().soundVolume;
+        GetComponent<AudioSource>().volume = FindObjectOfType<SoundManager>().effectVolume;
     }
 
     public void StartRepetitiveSound(AudioClip clip)
@@ -27,11 +25,14 @@ public class ManagedAudioSource : MonoBehaviour
 
     IEnumerator RepetitiveSoundCo(AudioClip clip)
     {
-        while (repetitivesSounds.Find(c => c == clip))
-        {
-            audioSource.clip = clip;
-            audioSource.Play();
+        AudioSource audioSource = GetComponent<AudioSource>();
+        var sound = repetitivesSounds.Find(c => c == clip);
 
+        while (sound != null)
+        {
+            audioSource.PlayOneShot(sound);
+
+            sound = repetitivesSounds.Find(c => c == clip);
             yield return null;
         }
     }

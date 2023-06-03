@@ -5,11 +5,12 @@ public class ChaseBrain : Brain
     public float detectionRange = 4;
     public bool needDirectSee = true;
 
+    protected Animator animator;
     protected Vector3 lastPositionKnown;
 
     private void Start()
     {
-        //
+        animator = GetComponent<Animator>();
     }
 
     public override Vector3? Think(ThinkParam param)
@@ -22,6 +23,10 @@ public class ChaseBrain : Brain
             GetComponent<Animator>().SetBool("targeting", false);
             return Vector3.zero;
         }
+
+        Vector3 direction = DirectionHelper.GetDirection(transform.position, targetPos);
+        animator.SetFloat("moveX", direction.x);
+        animator.SetFloat("moveY", direction.y);
 
         if (!needDirectSee)
         {

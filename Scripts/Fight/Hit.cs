@@ -4,10 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public abstract class Hit : MonoBehaviour
 {
-    [SerializeReference]
-    public List<Effect> effects = new List<Effect>();
-
-    public Rigidbody2D rigidBody;
+    [SerializeReference] public List<Effect> effects = new List<Effect>();
 
     protected virtual void Start()
     {
@@ -17,7 +14,7 @@ public abstract class Hit : MonoBehaviour
 
     protected virtual void OnHit(Hitable hited)
     {
-        hited.Hit(this.rigidBody.position, effects);
+        hited.Hit(gameObject, effects);
     }
 
 }

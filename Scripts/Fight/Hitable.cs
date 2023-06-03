@@ -5,5 +5,5 @@ public abstract class Hitable : Effectable
 {
     [SerializeField] protected AudioClip hitSound;
 
-    public abstract void Hit(Vector3 attackerPos, List<Effect> hit);
+    public abstract void Hit(GameObject attacker, List<Effect> hit);
 }

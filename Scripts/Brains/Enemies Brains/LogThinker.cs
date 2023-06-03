@@ -81,13 +81,13 @@ public class LogThinker : Bot
             case EntityState.attack:
                 if (!animator.GetBool("attacking"))
                 {
-                    AttackBehaveParam para = new AttackBehaveParam()
+                    AttackBehaveParam param = new AttackBehaveParam()
                     {
                         attackDuration = 1,
                         cooldown = 1,
                         attackCollider = this.attackCollider
                     };
-                    attackBrain.Behave(para);
+                    attackBrain.Behave(param);
                 }
                 break;
 

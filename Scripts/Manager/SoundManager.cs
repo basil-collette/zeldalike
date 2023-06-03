@@ -1,10 +1,11 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scripts.Manager
 {
     [System.Serializable]
-    public class Music
+    public class Sound
     {
         public string Name;
         public AudioClip Clip;
@@ -12,12 +13,13 @@ namespace Assets.Scripts.Manager
 
     public class SoundManager : SignletonGameObject<SoundManager>
     {
-        public bool playMusic = true;
-        public float musicVolume = 1;
-        public bool playSounds = true;
-        public float soundVolume = 1;
+        [SerializeField] public AudioSource musicSource;
+        [SerializeField] public float musicVolume = 1;
+        [SerializeField] public Sound[] musics;
 
-        public Music[] musics;
+        [SerializeField] public AudioSource effectSource;
+        [SerializeField] public float effectVolume = 1;
+        [SerializeField] public Sound[] effects;
 
         private void Start()
         {
@@ -26,58 +28,74 @@ namespace Assets.Scripts.Manager
 
         public void OnSceneSwitchSetMusic(TargetScene scene)
         {
-            AudioSource audioSource = GetComponent<AudioSource>();
+            musicSource.Stop();
 
-            audioSource.Stop();
-
-            if (playMusic &&
-                scene.musicName != null && scene.musicName != string.Empty)
+            if (scene.musicName != null && scene.musicName != string.Empty)
             {
-                audioSource.clip = musics.First(music => music.Name == scene.musicName).Clip;
-                audioSource.Play();
+                musicSource.clip = musics.First(music => music.Name == scene.musicName).Clip;
+                musicSource.Play();
             }
         }
 
         public void PlayMusic(string Name)
         {
-            if (playMusic)
-            {
-                AudioSource audioSource = GetComponent<AudioSource>();
-
-                audioSource.Stop();
-                audioSource.clip = musics.First(music => music.Name == Name).Clip;
-                audioSource.Play();
-            }
+            musicSource.Stop();
+            musicSource.clip = musics.First(music => music.Name == Name).Clip;
+            musicSource.Play();
         }
 
         public void SetMusicVolume(float volume)
         {
-            GetComponent<AudioSource>().volume = volume;
+            musicSource.volume = volume;
+        }
+
+        public void PlayEffect(string Name)
+        {
+            effectSource.PlayOneShot(effects.First(e => e.Name == Name).Clip);
         }
 
         public void SetSoundsVolume(float volume)
         {
-            soundVolume = volume;
+            effectVolume = volume;
 
             foreach (var obj in FindObjectsOfType<AudioSource>())
             {
-                if (obj == this)
+                if (obj.name == "MusicSource")
                     break;
 
                 obj.GetComponent<AudioSource>().volume = volume;
             }
         }
 
-        public void SetPlayMusic(bool play)
+        public void TogglePlayMusic()
         {
-            playMusic = play;
+            musicSource.mute = !musicSource.mute;
         }
 
-        public void SetPlaySounds(bool play)
+        public void TogglePlaySounds(bool play)
         {
-            playSounds = play;
+            effectSource.mute = !effectSource.mute;
         }
+
+        /*
+        public void StartRepetitiveSound(AudioClip clip)
+        {
+            repetitivesSounds.Add(clip);
+            StartCoroutine(RepetitiveSoundCo(clip));
+        }
+
+        IEnumerator RepetitiveSoundCo(string clipname)
+        {
+            var sound = effects.FirstOrDefault(c => c.Name == clipname);
+            while (sound != null)
+            {
+                effectSource.PlayOneShot(sound.Clip);
+
+                sound = effects.FirstOrDefault(c => c.Name == clipname);
+                yield return null;
+            }
+        }
+        */
 
     }
-
 }

@@ -1,52 +1,59 @@
+using Assets.Scripts.Manager;
+using System.Collections;
 using UnityEngine;
 
 public class BeanThinker : Bot
 {
     protected ChaseBrain chaseBrain;
-    protected PursueBrain pursueBrain;
-    protected AttackBrain attackBrain;
+    protected FlueBrain flueBrain;
+    protected ProjectileAttackBrain projectileAttackBrain;
+    protected CooldownManager cooldownManager;
 
     new void Start()
     {
         base.Start();
 
         chaseBrain = GetComponent<ChaseBrain>();
-        pursueBrain = GetComponent<PursueBrain>();
-        attackBrain = GetComponent<AttackBrain>();
-        
+        flueBrain = GetComponent<FlueBrain>();
+        projectileAttackBrain = GetComponent<ProjectileAttackBrain>();
+        cooldownManager = GetComponent<CooldownManager>();
+
         SetState(EntityState.sleep);
     }
 
     new void Update()
     {
-        if (currentEntityState == EntityState.unavailable)
+        if (currentEntityState == EntityState.unavailable
+            || currentEntityState == EntityState.attack)
             return;
 
         direction = chaseBrain.Think(new TargetThinkParam() { target = this.target }) ?? Vector3.zero;
+        if (direction == Vector3.zero)
+        {
+            // wandering !
+            return;
+        }
 
-        direction = pursueBrain.Think(new TargetThinkParam() { target = this.target }) ?? Vector3.zero;
-
-        //On target not inside attackRadius
+        direction = flueBrain.Think(new TargetThinkParam() { target = this.target }) ?? Vector3.zero;
+        //On target on flue needing range
         if (direction != Vector3.zero)
         {
             SetState(EntityState.walk);
             return;
         }
 
-        /*
         AttackThinkParam para = new AttackThinkParam()
         {
             targetPos = target.position,
-            attackCollider = this.attackCollider
+            attackCollider = GetComponent<BoxCollider2D>()
         };
-        if (attackBrain.Think(para) != Vector3.zero)
+        if (projectileAttackBrain.Think(para) != Vector3.zero)
         {
             SetState(EntityState.attack);
             animator.SetBool("moving", false);
             return;
         }
-        */
-        
+
         SetState(EntityState.idle);
     }
 
@@ -60,7 +67,18 @@ public class BeanThinker : Bot
         switch (currentEntityState)
         {
             case EntityState.walk:
-                pursueBrain.Behave(new TargetPosBehaveParam() { targetPos = this.direction });
+                flueBrain.Behave(new TargetPosBehaveParam() { targetPos = this.direction });
+                break;
+
+            case EntityState.attack:
+                if (!animator.GetBool("attacking"))
+                {
+                    AttackBehaveParam param = new AttackBehaveParam()
+                    {
+                        targetTransform = target.transform
+                    };
+                    projectileAttackBrain.Behave(param);
+                }
                 break;
 
             default: break;

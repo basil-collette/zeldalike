@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 6809629457761089077}
   - component: {fileID: 1776859290621372642}
   - component: {fileID: 1854991670337369718}
-  - component: {fileID: -4282534634085320254}
-  - component: {fileID: 1776859290621372649}
+  - component: {fileID: -4700577540962086821}
+  - component: {fileID: 7050955607430235698}
   - component: {fileID: 4887274313369944488}
+  - component: {fileID: 7802258978821172004}
   m_Layer: 0
   m_Name: Bean Enemy
   m_TagString: Untagged
@@ -153,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anchorPosition: {x: 0, y: 0, z: 0}
   currentEntityState: 2
-  moveSpeed: 1
+  moveSpeed: 5
   nearRadius: 1
   direction: {x: 0, y: 0, z: 0}
   orientation: {x: 0, y: 0, z: 0}
@@ -173,6 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb059cbe11b736746aa9351ef5d49ca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitSound: {fileID: 0}
   health: {fileID: 0}
   healthSignal: {fileID: 0}
   effectMods:
@@ -183,6 +185,7 @@ MonoBehaviour:
   effects: []
   timedEffects: []
   deathEffect: {fileID: 0}
+  deathSound: {fileID: 0}
 --- !u!114 &1854991670337369718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,9 +198,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2fd13184c7b1e47a6a9a90a20936e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 4
-  needDirectSee: 1
---- !u!114 &-4282534634085320254
+  detectionRange: 6
+  needDirectSee: 0
+--- !u!114 &-4700577540962086821
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,13 +209,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1776859291371688983}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30d38aeec86b58c418956ed22ce47fbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 3dd11017cfb5d754a9b900ea16b54592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pursueDistance: 4
-  meleeDistance: 1.5
-  avoidObstacle: 1
---- !u!114 &1776859290621372649
+  startingFlueDistance: 2
+  flueCooldown: 2
+  flueDuration: 1
+--- !u!114 &7050955607430235698
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -221,10 +224,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1776859291371688983}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 531a9fc90fca3ba45bdc1cdfceb4c7bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 50068c9f4912e784bba7be4fcafa2482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cooldown: 2
+  Cooldown: 3
+  attackAnim: {fileID: 7400000, guid: 514b35e858004d54398e093e318874e1, type: 2}
+  projectile: {fileID: 6748425022035738554, guid: a3e912437868de147a79dd32191b64cc, type: 3}
+  attackClipName: short-breath
 --- !u!95 &4887274313369944488
 Animator:
   serializedVersion: 5
@@ -245,3 +251,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &7802258978821172004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776859291371688983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 357f1fae905aa2d458cd8c3c59b9386b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -7,7 +7,7 @@ public class LogTreeHit : Hitable
     public GameObject logPrefab;
     public int maxSpawnCount = 4;
 
-    List<EffectEnum> effectTypeTriggerable = new List<EffectEnum>() { 
+    List<EffectEnum> effectTypeTriggerable = new List<EffectEnum>() {
         EffectEnum.neutral,
         EffectEnum.slash,
         EffectEnum.bump,
@@ -19,16 +19,15 @@ public class LogTreeHit : Hitable
         hasGrown = true;
     }
 
-
-
     public override void Effect(Vector3 attackerPos, Effect effect)
     {
         //
     }
 
-    public override void Hit(Vector3 attackerPos, List<Effect> hit)
+    public override void Hit(GameObject attacker, List<Effect> hit)
     {
         if (hasGrown
+            && attacker.transform.parent.CompareTag("Player") // prevent the friendly fire, enemy sided
             && hit.Exists(effect => effectTypeTriggerable.Contains(effect.effectType))
             && SpawnCountNotReached())
         {

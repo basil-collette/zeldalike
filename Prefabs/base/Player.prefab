@@ -231,6 +231,7 @@ GameObject:
   - component: {fileID: 5620636059707414397}
   - component: {fileID: -8977632066232515915}
   - component: {fileID: 7635081761687281262}
+  - component: {fileID: -6946752784336399755}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -379,8 +380,8 @@ MonoBehaviour:
   baseAttack: 1
   inventory: {fileID: 11400000, guid: 2b27182376eeadf4a85051c113b16f97, type: 2}
   dashSpeed: 20
-  dashTimeLength: 0.2
-  dashCooldown: 1
+  dashDuration: 0.2
+  dashCooldown: 0.7
   startingPosition: {fileID: 11400000, guid: 6998fd47cd0ad4d4eb8a85262c147f3f, type: 2}
   startingDirection: {fileID: 11400000, guid: a4af571f5e64693489a57bd6f3f27b5b, type: 2}
 --- !u!114 &5620636059707414399
@@ -617,6 +618,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &-6946752784336399755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5620636059707414373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 357f1fae905aa2d458cd8c3c59b9386b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5620636060471748977
 GameObject:
   m_ObjectHideFlags: 0

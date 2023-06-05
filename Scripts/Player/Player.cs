@@ -34,6 +34,12 @@ public class Player : AliveEntity
         animator.SetFloat("moveY", startingDirection.initalValue.y);
 
         SetState(EntityState.walk);
+
+        if (inventory.holdedItem != null)
+        {
+            HoldableItem holded = Instantiate(inventory.holdedItem, transform.position, Quaternion.identity);
+            holded.transform.parent = gameObject.transform;
+        }
     }
 
     new void Update()

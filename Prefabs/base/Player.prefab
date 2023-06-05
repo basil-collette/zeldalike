@@ -379,11 +379,11 @@ MonoBehaviour:
   orientation: {x: 0, y: 0, z: 0}
   baseAttack: 1
   inventory: {fileID: 11400000, guid: 2b27182376eeadf4a85051c113b16f97, type: 2}
+  startingPosition: {fileID: 11400000, guid: 6998fd47cd0ad4d4eb8a85262c147f3f, type: 2}
+  startingDirection: {fileID: 11400000, guid: a4af571f5e64693489a57bd6f3f27b5b, type: 2}
   dashSpeed: 20
   dashDuration: 0.2
   dashCooldown: 0.7
-  startingPosition: {fileID: 11400000, guid: 6998fd47cd0ad4d4eb8a85262c147f3f, type: 2}
-  startingDirection: {fileID: 11400000, guid: a4af571f5e64693489a57bd6f3f27b5b, type: 2}
 --- !u!114 &5620636059707414399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -708,7 +708,6 @@ MonoBehaviour:
   effects:
   - rid: 1056142084445831173
   - rid: 1056142084445831175
-  rigidBody: {fileID: 5620636059707414374}
   references:
     version: 2
     RefIds:
@@ -802,7 +801,6 @@ MonoBehaviour:
   effects:
   - rid: 1056142084445831173
   - rid: 1056142084445831175
-  rigidBody: {fileID: 5620636059707414374}
   references:
     version: 2
     RefIds:
@@ -895,7 +893,6 @@ MonoBehaviour:
   effects:
   - rid: 1056142084445831173
   - rid: 1056142084445831175
-  rigidBody: {fileID: 5620636059707414374}
   references:
     version: 2
     RefIds:
@@ -988,7 +985,6 @@ MonoBehaviour:
   effects:
   - rid: 1056142084445831173
   - rid: 1056142084445831175
-  rigidBody: {fileID: 5620636059707414374}
   references:
     version: 2
     RefIds:

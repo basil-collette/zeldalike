@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Data;
+using UnityEngine;
 
 namespace Assets.Database.Model.Design
 {
-    public class BaseDbData
+    [Serializable]
+    public class BaseDbData : MonoBehaviour
     {
         public int Id;
         public Guid? Uid;
@@ -16,6 +18,11 @@ namespace Assets.Database.Model.Design
             Uid = uid;
             NameCode = reader["name_code"].ToString();
             Actif = bool.Parse(reader["actif"].ToString());
+        }
+
+        public BaseDbData() : base()
+        {
+
         }
 
     }

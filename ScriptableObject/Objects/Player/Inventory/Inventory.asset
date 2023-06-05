@@ -12,17 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3707a5970abb225468f5b537c92e7067, type: 3}
   m_Name: Inventory
   m_EditorClassIdentifier: 
-  holdedItem:
-    Id: 0
-    NameLibelle: 
-    NameCode: 
-    Actif: 0
-    SpriteName: 
-    RarityCode: 
-    Weight: 0
-    Description: 
-    Sprite: {fileID: 0}
-    Rarity: 0
+  holdedItem: {fileID: 5689959043588874744, guid: 99e8a2a1bdee78146a45a68efc23d156, type: 3}
   items: []
   maxWeight: 10
   currentWeight: 0

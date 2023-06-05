@@ -29,5 +29,10 @@ namespace Assets.Database.Model.Design
             Rarity = (RarityEnum)Enum.Parse(typeof(RarityEnum), reader["rarity_code"].ToString());
         }
 
+        public Item() : base()
+        {
+
+        }
+
     }
 }

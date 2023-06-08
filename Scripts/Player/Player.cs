@@ -61,13 +61,16 @@ public class Player : AliveEntity
             return;
         }
 
-        if (Gamepad.current[GamepadButton.East].wasPressedThisFrame)
+        if (Gamepad.current[GamepadButton.East].isPressed)
         {
+            Debug.Log("Grab");
+            /*
             if (currentEntityState != EntityState.unavailable)
             {
                 SetState(EntityState.attack);
             }
             return;
+            */
         }
 
         direction.x = Input.GetAxis("Horizontal");

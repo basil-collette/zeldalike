@@ -16,3 +16,4 @@ MonoBehaviour:
   needPreload: 0
   scenesNeedingPreloadNames:
   - LittleTownScene
+  musicName: fantaisy

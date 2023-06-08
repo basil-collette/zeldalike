@@ -11,7 +11,7 @@ namespace Assets.Scripts.Manager
         public AudioClip Clip;
     }
 
-    public class SoundManager : SignletonGameObject<SoundManager>
+    public class SoundManager : MonoBehaviour
     {
         [SerializeField] public AudioSource musicSource;
         [SerializeField] public float musicVolume = 1;

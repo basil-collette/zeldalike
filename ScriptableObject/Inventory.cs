@@ -1,6 +1,7 @@
 using Assets.Database.Model.Design;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(menuName = "ScriptableObject/Inventory")]
 public class Inventory : ScriptableObject
@@ -11,5 +12,13 @@ public class Inventory : ScriptableObject
     public float currentWeight = 0;
 
     //public List<HoldableItem> hotbar = new List<HoldableItem>();
+
+    void OnValidate()
+    {
+        var attackJoystickImage = GameObject.Find("HoldItemSprite")?.GetComponent<Image>();
+        
+        if (attackJoystickImage != null)
+            attackJoystickImage.sprite = holdedItem.Sprite;
+    }
 
 }

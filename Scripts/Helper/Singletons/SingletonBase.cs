@@ -1,13 +1,13 @@
 ﻿using System;
 using UnityEngine;
 
-public abstract class SignletonBase<T> where T : SignletonBase<T>, new()
+public abstract class SingletonBase<T> where T : SingletonBase<T>, new()
 {
     private static T _instance = null;
 
     private static readonly object _lockObj = new object();
 
-    protected SignletonBase() {
+    protected SingletonBase() {
         if (_instance != null)
         {
             throw new InvalidOperationException("Cannot create multiple instances of a Singleton.");
@@ -19,11 +19,11 @@ public abstract class SignletonBase<T> where T : SignletonBase<T>, new()
         get {
             lock (_lockObj)
             {
-                if (SignletonBase<T>._instance == null)
+                if (SingletonBase<T>._instance == null)
                     _instance = new T(); // Activator.CreateInstance(typeof(T), true) as T;
             }
 
-            return SignletonBase<T>._instance;
+            return SingletonBase<T>._instance;
         }
     }
 

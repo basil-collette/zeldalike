@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: CalmTown
   m_EditorClassIdentifier: 
   libelle: CalmTownScene
-  needPreload: 1
+  needPreload: 0
   scenesNeedingPreloadNames: []
   musicName: fantaisy

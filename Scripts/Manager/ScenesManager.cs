@@ -16,7 +16,7 @@ class PreloadedScene
     public bool canceled = false;
 }
 
-public class ScenesManager : MonoBehaviour
+public class ScenesManager : SignletonGameObject<ScenesManager>
 {
     public GameObject fadeToWhite;
     public GameObject fadeToVisible;
@@ -81,6 +81,18 @@ public class ScenesManager : MonoBehaviour
         _currentScene = targetScene.libelle;
 
         //fade to transparent here
+    }
+
+    IEnumerator LoadSceneCo(string targetSceneName, LoadSceneMode loadmode, Action resultCallback = null)
+    {
+        AsyncOperation loadOp = SceneManager.LoadSceneAsync(targetSceneName, loadmode);
+
+        while (!loadOp.isDone)
+        {
+            yield return null;
+        }
+
+        if (resultCallback != null) resultCallback();
     }
 
     IEnumerator LoadSceneCo(TargetScene targetScene, LoadSceneMode loadmode, Action resultCallback = null)
@@ -244,6 +256,10 @@ public class ScenesManager : MonoBehaviour
         preloadedScenes.Find(pScene => pScene.scene.libelle == sceneName).useScene = true;
     }
 
+    public void AdditiveLoadScene(string targetSceneName, Action resultCallback = null)
+    {
+        LoadScene(targetSceneName, LoadSceneMode.Additive, resultCallback);
+    }
     public void AdditiveLoadScene(TargetScene targetScene, Action resultCallback = null)
     {
         LoadScene(targetScene, LoadSceneMode.Additive, resultCallback);
@@ -254,6 +270,10 @@ public class ScenesManager : MonoBehaviour
         LoadScene(targetScene, LoadSceneMode.Single, resultCallback);
     }
 
+    public void LoadScene(string targetSceneName, LoadSceneMode loadmode, Action resultCallback = null)
+    {
+        StartCoroutine(LoadSceneCo(targetSceneName, loadmode, resultCallback));
+    }
     public void LoadScene(TargetScene targetScene, LoadSceneMode loadmode, Action resultCallback = null)
     {
         StartCoroutine(LoadSceneCo(targetScene, loadmode, resultCallback));

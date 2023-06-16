@@ -1,10 +1,11 @@
+using System.Runtime.Serialization;
 using UnityEngine;
 
 [System.Serializable]
-public class DialogueNodeData
+[KnownType(typeof(DialogueNodeData))]
+[KnownType(typeof(EventNodeData))]
+public class DialogueNodeData : BaseNodeData
 {
-    public string Guid;
-    public Vector2 Position;
     public string DialogueText;
     public DialogueNodeSide Side;
     public Sprite Sprite;

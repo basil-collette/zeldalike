@@ -1,6 +1,4 @@
-using System;
-
-[Serializable]
+[System.Serializable]
 public class NodeLinkData
 {
     public string BaseNodeGuid;

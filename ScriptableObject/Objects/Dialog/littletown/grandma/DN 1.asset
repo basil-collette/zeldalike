@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e679b72a61def0e4a805b353f09c96de, type: 3}
-  m_Name: HomeScene
-  m_EditorClassIdentifier: 
-  libelle: HomeScene
-  needPreload: 0
-  scenesNeedingPreloadNames:
-  - LittleTownScene
-  musicName: 
+  m_Script: {fileID: 0}
+  m_Name: DN 1
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
+  dialogueText: 
+  choices: []
+  nextNodes: []

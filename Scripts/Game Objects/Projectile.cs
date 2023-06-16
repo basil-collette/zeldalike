@@ -30,8 +30,9 @@ public class Projectile : TriggerHit
         if (hitableCollider != null)
         {
             base.OnHit(hitableCollider);
-            Destroy(gameObject);
         }
+
+        Destroy(gameObject);
     }
 
     protected virtual void OnTriggerExit2D(Collider2D collider)

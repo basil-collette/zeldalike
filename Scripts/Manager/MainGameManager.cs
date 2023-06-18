@@ -7,7 +7,6 @@ public class MainGameManager : SignletonGameObject<MainGameManager>
     public TargetScene firstLoadedScene;
 
     public ScenesManager scenesManager;
-    public bool destroyAfterLoad = false;
     public bool resetBDD = false;
 
     //public static event Action OnTrigger; //Observer Patern
@@ -24,10 +23,6 @@ public class MainGameManager : SignletonGameObject<MainGameManager>
 
         scenesManager.AdditiveLoadScene(firstLoadedScene, () => {
             scenesManager.SetCurrentScene(firstLoadedScene.libelle);
-
-            if (destroyAfterLoad) {
-                DestroyImmediate(gameObject);
-            }
         });
     }
 

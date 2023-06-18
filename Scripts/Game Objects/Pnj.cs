@@ -14,9 +14,8 @@ public class Pnj : Interacting
 
     void Start()
     {
-        dialogueManager = GameObject.Find("PauseManager").GetComponent<DialogueManager>();
+        dialogueManager = FindAnyObjectByType<DialogueManager>();
     }
-
 
     void FixedUpdate()
     {

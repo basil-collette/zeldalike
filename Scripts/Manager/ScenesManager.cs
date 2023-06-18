@@ -39,13 +39,6 @@ public class ScenesManager : SignletonGameObject<ScenesManager>
         //StartCoroutine(FadeTransitionCo(fadeToVisible));
     }
 
-    IEnumerator FadeTransitionCo(GameObject fadePanel)
-    {
-        fadePanel.SetActive(true);
-        yield return new WaitForSeconds(1f);
-        fadePanel.SetActive(false);
-    }
-
     #region PROCESS
 
     IEnumerator SwitchSceneCo(TargetScene targetScene)
@@ -71,16 +64,17 @@ public class ScenesManager : SignletonGameObject<ScenesManager>
         //fade to white here
 
         yield return StartCoroutine(UnLoadSceneCo(currentScene));
-
         yield return StartCoroutine(LoadSceneCo(targetScene, LoadSceneMode.Additive));
 
-        FindObjectOfType<SoundManager>().OnSceneSwitchSetMusic(targetScene);
-
-        //Play ambiance sound ??
-
-        _currentScene = targetScene.libelle;
+        CameraMovement camera = FindAnyObjectByType<CameraMovement>();
+        camera.target = FindAnyObjectByType<Player>().transform;
+        camera.cameraParams = targetScene.cameraParameters;
 
         //fade to transparent here
+
+        FindObjectOfType<SoundManager>().OnSceneSwitchSetMusic(targetScene.musicName);
+
+        _currentScene = targetScene.libelle;
     }
 
     IEnumerator LoadSceneCo(string targetSceneName, LoadSceneMode loadmode, Action resultCallback = null)
@@ -106,7 +100,7 @@ public class ScenesManager : SignletonGameObject<ScenesManager>
 
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(targetScene.libelle));
 
-        FindObjectOfType<SoundManager>().OnSceneSwitchSetMusic(targetScene);
+        FindObjectOfType<SoundManager>().OnSceneSwitchSetMusic(targetScene.musicName);
 
         if (resultCallback != null) resultCallback();
     }
@@ -150,7 +144,7 @@ public class ScenesManager : SignletonGameObject<ScenesManager>
                             yield return null;
                         }
 
-                        FindObjectOfType<SoundManager>().OnSceneSwitchSetMusic(scene);
+                        FindObjectOfType<SoundManager>().OnSceneSwitchSetMusic(scene.musicName);
 
                         //fade to white here
 
@@ -187,20 +181,6 @@ public class ScenesManager : SignletonGameObject<ScenesManager>
         yield return StartCoroutine(UnLoadSceneCo(sceneToUnload));
 
         RemovePreloadedSceneCallback(sceneName);
-    }
-
-    IEnumerator UnLoadSceneCo(string sceneName, Action resultCallback = null)
-    {
-        AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(sceneName);
-
-        while (!unloadOp.isDone)
-        {
-            yield return null;
-        }
-
-        Resources.UnloadUnusedAssets();
-
-        if (resultCallback != null) resultCallback();
     }
 
     IEnumerator UnLoadSceneCo(Scene scene, Action resultCallback = null)

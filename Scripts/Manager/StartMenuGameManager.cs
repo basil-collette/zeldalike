@@ -1,11 +1,15 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class StartMenuGameManager : MonoBehaviour
 {
+    public TargetScene targetScene;
+
     public void StartGame()
     {
-        SceneManager.LoadScene("MainScene");
+        FindGameObjectHelper.FindInactiveObjectByName("Screen UI Canva").active = true;
+        FindGameObjectHelper.FindInactiveObjectByName("Screen Controls Canva").active = true;
+
+        FindAnyObjectByType<ScenesManager>().SwitchScene(targetScene);
     }
 
 }

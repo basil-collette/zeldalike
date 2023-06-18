@@ -61,9 +61,13 @@ public class PauseManager : SignletonGameObject<PauseManager>
         soundManager.PlayEffect("pause_enter");
     }
 
+    public void ShowPausedInterface(string interfaceName)
+    {
+        ShowPausedInterface(interfaceName);
+    }
+
     public void ShowPausedInterface(string interfaceName, Action OnPauseProcessed = null)
     {
-
         loadedSceneName = interfaceName;
 
         StartCoroutine(LoadSceneCo(() => { Pause(); OnPauseProcessed?.Invoke(); }));

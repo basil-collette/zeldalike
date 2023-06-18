@@ -17,3 +17,10 @@ MonoBehaviour:
   scenesNeedingPreloadNames:
   - LittleTownScene
   musicName: 
+  cameraParameters:
+    target: {fileID: 0}
+    Smoothing: 0.05
+    IsFixed: 1
+    CurrentPos: {x: 0, y: 0}
+    MinPos: {x: -5, y: -5}
+    MaxPos: {x: 5, y: 5}

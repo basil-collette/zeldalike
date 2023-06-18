@@ -26,13 +26,13 @@ namespace Assets.Scripts.Manager
 
         }
 
-        public void OnSceneSwitchSetMusic(TargetScene scene)
+        public void OnSceneSwitchSetMusic(string musicName)
         {
             musicSource.Stop();
 
-            if (scene.musicName != null && scene.musicName != string.Empty)
+            if (musicName != null && musicName != string.Empty)
             {
-                musicSource.clip = musics.First(music => music.Name == scene.musicName).Clip;
+                musicSource.clip = musics.First(music => music.Name == musicName).Clip;
                 musicSource.Play();
             }
         }

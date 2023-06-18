@@ -8,7 +8,7 @@ public class EventNodeSO : ScriptableObject
 
     public void Invoke()
     {
-        Event.Invoke();
+        Event?.Invoke();
     }
 
 }

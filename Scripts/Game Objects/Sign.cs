@@ -12,7 +12,7 @@ public class Sign : FacingObject
 
     private void Start()
     {
-        dialogBox = FindGameObjectHelper.FindInactiveObjectByName("DialogBox");
+        //dialogBox = FindGameObjectHelper.FindInactiveObjectByName("DialogBox");
         dialogText = dialogBox.GetComponentInChildren<Text>();
     }
 
@@ -27,14 +27,14 @@ public class Sign : FacingObject
         {
             isShowed = true;
 
-            dialogBox.SetActive(true);
-            dialogText.text = dialog;
+            //dialogBox.SetActive(true);
+            //dialogText.text = dialog;
         }
     }
 
     protected override void OnQuitFacing()
     {
-        dialogBox.SetActive(false);
+        //dialogBox.SetActive(false);
         isShowed = false;
     }
 

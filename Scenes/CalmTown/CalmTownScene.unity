@@ -19028,6 +19028,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1799565886999403819, guid: b426837ba1280f347b41da1776e7856e, type: 3}
+      propertyPath: Dialogues.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1799565886999403819, guid: b426837ba1280f347b41da1776e7856e, type: 3}
+      propertyPath: Dialogues.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -1799565886999403819, guid: b426837ba1280f347b41da1776e7856e, type: 3}
+      propertyPath: Dialogues.Array.data[0].Name
+      value: hello
+      objectReference: {fileID: 0}
+    - target: {fileID: -1799565886999403819, guid: b426837ba1280f347b41da1776e7856e, type: 3}
+      propertyPath: Dialogues.Array.data[0].DialogueContainer
+      value: 
+      objectReference: {fileID: 11400000, guid: d2f795927b1a5c24fad5b0de557ca0dd, type: 2}
+    - target: {fileID: -1799565886999403819, guid: b426837ba1280f347b41da1776e7856e, type: 3}
+      propertyPath: interactSignal.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1799565886999403819, guid: b426837ba1280f347b41da1776e7856e, type: 3}
+      propertyPath: interactSignal.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1799565886999403819, guid: b426837ba1280f347b41da1776e7856e, type: 3}
+      propertyPath: interactSignal.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776369148330640803, guid: b426837ba1280f347b41da1776e7856e, type: 3}
+      propertyPath: Sprite
+      value: 
+      objectReference: {fileID: -925296149, guid: 095a1a16e4d2cdf4abc3bc33bb3a5067, type: 3}
+    - target: {fileID: 2776369148330640803, guid: b426837ba1280f347b41da1776e7856e, type: 3}
+      propertyPath: Dialogues.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776369148330640803, guid: b426837ba1280f347b41da1776e7856e, type: 3}
+      propertyPath: Dialogues.Array.data[0].Name
+      value: hello
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776369148330640803, guid: b426837ba1280f347b41da1776e7856e, type: 3}
+      propertyPath: Dialogues.Array.data[0].DialogueContainer
+      value: 
+      objectReference: {fileID: 11400000, guid: 3697636beab278c49b355b642a7b888f, type: 2}
     - target: {fileID: 6161290875288920071, guid: b426837ba1280f347b41da1776e7856e, type: 3}
       propertyPath: m_RootOrder
       value: 7

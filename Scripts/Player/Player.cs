@@ -63,7 +63,7 @@ public class Player : AliveEntity
 
         if (Gamepad.current[GamepadButton.East].isPressed)
         {
-            Debug.Log("Grab");
+            //Debug.Log("Grab");
             /*
             if (currentEntityState != EntityState.unavailable)
             {

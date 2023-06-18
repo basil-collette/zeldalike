@@ -31,7 +31,7 @@ public class GraphSaveUtility// : SingletonBase<GraphSaveUtility>
             return;
         }
 
-        var dialogueContainer = ScriptableObject.CreateInstance<DialogueContainer>();
+        DialogueContainer dialogueContainer = ScriptableObject.CreateInstance<DialogueContainer>();
 
         if (!SaveNodes(dialogueContainer))
         {
@@ -51,7 +51,7 @@ public class GraphSaveUtility// : SingletonBase<GraphSaveUtility>
         if (!AssetDatabase.IsValidFolder("Assets/Resources/Dialogue"))
             AssetDatabase.CreateFolder("Assets/Resources", "Dialogue");
 
-        AssetDatabase.CreateAsset(dialogueContainer, $"Assets/Resources/Dialogue/{fileName}.asset");
+        AssetDatabase.CreateAsset(dialogueContainer, $"Assets/Resources/Dialogue/{fileName}.asset"); // //ScriptableObject/Objects/Dialog/littletown/
         AssetDatabase.SaveAssets();
     }
 
@@ -72,8 +72,8 @@ public class GraphSaveUtility// : SingletonBase<GraphSaveUtility>
     {
         if (!Edges.Any()) return false;
 
-        var connectedPorts = Edges.Where(edge => edge.input.node != null).OrderByDescending(edge => ((BaseNode)(edge.output.node)).EntryPoint).ToArray();
-        //var connectedPorts = Edges.Where(x => x.input.node != null).ToArray();
+        //var connectedPorts = Edges.Where(edge => edge.input.node != null).OrderByDescending(edge => ((BaseNode)(edge.output.node)).EntryPoint).ToArray();
+        var connectedPorts = Edges.Where(x => x.input.node != null).ToArray();
         for (var i = 0; i < connectedPorts.Length; i++)
         {
             var outputNode = connectedPorts[i].output.node as BaseNode;
@@ -96,11 +96,10 @@ public class GraphSaveUtility// : SingletonBase<GraphSaveUtility>
                 {
                     Guid = nodeCasted.Guid,
                     Position = nodeCasted.GetPosition().position,
-                    Title = nodeCasted.Title,
+                    title = nodeCasted.title,
                     DialogueText = nodeCasted.DialogueText,
                     Side = nodeCasted.Side,
-                    Sprite = nodeCasted.Sprite,
-                    AudioClip = nodeCasted.AudioClip
+                    Pnj = nodeCasted.Pnj
                 });
             }
             else if (nodeData is EventNode)
@@ -110,8 +109,8 @@ public class GraphSaveUtility// : SingletonBase<GraphSaveUtility>
                 {
                     Guid = nodeCasted.Guid,
                     Position = nodeCasted.GetPosition().position,
-                    Title = nodeCasted.Title,
-                    EventNodeSo = nodeCasted.EventNodeSo
+                    title = nodeCasted.title,
+                    Event = nodeCasted.Event
                 });
             }            
         }
@@ -204,8 +203,34 @@ public class GraphSaveUtility// : SingletonBase<GraphSaveUtility>
 
             _targetGraphView.AddElement(baseNode);
 
-            var nodePorts = _containerCache.NodeLinks.Where(x => x.BaseNodeGuid == nodeData.Guid).ToList();
-            nodePorts.ForEach(x => _targetGraphView.AddChoicePort(baseNode, x.PortName));
+            //var nodePorts = _containerCache.NodeLinks.Where(x => x.BaseNodeGuid == nodeData.Guid).ToList();
+            //nodePorts.ForEach(x => _targetGraphView.AddChoicePort(baseNode, x.PortName));
+
+            if (nodeData is DialogueNodeData)
+            {
+                var nodePorts = _containerCache.NodeLinks.Where(x => x.BaseNodeGuid == nodeData.Guid).ToList();
+                if (nodePorts.Count() > 0)
+                {
+                    nodePorts.ForEach(x => _targetGraphView.AddChoicePort(baseNode, x.PortName));
+                }
+                else
+                {
+                    _targetGraphView.AddChoicePort(baseNode, "Ok");
+                }
+
+            }
+            else if (nodeData is EventNodeData)
+            {
+                var nodePorts = _containerCache.NodeLinks.Where(x => x.BaseNodeGuid == nodeData.Guid).ToList();
+                if (nodePorts.Count() > 0)
+                {
+                    nodePorts.ForEach(x => _targetGraphView.AddChoicePort(baseNode, x.PortName));
+                }
+                else
+                {
+                    _targetGraphView.AddChoicePort(baseNode, "Output");
+                }
+            }
         }
     }
 
@@ -224,43 +249,17 @@ public class GraphSaveUtility// : SingletonBase<GraphSaveUtility>
         }
     }
 
-    //STATIC ACCESSORS
-
-    public static DialogueContainer GetDialogue(string fileName)
-    {
-        return Resources.Load<DialogueContainer>("Dialogue/" + fileName);
-    }
-
-    public static BaseNodeData GetNodeByOutput(DialogueContainer dialogueContainer, string outputName)
-    {
-        if (outputName == null || outputName == string.Empty)
-            return null;
-
-        var connection = dialogueContainer.NodeLinks.FirstOrDefault(x => x.PortName == outputName);
-
-        return GetNodeByGuid(dialogueContainer, connection.TargetNodeGuid);
-    }
-
-    public static BaseNodeData GetNodeByGuid(DialogueContainer dialogueContainer, string targetNodeGuid)
-    {
-        if (targetNodeGuid == null)
-            return null;
-
-        return dialogueContainer.NodeDatas.FirstOrDefault(x => x.Guid == targetNodeGuid);
-    }
-
     DialogueNode GetDialogueNodeFromData(DialogueNodeData nodeData)
     {
         return new DialogueNode
         {
             Guid = nodeData.Guid,
-            Title = nodeData.Title,
+            title = nodeData.title,
             Position = nodeData.Position,
             EntryPoint = nodeData.EntryPoint,
             DialogueText = nodeData.DialogueText,
             Side = nodeData.Side,
-            Sprite = nodeData.Sprite,
-            AudioClip = nodeData.AudioClip
+            Pnj = nodeData.Pnj
         };
     }
 
@@ -269,11 +268,51 @@ public class GraphSaveUtility// : SingletonBase<GraphSaveUtility>
         return new EventNode
         {
             Guid = nodeData.Guid,
-            Title = nodeData.Title,
+            title = nodeData.title,
             Position = nodeData.Position,
             EntryPoint = nodeData.EntryPoint,
-            EventNodeSo = nodeData.EventNodeSo
+            Event = nodeData.Event
         };
+    }
+
+    //STATIC ACCESSORS
+
+    public static DialogueContainer GetDialogue(string fileName)
+    {
+        return Resources.Load<DialogueContainer>("Dialogue/" + fileName);
+    }
+
+    public static BaseNodeData GetFirstNode(DialogueContainer dialogueContainer)
+    {
+        var linkFromEntry = dialogueContainer.NodeLinks[0];
+        return dialogueContainer.NodeDatas.FirstOrDefault(x => x.Guid == linkFromEntry.TargetNodeGuid);
+    }
+    public static List<NodeLinkData> GetOutputs(DialogueContainer dialogueContainer, DialogueNodeData node)
+    {
+        return dialogueContainer.NodeLinks.Where(x => x.BaseNodeGuid == node.Guid).ToList();
+    }
+
+
+    public static List<NodeLinkData> GetNodeLinksByGuid(DialogueContainer dialogueContainer, string nodeGuid)
+    {
+        return dialogueContainer.NodeLinks.Where(x => x.BaseNodeGuid == nodeGuid).ToList();
+    }
+
+    public static BaseNodeData GetNextNode(DialogueContainer dialogueContainer, string nodeGuid, string outputPortName)
+    {
+        NodeLinkData nodeLink = dialogueContainer.NodeLinks.FirstOrDefault(x => 
+            x.BaseNodeGuid == nodeGuid
+            && x.PortName == outputPortName);
+
+        return GetNodeByGuid(dialogueContainer, nodeLink.TargetNodeGuid);
+    }
+
+    public static BaseNodeData GetNodeByGuid(DialogueContainer dialogueContainer, string targetNodeGuid)
+    {
+        if (targetNodeGuid == null)
+            return null;
+
+        return dialogueContainer.NodeDatas.FirstOrDefault(x => x.Guid == targetNodeGuid);
     }
 
 }

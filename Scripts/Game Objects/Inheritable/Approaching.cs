@@ -1,23 +1,14 @@
 ﻿using UnityEngine;
 
 //it is preferred to use FacingObject to trigger events whose
-//objects concerned come from a specific scene. Inherit this class to use it
+//objects concerned come from a specific scene.
 //For global object (as screen ui), use NorthApproachingInteractable
 public abstract class Approaching : MonoBehaviour
 {
     protected bool playerInRange;
 
-    protected void FixedUpdate()
-    {
-        if (playerInRange)
-        {
-            OnApproaching();
-        }
-        else
-        {
-            OnQuit();
-        }
-    }
+    public Signal enterSignal;
+    public Signal exitSignal;
 
     protected virtual void OnTriggerEnter2D(Collider2D collider)
     {
@@ -25,7 +16,7 @@ public abstract class Approaching : MonoBehaviour
         {
             playerInRange = true;
 
-            OnApproaching();
+            enterSignal?.Raise();
         }
     }
 
@@ -35,12 +26,8 @@ public abstract class Approaching : MonoBehaviour
         {
             playerInRange = false;
 
-            OnQuit();
+            exitSignal?.Raise();
         }
     }
-
-    protected abstract void OnApproaching();
-
-    protected abstract void OnQuit();
 
 }

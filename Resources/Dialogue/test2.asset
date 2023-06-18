@@ -13,65 +13,74 @@ MonoBehaviour:
   m_Name: test2
   m_EditorClassIdentifier: 
   NodeLinks:
-  - BaseNodeGuid: d9597344-3c47-4899-bb7e-1e50f13614a2
+  - BaseNodeGuid: b775afbc-0cd6-47b3-9b29-e644eb864e51
     PortName: Next
-    TargetNodeGuid: 998c9527-5af2-459e-8268-d2a627ebe26f
-  - BaseNodeGuid: 998c9527-5af2-459e-8268-d2a627ebe26f
+    TargetNodeGuid: 15c1e9ab-86db-4989-94be-5c6c4a78beba
+  - BaseNodeGuid: 15c1e9ab-86db-4989-94be-5c6c4a78beba
     PortName: yes
-    TargetNodeGuid: b44a12c1-afd9-40d4-859e-e65fb8c296da
-  - BaseNodeGuid: 998c9527-5af2-459e-8268-d2a627ebe26f
+    TargetNodeGuid: 361d5818-c8b9-4659-a1f8-a648e483e7e8
+  - BaseNodeGuid: 15c1e9ab-86db-4989-94be-5c6c4a78beba
     PortName: no
-    TargetNodeGuid: fbbbc268-efd5-4e96-a480-8bb73618e069
-  - BaseNodeGuid: b44a12c1-afd9-40d4-859e-e65fb8c296da
+    TargetNodeGuid: 6d3caf33-0487-4323-813e-a327e44d8b40
+  - BaseNodeGuid: 6d3caf33-0487-4323-813e-a327e44d8b40
+    PortName: Ok
+    TargetNodeGuid: fb7f8b2d-412a-4e2d-ae5d-373e81765e0c
+  - BaseNodeGuid: 361d5818-c8b9-4659-a1f8-a648e483e7e8
     PortName: Output
-    TargetNodeGuid: dfb5227a-fb86-46e0-b04b-ae114ffc056e
+    TargetNodeGuid: 05ab1acc-084c-4245-8ca1-e7fdd22e1f1f
   NodeDatas:
-  - rid: 5272711691886395393
-  - rid: 5272711691886395394
-  - rid: 5272711691886395395
-  - rid: 5272711691886395396
+  - rid: 5272711710986731525
+  - rid: 5272711710986731526
+  - rid: 5272711710986731527
+  - rid: 5272711710986731528
+  - rid: 5272711710986731529
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 5272711691886395393
+    - rid: 5272711710986731525
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
-        Guid: fbbbc268-efd5-4e96-a480-8bb73618e069
-        Title: 
-        Position: {x: 401, y: 300}
+        Guid: 15c1e9ab-86db-4989-94be-5c6c4a78beba
+        title: Dialogue
+        Position: {x: 209, y: 187}
         EntryPoint: 0
-        DialogueText: 
+        DialogueText: first dialogue text
         Side: 0
-        Sprite: {fileID: 0}
-        AudioClip: {fileID: 0}
-    - rid: 5272711691886395394
+        Pnj: {fileID: 0}
+    - rid: 5272711710986731526
       type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
       data:
-        Guid: b44a12c1-afd9-40d4-859e-e65fb8c296da
-        Title: 
-        Position: {x: 401, y: 101}
+        Guid: 361d5818-c8b9-4659-a1f8-a648e483e7e8
+        title: Event
+        Position: {x: 440, y: 123}
         EntryPoint: 0
-        EventNodeSo: {fileID: 0}
-    - rid: 5272711691886395395
+        Event: {fileID: 0}
+    - rid: 5272711710986731527
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
-        Guid: dfb5227a-fb86-46e0-b04b-ae114ffc056e
-        Title: 
-        Position: {x: 600, y: 101}
+        Guid: 05ab1acc-084c-4245-8ca1-e7fdd22e1f1f
+        title: Dialogue
+        Position: {x: 699, y: 97}
         EntryPoint: 0
-        DialogueText: 
+        DialogueText: after yes and event dilogue
         Side: 1
-        Sprite: {fileID: 0}
-        AudioClip: {fileID: 0}
-    - rid: 5272711691886395396
+        Pnj: {fileID: 0}
+    - rid: 5272711710986731528
+      type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: fb7f8b2d-412a-4e2d-ae5d-373e81765e0c
+        title: Event
+        Position: {x: 699, y: 313}
+        EntryPoint: 0
+        Event: {fileID: 0}
+    - rid: 5272711710986731529
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
-        Guid: 998c9527-5af2-459e-8268-d2a627ebe26f
-        Title: 
-        Position: {x: 202, y: 199}
+        Guid: 6d3caf33-0487-4323-813e-a327e44d8b40
+        title: Dialogue
+        Position: {x: 440, y: 277}
         EntryPoint: 0
-        DialogueText: 
-        Side: 1
-        Sprite: {fileID: 0}
-        AudioClip: {fileID: 0}
+        DialogueText: after no dialogue
+        Side: 0
+        Pnj: {fileID: 0}

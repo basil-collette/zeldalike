@@ -1010,7 +1010,7 @@ GameObject:
   - component: {fileID: 712053989}
   - component: {fileID: 712053990}
   m_Layer: 0
-  m_Name: StartGameManager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2225,6 +2225,7 @@ GameObject:
   - component: {fileID: 1538109153}
   - component: {fileID: 1538109152}
   - component: {fileID: 1538109149}
+  - component: {fileID: 1538109156}
   - component: {fileID: 1538109155}
   - component: {fileID: 1538109154}
   m_Layer: 5
@@ -2329,6 +2330,19 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
+--- !u!114 &1538109156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538109148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1444db6453409c941bc87ee5689cf2fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseManager: {fileID: 1538109149}
 --- !u!1 &1575377549
 GameObject:
   m_ObjectHideFlags: 0

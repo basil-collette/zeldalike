@@ -4,7 +4,7 @@
 public class BaseNodeData
 {
     public string Guid;
-    public string Title;
+    public string title;
     public Vector2 Position;
     public bool EntryPoint = false;
 }

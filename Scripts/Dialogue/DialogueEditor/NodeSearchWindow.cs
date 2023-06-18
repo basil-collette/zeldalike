@@ -25,6 +25,7 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
         var tree = new List<SearchTreeEntry>
         {
             new SearchTreeGroupEntry(new GUIContent("Create Elements"), 0),
+
             //new SearchTreeGroupEntry(new GUIContent("Dialogue"), 1),
             new SearchTreeEntry(new GUIContent("Dialogue Node", _indentationIcon))
             {
@@ -50,11 +51,13 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
         switch (SearchTreeEntry.userData)
         {
             case DialogueNode dialogueNode:
-                _graphView.CreateNode(localMousePosition);
+                var dialogueNodeResult = _graphView.CreateNode(localMousePosition);
+                _graphView.AddChoicePort(dialogueNodeResult, "Ok");
                 return true;
 
-            case EventNode dialogueEvent:
-                _graphView.CreateEvent(localMousePosition);
+            case EventNode eventNode:
+                var eventNodeResult = _graphView.CreateEvent(localMousePosition);
+                _graphView.AddChoicePort(eventNodeResult, "Output");
                 return true;
 
             default:

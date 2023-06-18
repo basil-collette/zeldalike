@@ -1,5 +1,5 @@
 public class EventNode : BaseNode
 {
-    public EventNodeSO EventNodeSo;
+    public EventNodeSO Event;
 }
 

@@ -120,14 +120,18 @@ public class DialogueGraphView : GraphView
         Blackboard.Add(container);
     }
 
-    public void CreateNode(Vector2 position)
+    public DialogueNode CreateNode(Vector2 position)
     {
-        AddElement(CreateDialogueNode(position));
+        var node = CreateDialogueNode(position);
+        AddElement(node);
+        return node;
     }
 
-    public void CreateEvent(Vector2 position)
+    public EventNode CreateEvent(Vector2 position)
     {
-        AddElement(CreateEventNode(position));
+        var node = CreateEventNode(position);
+        AddElement(node);
+        return node;
     }
 
     public DialogueNode CreateDialogueNode(DialogueNode dialogueNode, Vector2 position)
@@ -159,12 +163,13 @@ public class DialogueGraphView : GraphView
 
         var spriteField = new ObjectField
         {
-            objectType = typeof(Sprite)
+            objectType = typeof(Pnj)
         };
-        spriteField.SetValueWithoutNotify(dialogueNode.Sprite);
-        spriteField.RegisterValueChangedCallback((evt) => dialogueNode.Sprite = (Sprite)evt.newValue);
+        spriteField.SetValueWithoutNotify(dialogueNode.Pnj);
+        spriteField.RegisterValueChangedCallback((evt) => dialogueNode.Pnj = (Pnj)evt.newValue);
         dialogueNode.mainContainer.Add(spriteField);
 
+        /*
         var audioField = new ObjectField
         {
             objectType = typeof(AudioClip)
@@ -172,6 +177,7 @@ public class DialogueGraphView : GraphView
         audioField.SetValueWithoutNotify(dialogueNode.AudioClip);
         audioField.RegisterValueChangedCallback((evt) => dialogueNode.AudioClip = (AudioClip)evt.newValue);
         dialogueNode.mainContainer.Add(audioField);
+        */
 
         dialogueNode.RefreshExpandedState();
         dialogueNode.RefreshPorts();
@@ -191,31 +197,33 @@ public class DialogueGraphView : GraphView
         return CreateDialogueNode(dialogueNode, position);
     }
 
-    public EventNode CreateEventNode(EventNode dialogueEvent, Vector2 position)
+    public EventNode CreateEventNode(EventNode eventNode, Vector2 position)
     {
-        var inputPort = GeneratePort(dialogueEvent, Direction.Input, Port.Capacity.Multi);
+        var inputPort = GeneratePort(eventNode, Direction.Input, Port.Capacity.Multi);
         inputPort.portName = "Input";
-        dialogueEvent.inputContainer.Add(inputPort);
+        eventNode.inputContainer.Add(inputPort);
 
-        var outputPort = GeneratePort(dialogueEvent, Direction.Output);
+        /*
+        var outputPort = GeneratePort(eventNode, Direction.Output);
         outputPort.portName = "Output";
-        dialogueEvent.inputContainer.Add(outputPort);
+        eventNode.inputContainer.Add(outputPort);
+        */
 
-        dialogueEvent.styleSheets.Add(Resources.Load<StyleSheet>("EventStyle"));
+        eventNode.styleSheets.Add(Resources.Load<StyleSheet>("EventStyle"));
 
-        var eventField = new ObjectField
+        var EventField = new ObjectField
         {
             objectType = typeof(EventNodeSO)
         };
-        eventField.SetValueWithoutNotify(dialogueEvent.EventNodeSo);
-        eventField.RegisterValueChangedCallback((evt) => dialogueEvent.EventNodeSo = (EventNodeSO)evt.newValue);
-        dialogueEvent.mainContainer.Add(eventField);
+        EventField.SetValueWithoutNotify(eventNode.Event);
+        EventField.RegisterValueChangedCallback((evt) => eventNode.Event = (EventNodeSO)evt.newValue);
+        eventNode.mainContainer.Add(EventField);
 
-        dialogueEvent.RefreshExpandedState();
-        dialogueEvent.RefreshPorts();
-        dialogueEvent.SetPosition(new Rect(position, defaultNodeSize));
+        eventNode.RefreshExpandedState();
+        eventNode.RefreshPorts();
+        eventNode.SetPosition(new Rect(position, defaultNodeSize));
 
-        return dialogueEvent;
+        return eventNode;
     }
 
     public EventNode CreateEventNode(Vector2 position)
@@ -233,9 +241,6 @@ public class DialogueGraphView : GraphView
     {
         var generatedPort = GeneratePort(dialogueNode, Direction.Output);
 
-        var oldLabel = generatedPort.contentContainer.Q<Label>("type");
-        generatedPort.contentContainer.Remove(oldLabel);
-
         var outputPortCount = dialogueNode.outputContainer.Query("connector").ToList().Count;
         generatedPort.portName = $"Choice {outputPortCount}";
 
@@ -243,19 +248,26 @@ public class DialogueGraphView : GraphView
             ? $"Choice {outputPortCount}"
             : overriddenPortName;
 
-        var textField = new TextField
+        if (dialogueNode is DialogueNode)
         {
-            name = string.Empty,
-            value = choicePortName
-        };
-        textField.RegisterValueChangedCallback((evt) => generatedPort.portName = evt.newValue);
-        generatedPort.contentContainer.Add(new Label("  "));
-        generatedPort.contentContainer.Add(textField);
+            var oldLabel = generatedPort.contentContainer.Q<Label>("type");
+            generatedPort.contentContainer.Remove(oldLabel);
 
-        var deleteButton = new Button(() => RemovePort(dialogueNode, generatedPort)) {
-            text = "X"
-        };
-        generatedPort.contentContainer.Add(deleteButton);
+            var textField = new TextField
+            {
+                name = string.Empty,
+                value = choicePortName
+            };
+            textField.RegisterValueChangedCallback((evt) => generatedPort.portName = evt.newValue);
+            generatedPort.contentContainer.Add(new Label("  "));
+            generatedPort.contentContainer.Add(textField);
+
+            var deleteButton = new Button(() => RemovePort(dialogueNode, generatedPort))
+            {
+                text = "X"
+            };
+            generatedPort.contentContainer.Add(deleteButton);
+        }
 
         generatedPort.portName = choicePortName;
         dialogueNode.outputContainer.Add(generatedPort);
@@ -269,7 +281,7 @@ public class DialogueGraphView : GraphView
             x.output.portName == generatedPort.portName
             && x.output.node == generatedPort.node);
 
-        if (!targetEdge.Any())
+        if (targetEdge.Any())
         {
             var edge = targetEdge.First();
             edge.input.Disconnect(edge);

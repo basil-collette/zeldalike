@@ -6,27 +6,14 @@ public class LogTreeGrow : Interacting
 {
     public bool hasGrown;
 
+    protected override void OnInterfact()
+    {
+        throw new System.NotImplementedException();
+    }
+
     void Start()
     {
         hasGrown = true;
-    }
-
-    protected override void OnInterfact()
-    {
-        if (true) // replace by is east object in use correct object
-        {
-
-        }
-    }
-
-    protected override void OnApproaching()
-    {
-        //
-    }
-
-    protected override void OnQuit()
-    {
-        //
     }
 
 }

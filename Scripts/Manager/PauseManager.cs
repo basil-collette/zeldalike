@@ -49,18 +49,6 @@ public class PauseManager : SignletonGameObject<PauseManager>
         }
     }
 
-    IEnumerator UnloadPauseSceneCo(Action OnUnloadPauseSceneEnd)
-    {
-        AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(loadedSceneName);
-
-        while (!unloadOp.isDone)
-        {
-            yield return null;
-        }
-
-        OnUnloadPauseSceneEnd?.Invoke();
-    }
-
     void Pause()
     {
         IsPaused = true;
@@ -73,18 +61,42 @@ public class PauseManager : SignletonGameObject<PauseManager>
         soundManager.PlayEffect("pause_enter");
     }
 
-    public void ShowPausedInterface(string interfaceName)
+    public void ShowPausedInterface(string interfaceName, Action OnPauseProcessed = null)
     {
-        Pause();
+
         loadedSceneName = interfaceName;
 
-        ScenesManager scenesManager = GameObject.Find("ScenesManager").GetComponent<ScenesManager>();
-        scenesManager.LoadScene(loadedSceneName, LoadSceneMode.Additive);
+        StartCoroutine(LoadSceneCo(() => { Pause(); OnPauseProcessed?.Invoke(); }));
     }
 
     public bool GetIsPaused()
     {
         return IsPaused;
+    }
+
+    IEnumerator LoadSceneCo(Action resultCallback = null)
+    {
+        AsyncOperation loadOp = SceneManager.LoadSceneAsync(loadedSceneName, LoadSceneMode.Additive);
+
+        while (!loadOp.isDone)
+        {
+            yield return null;
+        }
+
+        yield return new WaitForFixedUpdate();
+        resultCallback?.Invoke();
+    }
+
+    IEnumerator UnloadPauseSceneCo(Action OnUnloadPauseSceneEnd)
+    {
+        AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(loadedSceneName);
+
+        while (!unloadOp.isDone)
+        {
+            yield return null;
+        }
+
+        OnUnloadPauseSceneEnd?.Invoke();
     }
 
 }

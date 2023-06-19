@@ -55,13 +55,13 @@ public class Player : AliveEntity
 
         direction = Vector3.zero;
 
-        if (Gamepad.current[GamepadButton.South].wasPressedThisFrame)
+        if (Gamepad.current != null && Gamepad.current[GamepadButton.South].wasPressedThisFrame)
         {
             Dash();
             return;
         }
 
-        if (Gamepad.current[GamepadButton.East].isPressed)
+        if (Gamepad.current != null && Gamepad.current[GamepadButton.East].isPressed)
         {
             //Debug.Log("Grab");
             /*
@@ -188,16 +188,14 @@ public class Player : AliveEntity
 
     public void RaiseItem()
     {
-        if (!animator.GetBool("receivingItem"))
-        {
-            animator.SetBool("receivingItem", true);
-            SetState(EntityState.unavailable);
-        }
-        else
-        {
-            animator.SetBool("receivingItem", false);
-            SetState(EntityState.walk);
-        }
+        animator.SetBool("receivingItem", true);
+        SetState(EntityState.unavailable);
+    }
+
+    public void CloseRaiseItem()
+    {
+        animator.SetBool("receivingItem", false);
+        SetState(EntityState.walk);
     }
 
     /*

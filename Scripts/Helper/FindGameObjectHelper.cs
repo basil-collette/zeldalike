@@ -2,7 +2,7 @@
 
 public static class FindGameObjectHelper
 {
-    public static GameObject FindInactiveObjectByName(string name)
+    public static GameObject FindByName(string name) //Also Find inactive
     {
         Transform[] objs = Resources.FindObjectsOfTypeAll<Transform>() as Transform[];
         for (int i = 0; i < objs.Length; i++)

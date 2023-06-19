@@ -60,7 +60,7 @@ public class ProjectileAttackBrain : Brain
         Projectile instanciateProjectile = Instantiate(projectile, instantiatePos, Quaternion.identity);
         instanciateProjectile.direction = DirectionHelper.GetDirection(transform.position, targetPos);
 
-        FindGameObjectHelper.FindInactiveObjectByName("SoundManager").GetComponent<SoundManager>().PlayEffect(attackClipName);
+        FindGameObjectHelper.FindByName("Main Sound Manager").GetComponent<SoundManager>().PlayEffect(attackClipName);
     }
 
     IEnumerator AttackCooldownCo(AttackBehaveParam attackBehaveParam)

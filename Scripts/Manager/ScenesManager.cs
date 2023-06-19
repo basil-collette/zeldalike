@@ -18,8 +18,7 @@ class PreloadedScene
 
 public class ScenesManager : SignletonGameObject<ScenesManager>
 {
-    public GameObject fadeToWhite;
-    public GameObject fadeToVisible;
+    public GameObject transitionOverlay;
 
     GameObject textBox;
     Text placeText;
@@ -33,7 +32,7 @@ public class ScenesManager : SignletonGameObject<ScenesManager>
 
     void Start()
     {
-        textBox = FindGameObjectHelper.FindInactiveObjectByName("PlaceName");
+        textBox = FindGameObjectHelper.FindByName("Place Name");
         placeText = textBox.GetComponentInChildren<Text>();
 
         //StartCoroutine(FadeTransitionCo(fadeToVisible));
@@ -61,18 +60,21 @@ public class ScenesManager : SignletonGameObject<ScenesManager>
 
         DisableGameObjects(currentScene);
 
-        //fade to white here
+        transitionOverlay.SetActive(true);
+
+        CameraMovement camera = FindAnyObjectByType<CameraMovement>();
+        Vector3 currentCameraPos = camera.cameraParams.CurrentPos;
 
         yield return StartCoroutine(UnLoadSceneCo(currentScene));
         yield return StartCoroutine(LoadSceneCo(targetScene, LoadSceneMode.Additive));
 
-        CameraMovement camera = FindAnyObjectByType<CameraMovement>();
         camera.target = FindAnyObjectByType<Player>().transform;
         camera.cameraParams = targetScene.cameraParameters;
+        camera.cameraParams.PreviousScenePos = currentCameraPos;
 
-        //fade to transparent here
+        transitionOverlay.SetActive(false);
 
-        FindObjectOfType<SoundManager>().OnSceneSwitchSetMusic(targetScene.musicName);
+        GetComponentInChildren<SoundManager>().OnSceneSwitchSetMusic(targetScene.musicName);
 
         _currentScene = targetScene.libelle;
     }
@@ -100,7 +102,7 @@ public class ScenesManager : SignletonGameObject<ScenesManager>
 
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(targetScene.libelle));
 
-        FindObjectOfType<SoundManager>().OnSceneSwitchSetMusic(targetScene.musicName);
+        GetComponentInChildren<SoundManager>().OnSceneSwitchSetMusic(targetScene.musicName);
 
         if (resultCallback != null) resultCallback();
     }
@@ -144,7 +146,7 @@ public class ScenesManager : SignletonGameObject<ScenesManager>
                             yield return null;
                         }
 
-                        FindObjectOfType<SoundManager>().OnSceneSwitchSetMusic(scene.musicName);
+                        GetComponentInChildren<SoundManager>().OnSceneSwitchSetMusic(scene.musicName);
 
                         //fade to white here
 

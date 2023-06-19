@@ -11,56 +11,57 @@ public class TreasureChest : NorthApproachingInteractable
     [HideInInspector] public Item content;
     public Inventory inventory;
     public bool isOpen;
-    public Signal raiseItem;
     public string itemNameCode;
 
-    private GameObject dialogWindow;
-    private Text dialogText;
     private GameObject receivedItemContext;
-    private Animator anim;
 
     void Start()
     {
-        anim = GetComponent<Animator>();
-
-        receivedItemContext = FindGameObjectHelper.FindInactiveObjectByName("received item");
-
-        dialogWindow = FindGameObjectHelper.FindInactiveObjectByName("DialogBox");
-        dialogText = dialogWindow.GetComponentInChildren<Text>();
+        receivedItemContext = FindAnyObjectByType<Player>().transform.Find("received item").gameObject;
 
         content = ItemRepository.Current.GetByCode(itemNameCode);
+
+        ButtonAccess.exitPause += ExitRaiseItem;
+    }
+
+    private void OnDisable()
+    {
+        ButtonAccess.exitPause -= ExitRaiseItem;
     }
 
     void Update()
     {
-        if (Gamepad.current[GamepadButton.East].wasPressedThisFrame
-            && playerInRange)
+        if (playerInRange
+            && Gamepad.current != null
+            && Gamepad.current[GamepadButton.East].wasPressedThisFrame)
         {
             if (!isOpen)
             {
-                anim.SetBool("open", true);
+                isOpen = true;
 
-                exitSignal.Raise();
+                GetComponent<Animator>().SetBool("open", true);
 
-                dialogWindow.SetActive(true);
-                dialogText.text = content.Description;
+                exitSignal.Raise(); //to remove the "?" clue
 
                 inventory.items.Add(content);
 
-                receivedItemContext.SetActive(true);
+                receivedItemContext.gameObject.SetActive(true);
                 receivedItemContext.GetComponent<SpriteRenderer>().sprite = content.Sprite;
 
-                raiseItem.Raise();
+                FindAnyObjectByType<Player>().RaiseItem();
 
-                isOpen = true;
-            }
-            else
-            {
-                raiseItem.Raise();
-                dialogWindow.SetActive(false);
-                receivedItemContext.SetActive(false);
+                FindAnyObjectByType<PauseManager>().ShowPausedInterface("InfoScene", true, () =>
+                {
+                    FindGameObjectHelper.FindByName("Info Canva").GetComponentInChildren<Text>().text = content.Description;
+                });
             }
         }
+    }
+
+    public void ExitRaiseItem()
+    {
+        FindAnyObjectByType<Player>().CloseRaiseItem();
+        receivedItemContext.SetActive(false);
     }
 
     protected new void OnTriggerEnter2D(Collider2D collider)

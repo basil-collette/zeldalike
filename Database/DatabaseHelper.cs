@@ -30,7 +30,7 @@ namespace Assets.Scripts.Manager
 			SqliteConnection dbConn = GetConnexion();
 
 			IDbCommand dbcmd2 = dbConn.CreateCommand();
-			dbcmd2.CommandText = "DROP TABLE item";
+			dbcmd2.CommandText = "DROP TABLE IF EXISTS item";
 			dbcmd2.ExecuteNonQuery();
 
 			IDbCommand dbcmd = dbConn.CreateCommand();

@@ -8,7 +8,9 @@ public class PauseManager : SignletonGameObject<PauseManager>
 {
     static bool IsPaused = false;
 
-    public GameObject overlay;
+    public GameObject controlsCanva;
+    public GameObject blackOverlay;
+    public GameObject transparentOverlay;
 
     string loadedSceneName;
 
@@ -30,6 +32,11 @@ public class PauseManager : SignletonGameObject<PauseManager>
 
     public void Resume()
     {
+        Resume(null);
+    }
+
+    public void Resume(Action AfterResume = null)
+    {
         if (IsPaused)
         {
             Action OnUnloadPauseSceneEnd = () => {
@@ -38,27 +45,45 @@ public class PauseManager : SignletonGameObject<PauseManager>
                 IsPaused = false;
                 Time.timeScale = 1f;
 
-                overlay.SetActive(false);
+                blackOverlay.SetActive(false);
+                transparentOverlay.SetActive(false);
+                controlsCanva.SetActive(true);
 
-                SoundManager soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+                SoundManager soundManager = GetComponentInChildren<SoundManager>();
                 soundManager.PlayEffect("pause_exit");
                 soundManager.musicSource.Play();
+
+                AfterResume?.Invoke();
             };
 
             StartCoroutine(UnloadPauseSceneCo(OnUnloadPauseSceneEnd));
         }
     }
 
-    void Pause()
+    void Pause(bool transparent = false)
     {
         IsPaused = true;
         Time.timeScale = 0f;
 
-        overlay.SetActive(true);
+        if (transparent == false)
+        {
+            blackOverlay.SetActive(true);
+        }
+        else
+        {
+            transparentOverlay.SetActive(true);
+            controlsCanva.SetActive(false);
+        }
 
-        SoundManager soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        SoundManager soundManager = GetComponentInChildren<SoundManager>();
         soundManager.musicSource.Stop();
         soundManager.PlayEffect("pause_enter");
+    }
+    public void ShowPausedInterface(string sceneName, bool transparentOverlay, Action OnPauseProcessed = null)
+    {
+        loadedSceneName = sceneName;
+
+        StartCoroutine(LoadSceneCo(() => { Pause(transparentOverlay); OnPauseProcessed?.Invoke(); }));
     }
 
     public void ShowPausedInterface(string interfaceName)

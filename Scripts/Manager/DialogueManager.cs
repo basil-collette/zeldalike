@@ -42,12 +42,12 @@ public class DialogueManager : MonoBehaviour
     {
         ClearButtonsLayout();
 
-        GameObject dialogueCanva = FindGameObjectHelper.FindInactiveObjectByName("Dialog Canva");
+        GameObject dialogueCanva = FindGameObjectHelper.FindByName("Dialog Canva");
 
-        FindGameObjectHelper.FindInactiveObjectByName("Dialogue Name").GetComponent<Text>().text = node.Pnj.Name + ":";
-        FindGameObjectHelper.FindInactiveObjectByName("Interlocutor").GetComponent<Image>().sprite = node.Pnj.Sprite;
+        FindGameObjectHelper.FindByName("Dialogue Name").GetComponent<Text>().text = node.Pnj.Name + ":";
+        FindGameObjectHelper.FindByName("Interlocutor").GetComponent<Image>().sprite = node.Pnj.Sprite;
 
-        var textComp = FindGameObjectHelper.FindInactiveObjectByName("Dialogue Text").GetComponent<Text>();
+        var textComp = FindGameObjectHelper.FindByName("Dialogue Text").GetComponent<Text>();
 
         Action showButtons = () =>
         {
@@ -83,7 +83,7 @@ public class DialogueManager : MonoBehaviour
         GameObject choiceButton = Instantiate(dialogueButtonPrefab, Vector3.zero, Quaternion.identity);
         Vector3 scale = choiceButton.transform.localScale;
 
-        GameObject dialogueButtonsLayout = FindGameObjectHelper.FindInactiveObjectByName("Dialogue Buttons Layout");
+        GameObject dialogueButtonsLayout = FindGameObjectHelper.FindByName("Dialogue Buttons Layout");
         choiceButton.transform.SetParent(dialogueButtonsLayout.transform, true);
         choiceButton.transform.localScale = scale;
 
@@ -109,7 +109,7 @@ public class DialogueManager : MonoBehaviour
 
     void ClearButtonsLayout()
     {
-        GameObject dialogueButtonsLayout = FindGameObjectHelper.FindInactiveObjectByName("Dialogue Buttons Layout");
+        GameObject dialogueButtonsLayout = FindGameObjectHelper.FindByName("Dialogue Buttons Layout");
         foreach (Transform child in dialogueButtonsLayout.transform)
         {
             Destroy(child.gameObject);

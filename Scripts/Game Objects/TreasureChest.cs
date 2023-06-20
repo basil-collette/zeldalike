@@ -21,12 +21,12 @@ public class TreasureChest : NorthApproachingInteractable
 
         content = ItemRepository.Current.GetByCode(itemNameCode);
 
-        ButtonAccess.exitPause += ExitRaiseItem;
+        ButtonHelper.exitPause += ExitRaiseItem;
     }
 
     private void OnDisable()
     {
-        ButtonAccess.exitPause -= ExitRaiseItem;
+        ButtonHelper.exitPause -= ExitRaiseItem;
     }
 
     void Update()

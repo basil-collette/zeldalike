@@ -5,7 +5,7 @@ namespace Assets.Scripts.Game_Objects.Inheritable
 {
     public abstract class Interacting : Approaching
     {
-        new void Update()
+        void Update()
         {
             if (playerInRange
                 && Gamepad.current[GamepadButton.East].wasPressedThisFrame)

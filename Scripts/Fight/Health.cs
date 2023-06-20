@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Health : Hitable
 {
+    public static event Action OnDeath;
+
     [SerializeField] public FloatValue health;
     [SerializeField] protected Signal healthSignal;
     [SerializeField] public List<EffectModificator> effectMods = new List<EffectModificator>();
@@ -108,6 +111,8 @@ public class Health : Hitable
     {
         //Ask the sound helper to play cause this audioSource is destroyed
         //deathSound
+
+        OnDeath?.Invoke();
 
         if (deathEffect != null)
             Instantiate(deathEffect, transform.position, Quaternion.identity);

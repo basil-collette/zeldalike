@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class ButtonAccess : MonoBehaviour
+public class ButtonHelper : MonoBehaviour
 {
     public TargetScene targetScene;
 
@@ -9,8 +9,8 @@ public class ButtonAccess : MonoBehaviour
 
     public void StartGame()
     {
-        FindGameObjectHelper.FindByName("Screen UI Canva").active = true;
-        FindGameObjectHelper.FindByName("Screen Controls Canva").active = true;
+        FindGameObjectHelper.FindByName("Screen UI Canva").SetActive(true);
+        FindGameObjectHelper.FindByName("Screen Controls Canva").SetActive(true);
 
         FindAnyObjectByType<ScenesManager>().SwitchScene(targetScene);
     }

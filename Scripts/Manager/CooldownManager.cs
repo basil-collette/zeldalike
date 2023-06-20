@@ -21,7 +21,7 @@ namespace Assets.Scripts.Manager
             return !Cooldowns.Any(item => item.Name == name);
         }
 
-        public void StartCooldown(string name, float time, Action? OnLoop = null, Action? OnEnd = null)
+        public void StartCooldown(string name, float time, Action OnLoop = null, Action OnEnd = null)
         {
             if (IsAvailable(name))
             {
@@ -29,7 +29,7 @@ namespace Assets.Scripts.Manager
             }
         }
 
-        public void StartOrIncreaseCooldown(string name, float time, Action? OnLoop = null, Action? OnEnd = null)
+        public void StartOrIncreaseCooldown(string name, float time, Action OnLoop = null, Action OnEnd = null)
         {
             if (IsAvailable(name))
             {
@@ -47,7 +47,7 @@ namespace Assets.Scripts.Manager
             return Cooldowns.Where(n => n.Name == name).FirstOrDefault();
         }
 
-        IEnumerator CooldownCo(string name, float time, Action? OnLoop = null, Action? OnEnd = null)
+        IEnumerator CooldownCo(string name, float time, Action OnLoop = null, Action OnEnd = null)
         {
             var newCooldown = new Cooldown()
             {

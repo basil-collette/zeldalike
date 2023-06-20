@@ -56,8 +56,8 @@ public class LogTreeHit : Hitable
 
         Vector3 relativeDirection = DirectionHelper.GetDirection(transform.position, newPos).normalized;
 
-        relativeDirection.x *= Random.RandomRange(5, 6);
-        relativeDirection.y *= Random.RandomRange(5, 10);
+        relativeDirection.x *= Random.Range(5, 6);
+        relativeDirection.y *= Random.Range(5, 10);
 
         return relativeDirection;
     }

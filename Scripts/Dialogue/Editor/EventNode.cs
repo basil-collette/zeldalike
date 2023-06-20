@@ -1,5 +1,6 @@
 public class EventNode : BaseNode
 {
-    public EventNodeSO Event;
+    public EventNodeSO EventSO;
+    public string Param;
 }
 

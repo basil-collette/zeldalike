@@ -7,9 +7,8 @@ using UnityEngine.UIElements;
 
 public class DialogueGraph : EditorWindow
 {
-
     private DialogueGraphView _graphView;
-    private string _fileName = "New narrative";
+    private string _fileName = "New_narrative";
 
     [MenuItem("Graph/Dialogue Graph")]
     public static void OpenDialogueGraphWindow()

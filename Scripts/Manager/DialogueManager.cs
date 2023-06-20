@@ -17,7 +17,7 @@ public class DialogueManager : MonoBehaviour
 
         pauseManager.ShowPausedInterface("DialogScene", () =>
         {
-            BaseNodeData node = GraphSaveUtility.GetFirstNode(_dialogueContainer);
+            BaseNodeData node = GraphHelper.GetFirstNode(_dialogueContainer);
             NextNode(node);
         });
     }
@@ -51,7 +51,7 @@ public class DialogueManager : MonoBehaviour
 
         Action showButtons = () =>
         {
-            var connections = GraphSaveUtility.GetOutputs(_dialogueContainer, node);
+            var connections = GraphHelper.GetOutputs(_dialogueContainer, node);
             if (connections.Count > 0)
             {
                 foreach (var conn in connections)
@@ -60,7 +60,7 @@ public class DialogueManager : MonoBehaviour
                         (conn.PortName == string.Empty) ? "continue" : conn.PortName,
                         () =>
                         {
-                            BaseNodeData nextNode = GraphSaveUtility.GetNodeByGuid(_dialogueContainer, conn.TargetNodeGuid);
+                            BaseNodeData nextNode = GraphHelper.GetNodeByGuid(_dialogueContainer, conn.TargetNodeGuid);
                             NextNode(nextNode);
                         }
                     );
@@ -93,12 +93,12 @@ public class DialogueManager : MonoBehaviour
 
     void ProcessEvent(EventNodeData node)
     {
-        node.Event?.Invoke();
+        node.EventSO?.Event?.Invoke(node.Param);
 
-        var connections = GraphSaveUtility.GetOutputs(_dialogueContainer, node);
+        var connections = GraphHelper.GetOutputs(_dialogueContainer, node);
         if (connections.Count > 0)
         {
-            BaseNodeData nextNode = GraphSaveUtility.GetNodeByGuid(_dialogueContainer, connections[0].TargetNodeGuid);
+            BaseNodeData nextNode = GraphHelper.GetNodeByGuid(_dialogueContainer, connections[0].TargetNodeGuid);
             NextNode(nextNode);
         }
         else

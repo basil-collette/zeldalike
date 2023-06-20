@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public static class GraphSaveUtility
+public static class GraphHelper
 {
     public static BaseNodeData GetFirstNode(DialogueContainer dialogueContainer)
     {

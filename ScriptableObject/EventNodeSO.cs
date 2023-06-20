@@ -4,11 +4,5 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObject/EventNodeSO")]
 public class EventNodeSO : ScriptableObject
 {
-    public UnityEvent Event;
-
-    public void Invoke()
-    {
-        Event?.Invoke();
-    }
-
+    public UnityEvent<string> Event;
 }

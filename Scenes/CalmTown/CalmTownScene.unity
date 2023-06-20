@@ -32507,6 +32507,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1776859290621372642, guid: 3bf49c8e53b45a14cb763bad18e04d1c, type: 3}
+      propertyPath: OnDeathParam.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776859290621372642, guid: 3bf49c8e53b45a14cb763bad18e04d1c, type: 3}
+      propertyPath: OnDeathParam.Array.data[0]
+      value: Bean
+      objectReference: {fileID: 0}
     - target: {fileID: 1776859290621372658, guid: 3bf49c8e53b45a14cb763bad18e04d1c, type: 3}
       propertyPath: m_RootOrder
       value: 12

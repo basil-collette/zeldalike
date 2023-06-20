@@ -3,17 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class Health : Hitable
 {
-    public static event Action OnDeath;
+    public static event Action<string[]> OnDeath;
 
-    [SerializeField] public FloatValue health;
-    [SerializeField] protected Signal healthSignal;
-    [SerializeField] public List<EffectModificator> effectMods = new List<EffectModificator>();
-    [SerializeField] public List<Effect> effects;
-    [SerializeField] public List<Effect> timedEffects;
-    [SerializeField] protected GameObject deathEffect;
-    [SerializeField] protected AudioClip deathSound;
+    public FloatValue health;
+    protected Signal healthSignal;
+    public string[] OnDeathParam;
+    public List<EffectModificator> effectMods = new List<EffectModificator>();
+    public List<Effect> effects;
+    public List<Effect> timedEffects;
+    protected GameObject deathEffect;
+    protected AudioClip deathSound;
 
     protected void Start()
     {
@@ -112,7 +114,7 @@ public class Health : Hitable
         //Ask the sound helper to play cause this audioSource is destroyed
         //deathSound
 
-        OnDeath?.Invoke();
+        OnDeath?.Invoke(OnDeathParam);
 
         if (deathEffect != null)
             Instantiate(deathEffect, transform.position, Quaternion.identity);

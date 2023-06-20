@@ -110,7 +110,8 @@ public class GraphSaveUtility
                     Guid = nodeCasted.Guid,
                     Position = nodeCasted.GetPosition().position,
                     title = nodeCasted.title,
-                    Event = nodeCasted.Event
+                    EventSO = nodeCasted.EventSO,
+                    Param = nodeCasted.Param
                 });
             }
         }
@@ -276,7 +277,8 @@ public class GraphSaveUtility
             title = nodeData.title,
             Position = nodeData.Position,
             EntryPoint = nodeData.EntryPoint,
-            Event = nodeData.Event
+            EventSO = nodeData.EventSO,
+            Param = nodeData.Param
         };
     }
 

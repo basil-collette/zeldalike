@@ -16,9 +16,6 @@ MonoBehaviour:
   - BaseNodeGuid: b775afbc-0cd6-47b3-9b29-e644eb864e51
     PortName: Next
     TargetNodeGuid: 15c1e9ab-86db-4989-94be-5c6c4a78beba
-  - BaseNodeGuid: 6d3caf33-0487-4323-813e-a327e44d8b40
-    PortName: Ok
-    TargetNodeGuid: fb7f8b2d-412a-4e2d-ae5d-373e81765e0c
   - BaseNodeGuid: 15c1e9ab-86db-4989-94be-5c6c4a78beba
     PortName: yes
     TargetNodeGuid: 361d5818-c8b9-4659-a1f8-a648e483e7e8
@@ -28,17 +25,20 @@ MonoBehaviour:
   - BaseNodeGuid: 361d5818-c8b9-4659-a1f8-a648e483e7e8
     PortName: Output
     TargetNodeGuid: 05ab1acc-084c-4245-8ca1-e7fdd22e1f1f
+  - BaseNodeGuid: 6d3caf33-0487-4323-813e-a327e44d8b40
+    PortName: Ok
+    TargetNodeGuid: fb7f8b2d-412a-4e2d-ae5d-373e81765e0c
   NodeDatas:
-  - rid: 5272711727398518794
-  - rid: 5272711727398518795
-  - rid: 5272711727398518796
-  - rid: 5272711727398518797
-  - rid: 5272711727398518798
+  - rid: 5272711782787448832
+  - rid: 5272711782787448833
+  - rid: 5272711782787448834
+  - rid: 5272711782787448835
+  - rid: 5272711782787448836
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 5272711727398518794
+    - rid: 5272711782787448832
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 05ab1acc-084c-4245-8ca1-e7fdd22e1f1f
@@ -48,7 +48,7 @@ MonoBehaviour:
         DialogueText: after yes and event dilogue
         Side: 1
         Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
-    - rid: 5272711727398518795
+    - rid: 5272711782787448833
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 15c1e9ab-86db-4989-94be-5c6c4a78beba
@@ -58,23 +58,25 @@ MonoBehaviour:
         DialogueText: first dialogue text
         Side: 0
         Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
-    - rid: 5272711727398518796
+    - rid: 5272711782787448834
       type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 361d5818-c8b9-4659-a1f8-a648e483e7e8
         title: Event
         Position: {x: 440, y: 123}
         EntryPoint: 0
-        Event: {fileID: 0}
-    - rid: 5272711727398518797
+        EventSO: {fileID: 11400000, guid: 4fd53acbd5054b749a04680fc7611d06, type: 2}
+        Param: GrandmaQuest
+    - rid: 5272711782787448835
       type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: fb7f8b2d-412a-4e2d-ae5d-373e81765e0c
         title: Event
         Position: {x: 699, y: 313}
         EntryPoint: 0
-        Event: {fileID: 0}
-    - rid: 5272711727398518798
+        EventSO: {fileID: 0}
+        Param: 
+    - rid: 5272711782787448836
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 6d3caf33-0487-4323-813e-a327e44d8b40

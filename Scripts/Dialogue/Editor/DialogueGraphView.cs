@@ -211,13 +211,18 @@ public class DialogueGraphView : GraphView
 
         eventNode.styleSheets.Add(Resources.Load<StyleSheet>("EventStyle"));
 
-        var EventField = new ObjectField
+        var eventField = new ObjectField
         {
             objectType = typeof(EventNodeSO)
         };
-        EventField.SetValueWithoutNotify(eventNode.Event);
-        EventField.RegisterValueChangedCallback((evt) => eventNode.Event = (EventNodeSO)evt.newValue);
-        eventNode.mainContainer.Add(EventField);
+        eventField.SetValueWithoutNotify(eventNode.EventSO);
+        eventField.RegisterValueChangedCallback((evt) => eventNode.EventSO = (EventNodeSO)evt.newValue);
+        eventNode.mainContainer.Add(eventField);
+
+        var textField = new TextField();
+        textField.SetValueWithoutNotify(eventNode.Param);
+        textField.RegisterValueChangedCallback((evt) => eventNode.Param = evt.newValue);
+        eventNode.mainContainer.Add(textField);
 
         eventNode.RefreshExpandedState();
         eventNode.RefreshPorts();

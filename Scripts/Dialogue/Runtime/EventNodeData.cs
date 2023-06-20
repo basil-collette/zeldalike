@@ -1,5 +1,6 @@
 ﻿[System.Serializable]
 public class EventNodeData : BaseNodeData
 {
-    public EventNodeSO Event;
+    public EventNodeSO EventSO;
+    public string Param;
 }

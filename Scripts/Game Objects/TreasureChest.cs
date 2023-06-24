@@ -50,10 +50,10 @@ public class TreasureChest : NorthApproachingInteractable
 
                 FindAnyObjectByType<Player>().RaiseItem();
 
-                FindAnyObjectByType<PauseManager>().ShowPausedInterface("InfoScene", true, () =>
+                FindAnyObjectByType<PauseManager>().ShowPausedInterface("InfoScene", () =>
                 {
                     FindGameObjectHelper.FindByName("Info Canva").GetComponentInChildren<Text>().text = content.Description;
-                });
+                }, true);
             }
         }
     }

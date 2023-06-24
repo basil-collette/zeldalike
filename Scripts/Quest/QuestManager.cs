@@ -20,7 +20,7 @@ public class QuestManager : MonoBehaviour
     public GameObject QuestLogObject;
     public Button[] QuestButtons;
 
-    Quest CurrentQuest;
+    //Quest CurrentQuest;
     int PreviousButtonIndex;
 
     private void Start()
@@ -67,7 +67,7 @@ public class QuestManager : MonoBehaviour
         SetQuestSelectionColor(button, true);
         PreviousButtonIndex = index;
 
-        CurrentQuest = quest;
+        //CurrentQuest = quest;
 
         QuestDescContainer.gameObject.SetActive(quest != null);
         if (quest == null) return;

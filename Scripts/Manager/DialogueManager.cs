@@ -15,7 +15,7 @@ public class DialogueManager : MonoBehaviour
     {
         _dialogueContainer = dialogueContainer;
 
-        pauseManager.ShowPausedInterface("DialogScene", () =>
+        pauseManager.ShowPausedInterface("DialogueScene", () =>
         {
             BaseNodeData node = GraphHelper.GetFirstNode(_dialogueContainer);
             NextNode(node);

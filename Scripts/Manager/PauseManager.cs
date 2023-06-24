@@ -11,6 +11,7 @@ public class PauseManager : SignletonGameObject<PauseManager>
     public GameObject controlsCanva;
     public GameObject blackOverlay;
     public GameObject transparentOverlay;
+    public GameObject MenuOverlay;
 
     string loadedSceneName;
 
@@ -53,6 +54,8 @@ public class PauseManager : SignletonGameObject<PauseManager>
                 soundManager.PlayEffect("pause_exit");
                 soundManager.musicSource.Play();
 
+                MenuOverlay.SetActive(false);
+
                 AfterResume?.Invoke();
             };
 
@@ -68,6 +71,7 @@ public class PauseManager : SignletonGameObject<PauseManager>
         if (transparent == false)
         {
             blackOverlay.SetActive(true);
+            MenuOverlay.SetActive(loadedSceneName != "DialogueScene");
         }
         else
         {
@@ -79,23 +83,30 @@ public class PauseManager : SignletonGameObject<PauseManager>
         soundManager.musicSource.Stop();
         soundManager.PlayEffect("pause_enter");
     }
-    public void ShowPausedInterface(string sceneName, bool transparentOverlay, Action OnPauseProcessed = null)
-    {
-        loadedSceneName = sceneName;
-
-        StartCoroutine(LoadSceneCo(() => { Pause(transparentOverlay); OnPauseProcessed?.Invoke(); }));
-    }
 
     public void ShowPausedInterface(string interfaceName)
     {
-        ShowPausedInterface(interfaceName);
+        ShowPausedInterface(interfaceName, null);
     }
-
-    public void ShowPausedInterface(string interfaceName, Action OnPauseProcessed = null)
+    public void ShowPausedInterface(string interfaceName, Action OnPauseProcessed, bool transparentOverlay = false)
     {
+        if (interfaceName == loadedSceneName) return;
+
         loadedSceneName = interfaceName;
 
-        StartCoroutine(LoadSceneCo(() => { Pause(); OnPauseProcessed?.Invoke(); }));
+        StartCoroutine(SwitchPausedSceneCo(() => {
+            Pause(transparentOverlay);
+            OnPauseProcessed?.Invoke();
+        }));
+    }
+
+    public void SwitchPausedInterface(string interfaceName)
+    {
+        if (interfaceName == loadedSceneName) return;
+
+        loadedSceneName = interfaceName;
+
+        StartCoroutine(SwitchPausedSceneCo());
     }
 
     public bool GetIsPaused()
@@ -103,10 +114,22 @@ public class PauseManager : SignletonGameObject<PauseManager>
         return IsPaused;
     }
 
-    IEnumerator LoadSceneCo(Action resultCallback = null)
+    IEnumerator SwitchPausedSceneCo(Action resultCallback = null)
     {
-        AsyncOperation loadOp = SceneManager.LoadSceneAsync(loadedSceneName, LoadSceneMode.Additive);
+        Scene[] scenes = SceneManager.GetAllScenes();
+        if (scenes.Length > 2)
+        {
+            for (int i = 2; i < scenes.Length; i++)
+            {
+                AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(scenes[i]);
+                while (!unloadOp.isDone)
+                {
+                    yield return null;
+                }
+            }
+        }
 
+        AsyncOperation loadOp = SceneManager.LoadSceneAsync(loadedSceneName, LoadSceneMode.Additive);
         while (!loadOp.isDone)
         {
             yield return null;

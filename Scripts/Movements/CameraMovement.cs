@@ -29,11 +29,20 @@ public class CameraMovement : MonoBehaviour
 
         if (CameraParams.IsFixed)
         {
-            transform.position = new Vector3(CameraParams.MinPos.x, CameraParams.MinPos.y, -10);
+            transform.position = new Vector3(
+                CameraParams.MinPos.x,
+                CameraParams.MinPos.y,
+                -10);
         }
         else
         {
-            transform.position = new Vector3(Target.position.x, Target.position.y, -10);
+            float x = Target.position.x;
+            float y = Target.position.y;
+
+            transform.position = new Vector3(
+                Mathf.Min(CameraParams.MaxPos.x, Mathf.Max(x, CameraParams.MinPos.x)),
+                Mathf.Min(CameraParams.MaxPos.y, Mathf.Max(y, CameraParams.MinPos.y)),
+                -10);
         }
     }
 

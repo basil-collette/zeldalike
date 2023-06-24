@@ -21,8 +21,14 @@ public class KillGoal : Goal
 
         if (Array.Exists(deathParams, (x) => x == Target))
         {
-            IsCompleted = true;
-            DisableGoalCheckObserver();
+            CurrentAmmount++;
+
+            if (CurrentAmmount == RequiredAmmount)
+            {
+                IsCompleted = true;
+                DisableGoalCheckObserver();
+            }
         }
     }
+
 }

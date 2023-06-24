@@ -80,6 +80,7 @@ public class DialogueManager : MonoBehaviour
 
     void InstanciateChoiceButton(string portName, Action clickAction)
     {
+        //tester Instantiate(prefab, parent);
         GameObject choiceButton = Instantiate(dialogueButtonPrefab, Vector3.zero, Quaternion.identity);
         Vector3 scale = choiceButton.transform.localScale;
 

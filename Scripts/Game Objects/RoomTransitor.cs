@@ -10,8 +10,8 @@ public class RoomTransitor : MonoBehaviour
     {
         if (collider.CompareTag("Player") && !collider.isTrigger)
         {
-            GetComponent<CameraMovement>().cameraParams.MinPos = minPosition;
-            GetComponent<CameraMovement>().cameraParams.MinPos = maxPosition;
+            GetComponent<CameraMovement>().CameraParams.MinPos = minPosition;
+            GetComponent<CameraMovement>().CameraParams.MinPos = maxPosition;
 
             collider.transform.position += playerChange;
         }

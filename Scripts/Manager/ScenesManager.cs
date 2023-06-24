@@ -66,9 +66,7 @@ public class ScenesManager : SignletonGameObject<ScenesManager>
         yield return StartCoroutine(LoadSceneCo(targetScene, LoadSceneMode.Additive));
 
         CameraMovement camera = FindAnyObjectByType<CameraMovement>();
-        camera.target = FindAnyObjectByType<Player>().transform;
-        camera.cameraParams = targetScene.cameraParameters;
-        camera.transform.position = camera.target.position;
+        camera.SetParams(targetScene.cameraParameters, FindAnyObjectByType<Player>().transform);
 
         transitionOverlay.SetActive(false);
 
@@ -261,6 +259,7 @@ public class ScenesManager : SignletonGameObject<ScenesManager>
 
     public void ClearScenes()
     {
+        /*
         for (int i = 0; i < SceneManager.sceneCount; i++)
         {
             AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(i));
@@ -269,9 +268,9 @@ public class ScenesManager : SignletonGameObject<ScenesManager>
                 
             }
         }
+        */
 
         //Deprecated
-        /*
         Scene[] scenes = SceneManager.GetAllScenes();
 
         //Starting at 1, to skip first scene (GUI and scene managing stuff)
@@ -282,7 +281,6 @@ public class ScenesManager : SignletonGameObject<ScenesManager>
                 //
             }
         }
-        */
     }
 
     public void SetCurrentScene(string sceneName)

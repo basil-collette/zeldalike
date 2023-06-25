@@ -8,6 +8,7 @@ public class ButtonHelper : MonoBehaviour
 
     public static event Action exitPause;
 
+    /*
     Button button;
 
     private void Start()
@@ -21,10 +22,11 @@ public class ButtonHelper : MonoBehaviour
         {
             if (RectTransformUtility.RectangleContainsScreenPoint(button.GetComponent<RectTransform>(), Input.mousePosition))
             {
-                button.onClick.Invoke();
+                //button.onClick.Invoke();
             }
         }
     }
+    */
 
     public void StartGame()
     {

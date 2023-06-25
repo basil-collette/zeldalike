@@ -191,11 +191,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5620636059707414375}
+  - component: {fileID: 5620636059707414392}
+  - component: {fileID: 5620636059707414399}
   - component: {fileID: 5620636059707414372}
   - component: {fileID: 5620636059707414374}
   - component: {fileID: 5620636059707414395}
-  - component: {fileID: 5620636059707414392}
-  - component: {fileID: 5620636059707414399}
   - component: {fileID: -1744978769058970862}
   - component: {fileID: -455889481050406444}
   - component: {fileID: 5620636059707414394}
@@ -227,6 +227,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5620636059707414392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5620636059707414373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a9413ac3795a2144a3cc77f13528a29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorPosition: {x: 0, y: 0, z: 0}
+  currentEntityState: 1
+  moveSpeed: 4
+  nearRadius: 1
+  direction: {x: 0, y: 0, z: 0}
+  orientation: {x: 0, y: 0, z: 0}
+  baseAttack: 1
+  inventory: {fileID: 11400000, guid: 2b27182376eeadf4a85051c113b16f97, type: 2}
+  startingPosition: {fileID: 11400000, guid: 6998fd47cd0ad4d4eb8a85262c147f3f, type: 2}
+  startingDirection: {fileID: 11400000, guid: a4af571f5e64693489a57bd6f3f27b5b, type: 2}
+  dashSpeed: 20
+  dashDuration: 0.2
+  dashCooldown: 0.7
+--- !u!114 &5620636059707414399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5620636059707414373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb059cbe11b736746aa9351ef5d49ca3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitSound: {fileID: 0}
+  health: {fileID: 11400000, guid: 7a4b7ca3f9ae54c4896657d98f3264b1, type: 2}
+  OnDeathParam: []
+  effectMods: []
+  effects: []
+  timedEffects: []
 --- !u!212 &5620636059707414372
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -326,51 +369,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7951133, y: 0.82890487}
   m_EdgeRadius: 0
---- !u!114 &5620636059707414392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5620636059707414373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a9413ac3795a2144a3cc77f13528a29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorPosition: {x: 0, y: 0, z: 0}
-  currentEntityState: 1
-  moveSpeed: 4
-  nearRadius: 1
-  direction: {x: 0, y: 0, z: 0}
-  orientation: {x: 0, y: 0, z: 0}
-  baseAttack: 1
-  inventory: {fileID: 11400000, guid: 2b27182376eeadf4a85051c113b16f97, type: 2}
-  startingPosition: {fileID: 11400000, guid: 6998fd47cd0ad4d4eb8a85262c147f3f, type: 2}
-  startingDirection: {fileID: 11400000, guid: a4af571f5e64693489a57bd6f3f27b5b, type: 2}
-  dashSpeed: 20
-  dashDuration: 0.2
-  dashCooldown: 0.7
---- !u!114 &5620636059707414399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5620636059707414373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb059cbe11b736746aa9351ef5d49ca3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitSound: {fileID: 0}
-  health: {fileID: 11400000, guid: 7a4b7ca3f9ae54c4896657d98f3264b1, type: 2}
-  healthSignal: {fileID: 11400000, guid: 4010a70832e8d3a4da0fe997c30f6daf, type: 2}
-  effectMods: []
-  effects: []
-  timedEffects: []
-  deathEffect: {fileID: 0}
-  deathSound: {fileID: 0}
 --- !u!82 &-1744978769058970862
 AudioSource:
   m_ObjectHideFlags: 0

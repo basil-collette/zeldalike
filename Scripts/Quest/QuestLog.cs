@@ -4,10 +4,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class QuestManager : MonoBehaviour
+public class QuestLog : MonoBehaviour
 {
-    public List<Quest> PlayerQuests;
-
     public GameObject QuestInListPrefab;
     public RectTransform ListTransform;
 
@@ -20,7 +18,6 @@ public class QuestManager : MonoBehaviour
     public GameObject QuestLogObject;
     public Button[] QuestButtons;
 
-    //Quest CurrentQuest;
     int PreviousButtonIndex;
 
     private void Start()
@@ -34,17 +31,9 @@ public class QuestManager : MonoBehaviour
         QuestLogObject.SetActive(show);
     }
 
-    public void AddQuest(Quest quest)
-    {
-        PlayerQuests.Add(quest);
-        ShowQuestsByState(true);
-    }
-
     public void ShowQuestsByState(bool inProgress)
     {
-        List<Quest> quests = PlayerQuests.AsEnumerable<Quest>()
-            .Where(x => x.Goals.LastOrDefault().IsCompleted != inProgress)
-            .ToList();
+        List<Quest> quests = FindAnyObjectByType<PlayerQuest>().GetQuestsByState(inProgress);
 
         SetQuestListContainer(quests);
     }

@@ -7,8 +7,8 @@ using UnityEngine.InputSystem.LowLevel;
 
 public class Player : AliveEntity
 {
-    public int baseAttack = 1;
     public Inventory inventory;
+    public PlayerQuest playerQuest;
 
     [Header("Position Settings")]
     public VectorValue startingPosition;

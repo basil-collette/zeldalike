@@ -12,5 +12,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 624b60cc4738c144f93860be7ab3d832, type: 3}
   m_Name: GrandmaQuest
   m_EditorClassIdentifier: 
-  Name: 
-  Goals: []
+  Name: Tuer un bean pour la grandma
+  Description: 
+  IsCompleted: 0
+  QuestSteps:
+  - Goals:
+    - rid: 5272711918093598720
+    IsCompleted: 0
+    Rewards:
+      Money: 0
+      Xp: 20
+      ItemsRef:
+      - ItemName: key
+        Amount: 2
+  - Goals:
+    - rid: 5272711918093598741
+    IsCompleted: 0
+    Rewards:
+      Money: 0
+      Xp: 30
+      ItemsRef: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 5272711918093598720
+      type: {class: KillGoal, ns: , asm: Assembly-CSharp}
+      data:
+        Objective: kill a bean
+        IsCompleted: 0
+        RequiredAmmount: 1
+        CurrentAmmount: 0
+        Target: bean
+    - rid: 5272711918093598741
+      type: {class: TalkGoal, ns: , asm: Assembly-CSharp}
+      data:
+        Objective: talk to gandma
+        IsCompleted: 0
+        RequiredAmmount: 0
+        CurrentAmmount: 0

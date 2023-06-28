@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7483562462869052032}
   - component: {fileID: 3432016848990225718}
   m_Layer: 5
-  m_Name: Button Choice
+  m_Name: Button Dialogue Choice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

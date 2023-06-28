@@ -1,3 +1,5 @@
+using Assets.Database.Model.Design;
+using Assets.Database.Model.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,34 +8,31 @@ using UnityEngine.UI;
 
 public class QuestLog : MonoBehaviour
 {
-    public GameObject QuestInListPrefab;
+    public GameObject SelectQuestButtonPrefab;
     public RectTransform ListTransform;
-
-    public RectTransform QuestDescContainer;
-    public Text QuestNameText;
-    public Text QuestDescText;
-    public RectTransform QuestRewardsContainer;
-    public Text QuestRewardText;
-
-    public GameObject QuestLogObject;
+    public Text QuestDetailsText;
+    public Text QuestObjectiveText;
     public Button[] QuestButtons;
 
-    int PreviousButtonIndex;
+    public GameObject RewardXP;
+    public GameObject RewardGold;
+    public List<GameObject> Items;
 
-    private void Start()
+    int PreviousButtonIndex;
+    PlayerQuest PlayerQuest;
+
+    private void OnEnable()
     {
         PreviousButtonIndex = 0;
+        PlayerQuest = FindAnyObjectByType<Player>().playerQuest; //PlayerQuest = FindGameObjectHelper.FindByName("Player").GetComponent<Player>().playerQuest;
         ShowQuestsByState(true);
-    }
 
-    public void SetShowQuestLog(bool show)
-    {
-        QuestLogObject.SetActive(show);
+        QuestButtons[0].onClick.Invoke();
     }
 
     public void ShowQuestsByState(bool inProgress)
     {
-        List<Quest> quests = FindAnyObjectByType<PlayerQuest>().GetQuestsByState(inProgress);
+        List<Quest> quests = PlayerQuest.GetQuestsByState(inProgress);
 
         SetQuestListContainer(quests);
     }
@@ -56,26 +55,55 @@ public class QuestLog : MonoBehaviour
         SetQuestSelectionColor(button, true);
         PreviousButtonIndex = index;
 
-        //CurrentQuest = quest;
+        QuestStep questStep = PlayerQuest.GetCurrentStep(quest);
 
-        QuestDescContainer.gameObject.SetActive(quest != null);
-        if (quest == null) return;
+        QuestDetailsText.text = quest.Description;
+        QuestObjectiveText.text = string.Join("\n", questStep.Goals.AsEnumerable<Goal>().Select(x => x.Objective));
 
-        QuestNameText.text = quest.Name;
-        //QuestDescText.text = "";
-        //QuestRewardsContainer
-        QuestDescText.rectTransform.sizeDelta = new Vector2(0, QuestDescText.preferredHeight);
-        //
+        bool haveRewardXP = questStep.Rewards.Xp != null && questStep.Rewards.Xp != 0;
+        RewardXP.SetActive(haveRewardXP);
+        if (haveRewardXP)
+        {
+            RewardXP.transform.Find("Text XPValue").GetComponent<Text>().text = questStep.Rewards.Xp.ToString();
+        }
+
+        bool haveRewardGold = questStep.Rewards.Money != null && questStep.Rewards.Money != 0;
+        RewardGold.SetActive(haveRewardGold);
+        if (haveRewardGold)
+        {
+            RewardGold.transform.Find("Text GoldValue").GetComponent<Text>().text = questStep.Rewards.Money.ToString();
+        }
+        
+        for (int i = 0; i < 3; i++)
+        {
+            bool haveItemReward = questStep.Rewards.ItemsRef.Count() >= i + 1;
+            Items[i].SetActive(haveItemReward);
+
+            if (haveItemReward)
+            {
+                Item item = ItemRepository.Current.GetByCode(questStep.Rewards.ItemsRef[i].ItemName);
+                Items[i].transform.Find("Item Image").GetComponent<Image>().sprite = item.Sprite;
+                int amount = questStep.Rewards.ItemsRef[i].Amount;
+                Transform amountShadow = Items[i].transform.Find("Amount Shadow");
+                amountShadow.gameObject.SetActive(amount > 1);
+                amountShadow.GetComponent<Text>().text = "x" + amount;
+                Transform amountValue = Items[i].transform.Find("Amount");
+                amountValue.gameObject.SetActive(amount > 1);
+                amountValue.GetComponent<Text>().text = "x" + amount;
+            }
+        }
     }
 
     void SetQuestSelectionColor(Button button, bool isSelected)
     {
-        button.image.color = (isSelected) ? Color.green : new Color(0, 0, 0, 0);
+        //button.image.color = (isSelected) ? Color.green : new Color(0, 0, 0, 0);
+        button.transform.Find("Selected").gameObject.SetActive(isSelected);
     }
 
     Button InitializeButton(Quest quest, int index)
     {
-        Button button = Instantiate(QuestInListPrefab, ListTransform).GetComponent<Button>();
+        Button button = Instantiate(SelectQuestButtonPrefab, ListTransform).GetComponent<Button>();
+        button.GetComponentInChildren<Text>().text = quest.Name;
         button.image.rectTransform.sizeDelta = new Vector2(0, 80);
         button.image.rectTransform.anchoredPosition = new Vector2(0, -80 * index);
         button.onClick.AddListener(delegate { ShowQuestDesc(index, button, quest); });

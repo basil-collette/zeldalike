@@ -1,14 +1,25 @@
-using UnityEngine;
-
 [System.Serializable]
-public abstract class Goal : MonoBehaviour
+public abstract class Goal // : MonoBehaviour
 {
-    public string Description;
+    public string Objective;
+    public bool IsCompleted;
     public int RequiredAmmount;
     public int CurrentAmmount;
-    public bool IsCompleted;
-    public Reward[] Rewards;
 
+    public Goal()
+    {
+        if (!IsCompleted)
+        {
+            ApplyGoalCheckObserver();
+        }
+    }
+
+    ~Goal()
+    {
+        DisableGoalCheckObserver();
+    }
+
+    /*
     private void Start()
     {
         if (!IsCompleted)
@@ -21,6 +32,7 @@ public abstract class Goal : MonoBehaviour
     {
         DisableGoalCheckObserver();
     }
+    */
 
     protected abstract void GoalCheck(params object[] observerParams);
     protected abstract void ApplyGoalCheckObserver();

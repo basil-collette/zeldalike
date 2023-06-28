@@ -1,4 +1,5 @@
 ﻿using Assets.Database.Model.Design;
+using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -8,6 +9,7 @@ namespace Assets.Database.Model.Repository
     {
         public sealed override Item DbDataToModel(IDataReader reader)
         {
+            Console.WriteLine("test");
             return new Item(reader);
         }
 

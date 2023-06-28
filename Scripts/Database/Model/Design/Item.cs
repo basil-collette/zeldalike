@@ -31,7 +31,7 @@ namespace Assets.Database.Model.Design
 
         public Item() : base()
         {
-
+            //Sprite = (SpriteName == null) ? null : Resources.Load<Sprite>($"Art/{SpriteName}");
         }
 
     }

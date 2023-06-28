@@ -30,8 +30,8 @@ public class ButtonHelper : MonoBehaviour
 
     public void StartGame()
     {
-        FindGameObjectHelper.FindByName("Screen UI Canva").SetActive(true);
-        FindGameObjectHelper.FindByName("Screen Controls Canva").SetActive(true);
+        FindGameObjectHelper.FindByName("Canva UI").SetActive(true);
+        FindGameObjectHelper.FindByName("Canva Controls").SetActive(true);
 
         FindAnyObjectByType<ScenesManager>().SwitchScene(targetScene);
     }

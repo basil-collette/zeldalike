@@ -245,8 +245,8 @@ MonoBehaviour:
   nearRadius: 1
   direction: {x: 0, y: 0, z: 0}
   orientation: {x: 0, y: 0, z: 0}
-  baseAttack: 1
   inventory: {fileID: 11400000, guid: 2b27182376eeadf4a85051c113b16f97, type: 2}
+  playerQuest: {fileID: 11400000, guid: 522e5886dbfe4b54fae8ad4999be818a, type: 2}
   startingPosition: {fileID: 11400000, guid: 6998fd47cd0ad4d4eb8a85262c147f3f, type: 2}
   startingDirection: {fileID: 11400000, guid: a4af571f5e64693489a57bd6f3f27b5b, type: 2}
   dashSpeed: 20

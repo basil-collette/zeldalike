@@ -9,8 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4965f1a5b227fba45bb43227346c2e15, type: 3}
-  m_Name: PlayerQuest
+  m_Script: {fileID: 11500000, guid: 624b60cc4738c144f93860be7ab3d832, type: 3}
+  m_Name: test
   m_EditorClassIdentifier: 
-  PlayerQuests:
-  - {fileID: 11400000, guid: 8e3c7c221384c074aa4274d6120e7fe1, type: 2}
+  Name: 
+  Description: 
+  IsCompleted: 0
+  QuestSteps: []
+  references:
+    version: 2
+    RefIds: []

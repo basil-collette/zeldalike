@@ -46,7 +46,7 @@ namespace Assets.Database.Model.Repository
 
                 using (SqliteConnection connexion = DatabaseHelper.GetConnexion())
                 {
-                    var command = new SqliteCommand($"SELECT {Current.GetFields()} FROM {typeof(D).Name.ToLower()}", connexion);
+                    var command = new SqliteCommand($"SELECT {string.Join(",", Current.GetFields())} FROM {typeof(D).Name.ToLower()}", connexion);
 
                     using (IDataReader reader = command.ExecuteReader())
                     {
@@ -73,7 +73,7 @@ namespace Assets.Database.Model.Repository
                 {
                     string query =
                         "SELECT " +
-                            $"{Current.GetFields()} " +
+                            $"{string.Join(",", Current.GetFields())} " +
                         $"FROM {typeof(D).Name.ToLower()} " +
                         $"WHERE {fieldName} = @Param AND actif = 1 " +
                             "LIMIT 1";
@@ -112,7 +112,7 @@ namespace Assets.Database.Model.Repository
                 {
                     string query =
                         "SELECT " +
-                            $"{Current.GetFields()} " +
+                            $"{string.Join(",", Current.GetFields())} " +
                         $"FROM {typeof(D).Name.ToLower()} " +
                         $"WHERE {string.Join(" AND ", whereClauses)} AND actif = 1 " +
                             "LIMIT 1";

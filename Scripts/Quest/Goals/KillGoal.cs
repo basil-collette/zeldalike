@@ -1,8 +1,10 @@
 using System;
+using UnityEngine;
 
 [System.Serializable]
 public class KillGoal : Goal
 {
+    [Header("Kill")]
     public string Target;
 
     protected override void ApplyGoalCheckObserver()

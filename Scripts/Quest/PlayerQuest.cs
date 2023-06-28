@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObject/PlayerQuest")]
 public class PlayerQuest : ScriptableObject
 {
-    public List<Quest> PlayerQuests;
+    public List<Quest> PlayerQuests = new List<Quest>();
 
     public void AddQuest(Quest quest)
     {
@@ -20,18 +20,18 @@ public class PlayerQuest : ScriptableObject
     public List<Quest> GetQuestsByState(bool inProgress)
     {
         return PlayerQuests.AsEnumerable<Quest>()
-            .Where(x => x.Goals.LastOrDefault().IsCompleted != inProgress)
+            .Where(x => x.QuestSteps.LastOrDefault().IsCompleted != inProgress)
             .ToList();
     }
 
-    public List<Goal> GetCompletedGoals(Quest quest)
+    public List<QuestStep> GetCompletedQuestSteps(Quest quest)
     {
-        return quest.Goals.Where(x => x.IsCompleted).ToList();
+        return quest.QuestSteps.Where(x => x.IsCompleted).ToList();
     }
 
-    public Goal GetCurrentGoal(Quest quest)
+    public QuestStep GetCurrentStep(Quest quest)
     {
-        return quest.Goals.FirstOrDefault<Goal>(x => !x.IsCompleted);
+        return quest.QuestSteps.FirstOrDefault(x => !x.IsCompleted);
     }
 
 }

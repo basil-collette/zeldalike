@@ -1,18 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
-public class LocationGoal : MonoBehaviour
+[System.Serializable]
+public class LocationGoal : Goal
 {
-    // Start is called before the first frame update
-    void Start()
+    //public string Target;
+
+    protected override void ApplyGoalCheckObserver()
     {
-        
+        //Health.OnDeath += GoalCheck;
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void DisableGoalCheckObserver()
     {
-        
+        //Health.OnDeath -= GoalCheck;
     }
+
+    protected override void GoalCheck(params object[] observerParams)
+    {
+        string[] deathParams = observerParams as string[];
+
+        /*if (Array.Exists(deathParams, (x) => x == Target))
+        {
+            CurrentAmmount++;
+
+            if (CurrentAmmount == RequiredAmmount)
+            {
+                IsCompleted = true;
+                DisableGoalCheckObserver();
+            }
+        }*/
+    }
+
 }

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,5 +5,18 @@ using UnityEngine;
 public class Quest : ScriptableObject
 {
     public string Name;
-    [SerializeReference] public List<Goal> Goals;
+    public string Description;
+    public bool IsCompleted;
+    public List<QuestStep> QuestSteps;
+
+    /*
+    private void OnValidate()
+    {
+        foreach (QuestStep questStep in QuestSteps)
+        {
+            questStep.Rewards.OnAfterDeserialize();
+        }
+    }
+    */
+
 }

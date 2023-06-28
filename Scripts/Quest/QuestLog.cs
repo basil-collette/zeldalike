@@ -1,6 +1,7 @@
 using Assets.Database.Model.Design;
 using Assets.Database.Model.Repository;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -26,26 +27,45 @@ public class QuestLog : MonoBehaviour
         PreviousButtonIndex = 0;
         PlayerQuest = FindAnyObjectByType<Player>().playerQuest; //PlayerQuest = FindGameObjectHelper.FindByName("Player").GetComponent<Player>().playerQuest;
         ShowQuestsByState(true);
-
-        QuestButtons[0].onClick.Invoke();
     }
 
     public void ShowQuestsByState(bool inProgress)
     {
+        ClearQuestDesc();
+
         List<Quest> quests = PlayerQuest.GetQuestsByState(inProgress);
 
+        StartCoroutine(SetButtonsColor(inProgress));
+
         SetQuestListContainer(quests);
+
+        QuestButtons[0].onClick.Invoke();
+    }
+
+    IEnumerator SetButtonsColor(bool inProgress)
+    {
+        while (transform.Find("InProgress Button") == null)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        transform.Find("InProgress Button").GetComponent<Button>().image.color = (inProgress) ? new Color(1, 1, 1, 1f) : new Color(0.6f, 0.6f, 0.6f, 1f);
+        transform.Find("Completed Button").GetComponent<Button>().image.color = (inProgress) ? new Color(0.6f, 0.6f, 0.6f, 1f) : new Color(1, 1, 1, 1f);
     }
 
     void SetQuestListContainer(List<Quest> quests)
     {
+        foreach (Transform child in ListTransform)
+        {
+            Destroy(child.gameObject);
+        }
+
         ListTransform.sizeDelta = new Vector2(0, quests.Count * 80);
         Array.Resize(ref QuestButtons, quests.Count);
         for (int i = 0; i < quests.Count; i++)
         {
             QuestButtons[i] = InitializeButton(quests[i], i);
             UpdateQuestText(QuestButtons[i], quests[i]);
-            //
         }
     }
 
@@ -55,9 +75,12 @@ public class QuestLog : MonoBehaviour
         SetQuestSelectionColor(button, true);
         PreviousButtonIndex = index;
 
+        QuestDetailsText.text = quest.Description;
+
         QuestStep questStep = PlayerQuest.GetCurrentStep(quest);
 
-        QuestDetailsText.text = quest.Description;
+        if (questStep == null) return;
+
         QuestObjectiveText.text = string.Join("\n", questStep.Goals.AsEnumerable<Goal>().Select(x => x.Objective));
 
         bool haveRewardXP = questStep.Rewards.Xp != null && questStep.Rewards.Xp != 0;
@@ -91,6 +114,17 @@ public class QuestLog : MonoBehaviour
                 amountValue.gameObject.SetActive(amount > 1);
                 amountValue.GetComponent<Text>().text = "x" + amount;
             }
+        }
+    }
+
+    void ClearQuestDesc()
+    {
+        QuestObjectiveText.text = string.Empty;
+        RewardXP.SetActive(false);
+        RewardGold.SetActive(false);
+        for (int i = 0; i < 3; i++)
+        {
+            Items[i].SetActive(false);
         }
     }
 

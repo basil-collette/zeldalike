@@ -270,15 +270,18 @@ public class ScenesManager : SignletonGameObject<ScenesManager>
         }
         */
 
-        //Deprecated
+        //Deprecated bellow 
+
         Scene[] scenes = SceneManager.GetAllScenes();
 
         //Starting at 1, to skip first scene (GUI and scene managing stuff)
         for (int i = 1; i < scenes.Length; i++)
         {
-            AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(scenes[i]);
+            AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(scenes[i].name);
+            unloadOp.allowSceneActivation = true;
+
             while (!unloadOp.isDone) {
-                //
+                Debug.Log($"unloading {scenes[i].name}...");
             }
         }
     }

@@ -12,10 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 624b60cc4738c144f93860be7ab3d832, type: 3}
   m_Name: test
   m_EditorClassIdentifier: 
-  Name: 
-  Description: 
+  Name: Test
+  Description: Test Description
   IsCompleted: 0
-  QuestSteps: []
+  QuestSteps:
+  - Goals:
+    - rid: 5272711953901682689
+    IsCompleted: 0
+    Rewards:
+      Money: 0
+      Xp: 0
+      ItemsRef: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 5272711953901682689
+      type: {class: LocationGoal, ns: , asm: Assembly-CSharp}
+      data:
+        Objective: test goal description
+        IsCompleted: 0
+        RequiredAmmount: 0
+        CurrentAmmount: 0

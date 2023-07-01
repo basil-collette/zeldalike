@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Test
   Description: Test Description
-  IsCompleted: 0
+  IsCompleted: 1
   QuestSteps:
   - Goals:
     - rid: 5272711953901682689
-    IsCompleted: 0
+    IsCompleted: 1
     Rewards:
       Money: 0
       Xp: 0

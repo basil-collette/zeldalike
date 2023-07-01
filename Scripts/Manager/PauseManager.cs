@@ -72,16 +72,20 @@ public class PauseManager : SignletonGameObject<PauseManager>
         {
             blackOverlay.SetActive(true);
             MenuOverlay.SetActive(loadedSceneName != "DialogueScene");
+
+            SoundManager soundManager = GetComponentInChildren<SoundManager>();
+            soundManager.musicSource.Stop();
+            soundManager.PlayEffect("pause_enter");
         }
         else
         {
             transparentOverlay.SetActive(true);
             controlsCanva.SetActive(false);
-        }
 
-        SoundManager soundManager = GetComponentInChildren<SoundManager>();
-        soundManager.musicSource.Stop();
-        soundManager.PlayEffect("pause_enter");
+            SoundManager soundManager = GetComponentInChildren<SoundManager>();
+            soundManager.musicSource.Stop();
+            //soundManager.PlayEffect("pause_enter"); play info sound ?
+        }
     }
 
     public void ShowPausedInterface(string interfaceName)

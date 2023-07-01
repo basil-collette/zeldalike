@@ -8,6 +8,8 @@ public class Inventory : ScriptableObject
 {
     public HoldableItem holdedItem; //public HoldableItem hand;
     public List<Item> items = new List<Item>();
+    public List<Item> hotbars = new List<Item>();
+
     public float maxWeight = 10f;
     public float currentWeight = 0;
 

@@ -278,11 +278,8 @@ public class ScenesManager : SignletonGameObject<ScenesManager>
         for (int i = 1; i < scenes.Length; i++)
         {
             AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(scenes[i].name);
-            unloadOp.allowSceneActivation = true;
 
-            while (!unloadOp.isDone) {
-                Debug.Log($"unloading {scenes[i].name}...");
-            }
+            //DO NOT WAIT FOR DONE, ON RUNNING APP, LOAD:UNLOAD NEED SOME PROCESS TO BEING ALLOWED TO START
         }
     }
 

@@ -1,8 +1,8 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(Hit), true)]
 //[CanEditMultipleObjects()]
+[CustomEditor(typeof(Hit), true)]
 public class HitEditor : Editor
 {
     public override void OnInspectorGUI()

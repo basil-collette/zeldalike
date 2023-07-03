@@ -1,5 +1,5 @@
 [System.Serializable]
-public abstract class Goal // : MonoBehaviour
+public abstract class Goal
 {
     public string Objective;
     public bool IsCompleted;
@@ -18,21 +18,6 @@ public abstract class Goal // : MonoBehaviour
     {
         DisableGoalCheckObserver();
     }
-
-    /*
-    private void Start()
-    {
-        if (!IsCompleted)
-        {
-            ApplyGoalCheckObserver();
-        }
-    }
-
-    private void OnDestroy()
-    {
-        DisableGoalCheckObserver();
-    }
-    */
 
     protected abstract void GoalCheck(params object[] observerParams);
     protected abstract void ApplyGoalCheckObserver();

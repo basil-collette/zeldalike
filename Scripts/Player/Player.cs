@@ -1,9 +1,11 @@
+using Assets.Scripts.Items.Equipments.Weapons;
 using Assets.Scripts.Manager;
 using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.UI;
 
 public class Player : AliveEntity
 {
@@ -35,10 +37,19 @@ public class Player : AliveEntity
 
         SetState(EntityState.walk);
 
-        if (inventory.holdedItem != null)
+        if (inventory.Weapon != null)
         {
-            HoldableItem holded = Instantiate(inventory.holdedItem, transform.position, Quaternion.identity);
-            holded.transform.parent = gameObject.transform;
+            WeaponMonoBehaviour weaponMonobehaviour = Resources.Load<WeaponMonoBehaviour>($"Prefabs/Weapons/{inventory.Weapon.weaponType}");
+            weaponMonobehaviour.weapon = inventory.Weapon;
+            WeaponMonoBehaviour weapon = Instantiate(weaponMonobehaviour, transform.position, Quaternion.identity);
+            weapon.transform.parent = gameObject.transform;
+
+            var attackJoystickImage = FindGameObjectHelper.FindByName("WeaponSprite")?.GetComponent<Image>();
+            if (attackJoystickImage != null)
+            {
+                attackJoystickImage.sprite = weaponMonobehaviour.weapon.Sprite;
+                attackJoystickImage.preserveAspect = true;
+            }
         }
     }
 

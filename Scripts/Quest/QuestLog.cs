@@ -104,7 +104,7 @@ public class QuestLog : MonoBehaviour
 
             if (haveItemReward)
             {
-                Item item = ItemRepository.Current.GetByCode(questStep.Rewards.ItemsRef[i].ItemName);
+                Item item = Singleton<ItemRepository<Item>>.Instance.GetByCode(questStep.Rewards.ItemsRef[i].ItemCode);
                 Items[i].transform.Find("Item Image").GetComponent<Image>().sprite = item.Sprite;
                 int amount = questStep.Rewards.ItemsRef[i].Amount;
                 Transform amountShadow = Items[i].transform.Find("Amount Shadow");

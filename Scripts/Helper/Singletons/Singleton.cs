@@ -1,13 +1,13 @@
 ﻿using System;
 using UnityEngine;
 
-public abstract class SingletonBase<T> where T : SingletonBase<T>, new()
+public abstract class Singleton<T> where T : new()
 {
-    private static T _instance = null;
+    private static T _instance = default(T);
 
     private static readonly object _lockObj = new object();
 
-    protected SingletonBase() {
+    protected Singleton() {
         if (_instance != null)
         {
             throw new InvalidOperationException("Cannot create multiple instances of a Singleton.");
@@ -19,11 +19,11 @@ public abstract class SingletonBase<T> where T : SingletonBase<T>, new()
         get {
             lock (_lockObj)
             {
-                if (SingletonBase<T>._instance == null)
+                if (Singleton<T>._instance == null)
                     _instance = new T(); // Activator.CreateInstance(typeof(T), true) as T;
             }
 
-            return SingletonBase<T>._instance;
+            return Singleton<T>._instance;
         }
     }
 

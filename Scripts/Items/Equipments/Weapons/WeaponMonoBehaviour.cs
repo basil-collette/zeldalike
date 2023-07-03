@@ -1,3 +1,4 @@
+using Assets.Database.Model.Design;
 using Assets.Scripts.Manager;
 using System;
 using UnityEngine;
@@ -6,21 +7,22 @@ using UnityEngine.InputSystem;
 namespace Assets.Scripts.Items.Equipments.Weapons
 {
     [Serializable]
-    public abstract class Weapon : HoldableItem
+    public abstract class WeaponMonoBehaviour : MonoBehaviour
     {
-        public Animator anim;
-        public float attackDelay = 1;
-        public float speed = 1; //1 is the animator normal speed
+        public Weapon weapon;
 
-        bool attacking;
-        PlayerInput playerInputs;
-        CooldownManager cooldownManager;
+        [HideInInspector] public Animator anim;
+        protected bool attacking;
+        protected PlayerInput playerInputs;
+        protected CooldownManager cooldownManager;
 
         protected void Start()
         {
             playerInputs = GetComponent<PlayerInput>();
             cooldownManager = GetComponent<CooldownManager>();
-            anim.speed = speed;
+            anim = GetComponentInChildren<Animator>();
+            anim.speed = weapon.speed;
+            //anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(weapon.animatorName);
         }
 
         protected void Update()
@@ -36,7 +38,7 @@ namespace Assets.Scripts.Items.Equipments.Weapons
 
                     Action OnEnd = () => { attacking = false; };
 
-                    cooldownManager.StartCooldown("attackCooldown", attackDelay, null, OnEnd);
+                    cooldownManager.StartCooldown("attackCooldown", weapon.attackDelay, null, OnEnd);
                 }
             }
         }

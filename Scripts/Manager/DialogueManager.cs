@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager : SignletonGameObject<DialogueManager>
 {
     public PauseManager pauseManager;
     public GameObject dialogueButtonPrefab;

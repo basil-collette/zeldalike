@@ -1,14 +1,14 @@
-using Assets.Database.Model.Design;
 using Assets.Database.Model.Repository;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Assets.Scripts.Enums;
 
 [System.Serializable]
 public class Rewards
 {
-    public float Money;
-    public float Xp;
+    public int Money;
+    public int Experience;
     public List<ItemRef> ItemsRef;
     //[HideInInspector] public List<Item> Items;
     //public List<string> Spells;
@@ -30,6 +30,7 @@ public class Rewards
 [System.Serializable]
 public class ItemRef
 {
-    public string ItemName;
+    public string ItemCode;
     public int Amount;
+    public ItemTypeEnum itemType;
 }

@@ -15,7 +15,7 @@ public class MainGameManager : SignletonGameObject<MainGameManager>
     {
         if (resetBDD)
         {
-            DatabaseHelper.ResetTableItem();
+            DatabaseHelper.ResetTables();
             //Assembly.GetAssembly(typeof(BaseRepitory<T>)).GetTypes().FirstOrDefault(testc => testc.isSubsclassOf(typeof(GenericRepitory<T>)));
         }
 

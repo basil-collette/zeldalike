@@ -6,39 +6,10 @@ using System.Collections.Generic;
 using System.Data;
 
 namespace Assets.Database.Model.Repository
-
 {
-    public abstract class BaseRepository<R, D>
-        where R : BaseRepository<R, D>, new() /* repository child class, used fo Singleton */
-        where D : BaseDbData /* D : data row class */
+    public abstract class BaseRepository<D> where D : BaseDbData /* D : data row class */
     {
-        #region [Setup]
-
-        private static R _instance;
-        private static object _objLock = new object();
-
-        public static R Current
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    lock (_objLock)
-                    {
-                        if (_instance == null)
-                        {
-                            _instance = new R();
-                        }
-                    }
-                }
-
-                return _instance;
-            }
-        }
-
-        #endregion
-
-        public List<D> GetAll(bool isNested = false)
+        public virtual List<D> GetAll(bool isNested = false)
         {
             try
             {
@@ -46,7 +17,7 @@ namespace Assets.Database.Model.Repository
 
                 using (SqliteConnection connexion = DatabaseHelper.GetConnexion())
                 {
-                    var command = new SqliteCommand($"SELECT {string.Join(",", Current.GetFields())} FROM {typeof(D).Name.ToLower()}", connexion);
+                    var command = new SqliteCommand($"SELECT {string.Join(",", GetFields())} FROM {typeof(D).Name.ToLower()}", connexion);
 
                     using (IDataReader reader = command.ExecuteReader())
                     {
@@ -65,7 +36,7 @@ namespace Assets.Database.Model.Repository
             }
         }
 
-        public D GetBy<T>(string fieldName, T fieldValue, bool isNested = false)
+        public virtual D GetBy<T>(string fieldName, T fieldValue, bool isNested = false)
         {
             try
             {
@@ -73,7 +44,7 @@ namespace Assets.Database.Model.Repository
                 {
                     string query =
                         "SELECT " +
-                            $"{string.Join(",", Current.GetFields())} " +
+                            $"{string.Join(",", GetFields())} " +
                         $"FROM {typeof(D).Name.ToLower()} " +
                         $"WHERE {fieldName} = @Param AND actif = 1 " +
                             "LIMIT 1";
@@ -98,7 +69,7 @@ namespace Assets.Database.Model.Repository
             }
         }
 
-        public D GetByMany<T>(Dictionary<string, T> fields, bool isNested = false)
+        public virtual D GetByMany<T>(Dictionary<string, T> fields, bool isNested = false)
         {
             try
             {
@@ -112,7 +83,7 @@ namespace Assets.Database.Model.Repository
                 {
                     string query =
                         "SELECT " +
-                            $"{string.Join(",", Current.GetFields())} " +
+                            $"{string.Join(",", GetFields())} " +
                         $"FROM {typeof(D).Name.ToLower()} " +
                         $"WHERE {string.Join(" AND ", whereClauses)} AND actif = 1 " +
                             "LIMIT 1";
@@ -138,7 +109,7 @@ namespace Assets.Database.Model.Repository
             }
         }
 
-        public D GetByCode(string code, bool isNested = false)
+        public virtual D GetByCode(string code, bool isNested = false)
         {
             try
             {
@@ -146,7 +117,7 @@ namespace Assets.Database.Model.Repository
                 {
                     string query =
                         "SELECT " +
-                            $"{string.Join(",", Current.GetFields())} " +
+                            $"{string.Join(",", GetFields())} " +
                         $"FROM {typeof(D).Name.ToLower()} " +
                         "WHERE name_code = @Code AND actif = 1 " +
                             "LIMIT 1";
@@ -171,7 +142,7 @@ namespace Assets.Database.Model.Repository
             }
         }
 
-        public D GetById(int id, bool isNested = false)
+        public virtual D GetById(int id, bool isNested = false)
         {
             try
             {
@@ -186,13 +157,13 @@ namespace Assets.Database.Model.Repository
             }
         }
 
-        public D ContextualGetById(SqliteConnection dbcon, int id, bool isNested = false)
+        public virtual D ContextualGetById(SqliteConnection dbcon, int id, bool isNested = false)
         {
             try
             {
                 string query =
                     "SELECT " +
-                        $"{Current.GetQueryFields()} " +
+                        $"{GetQueryFields()} " +
                     $"FROM {typeof(D).Name.ToLower()} " +
                     "WHERE id = @Id AND actif = 1 " +
                         "LIMIT 1";
@@ -216,7 +187,7 @@ namespace Assets.Database.Model.Repository
             }
         }
 
-        public int Create(D model)
+        public virtual int Create(D model)
         {
             try
             {
@@ -229,7 +200,7 @@ namespace Assets.Database.Model.Repository
 
                     string query =
                         $"INSERT INTO {typeof(D).Name.ToLower()} " +
-                        $"({Current.GetQueryFields()}) VALUES " +
+                        $"({GetQueryFields()}) VALUES " +
                         $"({string.Join(",", GetFieldsValues(model))})";
 
                     var command = new SqliteCommand(query, connexion);
@@ -245,7 +216,7 @@ namespace Assets.Database.Model.Repository
             }
         }
 
-        private int Update(D model)
+        protected virtual int Update(D model)
         {
             try
             {
@@ -297,15 +268,16 @@ namespace Assets.Database.Model.Repository
             return new List<string>()
             {
                 "id",
+                "name_libelle",
                 "name_code",
                 "actif"
             };
         }
 
-        public string GetQueryFields()
+        public virtual string GetQueryFields()
         {
             List<string> finalFields = GetFields();
-            finalFields.Remove("Id");
+            finalFields.Remove("id");
 
             return string.Join(",", finalFields);
         }
@@ -359,27 +331,46 @@ namespace Assets.Database.Model.Repository
             return null;
         }
 
+        public virtual string GetTableFields()
+        {
+            return "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "name_libelle VARCHAR(100) UNIQUE," +
+                "name_code VARCHAR(100) UNIQUE," +
+                "actif BOOLEAN";
+        }
+
+        public void ResetTable()
+        {
+            using (var dbConn = DatabaseHelper.GetConnexion())
+            {
+                IDbCommand dbcmd2 = dbConn.CreateCommand();
+                dbcmd2.CommandText = $"DROP TABLE IF EXISTS {typeof(D).Name.ToLower()}";
+                dbcmd2.ExecuteNonQuery();
+
+                IDbCommand dbcmd = dbConn.CreateCommand();
+                dbcmd.CommandText = $"CREATE TABLE IF NOT EXISTS {typeof(D).Name.ToLower()} (" +
+                    GetTableFields() +
+                ")";
+                dbcmd.ExecuteNonQuery();
+
+                Insert(dbConn);
+            }
+        }
+
+        public abstract void Insert(SqliteConnection dbConn);
+
+        public void Delete()
+        {
+            using (var dbConn = DatabaseHelper.GetConnexion())
+            {
+                IDbCommand drop_cmd = dbConn.CreateCommand();
+                drop_cmd.CommandText = $"DELETE FROM {typeof(D).Name.ToLower()}";
+                drop_cmd.ExecuteNonQuery();
+            }                
+        }
+
         /*
         public abstract void Validate(D entity);
-
-        public override string GetFields()
-        {
-            List<string> fields = new List<string>();
-
-            foreach (PropertyInfo prop in typeof(D).GetProperties())
-            {
-                if (Nullable.GetUnderlyingType(prop.PropertyType) != null)
-                {
-                    fields.Add(Nullable.GetUnderlyingType(prop.PropertyType).ToString());
-                    break;
-                }
-
-                fields.Add(Codify(prop.Name).ToLower());
-            }
-
-            return String.Join(",", fields);
-         }
-
         */
 
     }

@@ -1,5 +1,6 @@
-﻿using Mono.Data.Sqlite;
-using System.Data;
+﻿using Assets.Database.Model.Design;
+using Assets.Database.Model.Repository;
+using Mono.Data.Sqlite;
 using UnityEngine;
 
 namespace Assets.Scripts.Manager
@@ -20,50 +21,12 @@ namespace Assets.Scripts.Manager
 			return dbcon;
 		}
 
-		public static void CreateTables()
+		public static void ResetTables()
 		{
-			ResetTableItem();
-		}
+			Singleton<ItemRepository<Item>>.Instance.ResetTable();
+			Singleton<WeaponRepository>.Instance.ResetTable();
 
-		public static void ResetTableItem()
-        {
-			SqliteConnection dbConn = GetConnexion();
-
-			IDbCommand dbcmd2 = dbConn.CreateCommand();
-			dbcmd2.CommandText = "DROP TABLE IF EXISTS item";
-			dbcmd2.ExecuteNonQuery();
-
-			IDbCommand dbcmd = dbConn.CreateCommand();
-			dbcmd.CommandText = "CREATE TABLE IF NOT EXISTS item (" +
-				"id INTEGER PRIMARY KEY AUTOINCREMENT," +
-				"name_libelle VARCHAR(100) UNIQUE," +
-				"name_code VARCHAR(100) UNIQUE," +
-				"sprite_name VARCHAR(100)," +
-				"rarity_code VARCHAR(20)," +
-				"weight DECIMAL(3,2)," +
-				"description VARCHAR(255)," +
-				"item_type VARCHAR(20)," +
-				"actif BOOLEAN" +
-			")";
-			dbcmd.ExecuteNonQuery();
-
-			/*
-			IDbCommand drop_cmd = dbConn.CreateCommand();
-			drop_cmd.CommandText = "DELETE FROM item";
-			drop_cmd.ExecuteNonQuery();
-			*/
-
-			IDbCommand key = dbConn.CreateCommand();
-			key.CommandText = "INSERT INTO item (name_libelle, name_code, sprite_name, rarity_code, weight, description, item_type, actif) VALUES ('Clé', 'key', 'gfx/key', 'common', 0, 'Petite Clé', 'consommable', 1)";
-			key.ExecuteNonQuery();
-
-			IDbCommand letter = dbConn.CreateCommand();
-			letter.CommandText = "INSERT INTO item (name_libelle, name_code, sprite_name, rarity_code, weight, description, item_type, actif) VALUES ('Lettre', 'letter', 'gfx/letter', 'common', 0, 'Lettre adressée à Mathilde', 'item', 1)";
-			letter.ExecuteNonQuery();
-
-			IDbCommand apple = dbConn.CreateCommand();
-			apple.CommandText = "INSERT INTO item (name_libelle, name_code, sprite_name, rarity_code, weight, description, item_type, actif) VALUES ('Pomme', 'apple', 'gfx/apple', 'common', 0, 'Pomme juteuse', 'consommable', 1)";
-			apple.ExecuteNonQuery();
+			//var items = Singleton<ItemRepository<Item>>.Instance.GetAll();
 		}
 
 	}

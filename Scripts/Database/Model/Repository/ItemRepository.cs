@@ -1,23 +1,22 @@
 ﻿using Assets.Database.Model.Design;
+using Mono.Data.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
 namespace Assets.Database.Model.Repository
 {
-    public sealed class ItemRepository : BaseRepository<ItemRepository, Item>
+    public class ItemRepository<T> : BaseRepository<T> where T : Item
     {
-        public sealed override Item DbDataToModel(IDataReader reader)
+        public override T DbDataToModel(IDataReader reader)
         {
-            Console.WriteLine("test");
-            return new Item(reader);
+            return (T)Activator.CreateInstance(typeof(T), reader);
         }
 
-        public sealed override List<string> GetFields()
+        public override List<string> GetFields()
         {
             List<string> fields = new List<string>()
             {
-                "name_libelle",
                 "sprite_name",
                 "rarity_code",
                 "weight",
@@ -29,6 +28,31 @@ namespace Assets.Database.Model.Repository
             fields.AddRange(base.GetFields());
 
             return fields;
+        }
+
+        public override string GetTableFields()
+        {
+            return "sprite_name VARCHAR(100)," +
+                "rarity_code VARCHAR(20)," +
+                "weight DECIMAL(3,2)," +
+                "description VARCHAR(255)," +
+                "item_type VARCHAR(20)," +
+                base.GetTableFields();
+        }
+
+        public override void Insert(SqliteConnection dbConn)
+        {
+            IDbCommand key = dbConn.CreateCommand();
+            key.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/key', 'common', 0, 'Petite Clé', 'consommable', 'Clé', 'key', 1)";
+            key.ExecuteNonQuery();
+
+            IDbCommand letter = dbConn.CreateCommand();
+            letter.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/letter', 'common', 0, 'Lettre adressée à Mathilde', 'item', 'Lettre', 'letter', 1)";
+            letter.ExecuteNonQuery();
+
+            IDbCommand apple = dbConn.CreateCommand();
+            apple.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/apple', 'common', 0, 'Pomme juteuse', 'consommable', 'Pomme', 'apple', 1)";
+            apple.ExecuteNonQuery();
         }
 
     }

@@ -125,8 +125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effects:
-  - rid: 1056142084445831175
   - rid: 1056142084445831173
+  - rid: 1056142084445831175
   references:
     version: 2
     RefIds:
@@ -230,21 +230,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53a0442bceacda649afb2c1830b21c7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon:
-    Id: 0
-    NameCode: 
-    Actif: 0
-    NameLibelle: 
-    SpriteName: 
-    Weight: 0
-    Description: 
-    ItemType: 0
-    Sprite: {fileID: 0}
-    Rarity: 0
-    anim: {fileID: 0}
-    attackDelay: 1
-    speed: 1
+  Id: 0
+  NameCode: 
+  Actif: 0
+  NameLibelle: 
+  SpriteName: 
+  Weight: 0
+  Description: 
+  ItemType: 2
+  Sprite: {fileID: 21300000, guid: 640e57a17b5b208478b103c8998894f0, type: 3}
+  Rarity: 0
   anim: {fileID: 5446324326688491881}
+  attackDelay: 1
+  speed: 1
 --- !u!1 &5545115837223209450
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HeartManager : MonoBehaviour
+public class HeartManager : SignletonGameObject<HeartManager>
 {
     public Image[] hearts;
     public FloatValue playerHealth;

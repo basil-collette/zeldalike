@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Assets.Database.Model.Design;
 
 public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public Image image;
+    [SerializeReference] public Item Item;
     [HideInInspector] public Transform slot;
 
     public void OnBeginDrag(PointerEventData eventData)

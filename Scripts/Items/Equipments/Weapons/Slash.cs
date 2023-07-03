@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Assets.Scripts.Items.Equipments.Weapons
 {
     [Serializable]
-    public class Slash : Weapon
+    public class Slash : WeaponMonoBehaviour
     {
         protected new void Start()
         {

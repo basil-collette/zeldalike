@@ -8,7 +8,6 @@ namespace Assets.Database.Model.Design
     [Serializable]
     public class Item : BaseDbData
     {
-        public string NameLibelle;
         public string SpriteName;
         public float Weight;
         public string Description;
@@ -19,7 +18,6 @@ namespace Assets.Database.Model.Design
 
         public Item(IDataReader reader) : base(reader)
         {
-            NameLibelle = reader["name_libelle"].ToString();
             SpriteName = reader["sprite_name"].ToString();
             Weight = float.Parse(reader["weight"].ToString());
             Description = reader["description"].ToString();

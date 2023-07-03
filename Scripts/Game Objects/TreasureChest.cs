@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class TreasureChest : NorthApproachingInteractable
 {
-    [HideInInspector] public Item content;
+    [HideInInspector] [SerializeReference] public Item content;
     public Inventory inventory;
     public bool isOpen;
     public string itemNameCode;
@@ -19,7 +19,7 @@ public class TreasureChest : NorthApproachingInteractable
     {
         receivedItemContext = FindAnyObjectByType<Player>().transform.Find("received item").gameObject;
 
-        content = ItemRepository.Current.GetByCode(itemNameCode);
+        content = Singleton<ItemRepository<Item>>.Instance.GetByCode(itemNameCode);
 
         ButtonHelper.exitPause += ExitRaiseItem;
     }
@@ -43,7 +43,7 @@ public class TreasureChest : NorthApproachingInteractable
 
                 exitSignal.Raise(); //to remove the "?" clue
 
-                inventory.items.Add(content);
+                inventory.AddItem(content);
 
                 receivedItemContext.gameObject.SetActive(true);
                 receivedItemContext.GetComponent<SpriteRenderer>().sprite = content.Sprite;

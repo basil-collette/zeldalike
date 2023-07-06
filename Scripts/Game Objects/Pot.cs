@@ -4,27 +4,19 @@ using UnityEngine;
 
 public class Pot : Hitable
 {
-    Animator anim;
+    List<EffectEnum> effectTypeTriggerable = new List<EffectEnum>() {
+        EffectEnum.neutral,
+        EffectEnum.slash,
+        EffectEnum.bump,
+        EffectEnum.pierce,
+        EffectEnum.knockback
+    };
 
-    void Start()
-    {
-        anim = GetComponent<Animator>();
-    }
-
-    void Update()
-    {
-        
-    }
-
-    public override void Hit(GameObject attacker, List<Effect> hit)
+    public override void Hit(GameObject attacker, List<Effect> hit, string attackerTag)
     {
         foreach (Effect effect in hit)
         {
-            if (effect.effectType == EffectEnum.neutral
-                || effect.effectType == EffectEnum.slash
-                || effect.effectType == EffectEnum.bump
-                || effect.effectType == EffectEnum.knockback
-                || effect.effectType == EffectEnum.pierce)
+            if (hit.Exists(effect => effectTypeTriggerable.Contains(effect.effectType)))
             {
                 StartCoroutine(breackCo());
                 return;
@@ -34,11 +26,13 @@ public class Pot : Hitable
 
     public override void Effect(Vector3 attackerPos, Effect effect)
     {
-        //
+        //nothing, intentionnaly
     }
 
     IEnumerator breackCo()
     {
+        Animator anim = GetComponent<Animator>();
+
         anim.SetBool("active", true);
 
         yield return new WaitForSeconds(0.3f);

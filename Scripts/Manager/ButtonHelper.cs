@@ -4,8 +4,6 @@ using UnityEngine.UI;
 
 public class ButtonHelper : MonoBehaviour
 {
-    public TargetScene targetScene;
-
     public static event Action exitPause;
 
     /*
@@ -30,10 +28,7 @@ public class ButtonHelper : MonoBehaviour
 
     public void StartGame()
     {
-        FindGameObjectHelper.FindByName("Canva UI").SetActive(true);
-        FindGameObjectHelper.FindByName("Canva Controls").SetActive(true);
-
-        FindAnyObjectByType<ScenesManager>().SwitchScene(targetScene);
+        FindGameObjectHelper.FindByName("Main Game Manager").GetComponent<MainGameManager>().StartGame();
     }
 
     public void Resume()
@@ -45,6 +40,11 @@ public class ButtonHelper : MonoBehaviour
     public void ShowPausedInterface(string sceneName)
     {
         FindAnyObjectByType<PauseManager>().ShowPausedInterface(sceneName);
+    }
+
+    public void Save()
+    {
+        FindAnyObjectByType<SaveManager>().SaveGame();
     }
 
 }

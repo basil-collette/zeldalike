@@ -14,11 +14,13 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     {
         if (transform.childCount != 0)
         {
-            Transform currentChild = transform.GetChild(0);
-            currentChild.SetParent(draggedItem.slot);
+            DraggableItem currentItem = transform.GetChild(0).GetComponent<DraggableItem>();
+            currentItem.transform.SetParent(draggedItem.Slot);
+            currentItem.Item.InventoryIndex = draggedItem.Slot.GetSiblingIndex();
         }
 
-        draggedItem.slot = transform;
+        draggedItem.Slot = transform;
+        draggedItem.Item.InventoryIndex = transform.GetSiblingIndex();
     }
 
 }

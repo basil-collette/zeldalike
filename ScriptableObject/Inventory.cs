@@ -1,9 +1,8 @@
 using Assets.Database.Model.Design;
 using Assets.Database.Model.Repository;
 using Assets.Scripts.Enums;
-using System;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 [CreateAssetMenu(menuName = "ScriptableObject/Inventory")]
 public class Inventory : ScriptableObject
@@ -11,25 +10,18 @@ public class Inventory : ScriptableObject
     public int Money = 0;
     public int Experience = 0;
     //OBJETS
-    public Weapon? Weapon;
-    public HoldableItem[] Hotbars = new HoldableItem[3];
-    public Item?[] Items = new Item?[12];
+    public static int MaxCountHotbar = 3;
+    public static int maxCountItems = 12;
+    public Weapon Weapon;
+    public List<HoldableItem> Hotbars = new List<HoldableItem>();
+    public List<Item> Items = new List<Item>();
 
     public float maxWeight = 10f;
     public float currentWeight = 0;
 
     void OnValidate()
     {
-        //REPLACE BY GETTING FROM SAVE
-
-        for (int i = 0; i < Items.Length; i++)
-        {
-            Items[i] = null;
-        }
-        for (int i = 0; i < Hotbars.Length; i++)
-        {
-            Hotbars[i] = null;
-        }
+        //REPLACE BY GETTING FROM SAVE, donc la fonction doit disparaitre
         Weapon = Singleton<WeaponRepository>.Instance.GetByCode("sword");
     }
 
@@ -54,14 +46,21 @@ public class Inventory : ScriptableObject
 
     public void AddItem(Item content)
     {
-        //ne gere pas les stackable objects
-        var index = Array.FindIndex(Items, i => i == null);
-        if (index == -1)
+        if (Items.Count < maxCountItems)
         {
-            //ask for bin an item
-            return;
+            Items.Add(content);
         }
-        Items[index] = content;
+        else
+        {
+            // ask for bin an item
+
+            //pause and open inventory scene
+        }
+    }
+
+    public void RemoveItem(Item item)
+    {
+        Items.Remove(item);
     }
 
 }

@@ -24,10 +24,10 @@ public class LogTreeHit : Hitable
         //
     }
 
-    public override void Hit(GameObject attacker, List<Effect> hit)
+    public override void Hit(GameObject attacker, List<Effect> hit, string attackerTag)
     {
         if (hasGrown
-            && attacker.transform.parent.CompareTag("Player") // prevent the friendly fire, enemy sided
+            && attackerTag == "Player" // prevent the "friendly fire" from enemies 
             && hit.Exists(effect => effectTypeTriggerable.Contains(effect.effectType))
             && SpawnCountNotReached())
         {

@@ -8,6 +8,8 @@ namespace Assets.Database.Model.Design
     [Serializable]
     public class Item : BaseDbData
     {
+        public int InventoryIndex;
+
         public string SpriteName;
         public float Weight;
         public string Description;

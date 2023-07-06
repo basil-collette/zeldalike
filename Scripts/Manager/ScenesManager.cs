@@ -23,7 +23,7 @@ public class ScenesManager : SignletonGameObject<ScenesManager>
     GameObject textBox;
     Text placeText;
 
-    string _currentScene = string.Empty;
+    public string _currentScene = string.Empty;
     List<PreloadedScene> preloadedScenes = new List<PreloadedScene>();
 
     //To keep it in memory

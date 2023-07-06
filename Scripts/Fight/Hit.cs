@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Hit : MonoBehaviour
 {
     [SerializeReference] public List<Effect> effects = new List<Effect>();
+    public string attackerTag;
 
     protected virtual void Start()
     {
@@ -14,7 +15,7 @@ public abstract class Hit : MonoBehaviour
 
     protected virtual void OnHit(Hitable hited)
     {
-        hited.Hit(gameObject, effects);
+        hited.Hit(gameObject, effects, attackerTag);
     }
 
 }

@@ -83,11 +83,11 @@ public class QuestLog : MonoBehaviour
 
         QuestObjectiveText.text = string.Join("\n", questStep.Goals.AsEnumerable<Goal>().Select(x => x.Objective));
 
-        bool haveRewardXP = questStep.Rewards.Xp != null && questStep.Rewards.Xp != 0;
+        bool haveRewardXP = questStep.Rewards.Experience != null && questStep.Rewards.Experience != 0;
         RewardXP.SetActive(haveRewardXP);
         if (haveRewardXP)
         {
-            RewardXP.transform.Find("Text XPValue").GetComponent<Text>().text = questStep.Rewards.Xp.ToString();
+            RewardXP.transform.Find("Text XPValue").GetComponent<Text>().text = questStep.Rewards.Experience.ToString();
         }
 
         bool haveRewardGold = questStep.Rewards.Money != null && questStep.Rewards.Money != 0;

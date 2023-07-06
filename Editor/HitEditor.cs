@@ -11,6 +11,9 @@ public class HitEditor : Editor
 
         Hit hit = target as Hit;
 
+        SerializedProperty attackerTagProperty = serializedObject.FindProperty("attackerTag");
+        EditorGUILayout.PropertyField(attackerTagProperty);
+
         EditorGUILayout.LabelField("Adding");
 
         if (GUILayout.Button("Effect"))

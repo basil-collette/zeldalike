@@ -1,11 +1,9 @@
 using Assets.Database.Model.Design;
-using Assets.Scripts.Items.Equipments.Weapons;
-using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class WeaponSlot : InventorySlot, IDropHandler
+public class WeaponSlot : InventorySlot
 {
-    public void OnDrop(PointerEventData eventData)
+    public new void OnDrop(PointerEventData eventData)
     {
         DraggableItem draggedItem = eventData.pointerDrag.GetComponent<DraggableItem>();
 

@@ -43,6 +43,7 @@ public class Player : AliveEntity
             weaponMonobehaviour.weapon = inventory.Weapon;
             WeaponMonoBehaviour weapon = Instantiate(weaponMonobehaviour, transform.position, Quaternion.identity);
             weapon.transform.parent = gameObject.transform;
+            weapon.GetComponentInChildren<TriggerHit>(true).attackerTag = "Player";
 
             var attackJoystickImage = FindGameObjectHelper.FindByName("WeaponSprite")?.GetComponent<Image>();
             if (attackJoystickImage != null)
@@ -51,6 +52,12 @@ public class Player : AliveEntity
                 attackJoystickImage.preserveAspect = true;
             }
         }
+
+        Health.OnDeath += (string[] deathParams) =>
+        {
+            Debug.Log("dead");
+            //respawn au startPos de la scene en cours
+        };
     }
 
     new void Update()
@@ -72,17 +79,19 @@ public class Player : AliveEntity
             return;
         }
 
+        //Grab
+        /*
         if (Gamepad.current != null && Gamepad.current[GamepadButton.East].isPressed)
         {
-            //Debug.Log("Grab");
             /*
             if (currentEntityState != EntityState.unavailable)
             {
                 SetState(EntityState.attack);
             }
             return;
-            */
+            *//*
         }
+        */
 
         direction.x = Input.GetAxis("Horizontal");
         direction.y = Input.GetAxis("Vertical");

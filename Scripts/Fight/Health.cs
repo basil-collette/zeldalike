@@ -9,7 +9,7 @@ public class Health : Hitable
     public static event Action<string[]> OnDeath;
 
     public FloatValue health;
-    protected Signal healthSignal;
+    public Signal healthSignal;
     public string[] OnDeathParam;
     public List<EffectModificator> effectMods = new List<EffectModificator>();
     public List<Effect> effects;
@@ -17,12 +17,7 @@ public class Health : Hitable
     protected GameObject deathEffect;
     protected AudioClip deathSound;
 
-    protected void Start()
-    {
-
-    }
-
-    public override void Hit(GameObject attacker, List<Effect> hit)
+    public override void Hit(GameObject attacker, List<Effect> hit, string attackerTag)
     {
         foreach (Effect effect in hit)
         {

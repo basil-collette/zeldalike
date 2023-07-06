@@ -13,7 +13,7 @@ public class Sign : FacingObject
     private void Start()
     {
         //dialogBox = FindGameObjectHelper.FindInactiveObjectByName("DialogBox");
-        dialogText = dialogBox.GetComponentInChildren<Text>();
+        //dialogText = dialogBox.GetComponentInChildren<Text>();
     }
 
     void Update()

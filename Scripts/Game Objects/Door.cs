@@ -45,7 +45,7 @@ public class Door : FacingInteractObject
     bool ConditionsOfTypesAreCompleted()
     {
         if (keyUidString != string.Empty
-            && !Array.Exists(FindFirstObjectByType<Player>().inventory.Items, x => x.NameCode == "key" && x.Uid == keyUid))
+            && !FindFirstObjectByType<Player>().inventory.Items.Exists(item => item.NameCode == "key" && item.Uid == keyUid))
         {
             return false;
         }

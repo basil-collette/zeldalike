@@ -25,28 +25,26 @@ public class InventoryManager : SignletonGameObject<InventoryManager>
 
     void FillSlots()
     {
-        for (int i = 0; i < Inventory.Items.Length; i++)
+        foreach (Item item in Inventory.Items)
         {
-            if (Inventory.Items[i] == null) continue;
-            DraggableItem item = Instantiate(DraggableItemPrefab, transform.position, Quaternion.identity);
-            Vector3 itemScale = item.transform.localScale;
-            item.transform.SetParent(ItemsSlotsContainer.GetChild(i).transform);
-            item.transform.localScale = itemScale;
-            item.Item = Inventory.Items[i];
-            item.image.sprite = item.Item.Sprite;
-            item.image.preserveAspect = true;
+            DraggableItem draggableItem = Instantiate(DraggableItemPrefab, transform.position, Quaternion.identity);
+            Vector3 itemScale = draggableItem.transform.localScale;
+            draggableItem.transform.SetParent(ItemsSlotsContainer.GetChild(item.InventoryIndex).transform);
+            draggableItem.transform.localScale = itemScale;
+            draggableItem.SetItem(item);
+            draggableItem.Image.sprite = draggableItem.Item.Sprite;
+            draggableItem.Image.preserveAspect = true;
         }
 
-        for (int i = 0; i < Inventory.Hotbars.Length; i++)
+        foreach (Item item in Inventory.Hotbars)
         {
-            if (Inventory.Hotbars[i] == null) continue;
             DraggableItem hotbarItem = Instantiate(DraggableItemPrefab, transform.position, Quaternion.identity);
             Vector3 hotbarScale = hotbarItem.transform.localScale;
-            hotbarItem.transform.SetParent(HotbarSlotsContainer.GetChild(i).transform);
+            hotbarItem.transform.SetParent(HotbarSlotsContainer.GetChild(item.InventoryIndex).transform);
             hotbarItem.transform.localScale = hotbarScale;
-            hotbarItem.Item = Inventory.Hotbars[i];
-            hotbarItem.image.sprite = hotbarItem.Item.Sprite;
-            hotbarItem.image.preserveAspect = true;
+            hotbarItem.SetItem(item);
+            hotbarItem.Image.sprite = hotbarItem.Item.Sprite;
+            hotbarItem.Image.preserveAspect = true;
         }
 
         if (Inventory.Weapon == null) return;
@@ -54,13 +52,14 @@ public class InventoryManager : SignletonGameObject<InventoryManager>
         Vector3 weaponScale = weapon.transform.localScale;
         weapon.transform.SetParent(HoldedSlot.transform);
         weapon.transform.localScale = weaponScale;
-        weapon.Item = Inventory.Weapon;
-        weapon.image.sprite = Inventory.Weapon.Sprite;
-        weapon.image.preserveAspect = true;
+        weapon.SetItem(Inventory.Weapon);
+        weapon.Image.sprite = Inventory.Weapon.Sprite;
+        weapon.Image.preserveAspect = true;
     }
 
     void UpdateInventory()
     {
+        /*
         for (int i = 0; i < ItemsSlotsContainer.childCount; i++)
         {
             if (ItemsSlotsContainer.GetChild(i).childCount == 0)
@@ -69,7 +68,7 @@ public class InventoryManager : SignletonGameObject<InventoryManager>
                 continue;
             }
 
-            Inventory.Items[i] = ItemsSlotsContainer.GetChild(i).GetChild(0).GetComponent<DraggableItem>().Item;
+            Inventory.Items[i] = ItemsSlotsContainer.GetChild(i).GetComponentInChildren<DraggableItem>().Item;
         }
 
         for (int i = 0; i < HotbarSlotsContainer.childCount; i++)
@@ -80,11 +79,12 @@ public class InventoryManager : SignletonGameObject<InventoryManager>
                 continue;
             }
 
-            Inventory.Hotbars[i] = HotbarSlotsContainer.GetChild(i).GetChild(0).GetComponent<DraggableItem>().Item as HoldableItem;
+            Inventory.Hotbars[i] = HotbarSlotsContainer.GetChild(i).GetComponentInChildren<DraggableItem>().Item as HoldableItem;
         }
 
-        var holded = HoldedSlot.GetComponent<DraggableItem>();
+        var holded = HoldedSlot.GetComponentInChildren<DraggableItem>();
         Inventory.Weapon = (holded == null) ? null : holded.Item as Weapon;
+        */
     }    
 
 }

@@ -212,7 +212,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 189856265}
-  - component: {fileID: 189856266}
   - component: {fileID: 189856264}
   - component: {fileID: 189856263}
   - component: {fileID: 189856262}
@@ -306,22 +305,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &189856266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 189856261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f7064df9cf648e45b9339094849048d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DraggableItemPrefab: {fileID: 949946210478068022, guid: d023f2dd7cc26ae4ca4197f7ee2eee2c, type: 3}
-  ItemsSlotsContainer: {fileID: 0}
-  HotbarSlotsContainer: {fileID: 0}
-  HoldedSlot: {fileID: 0}
 --- !u!1 &646451396
 GameObject:
   m_ObjectHideFlags: 0

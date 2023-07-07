@@ -1,5 +1,6 @@
 using Assets.Scripts.Game_Objects.Inheritable;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
@@ -8,7 +9,7 @@ public class Pnj : Interacting
     public string Name = "Anonymous";
     public AudioClip Voice;
     public Sprite Sprite;
-    public List<DialogueReference> Dialogues;
+    public PNJDialogues Dialogues;
 
     DialogueManager dialogueManager;
 
@@ -17,22 +18,34 @@ public class Pnj : Interacting
         dialogueManager = FindAnyObjectByType<DialogueManager>();
     }
 
-    void FixedUpdate()
-    {
-        
-    }
-
-    public void Talk()
-    {
-        var dialogueContainer = Dialogues.Find(x => x.Name == "hello").DialogueContainer;
-        dialogueManager.StartDialogue(dialogueContainer);
-    }
-
-    protected override void OnInterfact()
+    protected override void OnInteract()
     {
         Talk();
     }
 
+    public void Talk()
+    {
+        var dialogueContainer = GetDialogue();
+        dialogueManager.StartDialogue(dialogueContainer);
+    }
+
+    DialogueReference GetDialogue()
+    {
+        List<DialogueReference> dialogues = Dialogues.Dialogues.AsEnumerable()
+            .Where(x => !x.Conditions.Exists(condition => condition.Verify() == false)) // Il n'existe pas de condition dont verify() return false
+            .OrderBy(x => -(int)x.Priority)
+            .ToList();
+
+        if (dialogues.Count == 1)
+        {
+            return dialogues.FirstOrDefault();
+        }
+
+        int index = Random.Range(0, dialogues.Count);
+        return dialogues[index];
+    }
+
+    /*
     bool HaveSaid()
     {
         return true;
@@ -52,5 +65,5 @@ public class Pnj : Interacting
     {
         return true;
     }
-
+    */
 }

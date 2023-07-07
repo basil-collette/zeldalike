@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Database.Model.Design;
+using Assets.Database.Model.Repository;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor;
@@ -27,15 +29,13 @@ public class SaveManager : SignletonGameObject<SaveManager>
         if (loadedData != null)
         {
             GameData = loadedData;
-            /*score = loadedData.score;
-            playerHealth = loadedData.playerHealth;
-            playerTransform.position = loadedData.playerPosition;*/
+            SetDataToRunning();
         }
     }
 
     public void SaveGame()
     {
-        GameData gameData = GetCurrentRunningData();
+        GameData gameData = GetGameDataFromRunning();
         WriteSave(gameData);
     }
 
@@ -56,37 +56,39 @@ public class SaveManager : SignletonGameObject<SaveManager>
         List<string> saveFiles = new List<string>();
 
         DirectoryInfo directoryInfo = new DirectoryInfo(Path.Combine(Application.persistentDataPath, "Save"));
-        foreach (var file in directoryInfo.GetFiles("*.json"))
+        foreach (var file in directoryInfo.GetDirectories())
         {
             saveFiles.Add(file.Name);
         }
         return saveFiles;
     }
 
-    public GameData GetCurrentRunningData()
+    public GameData GetGameDataFromRunning()
     {
-        GameData gameData = new GameData();
-
-        gameData.saveName = GameData.saveName;
-        gameData.sceneName = FindAnyObjectByType<ScenesManager>()._currentScene;
-
         Player player = FindGameObjectHelper.FindByName("Player").GetComponent<Player>();
-        gameData.inventoryItemsCodes = player.inventory.Items.AsEnumerable().Select(x => x.NameCode).ToList();
-        gameData.inventoryHotbarsCodes = player.inventory.Hotbars.AsEnumerable().Select(x => x.NameCode).ToList();
-        gameData.inventoryWeaponCode = player.inventory.Weapon.NameCode;
-        gameData.playerHealth = player.GetComponent<Health>().health.RuntimeValue;
 
-        return gameData;
+        return new GameData() {
+            saveName = GameData.saveName,
+            sceneName = FindAnyObjectByType<ScenesManager>()._currentScene,
+
+            playerHealth = player.GetComponent<Health>().health.RuntimeValue,
+
+            inventoryItems = player.inventory.Items.AsEnumerable().Select(x => JsonUtility.ToJson(x)).ToList(),
+            inventoryHotbars = player.inventory.Hotbars.AsEnumerable().Select(x => JsonUtility.ToJson(x)).ToList(),
+            inventoryWeapon = JsonUtility.ToJson(player.inventory.Weapon)
+        };
     }
 
     public void CreateNewSave(string _saveName)
     {
+        Weapon sword = Singleton<WeaponRepository>.Instance.GetByCode("sword");
+
         GameData gameData = new GameData() {
             sceneName = StartScene.libelle,
             saveName = _saveName,
-            inventoryItemsCodes = new List<string>(),
-            inventoryHotbarsCodes = new List<string>(),
-            inventoryWeaponCode = "sword",
+            inventoryItems = new List<string>(),
+            inventoryHotbars = new List<string>(),
+            inventoryWeapon = JsonUtility.ToJson(sword),
             playerHealth = 3f
         };
 
@@ -95,16 +97,21 @@ public class SaveManager : SignletonGameObject<SaveManager>
 
     public void SetDataToRunning()
     {
-        /*
-        find scriptable object of player health
-        find scriptable object of player inventory
-        find scriptableobject of player questlog
+        //SCENE
+        TargetScene currentScene = Resources.Load<TargetScene>($"Scenes/{GameData.sceneName.Substring(0, GameData.sceneName.Length - 5)}/{GameData.sceneName}");
+        FindAnyObjectByType<CameraMovement>().CameraParams = currentScene.cameraParameters;
 
-        Player player = FindGameObjectHelper.FindByName("Player").GetComponent<Player>();
-        gameData.inventoryItemsCodes = player.inventory.Items.AsEnumerable().Select(x => x.NameCode).ToList();
-        gameData.inventoryHotbarsCodes = player.inventory.Hotbars.AsEnumerable().Select(x => x.NameCode).ToList();
-        gameData.inventoryWeaponCode = player.inventory.Weapon.NameCode;
-        gameData.playerHealth = player.GetComponent<Health>().health.RuntimeValue;*/
+        //PLAYER
+        Resources.Load<FloatValue>("ScriptableObjects/Player/Health/PlayerHealth").RuntimeValue = GameData.playerHealth;
+        //Resources.Load<FloatValue>("ScriptableObjects/Player/position/PlayerPosition").RuntimeValue = currentScene.pos;
+
+        //INVENTORY
+        Inventory inventory = Resources.Load<Inventory>("ScriptableObjects/Player/Inventory/Inventory");
+        inventory.Items = GameData.inventoryItems.Select(x => JsonUtility.FromJson<Item>(x)).ToList();
+        inventory.Hotbars = GameData.inventoryHotbars.Select(x => JsonUtility.FromJson<HoldableItem>(x)).ToList();
+        inventory.Weapon = JsonUtility.FromJson<Weapon>(GameData.inventoryWeapon);
+
+        //questlog
     }
 
 }

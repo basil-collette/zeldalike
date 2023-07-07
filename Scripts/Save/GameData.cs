@@ -7,9 +7,9 @@ public class GameData
 {
     public string saveName;
     public string sceneName;
-    public List<string> inventoryItemsCodes;
-    public List<string> inventoryHotbarsCodes;
-    public string? inventoryWeaponCode;
+    public List<string> inventoryItems;
+    public List<string> inventoryHotbars;
+    public string? inventoryWeapon;
     public float playerHealth;
 
     //etat du player, vie, etat

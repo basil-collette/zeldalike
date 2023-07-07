@@ -10,11 +10,11 @@ namespace Assets.Scripts.Game_Objects.Inheritable
             if (playerInRange
                 && Gamepad.current[GamepadButton.East].wasPressedThisFrame)
             {
-                OnInterfact();
+                OnInteract();
             }
         }
 
-        protected abstract void OnInterfact();
+        protected abstract void OnInteract();
 
     }
 }

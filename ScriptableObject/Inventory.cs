@@ -21,8 +21,7 @@ public class Inventory : ScriptableObject
 
     void OnValidate()
     {
-        //REPLACE BY GETTING FROM SAVE, donc la fonction doit disparaitre
-        Weapon = Singleton<WeaponRepository>.Instance.GetByCode("sword");
+        //
     }
 
     public void GetReward(Rewards reward)

@@ -6,7 +6,7 @@ public class LogTreeGrow : Interacting
 {
     public bool hasGrown;
 
-    protected override void OnInterfact()
+    protected override void OnInteract()
     {
         throw new System.NotImplementedException();
     }

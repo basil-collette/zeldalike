@@ -105,10 +105,7 @@ MonoBehaviour:
   Name: Clara
   Voice: {fileID: 0}
   Sprite: {fileID: -925296149, guid: 095a1a16e4d2cdf4abc3bc33bb3a5067, type: 3}
-  Dialogues:
-  - Name: hello
-    WasSaid: 0
-    DialogueContainer: {fileID: 11400000, guid: 3697636beab278c49b355b642a7b888f, type: 2}
+  Dialogues: {fileID: 11400000, guid: 8b4491dab7465a74cad3a42706a8a276, type: 2}
 --- !u!61 &5719563269841172503
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -9,15 +9,15 @@ public class DialogueManager : SignletonGameObject<DialogueManager>
     public GameObject dialogueButtonPrefab;
     public float textAnimPauseSeconds = 0.01f;
 
-    private DialogueContainer _dialogueContainer;
+    private DialogueReference _dialogueRef;
 
-    public void StartDialogue(DialogueContainer dialogueContainer)
+    public void StartDialogue(DialogueReference dialogueRef)
     {
-        _dialogueContainer = dialogueContainer;
+        _dialogueRef = dialogueRef;
 
         pauseManager.ShowPausedInterface("DialogueScene", () =>
         {
-            BaseNodeData node = GraphHelper.GetFirstNode(_dialogueContainer);
+            BaseNodeData node = GraphHelper.GetFirstNode(_dialogueRef.DialogueContainer);
             NextNode(node);
         });
     }
@@ -51,7 +51,7 @@ public class DialogueManager : SignletonGameObject<DialogueManager>
 
         Action showButtons = () =>
         {
-            var connections = GraphHelper.GetOutputs(_dialogueContainer, node);
+            var connections = GraphHelper.GetOutputs(_dialogueRef.DialogueContainer, node);
             if (connections.Count > 0)
             {
                 foreach (var conn in connections)
@@ -60,7 +60,7 @@ public class DialogueManager : SignletonGameObject<DialogueManager>
                         (conn.PortName == string.Empty) ? "continue" : conn.PortName,
                         () =>
                         {
-                            BaseNodeData nextNode = GraphHelper.GetNodeByGuid(_dialogueContainer, conn.TargetNodeGuid);
+                            BaseNodeData nextNode = GraphHelper.GetNodeByGuid(_dialogueRef.DialogueContainer, conn.TargetNodeGuid);
                             NextNode(nextNode);
                         }
                     );
@@ -70,6 +70,7 @@ public class DialogueManager : SignletonGameObject<DialogueManager>
             {
                 InstanciateChoiceButton("Ok", () =>
                 {
+                    _dialogueRef.IsSaid = true;
                     pauseManager.Resume();
                 });
             }
@@ -96,10 +97,10 @@ public class DialogueManager : SignletonGameObject<DialogueManager>
     {
         node.EventSO?.Event?.Invoke(node.Param);
 
-        var connections = GraphHelper.GetOutputs(_dialogueContainer, node);
+        var connections = GraphHelper.GetOutputs(_dialogueRef.DialogueContainer, node);
         if (connections.Count > 0)
         {
-            BaseNodeData nextNode = GraphHelper.GetNodeByGuid(_dialogueContainer, connections[0].TargetNodeGuid);
+            BaseNodeData nextNode = GraphHelper.GetNodeByGuid(_dialogueRef.DialogueContainer, connections[0].TargetNodeGuid);
             NextNode(nextNode);
         }
         else

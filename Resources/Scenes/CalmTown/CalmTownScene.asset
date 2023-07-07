@@ -10,8 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e679b72a61def0e4a805b353f09c96de, type: 3}
-  m_Name: Forest
+  m_Name: CalmTownScene
   m_EditorClassIdentifier: 
-  libelle: ForestScene
+  libelle: CalmTownScene
   needPreload: 0
   scenesNeedingPreloadNames: []
+  musicName: fantaisy
+  cameraParameters:
+    Smoothing: 0.05
+    IsFixed: 0
+    PreviousScenePos: {x: 0, y: 0}
+    CurrentPos: {x: 0, y: 0}
+    MinPos: {x: 0, y: -5.5}
+    MaxPos: {x: 32.5, y: 15.7}

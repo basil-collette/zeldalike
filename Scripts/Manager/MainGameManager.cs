@@ -1,5 +1,7 @@
 using Assets.Scripts.Manager;
+using System;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class MainGameManager : SignletonGameObject<MainGameManager>
 {
@@ -10,15 +12,28 @@ public class MainGameManager : SignletonGameObject<MainGameManager>
 
     void Start()
     {
+        InitLocalDataFolder();
+        
         InitBDD();
-
+        
         InitSave();
 
         ScenesManager scenesManager = GetComponent<ScenesManager>();
         scenesManager.ClearScenes();
         scenesManager.AdditiveLoadScene(firstLoadedScene.libelle, () => {
             scenesManager.SetCurrentScene(firstLoadedScene.libelle);
+            //Set Player pos ?
         });
+    }
+
+    private void InitLocalDataFolder()
+    {
+        if (!Directory.Exists(Application.persistentDataPath))
+        {
+            Directory.CreateDirectory(Application.persistentDataPath);
+
+            resetBDD = true;
+        }
     }
 
     void InitBDD()

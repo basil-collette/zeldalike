@@ -1,6 +1,7 @@
 using Assets.Database.Model.Design;
 using Assets.Database.Model.Repository;
 using Assets.Scripts.Game_Objects;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
@@ -13,10 +14,21 @@ public class TreasureChest : NorthApproachingInteractable
     public bool isOpen;
     public string itemNameCode;
 
-    private GameObject receivedItemContext;
+    GameObject receivedItemContext;
+    Guid Uid;
 
     void Start()
     {
+        if (Uid == null)
+            Uid = Guid.NewGuid();
+
+        if (FindAnyObjectByType<SaveManager>().GameData.opennedChestGuids.Contains(Uid.ToString()))
+        {
+            GetComponent<Animator>().SetBool("open", true);
+            enabled = false;
+            return;
+        }
+
         receivedItemContext = FindAnyObjectByType<Player>().transform.Find("received item").gameObject;
 
         content = Singleton<ItemRepository<Item>>.Instance.GetByCode(itemNameCode);
@@ -39,7 +51,7 @@ public class TreasureChest : NorthApproachingInteractable
             {
                 isOpen = true;
 
-                GetComponent<Animator>().SetBool("open", true);
+                GetComponent<Animator>().SetTrigger("opentrigger");
 
                 exitSignal.Raise(); //to remove the "?" clue
 
@@ -49,6 +61,8 @@ public class TreasureChest : NorthApproachingInteractable
                 receivedItemContext.GetComponent<SpriteRenderer>().sprite = content.Sprite;
 
                 FindAnyObjectByType<Player>().RaiseItem();
+
+                FindAnyObjectByType<SaveManager>().GameData.opennedChestGuids.Add(Uid.ToString());
 
                 FindAnyObjectByType<PauseManager>().ShowPausedInterface("InfoScene", () =>
                 {
@@ -61,7 +75,8 @@ public class TreasureChest : NorthApproachingInteractable
     public void ExitRaiseItem()
     {
         FindAnyObjectByType<Player>().CloseRaiseItem();
-        receivedItemContext.SetActive(false);
+        receivedItemContext.gameObject.SetActive(false);
+        this.enabled = false;
     }
 
     protected new void OnTriggerEnter2D(Collider2D collider)

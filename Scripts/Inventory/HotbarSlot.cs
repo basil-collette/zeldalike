@@ -1,15 +1,28 @@
+using Assets.Database.Model.Design;
 using UnityEngine.EventSystems;
 
 public class HotbarSlot : InventorySlot
 {
-    public new void OnDrop(PointerEventData eventData)
+    public sealed override void OnDrop(PointerEventData eventData)
     {
         DraggableItem draggedItem = eventData.pointerDrag.GetComponent<DraggableItem>();
 
         if (draggedItem.Item is HoldableItem)
         {
             DropProcess(draggedItem);
+
+            //remove from precedent list then add to the new one
         }
+    }
+
+    public sealed override void Remove(Item item)
+    {
+        ObjectGetterHelper.Inventory.Hotbars.Remove(item as HoldableItem);
+    }
+
+    public sealed override void Add(Item item)
+    {
+        ObjectGetterHelper.Inventory.Hotbars.Add(item as HoldableItem);
     }
 
 }

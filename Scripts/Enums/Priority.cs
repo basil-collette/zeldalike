@@ -1,4 +1,5 @@
-﻿public enum Priority
+﻿[System.Serializable]
+public enum Priority
 {
     hight = 3,
     medium = 2,

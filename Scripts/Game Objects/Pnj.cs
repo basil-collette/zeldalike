@@ -25,45 +25,28 @@ public class Pnj : Interacting
 
     public void Talk()
     {
-        var dialogueContainer = GetDialogue();
+        var dialogueContainer = GetWantToSay();
         dialogueManager.StartDialogue(dialogueContainer);
     }
 
-    DialogueReference GetDialogue()
+    public DialogueReference GetWantToSay()
     {
-        List<DialogueReference> dialogues = Dialogues.Dialogues.AsEnumerable()
-            .Where(x => !x.Conditions.Exists(condition => condition.Verify() == false)) // Il n'existe pas de condition dont verify() return false
-            .OrderBy(x => -(int)x.Priority)
-            .ToList();
+        IEnumerable<DialogueReference> dialogues = Dialogues.Dialogues.AsEnumerable()
+            .Where(x => !x.Conditions.Exists(condition => condition.Verify() == false))
+            .OrderBy(x => -(int)x.Priority);
 
-        if (dialogues.Count == 1)
+        if (dialogues.Count() == 1)
         {
             return dialogues.FirstOrDefault();
         }
 
-        int index = Random.Range(0, dialogues.Count);
-        return dialogues[index];
+        int index = Random.Range(0, dialogues.Count());
+        return dialogues.ElementAt(index);
     }
 
-    /*
-    bool HaveSaid()
+    public bool HaveSaid(string dialogueNameCode)
     {
-        return true;
+        return Dialogues.Dialogues.AsEnumerable().FirstOrDefault(x => x.NameCode == dialogueNameCode).IsSaid;
     }
 
-    bool HaveStartedQuest()
-    {
-        return true;
-    }
-
-    bool HaveEndedQuest()
-    {
-        return true;
-    }
-
-    bool HaveDo()
-    {
-        return true;
-    }
-    */
 }

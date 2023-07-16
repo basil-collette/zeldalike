@@ -9,13 +9,17 @@ namespace Assets.Database.Model.Design
     public class Item : BaseDbData
     {
         public int InventoryIndex;
-
-        public string SpriteName;
+        
         public float Weight;
         public string Description;
 
+        public string TypeName;
         public ItemTypeEnum ItemType;
+
+        public string SpriteName;
         public Sprite Sprite;
+
+        public string RarityName;
         public RarityEnum Rarity;
 
         public Item(IDataReader reader) : base(reader)
@@ -23,15 +27,26 @@ namespace Assets.Database.Model.Design
             SpriteName = reader["sprite_name"].ToString();
             Weight = float.Parse(reader["weight"].ToString());
             Description = reader["description"].ToString();
+            TypeName = reader["item_type"].ToString();
+            RarityName = reader["rarity_code"].ToString();
 
-            ItemType = (ItemTypeEnum)Enum.Parse(typeof(ItemTypeEnum), reader["item_type"].ToString());
-            Sprite = (SpriteName == null) ? null : Resources.Load<Sprite>($"Art/{SpriteName}");
-            Rarity = (RarityEnum)Enum.Parse(typeof(RarityEnum), reader["rarity_code"].ToString());
+            PostInstanciation();
+        }        
+
+        public static Item InstanciateFromJsonString(string json)
+        {
+            Item item = JsonUtility.FromJson<Item>(json);
+
+            item.PostInstanciation();
+
+            return item;
         }
 
-        public Item() : base()
+        protected void PostInstanciation()
         {
-            //Sprite = (SpriteName == null) ? null : Resources.Load<Sprite>($"Art/{SpriteName}");
+            ItemType = (ItemTypeEnum)Enum.Parse(typeof(ItemTypeEnum), TypeName);
+            Sprite = (SpriteName == null) ? null : Resources.Load<Sprite>($"Art/{SpriteName}");
+            Rarity = (RarityEnum)Enum.Parse(typeof(RarityEnum), RarityName);
         }
 
     }

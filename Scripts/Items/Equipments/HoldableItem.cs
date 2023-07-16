@@ -5,14 +5,24 @@ using UnityEngine;
 [System.Serializable]
 public class HoldableItem : Item
 {
+
     public HoldableItem(IDataReader reader) : base(reader)
     {
-        
+        PostInstanciation();
     }
 
-    public HoldableItem() : base()
+    public new static HoldableItem InstanciateFromJsonString(string json)
     {
+        HoldableItem holdableItem = JsonUtility.FromJson<HoldableItem>(json);
 
+        holdableItem.PostInstanciation();
+
+        return holdableItem;
+    }
+
+    protected new void PostInstanciation()
+    {
+        base.PostInstanciation();
     }
 
 }

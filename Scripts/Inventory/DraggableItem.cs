@@ -19,7 +19,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         (Color, Color) colors = GetColors();
         Background.color = colors.Item1;
         Shadow.color = colors.Item2;
-    }
+    } 
 
     (Color, Color) GetColors()
     {
@@ -42,6 +42,9 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnBeginDrag(PointerEventData eventData)
     {
         Slot = transform.parent;
+
+        Slot.GetComponent<InventorySlot>().Remove(Item);
+
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
         Background.raycastTarget = false;

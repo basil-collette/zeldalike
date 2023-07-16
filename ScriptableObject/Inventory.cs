@@ -1,3 +1,5 @@
+#nullable enable
+
 using Assets.Database.Model.Design;
 using Assets.Database.Model.Repository;
 using Assets.Scripts.Enums;
@@ -12,17 +14,12 @@ public class Inventory : ScriptableObject
     //OBJETS
     public static int MaxCountHotbar = 3;
     public static int maxCountItems = 12;
-    public Weapon Weapon;
+    public Weapon? Weapon;
     public List<HoldableItem> Hotbars = new List<HoldableItem>();
     public List<Item> Items = new List<Item>();
 
     public float maxWeight = 10f;
     public float currentWeight = 0;
-
-    void OnValidate()
-    {
-        //
-    }
 
     public void GetReward(Rewards reward)
     {
@@ -35,7 +32,10 @@ public class Inventory : ScriptableObject
                 case ItemTypeEnum.weapon:
                     AddItem(Singleton<WeaponRepository>.Instance.GetByCode(itemRef.ItemCode));
                     break;
-                //case ItemTypeEnum.holdable: break;
+
+                //case ItemTypeEnum.holdable:
+                    //break;
+
                 default:
                     AddItem(Singleton<ItemRepository<Item>>.Instance.GetByCode(itemRef.ItemCode));
                     break;

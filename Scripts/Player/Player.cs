@@ -1,3 +1,4 @@
+using Assets.Database.Model.Design;
 using Assets.Scripts.Items.Equipments.Weapons;
 using Assets.Scripts.Manager;
 using System;
@@ -23,6 +24,7 @@ public class Player : AliveEntity
 
     PlayerInput playerInputs;
     CooldownManager cooldownManager;
+    WeaponMonoBehaviour _weapon;
 
     new void Start()
     {
@@ -37,20 +39,9 @@ public class Player : AliveEntity
 
         SetState(EntityState.walk);
 
-        if (inventory.Weapon != null)
+        if (inventory.Weapon != null && inventory.Weapon.Id != 0)
         {
-            WeaponMonoBehaviour weaponMonobehaviour = Resources.Load<WeaponMonoBehaviour>($"Prefabs/Weapons/{inventory.Weapon.weaponType}");
-            weaponMonobehaviour.weapon = inventory.Weapon;
-            WeaponMonoBehaviour weapon = Instantiate(weaponMonobehaviour, transform.position, Quaternion.identity);
-            weapon.transform.parent = gameObject.transform;
-            weapon.GetComponentInChildren<TriggerHit>(true).attackerTag = "Player";
-
-            var attackJoystickImage = FindGameObjectHelper.FindByName("WeaponSprite")?.GetComponent<Image>();
-            if (attackJoystickImage != null)
-            {
-                attackJoystickImage.sprite = weaponMonobehaviour.weapon.Sprite;
-                attackJoystickImage.preserveAspect = true;
-            }
+            EquipWeapon(inventory.Weapon);
         }
 
         Health.OnDeath += (string[] deathParams) =>
@@ -108,6 +99,29 @@ public class Player : AliveEntity
             SetState(EntityState.walk);
             SetOrientation();
         }
+    }
+
+    public void EquipWeapon(Weapon weapon)
+    {
+        WeaponMonoBehaviour weaponMonobehaviour = Resources.Load<WeaponMonoBehaviour>($"Prefabs/Weapons/{weapon.weaponType}");
+        weaponMonobehaviour.weapon = weapon;
+        WeaponMonoBehaviour weaponMonoBehaviour = Instantiate(weaponMonobehaviour, transform.position, Quaternion.identity);
+        weaponMonoBehaviour.transform.parent = gameObject.transform;
+        weaponMonoBehaviour.GetComponentInChildren<TriggerHit>(true).attackerTag = "Player";
+
+        var attackJoystickImage = FindGameObjectHelper.FindByName("WeaponSprite")?.GetComponent<Image>();
+        if (attackJoystickImage != null)
+        {
+            attackJoystickImage.sprite = weaponMonobehaviour.weapon.Sprite;
+            attackJoystickImage.preserveAspect = true;
+        }
+
+        _weapon = weaponMonoBehaviour;
+    }
+
+    public void UnequipWeapon()
+    {
+        Destroy(_weapon);
     }
 
     new void FixedUpdate()

@@ -47,7 +47,7 @@ public class InventoryManager : SignletonGameObject<InventoryManager>
             hotbarItem.Image.preserveAspect = true;
         }
 
-        if (Inventory.Weapon == null) return;
+        if (Inventory.Weapon == null || Inventory.Weapon.Id == 0) return;
         DraggableItem weapon = Instantiate(DraggableItemPrefab, transform.position, Quaternion.identity);
         Vector3 weaponScale = weapon.transform.localScale;
         weapon.transform.SetParent(HoldedSlot.transform);

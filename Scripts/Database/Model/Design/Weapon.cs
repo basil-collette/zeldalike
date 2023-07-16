@@ -1,34 +1,40 @@
 using Assets.Scripts.Enums;
-using Assets.Scripts.Manager;
 using System;
 using System.Data;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Assets.Database.Model.Design
 {
     [Serializable]
     public class Weapon : Item
     {
-        public Animator anim;
+        public string WeaponTypeName;
         public WeaponTypeEnum weaponType;
         public float attackDelay = 1;
         public float speed = 1; //1 is the animator normal speed
 
-        bool attacking;
-        PlayerInput playerInputs;
-        CooldownManager cooldownManager;
-
         public Weapon(IDataReader reader) : base(reader)
         {
-            weaponType = (WeaponTypeEnum)Enum.Parse(typeof(WeaponTypeEnum), reader["weapon_type"].ToString());
+            WeaponTypeName = reader["weapon_type"].ToString();
             attackDelay = float.Parse(reader["attack_delay"].ToString());
             speed = float.Parse(reader["speed"].ToString());
+
+            PostInstanciation();
         }
 
-        public Weapon() : base()
+        public static new Weapon InstanciateFromJsonString(string json)
         {
-            //Sprite = (SpriteName == null) ? null : Resources.Load<Sprite>($"Art/{SpriteName}");
+            Weapon weapon = JsonUtility.FromJson<Weapon>(json);
+
+            weapon.PostInstanciation();
+
+            return weapon;
+        }
+
+        protected new void PostInstanciation()
+        {
+            base.PostInstanciation();
+            weaponType = (WeaponTypeEnum)Enum.Parse(typeof(WeaponTypeEnum), WeaponTypeName);
         }
 
     }

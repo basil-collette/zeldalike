@@ -1,5 +1,6 @@
 ﻿using Assets.Database.Model.Design;
 using Assets.Database.Model.Repository;
+using Assets.Scripts.Enums;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -67,15 +68,34 @@ public class SaveManager : SignletonGameObject<SaveManager>
     {
         Player player = FindGameObjectHelper.FindByName("Player").GetComponent<Player>();
 
+        PNJDialogues[] dialogues = Resources.LoadAll<PNJDialogues>(Path.Combine(Application.dataPath, "/Resources/PNJ Dialogues"));
+        Dictionary<string, Dictionary<string, bool>> dialoguesStates = new Dictionary<string, Dictionary<string, bool>>();
+        foreach (PNJDialogues current in dialogues)
+        {
+            var dictionaryDialogues = new Dictionary<string, bool>();
+            foreach (DialogueReference dialogueRef in current.Dialogues)
+            {
+                dictionaryDialogues.Add(dialogueRef.NameCode, dialogueRef.IsSaid);
+            }
+
+            dialoguesStates.Add(current.name, dictionaryDialogues);
+        }
+
         return new GameData() {
             saveName = GameData.saveName,
+
             sceneName = FindAnyObjectByType<ScenesManager>()._currentScene,
+            position = FindGameObjectHelper.FindByName("Player").transform.position,
 
             playerHealth = player.GetComponent<Health>().health.RuntimeValue,
 
             inventoryItems = player.inventory.Items.AsEnumerable().Select(x => JsonUtility.ToJson(x)).ToList(),
             inventoryHotbars = player.inventory.Hotbars.AsEnumerable().Select(x => JsonUtility.ToJson(x)).ToList(),
-            inventoryWeapon = JsonUtility.ToJson(player.inventory.Weapon)
+            inventoryWeapon = (player.inventory.Weapon == null || player.inventory.Weapon.Id == 0) ? null : JsonUtility.ToJson(player.inventory.Weapon),
+
+            opennedChestGuids = GameData.opennedChestGuids,
+
+            dialoguesStates = JsonUtility.ToJson(dialoguesStates)
         };
     }
 
@@ -84,8 +104,9 @@ public class SaveManager : SignletonGameObject<SaveManager>
         Weapon sword = Singleton<WeaponRepository>.Instance.GetByCode("sword");
 
         GameData gameData = new GameData() {
-            sceneName = StartScene.libelle,
             saveName = _saveName,
+            sceneName = StartScene.libelle,
+            position = new Vector3(-2.3f, 1.75f, 0),
             inventoryItems = new List<string>(),
             inventoryHotbars = new List<string>(),
             inventoryWeapon = JsonUtility.ToJson(sword),
@@ -104,14 +125,39 @@ public class SaveManager : SignletonGameObject<SaveManager>
         //PLAYER
         Resources.Load<FloatValue>("ScriptableObjects/Player/Health/PlayerHealth").RuntimeValue = GameData.playerHealth;
         //Resources.Load<FloatValue>("ScriptableObjects/Player/position/PlayerPosition").RuntimeValue = currentScene.pos;
-
+        Resources.Load<VectorValue>("ScriptableObjects/Player/position/PlayerPosition").initalValue = GameData.position;
+        
         //INVENTORY
         Inventory inventory = Resources.Load<Inventory>("ScriptableObjects/Player/Inventory/Inventory");
-        inventory.Items = GameData.inventoryItems.Select(x => JsonUtility.FromJson<Item>(x)).ToList();
-        inventory.Hotbars = GameData.inventoryHotbars.Select(x => JsonUtility.FromJson<HoldableItem>(x)).ToList();
-        inventory.Weapon = JsonUtility.FromJson<Weapon>(GameData.inventoryWeapon);
+        inventory.Items = GameData.inventoryItems.Select(x => GetSerializedItem(x)).ToList();
+        inventory.Hotbars = GameData.inventoryHotbars.Select(x => GetSerializedItem(x) as HoldableItem).ToList();
+        inventory.Weapon = (GameData.inventoryWeapon == null || GameData.inventoryWeapon == string.Empty) ? null : GetSerializedItem(GameData.inventoryWeapon) as Weapon;
 
         //questlog
+
+        //Set dialogues states of PNJs
+        //JsonUtility.FromJson<Dictionary<string, Dictionary<string, bool>>>(json);
+
+        //coffres ouverts:
+        //gardé en mémoire dans GameData
+    }
+
+    Item GetSerializedItem(string json)
+    {
+        Item item = Item.InstanciateFromJsonString(json);
+
+        switch (item.ItemType)
+        {
+            case ItemTypeEnum.holdable:
+                return HoldableItem.InstanciateFromJsonString(json);
+
+            case ItemTypeEnum.weapon:
+                return Weapon.InstanciateFromJsonString(json);
+            
+            case ItemTypeEnum.item:
+            default:
+                return item;
+        }
     }
 
 }

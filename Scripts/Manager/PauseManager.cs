@@ -3,14 +3,14 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseManager : SignletonGameObject<PauseManager>
 {
     static bool IsPaused = false;
 
     public GameObject controlsCanva;
-    public GameObject blackOverlay;
-    public GameObject transparentOverlay;
+    public GameObject overlay;
     public GameObject MenuOverlay;
 
     string loadedSceneName;
@@ -46,8 +46,7 @@ public class PauseManager : SignletonGameObject<PauseManager>
                 IsPaused = false;
                 Time.timeScale = 1f;
 
-                blackOverlay.SetActive(false);
-                transparentOverlay.SetActive(false);
+                overlay.SetActive(false);
                 controlsCanva.SetActive(true);
 
                 SoundManager soundManager = GetComponentInChildren<SoundManager>();
@@ -57,6 +56,8 @@ public class PauseManager : SignletonGameObject<PauseManager>
                 MenuOverlay.SetActive(false);
 
                 AfterResume?.Invoke();
+
+                //Input.ResetInputAxes();
             };
 
             StartCoroutine(UnloadPauseSceneCo(OnUnloadPauseSceneEnd));
@@ -68,24 +69,15 @@ public class PauseManager : SignletonGameObject<PauseManager>
         IsPaused = true;
         Time.timeScale = 0f;
 
-        if (transparent == false)
-        {
-            blackOverlay.SetActive(true);
-            MenuOverlay.SetActive(loadedSceneName != "DialogueScene");
+        overlay.SetActive(true);
 
-            SoundManager soundManager = GetComponentInChildren<SoundManager>();
-            soundManager.musicSource.Stop();
-            soundManager.PlayEffect("pause_enter");
-        }
-        else
-        {
-            transparentOverlay.SetActive(true);
-            controlsCanva.SetActive(false);
+        overlay.GetComponent<Image>().color = (transparent) ? new Color(0, 0, 0, 0) : new Color(0, 0, 0, 0.4f);
 
-            SoundManager soundManager = GetComponentInChildren<SoundManager>();
-            soundManager.musicSource.Stop();
-            //soundManager.PlayEffect("pause_enter"); play info sound ?
-        }
+        MenuOverlay.SetActive(!transparent);
+
+        SoundManager soundManager = GetComponentInChildren<SoundManager>();
+        soundManager.musicSource.Stop();
+        soundManager.PlayEffect("pause_enter");
     }
 
     public void ShowPausedInterface(string interfaceName)
@@ -94,7 +86,8 @@ public class PauseManager : SignletonGameObject<PauseManager>
     }
     public void ShowPausedInterface(string interfaceName, Action OnPauseProcessed, bool transparentOverlay = false)
     {
-        if (interfaceName == loadedSceneName) return;
+        if (interfaceName == loadedSceneName)
+            return;
 
         loadedSceneName = interfaceName;
 
@@ -106,7 +99,8 @@ public class PauseManager : SignletonGameObject<PauseManager>
 
     public void SwitchPausedInterface(string interfaceName)
     {
-        if (interfaceName == loadedSceneName) return;
+        if (interfaceName == loadedSceneName)
+            return;
 
         loadedSceneName = interfaceName;
 

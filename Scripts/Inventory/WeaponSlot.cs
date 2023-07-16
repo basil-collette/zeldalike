@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 public class WeaponSlot : InventorySlot
 {
-    public new void OnDrop(PointerEventData eventData)
+    public sealed override void OnDrop(PointerEventData eventData)
     {
         DraggableItem draggedItem = eventData.pointerDrag.GetComponent<DraggableItem>();
 
@@ -11,6 +11,19 @@ public class WeaponSlot : InventorySlot
         {
             DropProcess(draggedItem);
         }
+    }
+
+    public sealed override void Remove(Item item)
+    {
+        ObjectGetterHelper.Inventory.Weapon = null;
+        FindGameObjectHelper.FindByName("Player").GetComponent<Player>().UnequipWeapon();
+    }
+
+    public sealed override void Add(Item item)
+    {
+        Weapon weapon = item as Weapon;
+        ObjectGetterHelper.Inventory.Weapon = weapon;
+        FindGameObjectHelper.FindByName("Player").GetComponent<Player>().EquipWeapon(weapon);
     }
 
 }

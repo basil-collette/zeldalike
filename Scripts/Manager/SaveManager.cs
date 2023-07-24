@@ -66,36 +66,36 @@ public class SaveManager : SignletonGameObject<SaveManager>
 
     public GameData GetGameDataFromRunning()
     {
-        Player player = FindGameObjectHelper.FindByName("Player").GetComponent<Player>();
+        Player player = FindAnyObjectByType<Player>();
 
-        PNJDialogues[] dialogues = Resources.LoadAll<PNJDialogues>(Path.Combine(Application.dataPath, "/Resources/PNJ Dialogues"));
-        Dictionary<string, Dictionary<string, bool>> dialoguesStates = new Dictionary<string, Dictionary<string, bool>>();
-        foreach (PNJDialogues current in dialogues)
+        PNJDialogues[] dialogues = Resources.LoadAll<PNJDialogues>("ScriptableObjects/Dialogues/PNJ Dialogues/");
+        SerializableDic<string, SerializableDic<string, bool>> dialoguesStates = new SerializableDic<string, SerializableDic<string, bool>>()
         {
-            var dictionaryDialogues = new Dictionary<string, bool>();
-            foreach (DialogueReference dialogueRef in current.Dialogues)
+            keys = dialogues.Select(x => x.name).ToList(),
+            values = dialogues.Select(x => new SerializableDic<string, bool>()
             {
-                dictionaryDialogues.Add(dialogueRef.NameCode, dialogueRef.IsSaid);
-            }
-
-            dialoguesStates.Add(current.name, dictionaryDialogues);
-        }
+                keys = x.Dialogues.Select(y => y.NameCode).ToList(),
+                values = x.Dialogues.Select(y => y.IsSaid).ToList()
+            }).ToList()
+        };
 
         return new GameData() {
             saveName = GameData.saveName,
 
             sceneName = FindAnyObjectByType<ScenesManager>()._currentScene,
-            position = FindGameObjectHelper.FindByName("Player").transform.position,
+            position = player.transform.position,
 
             playerHealth = player.GetComponent<Health>().health.RuntimeValue,
 
-            inventoryItems = player.inventory.Items.AsEnumerable().Select(x => JsonUtility.ToJson(x)).ToList(),
-            inventoryHotbars = player.inventory.Hotbars.AsEnumerable().Select(x => JsonUtility.ToJson(x)).ToList(),
+            inventoryItems = player.inventory.Items.Select(x => JsonUtility.ToJson(x)).ToList(),
+            inventoryHotbars = player.inventory.Hotbars.Select(x => JsonUtility.ToJson(x)).ToList(),
             inventoryWeapon = (player.inventory.Weapon == null || player.inventory.Weapon.Id == 0) ? null : JsonUtility.ToJson(player.inventory.Weapon),
 
             opennedChestGuids = GameData.opennedChestGuids,
 
-            dialoguesStates = JsonUtility.ToJson(dialoguesStates)
+            dialoguesStates = JsonUtility.ToJson(dialoguesStates),
+
+            quests = player.playerQuest.PlayerQuests.Select(x => JsonUtility.ToJson(x)).ToList()
         };
     }
 
@@ -133,12 +133,26 @@ public class SaveManager : SignletonGameObject<SaveManager>
         inventory.Hotbars = GameData.inventoryHotbars.Select(x => GetSerializedItem(x) as HoldableItem).ToList();
         inventory.Weapon = (GameData.inventoryWeapon == null || GameData.inventoryWeapon == string.Empty) ? null : GetSerializedItem(GameData.inventoryWeapon) as Weapon;
 
-        //questlog
+        //DIALOGUES STATES
+        /*
+        SerializableDic<string, SerializableDic<string, bool>> dialoguesStates = JsonUtility.FromJson<SerializableDic<string, SerializableDic<string, bool>>>(GameData.dialoguesStates);
+        PNJDialogues[] dialogues = Resources.LoadAll<PNJDialogues>("ScriptableObjects/Dialogues/PNJ Dialogues/");
+        foreach (PNJDialogues current in dialogues)
+        {
+            foreach (DialogueReference dialogueRef in current.Dialogues)
+            {
+                dialogueRef.IsSaid = (dialoguesStates.GetValueOrDefault(current.name) != null) ? dialoguesStates.GetValueOrDefault(current.name).GetValueOrDefault(dialogueRef.NameCode) : false;
+            }
+        }
+        */
 
-        //Set dialogues states of PNJs
-        //JsonUtility.FromJson<Dictionary<string, Dictionary<string, bool>>>(json);
+        //QUESTS
+        PlayerQuest playerQuest = Resources.Load<PlayerQuest>("ScriptableObjects/Player/Quest/PlayerQuest");
+        for (int i = 0; i < Mathf.Min(playerQuest.PlayerQuests.Count, GameData.quests.Count); i++) {
+            JsonUtility.FromJsonOverwrite(GameData.quests[i], playerQuest.PlayerQuests[i]);
+        }
 
-        //coffres ouverts:
+        //COFFRES
         //gardé en mémoire dans GameData
     }
 

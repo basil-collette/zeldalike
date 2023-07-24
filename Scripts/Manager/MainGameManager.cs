@@ -1,7 +1,7 @@
 using Assets.Scripts.Manager;
-using System;
 using UnityEngine;
-using UnityEngine.Windows;
+using System.IO;
+using Mono.Data.Sqlite;
 
 public class MainGameManager : SignletonGameObject<MainGameManager>
 {
@@ -13,9 +13,9 @@ public class MainGameManager : SignletonGameObject<MainGameManager>
     void Start()
     {
         InitLocalDataFolder();
-        
+
         InitBDD();
-        
+
         InitSave();
 
         ScenesManager scenesManager = GetComponent<ScenesManager>();
@@ -38,6 +38,9 @@ public class MainGameManager : SignletonGameObject<MainGameManager>
 
     void InitBDD()
     {
+        if (!DbExists())
+            resetBDD = true;
+
         if (resetBDD)
         {
             DatabaseHelper.ResetTables();
@@ -52,6 +55,23 @@ public class MainGameManager : SignletonGameObject<MainGameManager>
         {
             saveManager.CreateNewSave("main");
         }
+    }
+
+    bool DbExists()
+    {
+        using (SqliteConnection connexion = DatabaseHelper.GetConnexion())
+        {
+            string query = "SELECT name FROM sqlite_master WHERE type='table' AND (name='item' OR name='weapon');";
+            var command = new SqliteCommand(query, connexion);
+            command.ExecuteNonQuery();
+            var result = command.ExecuteReader();
+            if (result.HasRows)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void StartGame()

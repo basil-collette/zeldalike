@@ -21,6 +21,7 @@ public class Player : AliveEntity
     public float dashSpeed = 20;
     public float dashDuration = 0.2f;
     public float dashCooldown = 3f;
+    public GameObject rollSmokeEffect;
 
     PlayerInput playerInputs;
     CooldownManager cooldownManager;
@@ -44,10 +45,10 @@ public class Player : AliveEntity
             EquipWeapon(inventory.Weapon);
         }
 
-        Health.OnDeath += (string[] deathParams) =>
+        GetComponent<Health>().InstanceOnDeath += (string[] deathParams) =>
         {
-            Debug.Log("dead");
             //respawn au startPos de la scene en cours
+            //get la pos de debut de la scene
         };
     }
 
@@ -183,11 +184,24 @@ public class Player : AliveEntity
 
         if (cooldownManager.IsAvailable("dashCooldown"))
         {
+            animator.SetTrigger("roll");
+
+            Coroutine rollEffectCoroutine = StartCoroutine(DashEffectCo());
+
             Action OnLoop = () => { /* CreateDashEffect() */ };
-            Action OnEnd = () => { SetState(EntityState.walk); };
+            Action OnEnd = () => { SetState(EntityState.walk); StopCoroutine(rollEffectCoroutine); };
 
             cooldownManager.StartCooldown("dashDuration", dashDuration, OnLoop, OnEnd);
             cooldownManager.StartCooldown("dashCooldown", dashCooldown);
+        }
+    }
+
+    IEnumerator DashEffectCo()
+    {
+        while(true)
+        {
+            CreateDashEffect();
+            yield return new WaitForSecondsRealtime(0.1f);
         }
     }
 
@@ -213,11 +227,7 @@ public class Player : AliveEntity
 
     void CreateDashEffect()
     {
-        /*
-        Transform dashTransform = Instantiate(GameAssets.i.pfDashEffect, dashPosition, Quaternion.identity);
-        dashTransform.localEulerAngles = new Vector3(0, 0, UtilsClass.getAngleFromVector(direction));
-        dashTransform.localScale = new Vector3(dashSize / 35f, 1, 1);
-        */
+        Instantiate(rollSmokeEffect, transform.position, Quaternion.identity);
     }
 
     public void RaiseItem()
@@ -231,28 +241,5 @@ public class Player : AliveEntity
         animator.SetBool("receivingItem", false);
         SetState(EntityState.walk);
     }
-
-    /*
-    void Teleport()
-    {
-        bool isDashButtonDown = false;
-        if (isDashButtonDown)
-        {
-            float dashAmount = 50f;
-            Vector3 dashPosition = transform.position + orientation * dashAmount;
-
-            RaycastHit2D raycast = Physics2D.Raycast(transform.position, direction, dashAmount);
-            if (raycast.collider != null)
-            {
-                dashPosition = raycast.point;
-            }
-
-            GetComponent<Rigidbody2D>().MovePosition(dashPosition);
-            isDashButtonDown = false;
-
-            CreateDashEffect(dashPosition, Vector2.Distance(GetComponent<Rigidbody2D>().position, dashPosition));
-        }
-    }
-    */
 
 }

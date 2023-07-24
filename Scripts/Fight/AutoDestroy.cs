@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DeathEffect : MonoBehaviour
+public class AutoDestroy : MonoBehaviour
 {
 
     public void Destroy()

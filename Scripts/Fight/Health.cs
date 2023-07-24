@@ -7,6 +7,7 @@ using UnityEngine;
 public class Health : Hitable
 {
     public static event Action<string[]> OnDeath;
+    public event Action<string[]> InstanceOnDeath;
 
     public FloatValue health;
     public Signal healthSignal;
@@ -14,7 +15,7 @@ public class Health : Hitable
     public List<EffectModificator> effectMods = new List<EffectModificator>();
     public List<Effect> effects;
     public List<Effect> timedEffects;
-    protected GameObject deathEffect;
+    public GameObject deathEffect;
     protected AudioClip deathSound;
 
     public override void Hit(GameObject attacker, List<Effect> hit, string attackerTag)

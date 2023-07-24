@@ -21,16 +21,17 @@ MonoBehaviour:
     IsCompleted: 0
     Rewards:
       Money: 0
-      Xp: 20
+      Experience: 0
       ItemsRef:
-      - ItemName: key
+      - ItemCode: key
         Amount: 2
+        itemType: 0
   - Goals:
     - rid: 5272711918093598741
     IsCompleted: 0
     Rewards:
       Money: 0
-      Xp: 30
+      Experience: 0
       ItemsRef: []
   references:
     version: 2

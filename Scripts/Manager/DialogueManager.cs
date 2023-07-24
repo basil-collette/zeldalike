@@ -19,7 +19,7 @@ public class DialogueManager : SignletonGameObject<DialogueManager>
         {
             BaseNodeData node = GraphHelper.GetFirstNode(_dialogueRef.DialogueContainer);
             NextNode(node);
-        });
+        }, true);
     }
 
     void NextNode(BaseNodeData node)
@@ -105,6 +105,7 @@ public class DialogueManager : SignletonGameObject<DialogueManager>
         }
         else
         {
+            _dialogueRef.IsSaid = true;
             pauseManager.Resume();
         }
     }

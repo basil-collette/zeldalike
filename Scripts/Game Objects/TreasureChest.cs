@@ -13,15 +13,12 @@ public class TreasureChest : NorthApproachingInteractable
     public Inventory inventory;
     public bool isOpen;
     public string itemNameCode;
+    public string Uid;
 
     GameObject receivedItemContext;
-    Guid Uid;
 
     void Start()
     {
-        if (Uid == null)
-            Uid = Guid.NewGuid();
-
         if (FindAnyObjectByType<SaveManager>().GameData.opennedChestGuids.Contains(Uid.ToString()))
         {
             GetComponent<Animator>().SetBool("open", true);

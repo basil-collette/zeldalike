@@ -19,7 +19,5 @@ public class GameData
 
     public string dialoguesStates;
 
-    //questlog
-
-    //pnjs dialogues states
+    public List<string> quests;
 }

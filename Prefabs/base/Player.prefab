@@ -252,6 +252,7 @@ MonoBehaviour:
   dashSpeed: 20
   dashDuration: 0.2
   dashCooldown: 0.7
+  rollSmokeEffect: {fileID: 4283853020777935570, guid: b2369b6f3c9dbc8469a715195a499f32, type: 3}
 --- !u!114 &5620636059707414399
 MonoBehaviour:
   m_ObjectHideFlags: 0

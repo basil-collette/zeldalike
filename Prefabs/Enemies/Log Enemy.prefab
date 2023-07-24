@@ -236,7 +236,7 @@ MonoBehaviour:
   effects:
   - rid: 9018936576273285120
   - rid: 9018936576273285121
-  rigidBody: {fileID: 1776859290621372574}
+  attackerTag: 
   references:
     version: 2
     RefIds:
@@ -266,6 +266,7 @@ MonoBehaviour:
   hitSound: {fileID: 8300000, guid: 7c47b20bb9874304a809dc5580d403ba, type: 3}
   health: {fileID: 0}
   healthSignal: {fileID: 0}
+  OnDeathParam: []
   effectMods:
   - effectType: 7
     mod: 2
@@ -274,7 +275,6 @@ MonoBehaviour:
   effects: []
   timedEffects: []
   deathEffect: {fileID: 4283853020777935570, guid: 24204c8ff3fb1394f868689e930f7d86, type: 3}
-  deathSound: {fileID: 8300000, guid: 79e6baad2fd414b82a6d49ce1568d2e5, type: 3}
 --- !u!114 &1776859290621372645
 MonoBehaviour:
   m_ObjectHideFlags: 0

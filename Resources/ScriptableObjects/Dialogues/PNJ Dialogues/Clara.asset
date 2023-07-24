@@ -18,6 +18,17 @@ MonoBehaviour:
     Conditions: []
     Priority: 1
     IsSaid: 1
+  - NameCode: deux
+    DialogueContainer: {fileID: 11400000, guid: 3697636beab278c49b355b642a7b888f, type: 2}
+    Conditions:
+    - rid: 3379738592604061696
+    Priority: 2
+    IsSaid: 0
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3379738592604061696
+      type: {class: DialogueConditionHaveTalk, ns: , asm: Assembly-CSharp}
+      data:
+        TargetCode: default
+        PNJName: Clara

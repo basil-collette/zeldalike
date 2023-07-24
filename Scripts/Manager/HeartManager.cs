@@ -19,7 +19,7 @@ public class HeartManager : SignletonGameObject<HeartManager>
 
     public void InitHearts()
     {
-        for (int i = 0; i < playerHealth.initialValue; i++)
+        for (int i = 0; i < playerHealth.RuntimeValue; i++)
         {
             hearts[i].gameObject.SetActive(true);
             hearts[i].sprite = fullHeart;

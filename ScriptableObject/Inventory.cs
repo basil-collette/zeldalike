@@ -23,8 +23,11 @@ public class Inventory : ScriptableObject
 
     public void GetReward(Rewards reward)
     {
-        Money += reward.Money;
-        Experience += reward.Experience;
+        if (reward.Money != null) Money += reward.Money;
+
+        if (reward.Experience != null) Experience += reward.Experience;
+
+        if (reward.ItemsRef == null) return;
         foreach (ItemRef itemRef in reward.ItemsRef)
         {
             switch (itemRef.itemType)
@@ -33,11 +36,11 @@ public class Inventory : ScriptableObject
                     AddItem(Singleton<WeaponRepository>.Instance.GetByCode(itemRef.ItemCode));
                     break;
 
-                //case ItemTypeEnum.holdable:
-                    //break;
+                case ItemTypeEnum.item:
+                    AddItem(Singleton<ItemRepository<Item>>.Instance.GetByCode(itemRef.ItemCode));
+                    break;
 
                 default:
-                    AddItem(Singleton<ItemRepository<Item>>.Instance.GetByCode(itemRef.ItemCode));
                     break;
             }
         }

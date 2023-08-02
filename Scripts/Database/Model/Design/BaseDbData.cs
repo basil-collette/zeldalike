@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data;
-using UnityEngine;
 
 namespace Assets.Database.Model.Design
 {

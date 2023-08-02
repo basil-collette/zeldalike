@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pot : Hitable
+public class OneShotHitable : Hitable
 {
     List<EffectEnum> effectTypeTriggerable = new List<EffectEnum>() {
         EffectEnum.neutral,
@@ -18,7 +17,7 @@ public class Pot : Hitable
         {
             if (hit.Exists(effect => effectTypeTriggerable.Contains(effect.effectType)))
             {
-                StartCoroutine(breackCo());
+                Die();
                 return;
             }
         }
@@ -27,19 +26,6 @@ public class Pot : Hitable
     public override void Effect(Vector3 attackerPos, Effect effect)
     {
         //nothing, intentionnaly
-    }
-
-    IEnumerator breackCo()
-    {
-        Animator anim = GetComponent<Animator>();
-
-        anim.SetBool("active", true);
-
-        yield return new WaitForSeconds(0.3f);
-
-        anim.SetBool("active", false);
-
-        this.gameObject.SetActive(false);
     }
 
 }

@@ -266,6 +266,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  lootTable: {fileID: 0}
+  deathEffect: {fileID: 0}
   health: {fileID: 11400000, guid: 7a4b7ca3f9ae54c4896657d98f3264b1, type: 2}
   healthSignal: {fileID: 11400000, guid: 4010a70832e8d3a4da0fe997c30f6daf, type: 2}
   OnDeathParam: []

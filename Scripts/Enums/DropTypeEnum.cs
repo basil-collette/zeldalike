@@ -1,12 +1,15 @@
 ﻿namespace Assets.Scripts.Enums
 {
     [System.Serializable]
-    public enum ItemTypeEnum
+    public enum DropTypeEnum
     {
         item,
         consommable,
         holdable,
         weapon,
-        quest
+        quest,
+        heart,
+        money,
+        experience
     }
 }

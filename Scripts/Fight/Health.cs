@@ -15,8 +15,6 @@ public class Health : Hitable
     public List<EffectModificator> effectMods = new List<EffectModificator>();
     public List<Effect> effects;
     public List<Effect> timedEffects;
-    public GameObject deathEffect;
-    protected AudioClip deathSound;
 
     public override void Hit(GameObject attacker, List<Effect> hit, string attackerTag)
     {
@@ -97,6 +95,28 @@ public class Health : Hitable
         CheckDeath();
     }
 
+    public void Heal(float healAmount)
+    {
+        health.RuntimeValue += healAmount;
+
+        health.RuntimeValue = Mathf.Min(health.RuntimeValue, health.initialValue);
+
+        //heal sound
+        /*
+        var audioSource = GetComponent<AudioSource>();
+        if (audioSource != null && hitSound != null)
+        {
+            audioSource.clip = hitSound;
+            audioSource.Play();
+        }
+        */
+
+        if (healthSignal != null)
+        {
+            healthSignal.Raise();
+        }
+    }
+
     protected virtual void CheckDeath()
     {
         if (this.health.RuntimeValue <= 0)
@@ -105,18 +125,14 @@ public class Health : Hitable
         }
     }
 
-    protected virtual void Die()
+    public override sealed void Die()
     {
         //Ask the sound helper to play cause this audioSource is destroyed
         //deathSound
 
         OnDeath?.Invoke(OnDeathParam);
 
-        if (deathEffect != null)
-            Instantiate(deathEffect, transform.position, Quaternion.identity);
-
-        this.gameObject.SetActive(false);
-        Destroy(this.gameObject);
+        base.Die();
     }
 
     // EFFECT PROCESS _________________________________________________________________ EFFECT PROCESS

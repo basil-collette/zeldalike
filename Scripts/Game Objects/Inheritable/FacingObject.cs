@@ -8,7 +8,7 @@ public abstract class FacingObject : MonoBehaviour
     protected bool playerInRange;
     protected bool isFacing = false;
 
-    protected void FixedUpdate()
+    protected void Update()
     {
         if (isFacing
             && playerInRange)

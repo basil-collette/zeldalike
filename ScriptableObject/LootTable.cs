@@ -34,13 +34,6 @@ public class LootTable : ScriptableObject, ISerializationCallbackReceiver
 
         int dropAmount = dropAmountLevels.keys.ElementAt(traveledIndex);
 
-        /*
-        if (dropAmount == dropAmountLevels.keys.Max(x => x))
-        {
-            return loots.ToList();
-        }
-        */
-
         List<Loot> lootsResult = new List<Loot>();
 
         List<Loot> tempLoots = loots.ToList();

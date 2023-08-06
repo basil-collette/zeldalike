@@ -12,7 +12,7 @@ public class TriggerHit : Hit
     {
         Hitable hitableCollider = collider.GetComponent<Hitable>();
 
-        if (hitableCollider != null)
+        if (hitableCollider != null && hitableCollider.enabled)
         {
             base.OnHit(hitableCollider);
         }

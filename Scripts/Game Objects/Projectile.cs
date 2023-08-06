@@ -27,12 +27,12 @@ public class Projectile : TriggerHit
 
         Hitable hitableCollider = collider.GetComponent<Hitable>();
 
-        if (hitableCollider != null)
+        if (hitableCollider != null && hitableCollider.enabled)
         {
             base.OnHit(hitableCollider);
-        }
 
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
     }
 
     protected virtual void OnTriggerExit2D(Collider2D collider)

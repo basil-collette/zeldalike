@@ -200,6 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effects:
   - rid: 493816681571287040
+  attackerTag: bean seed
   speed: 8
   aliveMaxDuration: 5
   direction: {x: 0, y: 0, z: 0}

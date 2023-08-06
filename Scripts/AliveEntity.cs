@@ -1,3 +1,5 @@
+using Assets.Scripts.Enums;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class AliveEntity : Entity
@@ -5,7 +7,9 @@ public abstract class AliveEntity : Entity
     public EntityState currentEntityState;
     public float moveSpeed = 1;
     public float nearRadius = 1;
+    public List<SenseEnum> imperceptibles;
 
+    [HideInInspector] public bool attacking;
     [HideInInspector] public Vector3 direction;
     [HideInInspector] public Vector3 orientation;
     protected Animator animator;

@@ -22,7 +22,6 @@ public class MainGameManager : SignletonGameObject<MainGameManager>
         scenesManager.ClearScenes();
         scenesManager.AdditiveLoadScene(firstLoadedScene.libelle, () => {
             scenesManager.SetCurrentScene(firstLoadedScene.libelle);
-            //Set Player pos ?
         });
     }
 
@@ -50,6 +49,12 @@ public class MainGameManager : SignletonGameObject<MainGameManager>
 
     void InitSave()
     {
+        var savePath = Path.Combine(Application.persistentDataPath, "Save");
+        if (!Directory.Exists(savePath))
+        {
+            Directory.CreateDirectory(savePath);
+        }
+
         SaveManager saveManager = GetComponent<SaveManager>();
         if (saveManager.GetSaveNames().Count == 0)
         {

@@ -1,6 +1,7 @@
 ﻿using Assets.Database.Model.Design;
 using Assets.Database.Model.Repository;
 using Assets.Scripts.Enums;
+using Assets.Scripts.Manager;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,8 +10,8 @@ public abstract class Hitable : Effectable
 {
     public AudioClip hitSound;
     public AudioClip deathSound;
-    public LootTable lootTable;
     public GameObject deathEffect;
+    public LootTable lootTable;    
 
     public abstract void Hit(GameObject attacker, List<Effect> hit, string attackerTag);
 
@@ -21,6 +22,9 @@ public abstract class Hitable : Effectable
 
         if (lootTable != null)
             Drop();
+
+        if (deathSound != null)
+            FindGameObjectHelper.FindByName("Main Sound Manager").GetComponent<SoundManager>().PlayEffect(deathSound);
 
         this.gameObject.SetActive(false);
         Destroy(this.gameObject);

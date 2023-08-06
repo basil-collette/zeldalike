@@ -16,6 +16,11 @@ public class Health : Hitable
     public List<Effect> effects;
     public List<Effect> timedEffects;
 
+    private void Start()
+    {
+        
+    }
+
     public override void Hit(GameObject attacker, List<Effect> hit, string attackerTag)
     {
         foreach (Effect effect in hit)

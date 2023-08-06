@@ -3,16 +3,24 @@ using UnityEngine;
 public class Plant : MonoBehaviour
 {
 
-    void Update()
-    {
-        
-    }
-
     protected virtual void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.CompareTag("Player") && !collider.isTrigger)
         {
-            //make player half opacity and indetectable
+            //var size = collider.GetComponent<BoxCollider2D>().size;
+            //var contacts = collider.GetContacts(GetComponent<Collider2D>().GetContacts());
+
+            collider.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 0.6f);
+            //make player indetectable : add see in his sense list "impercetibles"
+        }
+    }
+
+    protected void OnTriggerStay2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Player") && !collider.isTrigger)
+        {
+            collider.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 0.6f);
+            //make player indetectable : add see in his sense list "impercetibles"
         }
     }
 
@@ -20,7 +28,8 @@ public class Plant : MonoBehaviour
     {
         if (collider.CompareTag("Player") && !collider.isTrigger)
         {
-            //make player full opacity and detectable
+            collider.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+            //make player detectable
         }
     }
 

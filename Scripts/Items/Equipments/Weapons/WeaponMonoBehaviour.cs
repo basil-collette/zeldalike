@@ -11,32 +11,38 @@ namespace Assets.Scripts.Items.Equipments.Weapons
     {
         public Weapon weapon;
 
+        [HideInInspector] public Vector2 direction;
         [HideInInspector] public Animator anim;
         protected bool attacking;
+        protected AliveEntity player;
         protected PlayerInput playerInputs;
         protected CooldownManager cooldownManager;
 
         protected void Start()
         {
+            player = GetComponentInParent<AliveEntity>();
             playerInputs = GetComponent<PlayerInput>();
             cooldownManager = GetComponent<CooldownManager>();
             anim = GetComponentInChildren<Animator>();
             anim.speed = weapon.speed;
             //anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(weapon.animatorName);
+
+            direction = Vector2.zero;
         }
 
         protected void Update()
         {
-            Vector2 attackJoystickInput = playerInputs.actions["Aim"].ReadValue<Vector2>();
-            if (attackJoystickInput != Vector2.zero)
+            direction = playerInputs.actions["Aim"].ReadValue<Vector2>();
+            if (direction != Vector2.zero)
             {
                 if (!attacking)
                 {
                     attacking = true;
+                    player.attacking = true;
 
-                    Attack(attackJoystickInput);
+                    Attack(direction);
 
-                    Action OnEnd = () => { attacking = false; };
+                    Action OnEnd = () => { attacking = false; player.attacking = false; direction = Vector2.zero; };
 
                     cooldownManager.StartCooldown("attackCooldown", weapon.attackDelay, null, OnEnd);
                 }

@@ -22,15 +22,20 @@ public class Player : AliveEntity
     public float dashDuration = 0.2f;
     public float dashCooldown = 3f;
     public GameObject rollSmokeEffect;
+    public AudioClip rollSound;
+
+    public AudioClip walkSound;
 
     PlayerInput playerInputs;
     CooldownManager cooldownManager;
     WeaponMonoBehaviour _weapon;
+    AudioSource audioSource;
 
     new void Start()
     {
         base.Start();
 
+        audioSource = GetComponent<AudioSource>(); audioSource.volume = 0.5f;
         playerInputs = GetComponent<PlayerInput>();
         cooldownManager = GetComponent<CooldownManager>();
 
@@ -57,11 +62,13 @@ public class Player : AliveEntity
         if (currentEntityState == EntityState.unavailable)
             return;
 
+        /*
         if (currentEntityState == EntityState.attack)
         {
             Imobilize();
             return;
         }
+        */
 
         direction = Vector3.zero;
 
@@ -130,6 +137,7 @@ public class Player : AliveEntity
         if (currentEntityState == EntityState.unavailable)
             return;
 
+        /*
         if (currentEntityState == EntityState.attack)
         {
             if (!animator.GetBool("attacking"))
@@ -139,6 +147,7 @@ public class Player : AliveEntity
             }
             return;
         }
+        */
 
         if (currentEntityState == EntityState.walk)
         {
@@ -152,11 +161,25 @@ public class Player : AliveEntity
                     ? moveSpeed
                     : dashSpeed;
 
+                if (cooldownManager.IsAvailable("dashDuration") && cooldownManager.IsAvailable("walkSoundCooldown"))
+                {
+                    audioSource.PlayOneShot(walkSound);
+                    cooldownManager.StartCooldown("walkSoundCooldown", 0.4f);
+                }
+
                 GetComponent<Rigidbody2D>().velocity = new Vector2(direction.x * finalSpeed, direction.y * finalSpeed);
+
+                if (attacking)
+                {
+                    Vector2 attackDirection = GetComponentInChildren<WeaponMonoBehaviour>().direction;
+                    direction.x = attackDirection.x;
+                    direction.y = attackDirection.y;
+                }
 
                 animator.SetFloat("moveX", direction.x);
                 animator.SetFloat("moveY", direction.y);
                 animator.SetBool("moving", true);
+
             }
             else
             {
@@ -184,12 +207,15 @@ public class Player : AliveEntity
 
         if (cooldownManager.IsAvailable("dashCooldown"))
         {
+            GetComponent<Health>().enabled = false;
             animator.SetTrigger("roll");
+            audioSource.clip = rollSound;
+            audioSource.Play();
 
             Coroutine rollEffectCoroutine = StartCoroutine(DashEffectCo());
 
             Action OnLoop = () => { /* CreateDashEffect() */ };
-            Action OnEnd = () => { SetState(EntityState.walk); StopCoroutine(rollEffectCoroutine); };
+            Action OnEnd = () => { SetState(EntityState.walk); StopCoroutine(rollEffectCoroutine); GetComponent<Health>().enabled = true; };
 
             cooldownManager.StartCooldown("dashDuration", dashDuration, OnLoop, OnEnd);
             cooldownManager.StartCooldown("dashCooldown", dashCooldown);
@@ -201,7 +227,7 @@ public class Player : AliveEntity
         while(true)
         {
             CreateDashEffect();
-            yield return new WaitForSecondsRealtime(0.1f);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 

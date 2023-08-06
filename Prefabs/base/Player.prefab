@@ -253,6 +253,8 @@ MonoBehaviour:
   dashDuration: 0.2
   dashCooldown: 0.7
   rollSmokeEffect: {fileID: 4283853020777935570, guid: b2369b6f3c9dbc8469a715195a499f32, type: 3}
+  rollSound: {fileID: 8300000, guid: f11db4559b3ffff45b62e9327fc5535d, type: 3}
+  walkSound: {fileID: 8300000, guid: 3bd1b93317b7a3a49b13011cdaa64d0b, type: 3}
 --- !u!114 &5620636059707414399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,8 +269,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitSound: {fileID: 0}
   deathSound: {fileID: 0}
-  lootTable: {fileID: 0}
   deathEffect: {fileID: 0}
+  lootTable: {fileID: 0}
   health: {fileID: 11400000, guid: 7a4b7ca3f9ae54c4896657d98f3264b1, type: 2}
   healthSignal: {fileID: 11400000, guid: 4010a70832e8d3a4da0fe997c30f6daf, type: 2}
   OnDeathParam: []
@@ -386,7 +388,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -430,7 +432,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0

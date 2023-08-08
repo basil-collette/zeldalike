@@ -104,6 +104,7 @@ MonoBehaviour:
   closeDuration: 0.75
   readyDuration: 0.75
   openDuration: 2
+  delay: 0
 --- !u!114 &2620916254900420315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +134,7 @@ MonoBehaviour:
       type: {class: Effect, ns: , asm: Assembly-CSharp}
       data:
         effectType: 4
-        amount: 0.5
+        amount: 0.25
 --- !u!61 &2620916254900420312
 BoxCollider2D:
   m_ObjectHideFlags: 0

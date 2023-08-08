@@ -243,6 +243,8 @@ MonoBehaviour:
   currentEntityState: 1
   moveSpeed: 4
   nearRadius: 1
+  imperceptibles: 
+  attacking: 0
   direction: {x: 0, y: 0, z: 0}
   orientation: {x: 0, y: 0, z: 0}
   inventory: {fileID: 11400000, guid: 2b27182376eeadf4a85051c113b16f97, type: 2}
@@ -271,12 +273,12 @@ MonoBehaviour:
   deathSound: {fileID: 0}
   deathEffect: {fileID: 0}
   lootTable: {fileID: 0}
-  health: {fileID: 11400000, guid: 7a4b7ca3f9ae54c4896657d98f3264b1, type: 2}
-  healthSignal: {fileID: 11400000, guid: 4010a70832e8d3a4da0fe997c30f6daf, type: 2}
+  _health: {fileID: 11400000, guid: 7a4b7ca3f9ae54c4896657d98f3264b1, type: 2}
+  _healthSignal: {fileID: 11400000, guid: 4010a70832e8d3a4da0fe997c30f6daf, type: 2}
   OnDeathParam: []
-  effectMods: []
-  effects: []
-  timedEffects: []
+  _effectMods: []
+  _effects: []
+  _timedEffects: []
 --- !u!212 &5620636059707414372
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -390,6 +390,8 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: f4e62b05ce8fdb1429faf8a02beb390a, type: 3}
   - Name: pause_exit
     Clip: {fileID: 8300000, guid: d8c4a6c1273abce4a9eef8e7f2b7a280, type: 3}
+  - Name: heal
+    Clip: {fileID: 8300000, guid: d1895312f4bd9b345b3a7026ae002dfd, type: 3}
 --- !u!4 &119542048
 Transform:
   m_ObjectHideFlags: 0
@@ -2930,6 +2932,7 @@ GameObject:
   - component: {fileID: 1284377022}
   - component: {fileID: 1284377021}
   - component: {fileID: 1284377020}
+  - component: {fileID: 1284377023}
   m_Layer: 5
   m_Name: Option button
   m_TagString: Untagged
@@ -3002,8 +3005,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 712053995}
-        m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
+      - m_Target: {fileID: 1284377023}
+        m_TargetAssemblyTypeName: ButtonHelper, Assembly-CSharp
         m_MethodName: ShowPausedInterface
         m_Mode: 5
         m_Arguments:
@@ -3052,6 +3055,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1284377018}
   m_CullTransparentMesh: 1
+--- !u!114 &1284377023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284377018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e484a5a591cf04189ee95d201499ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1285418497
 GameObject:
   m_ObjectHideFlags: 0

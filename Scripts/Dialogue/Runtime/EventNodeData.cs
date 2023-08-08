@@ -1,6 +1,8 @@
-﻿[System.Serializable]
+﻿using Assets.Scripts.Enums;
+
+[System.Serializable]
 public class EventNodeData : BaseNodeData
 {
-    public EventNodeSO EventSO;
+    public EventTypeEnum Type;
     public string Param;
 }

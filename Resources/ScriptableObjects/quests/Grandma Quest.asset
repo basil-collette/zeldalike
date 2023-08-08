@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 624b60cc4738c144f93860be7ab3d832, type: 3}
-  m_Name: GrandmaQuest
+  m_Name: Grandma Quest
   m_EditorClassIdentifier: 
-  Name: Grandma quest
+  Name: Grandma Quest
   Description: grandma en a marre que le bean lui tire dessus
   IsCompleted: 0
   QuestSteps:
   - Goals:
-    - rid: 5272711918093598720
+    - rid: 4206153322438590468
     IsCompleted: 0
     Rewards:
       Money: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
         Amount: 2
         itemType: 0
   - Goals:
-    - rid: 5272711918093598741
+    - rid: 4206153322438590469
     IsCompleted: 0
     Rewards:
       Money: 0
@@ -36,7 +36,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 5272711918093598720
+    - rid: 4206153322438590468
       type: {class: KillGoal, ns: , asm: Assembly-CSharp}
       data:
         Objective: kill a bean
@@ -44,7 +44,7 @@ MonoBehaviour:
         RequiredAmmount: 1
         CurrentAmmount: 0
         Target: bean
-    - rid: 5272711918093598741
+    - rid: 4206153322438590469
       type: {class: TalkGoal, ns: , asm: Assembly-CSharp}
       data:
         Objective: talk to gandma

@@ -156,6 +156,8 @@ MonoBehaviour:
   currentEntityState: 2
   moveSpeed: 5
   nearRadius: 1
+  imperceptibles: 
+  attacking: 0
   direction: {x: 0, y: 0, z: 0}
   orientation: {x: 0, y: 0, z: 0}
   targetTag: Player
@@ -174,18 +176,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb059cbe11b736746aa9351ef5d49ca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitSound: {fileID: 0}
-  health: {fileID: 0}
-  healthSignal: {fileID: 0}
-  effectMods:
-  - effectType: 7
-    mod: 2
-  - effectType: 3
-    mod: 0.5
-  effects: []
-  timedEffects: []
-  deathEffect: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 7c47b20bb9874304a809dc5580d403ba, type: 3}
   deathSound: {fileID: 0}
+  deathEffect: {fileID: 0}
+  lootTable: {fileID: 0}
+  _health: {fileID: 0}
+  _healthSignal: {fileID: 0}
+  OnDeathParam: []
+  _effectMods: []
+  _effects: []
+  _timedEffects: []
 --- !u!114 &1854991670337369718
 MonoBehaviour:
   m_ObjectHideFlags: 0

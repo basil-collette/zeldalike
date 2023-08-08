@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4965f1a5b227fba45bb43227346c2e15, type: 3}
-  m_Name: PlayerQuest
+  m_Script: {fileID: 11500000, guid: 2b0afe222aeddf14e92e8d9217ef021c, type: 3}
+  m_Name: DialogueStates
   m_EditorClassIdentifier: 
-  PlayerQuests:
-  - {fileID: 11400000, guid: 1cf564b819f099140a96c9ba1a0aa426, type: 2}
-  - {fileID: 11400000, guid: 8e3c7c221384c074aa4274d6120e7fe1, type: 2}
+  States:
+  - Key: Clara
+    List:
+    - quest_started

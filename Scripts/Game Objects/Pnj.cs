@@ -11,6 +11,7 @@ public class Pnj : Interacting
     public Sprite Sprite;
     public PNJDialogues Dialogues;
 
+    //[HideInInspector] public List<string> dialogueCodeSaid = new List<string>();
     DialogueManager dialogueManager;
 
     void Start()
@@ -26,7 +27,7 @@ public class Pnj : Interacting
     public void Talk()
     {
         var dialogueContainer = GetWantToSay();
-        dialogueManager.StartDialogue(dialogueContainer);
+        dialogueManager.StartDialogue(this, dialogueContainer);
     }
 
     public DialogueReference GetWantToSay()
@@ -46,7 +47,12 @@ public class Pnj : Interacting
 
     public bool HaveSaid(string dialogueNameCode)
     {
-        return Dialogues.Dialogues.AsEnumerable().FirstOrDefault(x => x.NameCode == dialogueNameCode).IsSaid;
+        return DialogueStates.HaveSaid(Name, dialogueNameCode);
+    }
+
+    public void AddSaid(string dialogueNameCode)
+    {
+        DialogueStates.AddSaid(Name, dialogueNameCode);
     }
 
 }

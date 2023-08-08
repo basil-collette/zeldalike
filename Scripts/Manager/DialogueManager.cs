@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Enums;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,17 +10,19 @@ public class DialogueManager : SignletonGameObject<DialogueManager>
     public GameObject dialogueButtonPrefab;
     public float textAnimPauseSeconds = 0.01f;
 
-    private DialogueReference _dialogueRef;
+    DialogueContainer _dialogueContainer;
+    Pnj _pnj;
 
-    public void StartDialogue(DialogueReference dialogueRef)
+    public void StartDialogue(Pnj pnj, DialogueReference dialogueRef)
     {
-        _dialogueRef = dialogueRef;
+        _pnj = pnj;
+        _dialogueContainer = dialogueRef.DialogueContainer;
 
         pauseManager.ShowPausedInterface("DialogueScene", () =>
         {
-            BaseNodeData node = GraphHelper.GetFirstNode(_dialogueRef.DialogueContainer);
+            BaseNodeData node = GraphHelper.GetFirstNode(_dialogueContainer);
             NextNode(node);
-        }, true);
+        }, false, false);
     }
 
     void NextNode(BaseNodeData node)
@@ -51,7 +54,7 @@ public class DialogueManager : SignletonGameObject<DialogueManager>
 
         Action showButtons = () =>
         {
-            var connections = GraphHelper.GetOutputs(_dialogueRef.DialogueContainer, node);
+            var connections = GraphHelper.GetOutputs(_dialogueContainer, node);
             if (connections.Count > 0)
             {
                 foreach (var conn in connections)
@@ -60,7 +63,8 @@ public class DialogueManager : SignletonGameObject<DialogueManager>
                         (conn.PortName == string.Empty) ? "continue" : conn.PortName,
                         () =>
                         {
-                            BaseNodeData nextNode = GraphHelper.GetNodeByGuid(_dialogueRef.DialogueContainer, conn.TargetNodeGuid);
+                            _pnj.AddSaid(node.DialogueCode);
+                            BaseNodeData nextNode = GraphHelper.GetNodeByGuid(_dialogueContainer, conn.TargetNodeGuid);
                             NextNode(nextNode);
                         }
                     );
@@ -70,7 +74,7 @@ public class DialogueManager : SignletonGameObject<DialogueManager>
             {
                 InstanciateChoiceButton("Ok", () =>
                 {
-                    _dialogueRef.IsSaid = true;
+                    _pnj.AddSaid(node.DialogueCode);
                     pauseManager.Resume();
                 });
             }
@@ -95,17 +99,24 @@ public class DialogueManager : SignletonGameObject<DialogueManager>
 
     void ProcessEvent(EventNodeData node)
     {
-        node.EventSO?.Event?.Invoke(node.Param);
+        switch (node.Type)
+        {
+            case EventTypeEnum.StartQuest: PlayerQuest.AddQuest(node.Param); break;
+            case EventTypeEnum.AddItem: Inventory.AddItem(node.Param); break;
+            case EventTypeEnum.RemoveItem: Inventory.StaticRemoveItem(node.Param); break;
+            case EventTypeEnum.SetDialogueSaid: break;
+            case EventTypeEnum.StartCinematic: break;
+            default: break;
+        }
 
-        var connections = GraphHelper.GetOutputs(_dialogueRef.DialogueContainer, node);
+        var connections = GraphHelper.GetOutputs(_dialogueContainer, node);
         if (connections.Count > 0)
         {
-            BaseNodeData nextNode = GraphHelper.GetNodeByGuid(_dialogueRef.DialogueContainer, connections[0].TargetNodeGuid);
+            BaseNodeData nextNode = GraphHelper.GetNodeByGuid(_dialogueContainer, connections[0].TargetNodeGuid);
             NextNode(nextNode);
         }
         else
         {
-            _dialogueRef.IsSaid = true;
             pauseManager.Resume();
         }
     }

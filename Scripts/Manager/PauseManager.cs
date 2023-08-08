@@ -64,7 +64,7 @@ public class PauseManager : SignletonGameObject<PauseManager>
         }
     }
 
-    void Pause(bool transparent = false)
+    void Pause(bool transparent = false, bool showMenu = false)
     {
         IsPaused = true;
         Time.timeScale = 0f;
@@ -74,7 +74,7 @@ public class PauseManager : SignletonGameObject<PauseManager>
 
         //controlsCanva.SetActive(false);
 
-        MenuOverlay.SetActive(!transparent);
+        MenuOverlay.SetActive(showMenu);
 
         SoundManager soundManager = GetComponentInChildren<SoundManager>();
         soundManager.musicSource.Stop();
@@ -85,7 +85,7 @@ public class PauseManager : SignletonGameObject<PauseManager>
     {
         ShowPausedInterface(interfaceName, null);
     }
-    public void ShowPausedInterface(string interfaceName, Action OnPauseProcessed, bool transparentOverlay = false)
+    public void ShowPausedInterface(string interfaceName, Action OnPauseProcessed, bool transparentOverlay = false, bool showMenu = false)
     {
         if (interfaceName == loadedSceneName)
             return;
@@ -93,7 +93,7 @@ public class PauseManager : SignletonGameObject<PauseManager>
         loadedSceneName = interfaceName;
 
         StartCoroutine(SwitchPausedSceneCo(() => {
-            Pause(transparentOverlay);
+            Pause(transparentOverlay, showMenu);
             OnPauseProcessed?.Invoke();
         }));
     }

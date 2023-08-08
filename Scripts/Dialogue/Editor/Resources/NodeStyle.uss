@@ -1,3 +1,7 @@
 DialogueNode #title {
     background-color: rgb(0, 128, 0);
 }
+
+DialogueNode TextField Label {
+    margin-right: -100;
+}

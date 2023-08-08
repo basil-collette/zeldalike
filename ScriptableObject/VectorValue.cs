@@ -4,11 +4,11 @@ using UnityEngine;
 public class VectorValue : ScriptableObject, ISerializationCallbackReceiver
 {
     public Vector2 initalValue;
-    public Vector2 deffaultValue;
+    public Vector2 defaultValue;
 
     public void OnAfterDeserialize()
     {
-        initalValue = deffaultValue;
+        initalValue = defaultValue;
     }
 
     public void OnBeforeSerialize() {}

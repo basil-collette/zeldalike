@@ -12,6 +12,8 @@ public class MainGameManager : SignletonGameObject<MainGameManager>
 
     void Start()
     {
+        //Application.targetFrameRate = 10;
+
         InitLocalDataFolder();
 
         InitBDD();

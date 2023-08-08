@@ -1,3 +1,4 @@
+using Assets.Scripts.Manager;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,14 +8,15 @@ using UnityEngine;
 public class Health : Hitable
 {
     public static event Action<string[]> OnDeath;
-    public event Action<string[]> InstanceOnDeath;
 
-    public FloatValue health;
-    public Signal healthSignal;
+    public FloatValue _health;
+    public Signal _healthSignal;
     public string[] OnDeathParam;
-    public List<EffectModificator> effectMods = new List<EffectModificator>();
-    public List<Effect> effects;
-    public List<Effect> timedEffects;
+    public List<EffectModificator> _effectMods = new List<EffectModificator>();
+    public List<Effect> _effects;
+    public List<Effect> _timedEffects;
+
+    public Action _dieOverride;
 
     private void Start()
     {
@@ -31,7 +33,7 @@ public class Health : Hitable
 
     public override void Effect(Vector3 attackerPos, Effect effect)
     {
-        EffectModificator effectMod = effectMods.Find(em => em.effectType == effect.effectType);
+        EffectModificator effectMod = _effectMods.Find(em => em.effectType == effect.effectType);
         if (effectMod != null
             && effectMod.mod <= 0)
         {
@@ -74,7 +76,7 @@ public class Health : Hitable
 
     public float GetModifiedAmount(Effect effect)
     {
-        EffectModificator effMod = effectMods.Find(effMod => effMod.effectType == effect.effectType);
+        EffectModificator effMod = _effectMods.Find(effMod => effMod.effectType == effect.effectType);
         
         if (effMod != null) effect.amount *= effMod.mod;
 
@@ -83,7 +85,7 @@ public class Health : Hitable
 
     public void Dammage(Effect effect)
     {
-        health.RuntimeValue -= GetModifiedAmount(effect);
+        _health.RuntimeValue -= GetModifiedAmount(effect);
 
         var audioSource = GetComponent<AudioSource>();
         if (audioSource != null && hitSound != null)
@@ -92,9 +94,9 @@ public class Health : Hitable
             audioSource.Play();
         }
 
-        if (healthSignal != null)
+        if (_healthSignal != null)
         {
-            healthSignal.Raise();
+            _healthSignal.Raise();
         } 
 
         CheckDeath();
@@ -102,29 +104,20 @@ public class Health : Hitable
 
     public void Heal(float healAmount)
     {
-        health.RuntimeValue += healAmount;
+        _health.RuntimeValue += healAmount;
+        _health.RuntimeValue = Mathf.Min(_health.RuntimeValue, _health.initialValue);
 
-        health.RuntimeValue = Mathf.Min(health.RuntimeValue, health.initialValue);
+        FindAnyObjectByType<SoundManager>().PlayEffect("heal");
 
-        //heal sound
-        /*
-        var audioSource = GetComponent<AudioSource>();
-        if (audioSource != null && hitSound != null)
+        if (_healthSignal != null)
         {
-            audioSource.clip = hitSound;
-            audioSource.Play();
-        }
-        */
-
-        if (healthSignal != null)
-        {
-            healthSignal.Raise();
+            _healthSignal.Raise();
         }
     }
 
     protected virtual void CheckDeath()
     {
-        if (this.health.RuntimeValue <= 0)
+        if (this._health.RuntimeValue <= 0)
         {
             Die();
         }
@@ -137,14 +130,21 @@ public class Health : Hitable
 
         OnDeath?.Invoke(OnDeathParam);
 
-        base.Die();
+        if (_dieOverride == null)
+        {
+            base.Die();
+        }
+        else
+        {
+            _dieOverride.Invoke();
+        }
     }
 
     // EFFECT PROCESS _________________________________________________________________ EFFECT PROCESS
 
     protected virtual void CycleEffect(Effect effect, int durationSeconds = 5)
     {
-        int index = timedEffects.FindIndex(te => te.effectType == effect.effectType);
+        int index = _timedEffects.FindIndex(te => te.effectType == effect.effectType);
         if (index == -1)
         {
             //timedEffects.Add(new Effect(effect.effectType, durationSeconds));
@@ -153,28 +153,28 @@ public class Health : Hitable
         }
         else
         {
-            timedEffects[index].amount = durationSeconds;
+            _timedEffects[index].amount = durationSeconds;
         }
     }
 
     protected virtual IEnumerator CycleEffectCo(EffectEnum effectType)
     {
         new WaitForSeconds(1f);
-        int index = timedEffects.FindIndex(te => te.effectType == effectType);
+        int index = _timedEffects.FindIndex(te => te.effectType == effectType);
 
         while (index != -1)
         {
-            Dammage(timedEffects[index]);
+            Dammage(_timedEffects[index]);
 
-            timedEffects[index].amount--;
+            _timedEffects[index].amount--;
 
-            if (timedEffects[index].amount <= 0)
+            if (_timedEffects[index].amount <= 0)
             {
-                timedEffects.RemoveAt(index);
+                _timedEffects.RemoveAt(index);
             }
 
             new WaitForSeconds(1f);
-            index = timedEffects.FindIndex(te => te.effectType == effectType);
+            index = _timedEffects.FindIndex(te => te.effectType == effectType);
         }
 
         return null;
@@ -182,45 +182,45 @@ public class Health : Hitable
 
     protected virtual float RaiseEffect(Effect effect)
     {
-        int index = effectMods.FindIndex(effMod => effMod.effectType == effect.effectType);
+        int index = _effectMods.FindIndex(effMod => effMod.effectType == effect.effectType);
         if (index == -1)
         {
-            effects.Add(effect);
+            _effects.Add(effect);
             return effect.amount;
         }
         else
         {
-            effects[index].amount += effect.amount;
-            return effects[index].amount;
+            _effects[index].amount += effect.amount;
+            return _effects[index].amount;
         }
     }
 
     protected virtual float AddEffect(Effect effect)
     {
-        int index = effectMods.FindIndex(effMod => effMod.effectType == effect.effectType);
+        int index = _effectMods.FindIndex(effMod => effMod.effectType == effect.effectType);
         if (index == -1)
         {
-            effects.Add(effect);
+            _effects.Add(effect);
         }
-        else if (effects[index].amount < effect.amount)
+        else if (_effects[index].amount < effect.amount)
         {
-            effects[index].amount = effect.amount;
+            _effects[index].amount = effect.amount;
         }
-        return effects[index].amount;
+        return _effects[index].amount;
     }
 
     protected virtual void RemoveEffect(Effect effectToRemove)
     {
-        Effect effect = effects.Find(effMod => effMod.effectType == effectToRemove.effectType);
+        Effect effect = _effects.Find(effMod => effMod.effectType == effectToRemove.effectType);
         if (effect != null)
         {
-            effects.Remove(effect);
+            _effects.Remove(effect);
         }
     }
 
     protected virtual bool IsEnaughtEffect(EffectEnum effectType)
     {
-        Effect ownedEffect = effects.Find(effMod => effMod.effectType == effectType);
+        Effect ownedEffect = _effects.Find(effMod => effMod.effectType == effectType);
 
         return IsEnaughtEffect(effectType, ownedEffect.amount);
     }
@@ -234,14 +234,14 @@ public class Health : Hitable
     {
         float result;
 
-        EffectModificator effectmod = effectMods.Find(effMod => effMod.effectType == effectType);
+        EffectModificator effectmod = _effectMods.Find(effMod => effMod.effectType == effectType);
         if (effectmod != null)
         {
-            result = health.initialValue - (health.initialValue * effectmod.mod);
+            result = _health.initialValue - (_health.initialValue * effectmod.mod);
         }
         else
         {
-            result = health.initialValue / 4;
+            result = _health.initialValue / 4;
         }
         
         return (result < 1) ? 1 : result;

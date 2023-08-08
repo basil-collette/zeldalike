@@ -50,10 +50,19 @@ public class Player : AliveEntity
             EquipWeapon(inventory.Weapon);
         }
 
-        GetComponent<Health>().InstanceOnDeath += (string[] deathParams) =>
+        Health health = GetComponent<Health>();
+        health._dieOverride = () =>
         {
-            //respawn au startPos de la scene en cours
-            //get la pos de debut de la scene
+            //Animation death
+            //coroutine wait seconds
+
+            Vector3 pos = Resources.Load<VectorValue>("ScriptableObjects/Player/position/PlayerPosition").initalValue;
+            transform.position = pos;
+
+            FloatValue playerHealth = Resources.Load<FloatValue>("ScriptableObjects/Player/Health/PlayerHealth");
+            playerHealth.RuntimeValue = playerHealth.initialValue;
+
+            health._healthSignal.Raise();
         };
     }
 

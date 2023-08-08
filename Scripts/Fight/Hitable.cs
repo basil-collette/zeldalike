@@ -24,7 +24,7 @@ public abstract class Hitable : Effectable
             Drop();
 
         if (deathSound != null)
-            FindGameObjectHelper.FindByName("Main Sound Manager").GetComponent<SoundManager>().PlayEffect(deathSound);
+            FindAnyObjectByType<SoundManager>().PlayEffect(deathSound);
 
         this.gameObject.SetActive(false);
         Destroy(this.gameObject);

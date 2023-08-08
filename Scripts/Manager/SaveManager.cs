@@ -1,6 +1,7 @@
 ﻿using Assets.Database.Model.Design;
 using Assets.Database.Model.Repository;
 using Assets.Scripts.Enums;
+using Assets.Tools;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -85,7 +86,7 @@ public class SaveManager : SignletonGameObject<SaveManager>
             sceneName = FindAnyObjectByType<ScenesManager>()._currentScene,
             position = player.transform.position,
 
-            playerHealth = player.GetComponent<Health>().health.RuntimeValue,
+            playerHealth = player.GetComponent<Health>()._health.RuntimeValue,
 
             inventoryItems = player.inventory.Items.Select(x => JsonUtility.ToJson(x)).ToList(),
             inventoryHotbars = player.inventory.Hotbars.Select(x => JsonUtility.ToJson(x)).ToList(),
@@ -93,7 +94,7 @@ public class SaveManager : SignletonGameObject<SaveManager>
 
             opennedChestGuids = GameData.opennedChestGuids,
 
-            dialoguesStates = JsonUtility.ToJson(dialoguesStates),
+            dialoguesStates = JsonUtility.ToJson(DialogueStates.Current),
 
             quests = player.playerQuest.PlayerQuests.Select(x => JsonUtility.ToJson(x)).ToList()
         };
@@ -124,7 +125,6 @@ public class SaveManager : SignletonGameObject<SaveManager>
 
         //PLAYER
         Resources.Load<FloatValue>("ScriptableObjects/Player/Health/PlayerHealth").RuntimeValue = GameData.playerHealth;
-        //Resources.Load<FloatValue>("ScriptableObjects/Player/position/PlayerPosition").RuntimeValue = currentScene.pos;
         Resources.Load<VectorValue>("ScriptableObjects/Player/position/PlayerPosition").initalValue = GameData.position;
         
         //INVENTORY
@@ -134,22 +134,16 @@ public class SaveManager : SignletonGameObject<SaveManager>
         inventory.Weapon = (GameData.inventoryWeapon == null || GameData.inventoryWeapon == string.Empty) ? null : GetSerializedItem(GameData.inventoryWeapon) as Weapon;
 
         //DIALOGUES STATES
-        /*
-        SerializableDic<string, SerializableDic<string, bool>> dialoguesStates = JsonUtility.FromJson<SerializableDic<string, SerializableDic<string, bool>>>(GameData.dialoguesStates);
-        PNJDialogues[] dialogues = Resources.LoadAll<PNJDialogues>("ScriptableObjects/Dialogues/PNJ Dialogues/");
-        foreach (PNJDialogues current in dialogues)
-        {
-            foreach (DialogueReference dialogueRef in current.Dialogues)
-            {
-                dialogueRef.IsSaid = (dialoguesStates.GetValueOrDefault(current.name) != null) ? dialoguesStates.GetValueOrDefault(current.name).GetValueOrDefault(dialogueRef.NameCode) : false;
-            }
-        }
-        */
+        DialogueStates.Current.States = JsonUtility.FromJson<List<SerializableWrappedList<string>>>(GameData.dialoguesStates);
 
         //QUESTS
         PlayerQuest playerQuest = Resources.Load<PlayerQuest>("ScriptableObjects/Player/Quest/PlayerQuest");
-        for (int i = 0; i < Mathf.Min(playerQuest.PlayerQuests.Count, GameData.quests.Count); i++) {
-            JsonUtility.FromJsonOverwrite(GameData.quests[i], playerQuest.PlayerQuests[i]);
+        playerQuest.PlayerQuests.Clear();
+        for (int i = 0; i < GameData.quests.Count; i++) {
+            TempQuest tempQuest = JsonUtility.FromJson<TempQuest>(GameData.quests[i]);
+            Quest quest = Resources.Load<Quest>($"ScriptableObjects/quests/{tempQuest.Name}");
+            JsonUtility.FromJsonOverwrite(GameData.quests[i], quest);
+            playerQuest.AddQuest(quest);
         }
 
         //COFFRES

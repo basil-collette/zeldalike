@@ -3,6 +3,7 @@
 using Assets.Database.Model.Design;
 using Assets.Database.Model.Repository;
 using Assets.Scripts.Enums;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,6 +22,38 @@ public class Inventory : ScriptableObject
     public float maxWeight = 10f;
     public float currentWeight = 0;
 
+    #region EasyAccess
+    public static Inventory GetInventory() { return FindAnyObjectByType<Player>().inventory; }
+
+    public static Item GetItem(string itemParams) // dataTableName;itemName
+    {
+        string[] itemParamsArray = itemParams.Split(";");
+
+        ItemTypeEnum type = (ItemTypeEnum)Enum.Parse(typeof(ItemTypeEnum), itemParamsArray[0]);
+        string name = itemParamsArray[1];
+
+        return GetItem(name, type);
+    }
+
+    public static Item GetItem(string itemName, ItemTypeEnum type)
+    {
+        switch (type)
+        {
+            case ItemTypeEnum.weapon:
+                return Singleton<WeaponRepository>.Instance.GetByCode(itemName);
+
+            case ItemTypeEnum.item:
+                return Singleton<ItemRepository<Item>>.Instance.GetByCode(itemName);
+
+            default: return null;
+        }
+    }
+
+    public static void AddItem(string itemParams) { GetInventory().AddItem(GetItem(itemParams)); }
+
+    public static void StaticRemoveItem(string itemname) { GetInventory().RemoveItem(itemname); }
+    #endregion 
+
     public void GetReward(Rewards reward)
     {
         if (reward.Money != null) Money += reward.Money;
@@ -30,19 +63,7 @@ public class Inventory : ScriptableObject
         if (reward.ItemsRef == null) return;
         foreach (ItemRef itemRef in reward.ItemsRef)
         {
-            switch (itemRef.itemType)
-            {
-                case ItemTypeEnum.weapon:
-                    AddItem(Singleton<WeaponRepository>.Instance.GetByCode(itemRef.ItemCode));
-                    break;
-
-                case ItemTypeEnum.item:
-                    AddItem(Singleton<ItemRepository<Item>>.Instance.GetByCode(itemRef.ItemCode));
-                    break;
-
-                default:
-                    break;
-            }
+            AddItem(GetItem(itemRef.ItemCode, itemRef.itemType));
         }
     }
 
@@ -58,6 +79,11 @@ public class Inventory : ScriptableObject
 
             //pause and open inventory scene
         }
+    }
+
+    public void RemoveItem(string itemName)
+    {
+        Items.Remove(Items.Find(x => x.NameLibelle == itemName));
     }
 
     public void RemoveItem(Item item)

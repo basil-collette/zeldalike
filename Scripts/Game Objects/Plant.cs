@@ -11,7 +11,7 @@ public class Plant : MonoBehaviour
             //var contacts = collider.GetContacts(GetComponent<Collider2D>().GetContacts());
 
             collider.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 0.6f);
-            //make player indetectable : add see in his sense list "impercetibles"
+            //make player indetectable : add SenseEnum.see in his sense list "impercetibles"
         }
     }
 

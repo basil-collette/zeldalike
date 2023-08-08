@@ -5,6 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObject/PlayerQuest")]
 public class PlayerQuest : ScriptableObject
 {
+    public static void AddQuest(string questName)
+    {
+        PlayerQuest pq = FindAnyObjectByType<Player>().playerQuest;
+        pq.AddQuest(pq.FindQuest(questName));
+    }
+
     public List<Quest> PlayerQuests = new List<Quest>();
 
     public void AddQuest(Quest quest)
@@ -32,6 +38,11 @@ public class PlayerQuest : ScriptableObject
     public QuestStep GetCurrentStep(Quest quest)
     {
         return quest.QuestSteps.FirstOrDefault(x => !x.IsCompleted);
+    }
+
+    public Quest FindQuest(string questName)
+    {
+        return Resources.Load<Quest>($"ScriptableObjects/quests/{questName}");
     }
 
 }

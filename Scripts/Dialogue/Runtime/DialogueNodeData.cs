@@ -6,8 +6,9 @@ using UnityEngine;
 [KnownType(typeof(EventNodeData))]
 public class DialogueNodeData : BaseNodeData
 {
-    //public Enum Type (talk, think)
+    //public DialogueTypeEnum Type (talk, think)
     public string DialogueText;
-    public DialogueNodeSide Side;
+    public string DialogueCode;
+    //public DialogueNodeSide Side;
     public Pnj Pnj;
 }

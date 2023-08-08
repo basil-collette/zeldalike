@@ -98,7 +98,8 @@ public class GraphSaveUtility
                     Position = nodeCasted.GetPosition().position,
                     title = nodeCasted.title,
                     DialogueText = nodeCasted.DialogueText,
-                    Side = nodeCasted.Side,
+                    DialogueCode = nodeCasted.DialogueCode,
+                    //Side = nodeCasted.Side,
                     Pnj = nodeCasted.Pnj
                 });
             }
@@ -110,7 +111,7 @@ public class GraphSaveUtility
                     Guid = nodeCasted.Guid,
                     Position = nodeCasted.GetPosition().position,
                     title = nodeCasted.title,
-                    EventSO = nodeCasted.EventSO,
+                    Type = nodeCasted.Type,
                     Param = nodeCasted.Param
                 });
             }
@@ -264,7 +265,8 @@ public class GraphSaveUtility
             Position = nodeData.Position,
             EntryPoint = nodeData.EntryPoint,
             DialogueText = nodeData.DialogueText,
-            Side = nodeData.Side,
+            DialogueCode = nodeData.DialogueCode,
+            //Side = nodeData.Side,
             Pnj = nodeData.Pnj
         };
     }
@@ -277,7 +279,7 @@ public class GraphSaveUtility
             title = nodeData.title,
             Position = nodeData.Position,
             EntryPoint = nodeData.EntryPoint,
-            EventSO = nodeData.EventSO,
+            Type = nodeData.Type,
             Param = nodeData.Param
         };
     }

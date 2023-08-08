@@ -20,3 +20,12 @@ public class Quest : ScriptableObject
     */
 
 }
+
+[System.Serializable]
+public class TempQuest
+{
+    public string Name;
+    public string Description;
+    public bool IsCompleted;
+    public List<QuestStep> QuestSteps;
+} 

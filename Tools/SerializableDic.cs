@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 [System.Serializable]
 public class SerializableDic<TKey, TValue>
 {
-    public List<TKey> keys = new List<TKey>();
-    public List<TValue> values = new List<TValue>();
+    [SerializeField] public List<TKey> keys = new List<TKey>();
+    [SerializeField] public List<TValue> values = new List<TValue>();
 
     public void Add(TKey key, TValue value)
     {

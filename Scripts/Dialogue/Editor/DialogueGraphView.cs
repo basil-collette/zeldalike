@@ -1,3 +1,4 @@
+using Assets.Scripts.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,6 +63,7 @@ public class DialogueGraphView : GraphView
             title = "Start",
             Guid = Guid.NewGuid().ToString(),
             DialogueText = "ENTRYPOINT",
+            DialogueCode = "",
             EntryPoint = true
         };
 
@@ -136,30 +138,39 @@ public class DialogueGraphView : GraphView
 
     public DialogueNode CreateDialogueNode(DialogueNode dialogueNode, Vector2 position)
     {
+        dialogueNode.styleSheets.Add(Resources.Load<StyleSheet>("NodeStyle"));
+
         var inputPort = GeneratePort(dialogueNode, Direction.Input, Port.Capacity.Multi);
         inputPort.portName = "Input";
         dialogueNode.inputContainer.Add(inputPort);
-
-        dialogueNode.styleSheets.Add(Resources.Load<StyleSheet>("NodeStyle"));
 
         var addPortButton = new Button(() => { AddChoicePort(dialogueNode); });
         addPortButton.text = "New Choice";
         dialogueNode.titleContainer.Add(addPortButton);
 
-        var dialogueTextField = new TextField(dialogueNode.DialogueText);
-        //dialogueTextField.SetValueWithoutNotify(dialogueNode.DialogueText);
+        var dialogueTextField = new TextField("Text");
+        dialogueTextField.SetValueWithoutNotify(dialogueNode.DialogueText);
         dialogueTextField.RegisterValueChangedCallback((evt) =>
         {
             dialogueNode.DialogueText = evt.newValue;
         });
-        //dialogueTextField.SetValueWithoutNotify(dialogueNode.title);
         dialogueNode.mainContainer.Add(dialogueTextField);
 
+        var dialogueCodeField = new TextField("Code");
+        dialogueTextField.SetValueWithoutNotify(dialogueNode.DialogueCode);
+        dialogueCodeField.RegisterValueChangedCallback((evt) =>
+        {
+            dialogueNode.DialogueCode = evt.newValue;
+        });
+        dialogueNode.mainContainer.Add(dialogueCodeField);
+
+        /*
         var sideField = new EnumField();
         sideField.Init(DialogueNodeSide.left);
         sideField.SetValueWithoutNotify(dialogueNode.Side);
         sideField.RegisterValueChangedCallback((evt) => dialogueNode.Side = (DialogueNodeSide)evt.newValue);
         dialogueNode.mainContainer.Add(sideField);
+        */
 
         var spriteField = new ObjectField
         {
@@ -211,12 +222,10 @@ public class DialogueGraphView : GraphView
 
         eventNode.styleSheets.Add(Resources.Load<StyleSheet>("EventStyle"));
 
-        var eventField = new ObjectField
-        {
-            objectType = typeof(EventNodeSO)
-        };
-        eventField.SetValueWithoutNotify(eventNode.EventSO);
-        eventField.RegisterValueChangedCallback((evt) => eventNode.EventSO = (EventNodeSO)evt.newValue);
+        var eventField = new EnumField();
+        eventField.Init(EventTypeEnum.StartQuest);
+        eventField.SetValueWithoutNotify(eventNode.Type);
+        eventField.RegisterValueChangedCallback((evt) => eventNode.Type = (EventTypeEnum)evt.newValue);
         eventNode.mainContainer.Add(eventField);
 
         var textField = new TextField();

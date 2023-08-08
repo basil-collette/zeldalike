@@ -39,7 +39,7 @@ public class ButtonHelper : MonoBehaviour
 
     public void ShowPausedInterface(string sceneName)
     {
-        FindAnyObjectByType<PauseManager>().ShowPausedInterface(sceneName);
+        FindAnyObjectByType<PauseManager>().ShowPausedInterface(sceneName, null, false, true);
     }
 
     public void Save()

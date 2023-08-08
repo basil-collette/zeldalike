@@ -1,6 +1,8 @@
+using Assets.Scripts.Enums;
+
 public class EventNode : BaseNode
 {
-    public EventNodeSO EventSO;
+    public EventTypeEnum Type;
     public string Param;
 }
 

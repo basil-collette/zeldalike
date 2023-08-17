@@ -1,3 +1,4 @@
+using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -9,6 +10,7 @@ public class DialogueGraph : EditorWindow
 {
     private DialogueGraphView _graphView;
     private string _fileName = "New_narrative";
+    private Label fileNameTextField;
 
     [MenuItem("Graph/Dialogue Graph")]
     public static void OpenDialogueGraphWindow()
@@ -21,10 +23,10 @@ public class DialogueGraph : EditorWindow
     {
         var toolbar = new Toolbar();
 
-        var fileNameTextField = new TextField("File Name:");
-        fileNameTextField.SetValueWithoutNotify(_fileName);
+        fileNameTextField = new Label("File Name:");
+        fileNameTextField.text = "File Name: " + _fileName;
         fileNameTextField.MarkDirtyRepaint();
-        fileNameTextField.RegisterValueChangedCallback(evt => _fileName = evt.newValue);
+        fileNameTextField.RegisterValueChangedCallback(evt => _fileName = evt.newValue.Substring(11));
         toolbar.Add(fileNameTextField);
 
         var loadButton = new Button(() => RequestDataOperation(false)) { text = "Load Data" };
@@ -48,6 +50,15 @@ public class DialogueGraph : EditorWindow
         rootVisualElement.Add(toolbar);
     }
 
+    private void GenerateMiniMap()
+    {
+        var miniMap = new MiniMap { anchored = true };
+        //var cords = _graphView.contentViewContainer.WorldToLocal(new Vector2(this.maxSize.x - 10, 30));
+        //miniMap.SetPosition(new Rect(cords.x, cords.y, 200, 140));
+        miniMap.SetPosition(new Rect(this.position.width - 210, 30, 200, 140));
+        _graphView.Add(miniMap);
+    }
+
     private void ClearGraph()
     {
         if (string.IsNullOrEmpty(_fileName))
@@ -58,33 +69,47 @@ public class DialogueGraph : EditorWindow
 
         var saveUtility = GraphSaveUtility.GetInstance(_graphView);
         saveUtility.ClearGraph(_fileName);
-    }
-
-    private void GenerateMiniMap()
-    {
-        var miniMap = new MiniMap { anchored = true };
-        //var cords = _graphView.contentViewContainer.WorldToLocal(new Vector2(this.maxSize.x - 10, 30));
-        //miniMap.SetPosition(new Rect(cords.x, cords.y, 200, 140));
-        miniMap.SetPosition(new Rect(this.position.width - 210, 30, 200, 140));
-        _graphView.Add(miniMap);
+        
+        fileNameTextField.text = "File Name: ";
     }
 
     private void RequestDataOperation(bool save)
     {
+        /*
         if (string.IsNullOrEmpty(_fileName))
         {
             EditorUtility.DisplayDialog("Invalid file Name", "Please enter a valid file name.", "OK");
             return;
         }
+        */
 
+        string dialogPath = Path.Combine(Application.dataPath, "Resources/Dialogue");
         var saveUtility = GraphSaveUtility.GetInstance(_graphView);
+
         if (save)
         {
-            saveUtility.SaveGraph(_fileName);
+            string realFolderPath = Path.Combine(dialogPath, (_fileName.Length == 0) ? string.Empty : _fileName.Substring(0, _fileName.LastIndexOf("/")));
+            string realName = _fileName.Substring(_fileName.LastIndexOf("/") + 1);
+
+            string path = EditorUtility.SaveFilePanel("Save dialog", realFolderPath, realName, "asset");
+            if (path.Length != 0)
+            {
+                string finalPath = path.Substring(dialogPath.Length + 1, path.Length - (dialogPath.Length + 7));
+                saveUtility.SaveGraph(finalPath);
+
+                fileNameTextField.text = "File Name: " + finalPath;
+            }
         }
         else
         {
-            saveUtility.LoadGraph(_fileName);
+            string path = EditorUtility.OpenFilePanel("Select dialog to edit", dialogPath, "asset");
+            if (path.Length != 0)
+            {
+                string finalPath = path.Substring(dialogPath.Length + 1, path.Length - (dialogPath.Length + 7));
+                saveUtility.LoadGraph(finalPath);
+
+                fileNameTextField.text = "File Name: " + finalPath;
+            }
         }
     }
 

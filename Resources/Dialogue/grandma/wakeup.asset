@@ -20,13 +20,13 @@ MonoBehaviour:
     PortName: Ok
     TargetNodeGuid: 3173e805-a9ec-4b3c-98ef-cbfe55ee8683
   NodeDatas:
-  - rid: 4206153517309100035
-  - rid: 4206153517309100036
+  - rid: 4206153541875400704
+  - rid: 4206153541875400705
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 4206153517309100035
+    - rid: 4206153541875400704
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: eb0e570e-ec20-4c02-b23a-4422d1e215c1
@@ -37,7 +37,7 @@ MonoBehaviour:
           tu es ?"
         DialogueCode: wakeup
         Pnj: {fileID: 4019585777184574299, guid: 77a7f1fd211b43547a731f2d8b7cbabd, type: 3}
-    - rid: 4206153517309100036
+    - rid: 4206153541875400705
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 3173e805-a9ec-4b3c-98ef-cbfe55ee8683

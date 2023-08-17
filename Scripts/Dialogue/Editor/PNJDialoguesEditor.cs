@@ -61,7 +61,7 @@ public class PNJDialoguesEditor : Editor
         GUILayout.Space(2);
 
         EditorGUILayout.BeginHorizontal();
-        _showPnjDialogues = EditorGUILayout.Foldout(_showPnjDialogues, "Quest Steps");
+        _showPnjDialogues = EditorGUILayout.Foldout(_showPnjDialogues, "Dialogues");
         EditorGUILayout.IntField((_pnjDialogues.Dialogues == null) ? 0 : _pnjDialogues.Dialogues.Count, GUILayout.Width(40));
         EditorGUILayout.EndHorizontal();
         GUILayout.Space(4);
@@ -87,7 +87,7 @@ public class PNJDialoguesEditor : Editor
 
     private void DrawHeader(Rect rect)
     {
-        //EditorGUI.LabelField(rect, "Quest Steps");
+        //EditorGUI.LabelField(rect, "Dialogues");
     }
 
     private void DrawElement(Rect rect, int index, bool isActive, bool isFocused)

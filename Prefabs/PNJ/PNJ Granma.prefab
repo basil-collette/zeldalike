@@ -105,7 +105,7 @@ MonoBehaviour:
   Name: Grandma
   Voice: {fileID: 0}
   Sprite: {fileID: 21300000, guid: ba2e602b523cb344c83e56dce72b142b, type: 3}
-  Dialogues: {fileID: 0}
+  Dialogues: {fileID: 11400000, guid: aab7053023bf3ae42b720fd5b3396272, type: 2}
 --- !u!61 &7448573881337437193
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ using UnityEngine;
 
 public class SaveManager : SignletonGameObject<SaveManager>
 {
-    public GameData GameData;
+    public static GameData GameData;
     public TargetScene StartScene;
 
     void Start()
@@ -111,10 +111,42 @@ public class SaveManager : SignletonGameObject<SaveManager>
             inventoryItems = new List<string>(),
             inventoryHotbars = new List<string>(),
             inventoryWeapon = JsonUtility.ToJson(sword),
-            playerHealth = 3f
+            playerHealth = 3f,
+            opennedChestGuids = new List<string>()
         };
 
         WriteSave(gameData);
+    }
+
+    public void EraseSave()
+    {
+        string saveFolderPath = Path.Combine(Application.persistentDataPath, $"Save/{GameData.saveName}");
+        if (Directory.Exists(saveFolderPath))
+        {
+            //popup confirmation
+
+            GetComponent<PauseManager>().Resume();
+
+            GetComponent<MainGameManager>().ShowMenuScene();
+
+            Directory.Delete(saveFolderPath, true);
+
+            CreateNewSave("main");
+        }
+    }
+
+    public void InitSave()
+    {
+        var savePath = Path.Combine(Application.persistentDataPath, "Save");
+        if (!Directory.Exists(savePath))
+        {
+            Directory.CreateDirectory(savePath);
+        }
+
+        if (GetSaveNames().Count == 0)
+        {
+            CreateNewSave("main");
+        }
     }
 
     public void SetDataToRunning()
@@ -134,7 +166,7 @@ public class SaveManager : SignletonGameObject<SaveManager>
         inventory.Weapon = (GameData.inventoryWeapon == null || GameData.inventoryWeapon == string.Empty) ? null : GetSerializedItem(GameData.inventoryWeapon) as Weapon;
 
         //DIALOGUES STATES
-        DialogueStates.Current.States = JsonUtility.FromJson<List<SerializableWrappedList<string>>>(GameData.dialoguesStates);
+        DialogueStates.Current.States = JsonUtility.FromJson<List<SerializableWrappedList<string>>>(GameData.dialoguesStates) ?? new List<SerializableWrappedList<string>>();
 
         //QUESTS
         PlayerQuest playerQuest = Resources.Load<PlayerQuest>("ScriptableObjects/Player/Quest/PlayerQuest");

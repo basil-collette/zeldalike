@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a2d8ae767442a4c8c0177884108faf, type: 3}
+  m_Name: wakeup
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGuid: 6fa4ec6b-29d0-4db2-b9e2-1c93cb628193
+    PortName: Next
+    TargetNodeGuid: eb0e570e-ec20-4c02-b23a-4422d1e215c1
+  - BaseNodeGuid: eb0e570e-ec20-4c02-b23a-4422d1e215c1
+    PortName: Ok
+    TargetNodeGuid: 3173e805-a9ec-4b3c-98ef-cbfe55ee8683
+  NodeDatas:
+  - rid: 4206153517309100035
+  - rid: 4206153517309100036
+  ExposedProperties: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 4206153517309100035
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: eb0e570e-ec20-4c02-b23a-4422d1e215c1
+        title: Dialogue
+        Position: {x: 205, y: 203}
+        EntryPoint: 0
+        DialogueText: "Tu as l'air chamboul\xE9 mon gar\xE7on. Tu ne sais plus qui
+          tu es ?"
+        DialogueCode: wakeup
+        Pnj: {fileID: 4019585777184574299, guid: 77a7f1fd211b43547a731f2d8b7cbabd, type: 3}
+    - rid: 4206153517309100036
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: 3173e805-a9ec-4b3c-98ef-cbfe55ee8683
+        title: Dialogue
+        Position: {x: 695, y: 203}
+        EntryPoint: 0
+        DialogueText: "Les enfants ont jou\xE9 avec tes papiers d'identit\xE9s, \xE7a
+          serait un bon d\xE9but de leur reprendre"
+        DialogueCode: 
+        Pnj: {fileID: 4019585777184574299, guid: 77a7f1fd211b43547a731f2d8b7cbabd, type: 3}

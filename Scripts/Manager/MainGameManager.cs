@@ -18,8 +18,13 @@ public class MainGameManager : SignletonGameObject<MainGameManager>
 
         InitBDD();
 
-        InitSave();
+        GetComponent<SaveManager>().InitSave();
 
+        ShowMenuScene();
+    }
+
+    public void ShowMenuScene()
+    {
         ScenesManager scenesManager = GetComponent<ScenesManager>();
         scenesManager.ClearScenes();
         scenesManager.AdditiveLoadScene(firstLoadedScene.libelle, () => {
@@ -49,21 +54,6 @@ public class MainGameManager : SignletonGameObject<MainGameManager>
         }
     }
 
-    void InitSave()
-    {
-        var savePath = Path.Combine(Application.persistentDataPath, "Save");
-        if (!Directory.Exists(savePath))
-        {
-            Directory.CreateDirectory(savePath);
-        }
-
-        SaveManager saveManager = GetComponent<SaveManager>();
-        if (saveManager.GetSaveNames().Count == 0)
-        {
-            saveManager.CreateNewSave("main");
-        }
-    }
-
     bool DbExists()
     {
         using (SqliteConnection connexion = DatabaseHelper.GetConnexion())
@@ -86,7 +76,7 @@ public class MainGameManager : SignletonGameObject<MainGameManager>
         SaveManager saveManager = GetComponent<SaveManager>();
         saveManager.LoadGame("main");
 
-        string sceneName = saveManager.GameData.sceneName;
+        string sceneName = SaveManager.GameData.sceneName;
         string scenePath = $"Scenes/{sceneName.Substring(0, sceneName.Length - 5)}/{sceneName}";
         TargetScene targetScene = Resources.Load<TargetScene>(scenePath);
         GetComponent<ScenesManager>().SwitchScene(targetScene);

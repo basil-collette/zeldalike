@@ -27,8 +27,17 @@ public class DialogueGraph : EditorWindow
         fileNameTextField.RegisterValueChangedCallback(evt => _fileName = evt.newValue);
         toolbar.Add(fileNameTextField);
 
-        toolbar.Add(new Button(() => RequestDataOperation(false)) { text = "Load Data" });
-        toolbar.Add(new Button(() => RequestDataOperation(true)) { text= "Save Data" });
+        var loadButton = new Button(() => RequestDataOperation(false)) { text = "Load Data" };
+        loadButton.style.backgroundColor = new Color(0.1f, 0.1f, 0.5f);
+        toolbar.Add(loadButton);
+
+        var saveButton = new Button(() => RequestDataOperation(true)) { text = "Save Data" };
+        saveButton.style.backgroundColor = new Color(0.1f, 0.5f, 0.1f);
+        toolbar.Add(saveButton);
+
+        var clearButton = new Button(() => ClearGraph()) { text = "Clear Graph" };
+        clearButton.style.backgroundColor = new Color(0.5f, 0.1f, 0.1f);
+        toolbar.Add(clearButton);
 
         /*
         var nodeCreateButton = new Button(() => { _graphView.CreateNode("Dialogue Node"); });
@@ -37,6 +46,18 @@ public class DialogueGraph : EditorWindow
         */
 
         rootVisualElement.Add(toolbar);
+    }
+
+    private void ClearGraph()
+    {
+        if (string.IsNullOrEmpty(_fileName))
+        {
+            //EditorUtility.DisplayDialog("Invalid file Name", "Please enter a valid file name.", "OK");
+            return;
+        }
+
+        var saveUtility = GraphSaveUtility.GetInstance(_graphView);
+        saveUtility.ClearGraph(_fileName);
     }
 
     private void GenerateMiniMap()

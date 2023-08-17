@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: DialogueStates
   m_EditorClassIdentifier: 
   States:
-  - Key: Clara
+  - Key: Grandma
     List:
-    - quest_started
+    - wakeup
+    - default

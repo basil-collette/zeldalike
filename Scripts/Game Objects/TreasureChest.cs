@@ -1,7 +1,6 @@
 using Assets.Database.Model.Design;
 using Assets.Database.Model.Repository;
 using Assets.Scripts.Game_Objects;
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
@@ -13,13 +12,13 @@ public class TreasureChest : NorthApproachingInteractable
     public Inventory inventory;
     public bool isOpen;
     public string itemNameCode;
-    public string Uid;
+    public string code;
 
     GameObject receivedItemContext;
 
     void Start()
     {
-        if (FindAnyObjectByType<SaveManager>().GameData.opennedChestGuids.Contains(Uid.ToString()))
+        if (SaveManager.GameData.opennedChestGuids.Contains(code.ToString()))
         {
             GetComponent<Animator>().SetBool("open", true);
             enabled = false;
@@ -59,7 +58,7 @@ public class TreasureChest : NorthApproachingInteractable
 
                 FindAnyObjectByType<Player>().RaiseItem();
 
-                FindAnyObjectByType<SaveManager>().GameData.opennedChestGuids.Add(Uid.ToString());
+                SaveManager.GameData.opennedChestGuids.Add(code.ToString());
 
                 FindAnyObjectByType<PauseManager>().ShowPausedInterface("InfoScene", () =>
                 {

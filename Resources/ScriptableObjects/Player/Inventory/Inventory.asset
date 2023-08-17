@@ -33,6 +33,19 @@ MonoBehaviour:
     attackDelay: 1
     speed: 1
   Hotbars: []
-  Items: []
+  Items:
+  - Id: 1
+    NameLibelle: "Cl\xE9"
+    NameCode: key
+    Actif: 1
+    InventoryIndex: 5
+    Weight: 0
+    Description: "Petite Cl\xE9"
+    TypeName: consommable
+    ItemType: 1
+    SpriteName: gfx/key
+    Sprite: {fileID: 21300000, guid: 5c926dd0e324ed8459c7b0f4bc3d3f05, type: 3}
+    RarityName: common
+    Rarity: 0
   maxWeight: 10
   currentWeight: 0

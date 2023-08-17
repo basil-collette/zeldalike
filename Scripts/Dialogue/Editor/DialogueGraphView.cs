@@ -157,7 +157,7 @@ public class DialogueGraphView : GraphView
         dialogueNode.mainContainer.Add(dialogueTextField);
 
         var dialogueCodeField = new TextField("Code");
-        dialogueTextField.SetValueWithoutNotify(dialogueNode.DialogueCode);
+        dialogueCodeField.SetValueWithoutNotify(dialogueNode.DialogueCode);
         dialogueCodeField.RegisterValueChangedCallback((evt) =>
         {
             dialogueNode.DialogueCode = evt.newValue;

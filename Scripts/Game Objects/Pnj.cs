@@ -32,9 +32,13 @@ public class Pnj : Interacting
 
     public DialogueReference GetWantToSay()
     {
-        IEnumerable<DialogueReference> dialogues = Dialogues.Dialogues.AsEnumerable()
-            .Where(x => !x.Conditions.Exists(condition => condition.Verify() == false))
-            .OrderBy(x => -(int)x.Priority);
+
+        List<DialogueReference> dialogues = Dialogues.Dialogues.AsEnumerable()
+            .Where(x => !x.Conditions.Exists(condition => condition.Verify() == false)).ToList();
+
+        Priority maxPriority = dialogues.Max(x => x.Priority);
+
+        dialogues = dialogues.Where(x => x.Priority == maxPriority).ToList();
 
         if (dialogues.Count() == 1)
         {

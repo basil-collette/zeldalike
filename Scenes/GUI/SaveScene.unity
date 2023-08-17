@@ -621,6 +621,7 @@ GameObject:
   - component: {fileID: 2120486036}
   - component: {fileID: 2120486035}
   - component: {fileID: 2120486034}
+  - component: {fileID: 2120486037}
   m_Layer: 0
   m_Name: Reset Button
   m_TagString: Untagged
@@ -692,7 +693,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2120486035}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2120486037}
+        m_TargetAssemblyTypeName: ButtonHelper, Assembly-CSharp
+        m_MethodName: EraseSave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2120486035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -731,3 +744,15 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2120486032}
   m_CullTransparentMesh: 1
+--- !u!114 &2120486037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120486032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e484a5a591cf04189ee95d201499ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -15,3 +15,9 @@ MonoBehaviour:
   libelle: ForestScene
   needPreload: 0
   scenesNeedingPreloadNames: []
+  musicName: 
+  cameraParameters:
+    Smoothing: 0.05
+    IsFixed: 0
+    MinPos: {x: 8.5, y: -3}
+    MaxPos: {x: 9.3, y: 6.5}

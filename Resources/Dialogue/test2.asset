@@ -26,15 +26,15 @@ MonoBehaviour:
     PortName: no
     TargetNodeGuid: 6d3caf33-0487-4323-813e-a327e44d8b40
   NodeDatas:
-  - rid: 4206153300168671236
-  - rid: 4206153300168671237
-  - rid: 4206153300168671238
-  - rid: 4206153300168671239
+  - rid: 4206153404005220355
+  - rid: 4206153404005220356
+  - rid: 4206153404005220357
+  - rid: 4206153404005220358
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 4206153300168671236
+    - rid: 4206153404005220355
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 6d3caf33-0487-4323-813e-a327e44d8b40
@@ -44,16 +44,7 @@ MonoBehaviour:
         DialogueText: after no dialogue
         DialogueCode: 
         Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
-    - rid: 4206153300168671237
-      type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
-      data:
-        Guid: 361d5818-c8b9-4659-a1f8-a648e483e7e8
-        title: Event
-        Position: {x: 440, y: 123}
-        EntryPoint: 0
-        Type: 0
-        Param: GrandmaQuest
-    - rid: 4206153300168671238
+    - rid: 4206153404005220356
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 15c1e9ab-86db-4989-94be-5c6c4a78beba
@@ -63,7 +54,7 @@ MonoBehaviour:
         DialogueText: first dialogue text
         DialogueCode: 
         Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
-    - rid: 4206153300168671239
+    - rid: 4206153404005220357
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 05ab1acc-084c-4245-8ca1-e7fdd22e1f1f
@@ -73,3 +64,12 @@ MonoBehaviour:
         DialogueText: dialogue after yes
         DialogueCode: quest_started
         Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
+    - rid: 4206153404005220358
+      type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: 361d5818-c8b9-4659-a1f8-a648e483e7e8
+        title: Event
+        Position: {x: 440, y: 123}
+        EntryPoint: 0
+        Type: 0
+        Param: Grandma Quest

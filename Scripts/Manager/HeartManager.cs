@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class HeartManager : SignletonGameObject<HeartManager>
 {
     public Image[] hearts;
+    public float maxHearts = 3;
     public FloatValue playerHealth;
 
     public Sprite fullHeart;
@@ -14,21 +15,22 @@ public class HeartManager : SignletonGameObject<HeartManager>
     
     void Start()
     {
+        //playerHealth.RuntimeValue = SaveManager.GameData.playerHealth;
         InitHearts();
+        UpdateHearts();
     }
 
     public void InitHearts()
     {
-        for (int i = 0; i < playerHealth.RuntimeValue; i++)
+        for (int i = 0; i < maxHearts; i++)
         {
             hearts[i].gameObject.SetActive(true);
-            hearts[i].sprite = fullHeart;
         }
     }
 
     public void UpdateHearts()
     {
-        for (int i = 0; i < playerHealth.initialValue; i++)
+        for (int i = 0; i < maxHearts; i++)
         {
             float temp = playerHealth.RuntimeValue - i;
             

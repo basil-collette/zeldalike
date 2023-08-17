@@ -8,7 +8,11 @@ public class PlayerQuest : ScriptableObject
     public static void AddQuest(string questName)
     {
         PlayerQuest pq = FindAnyObjectByType<Player>().playerQuest;
-        pq.AddQuest(pq.FindQuest(questName));
+
+        if (!pq.PlayerQuests.Any(x => x.Name == questName))
+        {
+            pq.AddQuest(pq.FindQuest(questName));
+        }
     }
 
     public List<Quest> PlayerQuests = new List<Quest>();

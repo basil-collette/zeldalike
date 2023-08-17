@@ -1,5 +1,6 @@
 using Assets.Database.Model.Design;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryManager : SignletonGameObject<InventoryManager>
 {
@@ -8,12 +9,15 @@ public class InventoryManager : SignletonGameObject<InventoryManager>
     public Transform ItemsSlotsContainer;
     public Transform HotbarSlotsContainer;
     public GameObject HoldedSlot;
+    public Text MoneyAmount;
     
     Inventory Inventory;
 
     private void OnEnable()
     {
-        Inventory = FindGameObjectHelper.FindByName("Player").GetComponent<Player>().inventory;
+        Inventory = Resources.Load<Inventory>("ScriptableObjects/Player/Inventory/Inventory");
+
+        MoneyAmount.text = Inventory.Money.ToString();
 
         FillSlots();
     }

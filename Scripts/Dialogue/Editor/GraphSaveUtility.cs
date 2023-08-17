@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 
 public class GraphSaveUtility
 {
+    public string _currentFileName;
     private DialogueGraphView _targetGraphView;
     private DialogueContainer _containerCache;
 
@@ -53,6 +54,8 @@ public class GraphSaveUtility
 
         AssetDatabase.CreateAsset(dialogueContainer, $"Assets/Resources/Dialogue/{fileName}.asset"); // //ScriptableObject/Objects/Dialog/littletown/
         AssetDatabase.SaveAssets();
+
+        _currentFileName = fileName;
     }
 
     private bool SaveExposedProperties(DialogueContainer dialogueContainer)
@@ -129,6 +132,8 @@ public class GraphSaveUtility
             EditorUtility.DisplayDialog("File Not Found", "target dialogue graph file does not exists!", "OK");
             return;
         }
+
+        _currentFileName = fileName;
 
         ClearGraph();
         CreateNodes();
@@ -241,8 +246,11 @@ public class GraphSaveUtility
         return Resources.Load<DialogueContainer>("Dialogue/" + fileName);
     }
 
-    private void ClearGraph()
+    public void ClearGraph(string fileName = null)
     {
+        _currentFileName ??= fileName;
+
+        _containerCache = GetDialogue(_currentFileName);
         Nodes.Find(x => x.EntryPoint).Guid = _containerCache.NodeLinks[0].BaseNodeGuid;
 
         foreach (var node in Nodes)

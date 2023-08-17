@@ -31,6 +31,11 @@ public class ButtonHelper : MonoBehaviour
         FindGameObjectHelper.FindByName("Main Game Manager").GetComponent<MainGameManager>().StartGame();
     }
 
+    public void EraseSave()
+    {
+        FindGameObjectHelper.FindByName("Main Game Manager").GetComponent<SaveManager>().EraseSave();
+    }
+
     public void Resume()
     {
         exitPause?.Invoke();

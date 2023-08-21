@@ -72,10 +72,6 @@ public class QuestEditor : Editor
             {
                 AddGoal(new TalkGoal());
             }
-            if (GUILayout.Button("Collect"))
-            {
-                AddGoal(new CollectGoal());
-            }
         EditorGUILayout.EndHorizontal();
 
         GUILayout.Space(2);

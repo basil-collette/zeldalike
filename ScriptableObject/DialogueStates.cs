@@ -7,11 +7,14 @@ public class DialogueStates : ScriptableObject
 {
     public List<SerializableWrappedList<string>> States = new List<SerializableWrappedList<string>>();
 
-    public static DialogueStates Current => Resources.Load<DialogueStates>("ScriptableObjects/Dialogues/DialogueStates");
+    public static DialogueStates Get()
+    {
+        return Resources.Load<DialogueStates>("ScriptableObjects/Dialogues/DialogueStates");
+    }
 
     public static bool HaveSaid(string pnjName, string dialogueCode)
     {
-        var pnjNode = Current.States.Find(x => x.Key == pnjName);
+        var pnjNode = Get().States.Find(x => x.Key == pnjName);
 
         if (pnjNode == null) return false;
 
@@ -30,7 +33,7 @@ public class DialogueStates : ScriptableObject
         if (dialogueCode != null && dialogueCode != string.Empty
             && !HaveSaid(pnjName, dialogueCode))
         {
-            var tempStates = Current.States;
+            var tempStates = Get().States;
 
             var dialoguePnjState = tempStates.Find(x => x.Key == pnjName);
             if (dialoguePnjState == null)

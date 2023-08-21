@@ -26,13 +26,12 @@ public class Pnj : Interacting
 
     public void Talk()
     {
-        var dialogueContainer = GetWantToSay();
-        dialogueManager.StartDialogue(this, dialogueContainer);
+        var dialogueRef = GetWantToSay();
+        dialogueManager.StartDialogue(this, dialogueRef);
     }
 
     public DialogueReference GetWantToSay()
     {
-
         List<DialogueReference> dialogues = Dialogues.Dialogues.AsEnumerable()
             .Where(x => !x.Conditions.Exists(condition => condition.Verify() == false)).ToList();
 

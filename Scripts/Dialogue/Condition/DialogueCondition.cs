@@ -5,10 +5,23 @@ using UnityEngine;
 public abstract class DialogueCondition
 {
     public string TargetCode;
-    public string Type;
+    [ShowOnly] public string Type;
     public bool Not = false;
 
     public abstract bool Verify();
+}
+
+[Serializable]
+public class DialogueConditionStartedQuest : DialogueCondition
+{
+    public DialogueConditionStartedQuest() { Type = "StartedQuest"; }
+
+    public override bool Verify()
+    {
+        PlayerQuest playerQuest = Resources.Load<PlayerQuest>("ScriptableObjects/Player/Quest/PlayerQuest");
+        bool result = playerQuest.GetQuestByName(TargetCode) != null;
+        return (Not) ? !result : result;
+    }
 }
 
 [Serializable]
@@ -19,7 +32,8 @@ public class DialogueConditionEndQuest : DialogueCondition
     public override bool Verify()
     {
         PlayerQuest playerQuest = Resources.Load<PlayerQuest>("ScriptableObjects/Player/Quest/PlayerQuest");
-        bool result = playerQuest.GetQuestByName(TargetCode).IsCompleted;
+        var quest = playerQuest.GetQuestByName(TargetCode);
+        bool result = (quest == null) ? false : quest.IsCompleted;
         return (Not) ? !result : result;
     }
 }

@@ -1,6 +1,9 @@
-[System.Serializable]
+using System;
+
+[Serializable]
 public abstract class Goal
 {
+    public string Target;
     public string Objective;
     public bool IsCompleted;
     public int RequiredAmmount;
@@ -19,7 +22,22 @@ public abstract class Goal
         DisableGoalCheckObserver();
     }
 
-    protected abstract void GoalCheck(params object[] observerParams);
+    protected virtual void GoalCheck(params object[] observerParams)
+    {
+        string[] deathParams = observerParams as string[];
+
+        if (Array.Exists(deathParams, (x) => x == Target))
+        {
+            CurrentAmmount++;
+
+            if (CurrentAmmount == RequiredAmmount)
+            {
+                IsCompleted = true;
+                DisableGoalCheckObserver();
+            }
+        }
+    }
+
     protected abstract void ApplyGoalCheckObserver();
     protected abstract void DisableGoalCheckObserver();
 }

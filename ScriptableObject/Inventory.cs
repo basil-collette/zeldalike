@@ -1,8 +1,7 @@
 #nullable enable
 
 using Assets.Database.Model.Design;
-using Assets.Database.Model.Repository;
-using Assets.Scripts.Enums;
+using Assets.Scripts.Manager;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +9,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObject/Inventory")]
 public class Inventory : ScriptableObject
 {
+    public static event Action<string[]> OnObtain;
+
     public int Money = 0;
     public int Experience = 0;
     //OBJETS
@@ -25,31 +26,12 @@ public class Inventory : ScriptableObject
     #region EasyAccess
     public static Inventory GetInventory() { return FindAnyObjectByType<Player>().inventory; }
 
-    public static Item GetItem(string itemParams) // dataTableName;itemName
-    {
-        string[] itemParamsArray = itemParams.Split(";");
+    public static void AddItem(string itemParams) {
+        var item = ItemManager.GetItem(itemParams);
+        GetInventory().AddItem(item);
 
-        ItemTypeEnum type = (ItemTypeEnum)Enum.Parse(typeof(ItemTypeEnum), itemParamsArray[0]);
-        string name = itemParamsArray[1];
-
-        return GetItem(name, type);
+        OnObtain?.Invoke(new string[] { item.NameCode });
     }
-
-    public static Item GetItem(string itemName, ItemTypeEnum type)
-    {
-        switch (type)
-        {
-            case ItemTypeEnum.weapon:
-                return Singleton<WeaponRepository>.Instance.GetByCode(itemName);
-
-            case ItemTypeEnum.item:
-                return Singleton<ItemRepository<Item>>.Instance.GetByCode(itemName);
-
-            default: return null;
-        }
-    }
-
-    public static void AddItem(string itemParams) { GetInventory().AddItem(GetItem(itemParams)); }
 
     public static void StaticRemoveItem(string itemname) { GetInventory().RemoveItem(itemname); }
     #endregion 
@@ -63,7 +45,7 @@ public class Inventory : ScriptableObject
         if (reward.ItemsRef == null) return;
         foreach (ItemRef itemRef in reward.ItemsRef)
         {
-            AddItem(GetItem(itemRef.ItemCode, itemRef.itemType));
+            AddItem(ItemManager.GetItem(itemRef.ItemCode, itemRef.itemType));
         }
     }
 
@@ -72,6 +54,7 @@ public class Inventory : ScriptableObject
         if (Items.Count < maxCountItems)
         {
             Items.Add(content);
+            OnObtain?.Invoke(new string[] { content.NameCode });
         }
         else
         {

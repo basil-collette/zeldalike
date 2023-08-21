@@ -37,26 +37,35 @@ public class PNJDialoguesEditor : Editor
         EditorGUILayout.LabelField("Adding");
 
         EditorGUILayout.BeginHorizontal();
-        if (GUILayout.Button("End Quest"))
-        {
-            AddCondition(new DialogueConditionEndQuest());
-        }
-        if (GUILayout.Button("Have Talk"))
-        {
-            AddCondition(new DialogueConditionHaveTalk());
-        }
+            if (GUILayout.Button("Started Quest"))
+            {
+                AddCondition(new DialogueConditionStartedQuest());
+            }
+            if (GUILayout.Button("End Quest"))
+            {
+                AddCondition(new DialogueConditionEndQuest());
+            }
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.BeginHorizontal();
-        if (GUILayout.Button("Possess"))
-        {
-            AddCondition(new DialogueConditionPossess());
-        }
-        /*if (GUILayout.Button("Location"))
-        {
-            AddCondition();
-        }*/
+            if (GUILayout.Button("Possess"))
+            {
+                AddCondition(new DialogueConditionPossess());
+            }
+            if (GUILayout.Button("Have Talk"))
+            {
+                AddCondition(new DialogueConditionHaveTalk());
+            }
         EditorGUILayout.EndHorizontal();
+
+        /*
+        EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("Location"))
+            {
+                AddCondition();
+            }
+        EditorGUILayout.EndHorizontal();
+        */
 
         GUILayout.Space(2);
 

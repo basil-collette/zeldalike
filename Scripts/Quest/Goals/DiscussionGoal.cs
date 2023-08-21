@@ -1,34 +1,16 @@
 using System;
 
-[System.Serializable]
+[Serializable]
 public class DiscussionGoal : Goal
 {
-    //public string Target;
-
     protected override void ApplyGoalCheckObserver()
     {
-        //Health.OnDeath += GoalCheck;
+        DialogueManager.OnDiscuss += GoalCheck;
     }
 
     protected override void DisableGoalCheckObserver()
     {
-        //Health.OnDeath -= GoalCheck;
-    }
-
-    protected override void GoalCheck(params object[] observerParams)
-    {
-        string[] deathParams = observerParams as string[];
-
-        /*if (Array.Exists(deathParams, (x) => x == Target))
-        {
-            CurrentAmmount++;
-
-            if (CurrentAmmount == RequiredAmmount)
-            {
-                IsCompleted = true;
-                DisableGoalCheckObserver();
-            }
-        }*/
+        DialogueManager.OnDiscuss -= GoalCheck;
     }
 
 }

@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a2d8ae767442a4c8c0177884108faf, type: 3}
+  m_Name: arrosoir_thank
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGuid: 6fa4ec6b-29d0-4db2-b9e2-1c93cb628193
+    PortName: Next
+    TargetNodeGuid: f2c80eff-cd97-4fb1-b8c7-cab4cf2bb285
+  - BaseNodeGuid: f2c80eff-cd97-4fb1-b8c7-cab4cf2bb285
+    PortName: Output
+    TargetNodeGuid: 1e0292a7-fec5-443c-b7c0-73231493d2b1
+  NodeDatas:
+  - rid: 4206153562263650308
+  - rid: 4206153562263650309
+  ExposedProperties: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 4206153562263650308
+      type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: f2c80eff-cd97-4fb1-b8c7-cab4cf2bb285
+        title: Event
+        Position: {x: 200, y: 200}
+        EntryPoint: 0
+        Type: 2
+        Param: arrosoir
+    - rid: 4206153562263650309
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: 1e0292a7-fec5-443c-b7c0-73231493d2b1
+        title: Dialogue
+        Position: {x: 399, y: 200}
+        EntryPoint: 0
+        DialogueText: "Oh mon arrosoiri ! Voici 50 pi\xE8ces pour te remercier"
+        DialogueCode: arrosoir_back
+        Pnj: {fileID: 0}

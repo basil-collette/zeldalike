@@ -88,8 +88,13 @@ public class DialogueGraph : EditorWindow
 
         if (save)
         {
-            string realFolderPath = Path.Combine(dialogPath, (_fileName.Length == 0) ? string.Empty : _fileName.Substring(0, _fileName.LastIndexOf("/")));
-            string realName = _fileName.Substring(_fileName.LastIndexOf("/") + 1);
+            string realFolderPath = Path.Combine(dialogPath, (_fileName.Length == 0 || !_fileName.Contains("/"))
+                ? string.Empty
+                : _fileName.Substring(0, _fileName.LastIndexOf("/")));
+
+            string realName = (!_fileName.Contains("/"))
+                ? _fileName
+                : _fileName.Substring(_fileName.LastIndexOf("/") + 1);
 
             string path = EditorUtility.SaveFilePanel("Save dialog", realFolderPath, realName, "asset");
             if (path.Length != 0)

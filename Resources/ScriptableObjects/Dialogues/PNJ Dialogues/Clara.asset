@@ -14,21 +14,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Dialogues:
   - NameCode: default
-    DialogueContainer: {fileID: 11400000, guid: 3697636beab278c49b355b642a7b888f, type: 2}
+    DialogueContainer: {fileID: 11400000, guid: a4b46b0f4b5753649ac39c0887d5b98c, type: 2}
     Conditions: []
     Priority: 1
-    IsSaid: 1
-  - NameCode: deux
-    DialogueContainer: {fileID: 11400000, guid: 3697636beab278c49b355b642a7b888f, type: 2}
+    IsSaid: 0
+  - NameCode: id_card_info
+    DialogueContainer: {fileID: 11400000, guid: f53db87bcbe02364b881a6f1599dae49, type: 2}
     Conditions:
-    - rid: 3379738592604061696
+    - rid: 4206153544483209243
     Priority: 2
+    IsSaid: 0
+  - NameCode: arrosoir_thank
+    DialogueContainer: {fileID: 11400000, guid: 25a02eab93912ae4daefc5fbbed5b1e4, type: 2}
+    Conditions:
+    - rid: 4206153562263650310
+    Priority: 3
     IsSaid: 0
   references:
     version: 2
     RefIds:
-    - rid: 3379738592604061696
+    - rid: 4206153544483209243
       type: {class: DialogueConditionHaveTalk, ns: , asm: Assembly-CSharp}
       data:
-        TargetCode: default
-        PNJName: Clara
+        TargetCode: wakeup
+        Type: HaveTalk
+        Not: 0
+        PNJName: Grandma
+    - rid: 4206153562263650310
+      type: {class: DialogueConditionPossess, ns: , asm: Assembly-CSharp}
+      data:
+        TargetCode: arrosoir
+        Type: Possess
+        Not: 0

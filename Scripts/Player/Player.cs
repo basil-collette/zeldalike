@@ -158,6 +158,8 @@ public class Player : AliveEntity
         }
         */
 
+        var weapon = GetComponentInChildren<WeaponMonoBehaviour>();
+
         if (currentEntityState == EntityState.walk)
         {
             if (direction != Vector3.zero)
@@ -178,26 +180,24 @@ public class Player : AliveEntity
 
                 GetComponent<Rigidbody2D>().velocity = new Vector2(direction.x * finalSpeed, direction.y * finalSpeed);
 
-                if (attacking)
-                {
-                    Vector2 attackDirection = GetComponentInChildren<WeaponMonoBehaviour>().direction;
-                    direction.x = attackDirection.x;
-                    direction.y = attackDirection.y;
-                }
-
-                animator.SetFloat("moveX", direction.x);
-                animator.SetFloat("moveY", direction.y);
                 animator.SetBool("moving", true);
-
             }
             else
             {
                 Imobilize();
             }
         }
-        else
+
+        if (weapon.attacking)
         {
-            Imobilize();
+            direction.x = weapon.direction.x;
+            direction.y = weapon.direction.y;
+        }
+
+        if (direction != Vector3.zero)
+        {
+            animator.SetFloat("moveX", direction.x);
+            animator.SetFloat("moveY", direction.y);
         }
     }
 

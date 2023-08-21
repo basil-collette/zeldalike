@@ -12,8 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b0afe222aeddf14e92e8d9217ef021c, type: 3}
   m_Name: DialogueStates
   m_EditorClassIdentifier: 
-  States:
-  - Key: Grandma
-    List:
-    - wakeup
-    - default
+  States: []

@@ -22,6 +22,18 @@ MonoBehaviour:
     DialogueContainer: {fileID: 11400000, guid: 5514dba8a8a49fb478a3876900f8031b, type: 2}
     Conditions:
     - rid: 4206153503839879173
+    Priority: 3
+    IsSaid: 0
+  - NameCode: go_mother_rose
+    DialogueContainer: {fileID: 11400000, guid: 93ca462327834534daf9d4a383757501, type: 2}
+    Conditions:
+    - rid: 4206153544483209245
+    Priority: 3
+    IsSaid: 0
+  - NameCode: rappel_ic_card
+    DialogueContainer: {fileID: 11400000, guid: 836b9b3c31b00a84aabb1f67f7711bdc, type: 2}
+    Conditions:
+    - rid: 4206153544483209247
     Priority: 2
     IsSaid: 0
   references:
@@ -33,4 +45,17 @@ MonoBehaviour:
         TargetCode: wakeup
         Type: HaveTalk
         Not: 1
+        PNJName: Grandma
+    - rid: 4206153544483209245
+      type: {class: DialogueConditionStartedQuest, ns: , asm: Assembly-CSharp}
+      data:
+        TargetCode: mother_rose
+        Type: StartedQuest
+        Not: 0
+    - rid: 4206153544483209247
+      type: {class: DialogueConditionHaveTalk, ns: , asm: Assembly-CSharp}
+      data:
+        TargetCode: wakeup
+        Type: HaveTalk
+        Not: 0
         PNJName: Grandma

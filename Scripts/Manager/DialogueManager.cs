@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class DialogueManager : SignletonGameObject<DialogueManager>
 {
+    public static event Action<string[]> OnDiscuss;
+
     public PauseManager pauseManager;
     public GameObject dialogueButtonPrefab;
     public float textAnimPauseSeconds = 0.01f;
@@ -51,6 +53,8 @@ public class DialogueManager : SignletonGameObject<DialogueManager>
         FindGameObjectHelper.FindByName("Interlocutor").GetComponent<Image>().sprite = node.Pnj.Sprite;
 
         var textComp = FindGameObjectHelper.FindByName("Dialogue Text").GetComponent<Text>();
+
+        OnDiscuss?.Invoke(new string[] { node.DialogueCode });
 
         Action showButtons = () =>
         {

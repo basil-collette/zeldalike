@@ -94,7 +94,7 @@ public class SaveManager : SignletonGameObject<SaveManager>
 
             opennedChestGuids = GameData.opennedChestGuids,
 
-            dialoguesStates = JsonUtility.ToJson(DialogueStates.Current),
+            dialoguesStates = JsonUtility.ToJson(DialogueStates.Get()),
 
             quests = player.playerQuest.PlayerQuests.Select(x => JsonUtility.ToJson(x)).ToList()
         };
@@ -112,15 +112,27 @@ public class SaveManager : SignletonGameObject<SaveManager>
             inventoryHotbars = new List<string>(),
             inventoryWeapon = JsonUtility.ToJson(sword),
             playerHealth = 3f,
-            opennedChestGuids = new List<string>()
+            opennedChestGuids = new List<string>(),
+            quests = new List<string>() { JsonUtility.ToJson(Resources.Load<Quest>("ScriptableObjects/quests/Je m'appelle...")) }
         };
+
+        Quest[] quests = Resources.LoadAll<Quest>("ScriptableObjects/quests");
+        foreach (var quest in quests)
+        {
+            quest.IsCompleted = false;
+            quest.QuestSteps.Select(x => {
+                x.IsCompleted = false;
+                x.Goals.Select(y => y.CurrentAmmount = 0);
+                return x;
+            });
+        }
 
         WriteSave(gameData);
     }
 
     public void EraseSave()
     {
-        string saveFolderPath = Path.Combine(Application.persistentDataPath, $"Save/{GameData.saveName}");
+        string saveFolderPath = Path.Combine(Application.persistentDataPath, $"Save/main");
         if (Directory.Exists(saveFolderPath))
         {
             //popup confirmation
@@ -164,9 +176,12 @@ public class SaveManager : SignletonGameObject<SaveManager>
         inventory.Items = GameData.inventoryItems.Select(x => GetSerializedItem(x)).ToList();
         inventory.Hotbars = GameData.inventoryHotbars.Select(x => GetSerializedItem(x) as HoldableItem).ToList();
         inventory.Weapon = (GameData.inventoryWeapon == null || GameData.inventoryWeapon == string.Empty) ? null : GetSerializedItem(GameData.inventoryWeapon) as Weapon;
-
+        EditorUtility.SetDirty(inventory);
+        
         //DIALOGUES STATES
-        DialogueStates.Current.States = JsonUtility.FromJson<List<SerializableWrappedList<string>>>(GameData.dialoguesStates) ?? new List<SerializableWrappedList<string>>();
+        DialogueStates ds = Resources.Load<DialogueStates>("ScriptableObjects/Dialogues/DialogueStates");
+        ds.States.Clear();
+        JsonUtility.FromJsonOverwrite(GameData.dialoguesStates, ds);
 
         //QUESTS
         PlayerQuest playerQuest = Resources.Load<PlayerQuest>("ScriptableObjects/Player/Quest/PlayerQuest");
@@ -176,7 +191,14 @@ public class SaveManager : SignletonGameObject<SaveManager>
             Quest quest = Resources.Load<Quest>($"ScriptableObjects/quests/{tempQuest.Name}");
             JsonUtility.FromJsonOverwrite(GameData.quests[i], quest);
             playerQuest.AddQuest(quest);
+
+            EditorUtility.SetDirty(quest);
         }
+
+        EditorUtility.SetDirty(playerQuest);
+
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
 
         //COFFRES
         //gardé en mémoire dans GameData

@@ -18,7 +18,7 @@ public class TreasureChest : NorthApproachingInteractable
 
     void Start()
     {
-        if (SaveManager.GameData.opennedChestGuids.Contains(code.ToString()))
+        if (SaveManager.GameData.opennedChestGuids.Contains(code))
         {
             GetComponent<Animator>().SetBool("open", true);
             enabled = false;

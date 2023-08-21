@@ -12,6 +12,9 @@ public class MainGameManager : SignletonGameObject<MainGameManager>
 
     void Start()
     {
+        //Hide URP Debuger
+        UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
+
         //Application.targetFrameRate = 10;
 
         InitLocalDataFolder();

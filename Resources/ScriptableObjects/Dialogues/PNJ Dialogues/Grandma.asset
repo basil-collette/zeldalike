@@ -30,7 +30,7 @@ MonoBehaviour:
     - rid: 4206153544483209245
     Priority: 3
     IsSaid: 0
-  - NameCode: rappel_ic_card
+  - NameCode: rappel_id_card
     DialogueContainer: {fileID: 11400000, guid: 836b9b3c31b00a84aabb1f67f7711bdc, type: 2}
     Conditions:
     - rid: 4206153544483209247

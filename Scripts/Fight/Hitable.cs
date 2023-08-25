@@ -44,12 +44,12 @@ public abstract class Hitable : Effectable
             {
                 case DropTypeEnum.weapon:
                     drop = Resources.Load<ItemDrop>($"Prefabs/Drop/ItemDrop");
-                    (drop as ItemDrop).item = Singleton<WeaponRepository>.Instance.GetByCode(loot.lootCodeValue);
+                    (drop as ItemDrop).Item = Singleton<WeaponRepository>.Instance.GetByCode(loot.lootCodeValue);
                     break;
 
                 case DropTypeEnum.item:
                     drop = Resources.Load<ItemDrop>($"Prefabs/Drop/ItemDrop");
-                    (drop as ItemDrop).item = Singleton<ItemRepository<Item>>.Instance.GetByCode(loot.lootCodeValue);
+                    (drop as ItemDrop).Item = Singleton<ItemRepository<Item>>.Instance.GetByCode(loot.lootCodeValue);
                     break;
 
                 case DropTypeEnum.heart:

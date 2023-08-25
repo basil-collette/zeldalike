@@ -17,7 +17,7 @@ MonoBehaviour:
   IsCompleted: 0
   QuestSteps:
   - Goals:
-    - rid: 4206153630825840657
+    - rid: 4206153676036767746
     IsCompleted: 0
     Rewards:
       Money: 0
@@ -26,7 +26,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 4206153630825840657
+    - rid: 4206153676036767746
       type: {class: CollectGoal, ns: , asm: Assembly-CSharp}
       data:
         Target: id_card

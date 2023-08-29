@@ -392,6 +392,16 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: d8c4a6c1273abce4a9eef8e7f2b7a280, type: 3}
   - Name: heal
     Clip: {fileID: 8300000, guid: d1895312f4bd9b345b3a7026ae002dfd, type: 3}
+  - Name: insect_slash
+    Clip: {fileID: 8300000, guid: 3becec1909f194046945d85ac1077772, type: 3}
+  - Name: dagger
+    Clip: {fileID: 8300000, guid: 7bd63793371f95b4385fa74a1fe6b367, type: 3}
+  - Name: monster_movement
+    Clip: {fileID: 8300000, guid: 56703418e3aed4c47a5f6622816b8e41, type: 3}
+  - Name: monster_scream
+    Clip: {fileID: 8300000, guid: 46f2495fb792aef45b2bedde5e1862c8, type: 3}
+  - Name: monster_deny
+    Clip: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
 --- !u!4 &119542048
 Transform:
   m_ObjectHideFlags: 0

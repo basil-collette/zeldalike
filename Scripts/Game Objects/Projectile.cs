@@ -3,8 +3,8 @@ using UnityEngine;
 [System.Serializable]
 public class Projectile : TriggerHit
 {
-    [SerializeReference] public float speed = 1;
-    [SerializeReference] public float aliveMaxDuration = 6f;
+    public float speed = 1;
+    public float aliveMaxDuration = 6f;
     public Vector3 direction = Vector3.zero;
 
     protected bool canCollid = false;

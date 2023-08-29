@@ -2,12 +2,12 @@
 
 public abstract class DirectionHelper
 {
-    public static void PointTo(Transform transform, Vector2 target)
+    public static void PointTo(Transform transform, Vector2 target, int? angleOffset = null)
     {
-        const int ANGLE_CORRECTOR = -90; //-90 to towarding up at start
-
         Vector2 direction = target - (Vector2)transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + ANGLE_CORRECTOR;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        if (angleOffset != null) angle += (int)angleOffset;
 
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 

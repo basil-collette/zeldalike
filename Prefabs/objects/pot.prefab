@@ -147,5 +147,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitSound: {fileID: 0}
   deathSound: {fileID: 8300000, guid: d35e96c6c7e2567408f37324f66cbf29, type: 3}
-  lootTable: {fileID: 11400000, guid: ae517df4cb57d1749a631a552c2c756a, type: 2}
   deathEffect: {fileID: 4283853020777935570, guid: 6b97c1f804a723f4bb1da38e5af7d017, type: 3}
+  lootTable: {fileID: 11400000, guid: ae517df4cb57d1749a631a552c2c756a, type: 2}

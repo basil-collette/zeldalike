@@ -54,6 +54,11 @@ namespace Assets.Scripts.Manager
             effectSource.PlayOneShot(effects.First(e => e.Name == Name).Clip);
         }
 
+        public void PlayEffect(string Name, float currentVolume)
+        {
+            effectSource.PlayOneShot(effects.First(e => e.Name == Name).Clip, currentVolume);
+        }
+
         public void PlayEffect(AudioClip clip)
         {
             effectSource.PlayOneShot(clip);

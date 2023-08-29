@@ -11,9 +11,6 @@ public class HitEditor : Editor
 
         Hit hit = target as Hit;
 
-        SerializedProperty attackerTagProperty = serializedObject.FindProperty("attackerTag");
-        EditorGUILayout.PropertyField(attackerTagProperty);
-
         EditorGUILayout.LabelField("Adding");
 
         if (GUILayout.Button("Effect"))
@@ -41,42 +38,14 @@ public class HitEditor : Editor
         }
         EditorGUILayout.EndHorizontal();
 
+        /*
         SerializedProperty effectsProperty = serializedObject.FindProperty("effects");
         EditorGUILayout.PropertyField(effectsProperty, true);
+        */
 
-        //Show list on editor
-        InitEffectList(effectsProperty);
+        DrawDefaultInspector();
 
         serializedObject.ApplyModifiedProperties();
-    }
-
-    void InitEffectList(SerializedProperty effectsProperty)
-    {
-        for (int i = 0; i < effectsProperty.arraySize; i++)
-        {
-            SerializedProperty effectProperty = effectsProperty.GetArrayElementAtIndex(i);
-
-            //InitItemMenu(effectProperty);
-        }
-    }
-
-    void InitItemMenu(SerializedProperty effectProperty)
-    {
-        EditorGUI.indentLevel++;
-        EditorGUILayout.PropertyField(effectProperty, true);
-        
-        /*
-        EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Type");
-        EditorGUILayout.LabelField(effectProperty.FindPropertyRelative("effectType").);
-        EditorGUILayout.EndHorizontal();
-
-        EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Amount");
-        EditorGUILayout.FloatField(effectProperty.FindPropertyRelative("amount").floatValue);
-        EditorGUILayout.EndHorizontal();
-        */
-        EditorGUI.indentLevel--;
     }
 
 }

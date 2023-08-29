@@ -18,6 +18,8 @@ public class Health : Hitable
 
     public Action _dieOverride;
 
+    bool IsDammaged = false;
+
     private void Start()
     {
         
@@ -27,13 +29,15 @@ public class Health : Hitable
     {
         foreach (Effect effect in hit)
         {
+            if (IsDammaged && effect.effectType != EffectEnum.knockback) continue;
+
             Effect(attacker.transform.position, effect);
         }
     }
 
     public override void Effect(Vector3 attackerPos, Effect effect)
     {
-        EffectModificator effectMod = _effectMods.Find(em => em.effectType == effect.effectType);
+        EffectModificator? effectMod = _effectMods.Find(em => em.effectType == effect.effectType);
         if (effectMod != null
             && effectMod.mod <= 0)
         {
@@ -94,12 +98,40 @@ public class Health : Hitable
             audioSource.Play();
         }
 
+        StartCoroutine(ColorDamageCo());
+
         if (_healthSignal != null)
         {
             _healthSignal.Raise();
         } 
 
         CheckDeath();
+    }
+
+    IEnumerator ColorDamageCo()
+    {
+        IsDammaged = true;
+
+        var sr = GetComponent<SpriteRenderer>();
+
+        sr.color = new Color(1, 0.3f, 0.3f);
+        yield return new WaitForSeconds(0.1f);
+
+        sr.color = new Color(1, 1, 1);
+        yield return new WaitForSeconds(0.1f);
+
+        sr.color = new Color(1, 0.3f, 0.3f);
+        yield return new WaitForSeconds(0.1f);
+
+        sr.color = new Color(1, 1, 1);
+        yield return new WaitForSeconds(0.1f);
+
+        sr.color = new Color(1, 0.3f, 0.3f);
+        yield return new WaitForSeconds(0.1f);
+
+        sr.color = new Color(1, 1, 1);
+
+        IsDammaged = false;
     }
 
     public void Heal(float healAmount)

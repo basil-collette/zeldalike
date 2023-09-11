@@ -10,6 +10,14 @@ public class MainGameManager : SignletonGameObject<MainGameManager>
     public GameObject CanvaControls;
     public bool resetBDD = false;
 
+    [Header("ScriptableObjects")]
+    public PlayerQuest PlayerQuest;
+    public DialogueStates DialogueStates;
+    public Inventory Inventory;
+
+    //Assembly.GetAssembly(typeof(BaseRepitory<T>)).GetTypes().FirstOrDefault(testc => testc.isSubsclassOf(typeof(GenericRepitory<T>)));
+    //FindAnyObjectByType<ToastManager>().Add(new Toast("La partie à été supprimée!", ToastType.Success));
+
     void Start()
     {
         //Hide URP Debuger
@@ -53,7 +61,6 @@ public class MainGameManager : SignletonGameObject<MainGameManager>
         if (resetBDD)
         {
             DatabaseHelper.ResetTables();
-            //Assembly.GetAssembly(typeof(BaseRepitory<T>)).GetTypes().FirstOrDefault(testc => testc.isSubsclassOf(typeof(GenericRepitory<T>)));
         }
     }
 

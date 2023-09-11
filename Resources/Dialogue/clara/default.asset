@@ -17,12 +17,12 @@ MonoBehaviour:
     PortName: Next
     TargetNodeGuid: 1b77cbc5-424a-4ee9-b58e-f4ca3a581ac9
   NodeDatas:
-  - rid: 4206153544483209240
+  - rid: 8045116879657238529
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 4206153544483209240
+    - rid: 8045116879657238529
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 1b77cbc5-424a-4ee9-b58e-f4ca3a581ac9
@@ -31,5 +31,5 @@ MonoBehaviour:
         EntryPoint: 0
         DialogueText: "Mon pauvre, tu vas te souvenir de qui tu es, j'en suis s\xFBre
           !"
-        DialogueCode: 
+        DialogueCode: default
         Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}

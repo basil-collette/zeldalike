@@ -70,7 +70,7 @@ public class PauseManager : SignletonGameObject<PauseManager>
         Time.timeScale = 0f;
 
         overlay.SetActive(true);
-        overlay.GetComponent<Image>().color = (transparent) ? new Color(0, 0, 0, 0) : new Color(0, 0, 0, 0.8f);
+        overlay.GetComponent<Image>().color = (transparent) ? new Color(0, 0, 0, 0) : new Color(0, 0, 0, 0.7f);
 
         //controlsCanva.SetActive(false);
 

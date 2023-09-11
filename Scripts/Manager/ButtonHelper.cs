@@ -1,3 +1,5 @@
+using Assets.Database.Model.Design;
+using Assets.Database.Model.Repository;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -50,6 +52,33 @@ public class ButtonHelper : MonoBehaviour
     public void Save()
     {
         FindAnyObjectByType<SaveManager>().SaveGame();
+    }
+
+    public void UnlockMemoryPartIdCard()
+    {
+        /*
+        Item idCard = Singleton<ItemRepository<Item>>.Instance.GetByCode("id_card");
+        FindAnyObjectByType<MainGameManager>().Inventory.AddItem(idCard);
+        */
+        FindGameObjectHelper.FindByName("Parts").GetComponent<MemoryPartsCarroussel>().ShowMemoryPart("Identity", true);
+    }
+
+    public void UnlockMemoryPartDiplomas()
+    {
+        /*
+        Item idCard = Singleton<ItemRepository<Item>>.Instance.GetByCode("diplomes");
+        FindAnyObjectByType<MainGameManager>().Inventory.AddItem(idCard);
+        */
+        FindGameObjectHelper.FindByName("Parts").GetComponent<MemoryPartsCarroussel>().ShowMemoryPart("Diplomes", true);
+    }
+
+    public void UnlockMemoryPartCompetences()
+    {
+        /*
+        Item idCard = Singleton<ItemRepository<Item>>.Instance.GetByCode("competences");
+        FindAnyObjectByType<MainGameManager>().Inventory.AddItem(idCard);
+        */
+        FindGameObjectHelper.FindByName("Parts").GetComponent<MemoryPartsCarroussel>().ShowMemoryPart("Competences", true);
     }
 
 }

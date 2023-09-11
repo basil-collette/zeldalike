@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class DialogueCondition
 {
     public string TargetCode;
-    [ShowOnly] public string Type;
+    /*[ShowOnly]*/ public string Type;
     public bool Not = false;
 
     public abstract bool Verify();

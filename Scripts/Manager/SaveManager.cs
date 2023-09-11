@@ -51,6 +51,8 @@ public class SaveManager : SignletonGameObject<SaveManager>
 
         string jsonData = JsonUtility.ToJson(gameData);
         File.WriteAllText($"{saveFolderPath}/gameData.json", jsonData);
+
+        FindGameObjectHelper.FindByName("Main Game Manager").GetComponent<ToastManager>().Add(new Toast("La partie à été sauvegardée!", ToastType.Success));
     }
 
     public List<string> GetSaveNames()
@@ -144,6 +146,8 @@ public class SaveManager : SignletonGameObject<SaveManager>
             Directory.Delete(saveFolderPath, true);
 
             CreateNewSave("main");
+
+            FindGameObjectHelper.FindByName("Main Game Manager").GetComponent<ToastManager>().Add(new Toast("La partie à été supprimée!", ToastType.Success));
         }
     }
 
@@ -176,11 +180,10 @@ public class SaveManager : SignletonGameObject<SaveManager>
         inventory.Items = GameData.inventoryItems.Select(x => GetSerializedItem(x)).ToList();
         inventory.Hotbars = GameData.inventoryHotbars.Select(x => GetSerializedItem(x) as HoldableItem).ToList();
         inventory.Weapon = (GameData.inventoryWeapon == null || GameData.inventoryWeapon == string.Empty) ? null : GetSerializedItem(GameData.inventoryWeapon) as Weapon;
-        EditorUtility.SetDirty(inventory);
-        
+
         //DIALOGUES STATES
         DialogueStates ds = Resources.Load<DialogueStates>("ScriptableObjects/Dialogues/DialogueStates");
-        ds.States.Clear();
+        ds.States = new List<SerializableWrappedList<string>>();
         JsonUtility.FromJsonOverwrite(GameData.dialoguesStates, ds);
 
         //QUESTS
@@ -190,15 +193,9 @@ public class SaveManager : SignletonGameObject<SaveManager>
             TempQuest tempQuest = JsonUtility.FromJson<TempQuest>(GameData.quests[i]);
             Quest quest = Resources.Load<Quest>($"ScriptableObjects/quests/{tempQuest.Name}");
             JsonUtility.FromJsonOverwrite(GameData.quests[i], quest);
+
             playerQuest.AddQuest(quest);
-
-            EditorUtility.SetDirty(quest);
         }
-
-        EditorUtility.SetDirty(playerQuest);
-
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
 
         //COFFRES
         //gardé en mémoire dans GameData

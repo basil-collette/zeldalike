@@ -72,9 +72,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74b62a0bbf861cc41960464e209794eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  open: 0
-  keyUidString: 
-  enemies: []
+  enterSignal: {fileID: 11400000, guid: 5c6f2bf61d6ce8a499ea5ef10264fac3, type: 2}
+  exitSignal: {fileID: 11400000, guid: c2c481bd5dec5ef4d84386f2dcc77003, type: 2}
 --- !u!1 &7731252565978676314
 GameObject:
   m_ObjectHideFlags: 0

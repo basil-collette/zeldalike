@@ -7,10 +7,7 @@ public class DialogueStates : ScriptableObject
 {
     public List<SerializableWrappedList<string>> States = new List<SerializableWrappedList<string>>();
 
-    public static DialogueStates Get()
-    {
-        return Resources.Load<DialogueStates>("ScriptableObjects/Dialogues/DialogueStates");
-    }
+    public static DialogueStates Get() => Resources.Load<DialogueStates>("ScriptableObjects/Dialogues/DialogueStates");
 
     public static bool HaveSaid(string pnjName, string dialogueCode)
     {

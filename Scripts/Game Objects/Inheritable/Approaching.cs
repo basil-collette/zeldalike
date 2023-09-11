@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
 
-//it is preferred to use FacingObject to trigger events whose
-//objects concerned come from a specific scene.
-//For global object (as screen ui), use NorthApproachingInteractable
 public abstract class Approaching : MonoBehaviour
 {
     protected bool playerInRange;

@@ -19,6 +19,19 @@ public class Quest : ScriptableObject
     }
     */
 
+    /*
+    public void AddQuestStep()
+    {
+
+        PlayerQuests = new List<Quest>(PlayerQuests);
+    }
+    */
+
+    public void SetQuestSteps()
+    {
+        QuestSteps = new List<QuestStep>(QuestSteps);
+    }
+
 }
 
 [System.Serializable]

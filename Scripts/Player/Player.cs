@@ -71,6 +71,8 @@ public class Player : AliveEntity
         if (currentEntityState == EntityState.unavailable)
             return;
 
+        SetState(EntityState.idle);
+
         /*
         if (currentEntityState == EntityState.attack)
         {
@@ -115,6 +117,9 @@ public class Player : AliveEntity
         {
             SetState(EntityState.walk);
             SetOrientation();
+        } else
+        {
+            Imobilize();
         }
     }
 
@@ -224,7 +229,7 @@ public class Player : AliveEntity
             Coroutine rollEffectCoroutine = StartCoroutine(DashEffectCo());
 
             Action OnLoop = () => { /* CreateDashEffect() */ };
-            Action OnEnd = () => { SetState(EntityState.walk); StopCoroutine(rollEffectCoroutine); GetComponent<Health>().enabled = true; };
+            Action OnEnd = () => { /*SetState(EntityState.walk);*/ StopCoroutine(rollEffectCoroutine); GetComponent<Health>().enabled = true; };
 
             cooldownManager.StartCooldown("dashDuration", dashDuration, OnLoop, OnEnd);
             cooldownManager.StartCooldown("dashCooldown", dashCooldown);

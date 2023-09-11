@@ -1,6 +1,8 @@
 using Assets.Database.Model.Design;
 using Assets.Database.Model.Repository;
+using Assets.Scripts.Enums;
 using Assets.Scripts.Game_Objects;
+using Assets.Scripts.Manager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
@@ -12,6 +14,7 @@ public class TreasureChest : NorthApproachingInteractable
     public Inventory inventory;
     public bool isOpen;
     public string itemNameCode;
+    public ItemTypeEnum itemTypeEnum = ItemTypeEnum.item;
     public string code;
 
     GameObject receivedItemContext;
@@ -27,7 +30,7 @@ public class TreasureChest : NorthApproachingInteractable
 
         receivedItemContext = FindAnyObjectByType<Player>().transform.Find("received item").gameObject;
 
-        content = Singleton<ItemRepository<Item>>.Instance.GetByCode(itemNameCode);
+        content = ItemManager.GetItem(itemNameCode, itemTypeEnum);
 
         ButtonHelper.exitPause += ExitRaiseItem;
     }

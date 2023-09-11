@@ -18,7 +18,7 @@ public static class FindGameObjectHelper
         return null;
     }
 
-    public static GameObject FindInactiveObjectByTag(string tag)
+    public static GameObject FindByTag(string tag)
     {
 
         Transform[] objs = Resources.FindObjectsOfTypeAll<Transform>() as Transform[];

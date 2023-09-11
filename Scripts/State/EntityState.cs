@@ -7,5 +7,6 @@ public enum EntityState
     attack,
     unavailable,
     interact,
-    konckback
+    konckback,
+    immobilized
 }

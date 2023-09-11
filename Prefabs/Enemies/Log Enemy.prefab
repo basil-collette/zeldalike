@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 1776859290621372658}
   - component: {fileID: 1776859290621372575}
   - component: {fileID: 1776859290621372574}
-  - component: {fileID: 1776859290621372641}
+  - component: {fileID: 2614354850303950253}
   - component: {fileID: 1776859290621372640}
   - component: {fileID: 1776859290621372643}
   - component: {fileID: 1776859290621372642}
@@ -140,8 +140,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1012673369
-  m_SortingLayer: 4
+  m_SortingLayerID: 1143269941
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -1140011113, guid: 85885fe5f4c5a27439e98d3bc08fbc26, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -175,8 +175,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &1776859290621372641
-BoxCollider2D:
+--- !u!70 &2614354850303950253
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -188,19 +188,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.013761044, y: -0.38462162}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.92663765, y: 0.7876501}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.02672851, y: -0.2274065}
+  m_Size: {x: 0.8074057, y: 1.0903139}
+  m_Direction: 0
 --- !u!95 &1776859290621372640
 Animator:
   serializedVersion: 5
@@ -265,18 +255,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitSound: {fileID: 8300000, guid: 7c47b20bb9874304a809dc5580d403ba, type: 3}
   deathSound: {fileID: 0}
-  lootTable: {fileID: 11400000, guid: 21a1c106e942e134182077dd9eb5ed9f, type: 2}
   deathEffect: {fileID: 4283853020777935570, guid: 24204c8ff3fb1394f868689e930f7d86, type: 3}
-  health: {fileID: 0}
-  healthSignal: {fileID: 0}
+  lootTable: {fileID: 11400000, guid: 21a1c106e942e134182077dd9eb5ed9f, type: 2}
+  _health: {fileID: 0}
+  _healthSignal: {fileID: 0}
   OnDeathParam: []
-  effectMods:
-  - effectType: 7
-    mod: 2
-  - effectType: 3
-    mod: 0.5
-  effects: []
-  timedEffects: []
+  _effectMods: []
+  _effects: []
+  _timedEffects: []
 --- !u!114 &1776859290621372645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,6 +279,8 @@ MonoBehaviour:
   currentEntityState: 0
   moveSpeed: 1.5
   nearRadius: 1.5
+  imperceptibles: 
+  attacking: 0
   direction: {x: 0, y: 0, z: 0}
   orientation: {x: 0, y: 0, z: 0}
   targetTag: Player

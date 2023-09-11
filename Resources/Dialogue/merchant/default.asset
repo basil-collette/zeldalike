@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a2d8ae767442a4c8c0177884108faf, type: 3}
+  m_Name: default
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGuid: ea9d711f-0df2-4a68-a985-d01428a50833
+    PortName: Next
+    TargetNodeGuid: a9d3badb-5799-457c-8b2a-6be546d4e85a
+  NodeDatas:
+  - rid: 8045116879657238528
+  ExposedProperties: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 8045116879657238528
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: a9d3badb-5799-457c-8b2a-6be546d4e85a
+        title: Dialogue
+        Position: {x: 202, y: 200}
+        EntryPoint: 0
+        DialogueText: Les affaires sont les affaires !
+        DialogueCode: default
+        Pnj: {fileID: 0}

@@ -20,4 +20,14 @@ public class GameData
     public string dialoguesStates;
 
     public List<string> quests;
+
+    public EventCodes events;
+}
+
+public class EventCodes
+{
+    public List<string> Shop = new List<string>();
+    public List<string> Scenario = new List<string>();
+    public List<string> MapDiscovery = new List<string>();
+    public List<string> Tutorial = new List<string>();
 }

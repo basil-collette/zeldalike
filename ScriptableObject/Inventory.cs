@@ -24,7 +24,7 @@ public class Inventory : ScriptableObject
     public float currentWeight = 0;
 
     #region EasyAccess
-    public static Inventory GetInventory() { return FindAnyObjectByType<Player>().inventory; }
+    public static Inventory GetInventory() => FindAnyObjectByType<Player>().inventory;
 
     public static void AddItem(string itemParams) {
         var item = ItemManager.GetItem(itemParams);

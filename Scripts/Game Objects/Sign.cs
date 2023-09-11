@@ -1,41 +1,42 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Sign : FacingObject
+public class Sign : MonoBehaviour
 {
     
     public string dialog;
 
-    protected bool isShowed = false;
     private GameObject dialogBox;
-    private Text dialogText;
 
     private void Start()
     {
-        //dialogBox = FindGameObjectHelper.FindInactiveObjectByName("DialogBox");
-        //dialogText = dialogBox.GetComponentInChildren<Text>();
+        //dialogBox = GetComponentInChildren<SpriteRenderer>().transform.gameObject;
+        dialogBox = transform.GetChild(0).GetChild(0).gameObject;
     }
 
-    void Update()
+    protected virtual void OnTriggerEnter2D(Collider2D collider)
     {
-        //
-    }
-
-    protected override void OnFacing()
-    {
-        if(!isShowed)
+        if (collider.CompareTag("Player") && !collider.isTrigger)
         {
-            isShowed = true;
-
-            //dialogBox.SetActive(true);
-            //dialogText.text = dialog;
+            OpenSign();
         }
     }
 
-    protected override void OnQuitFacing()
+    protected virtual void OnTriggerExit2D(Collider2D collider)
     {
-        //dialogBox.SetActive(false);
-        isShowed = false;
+        if (collider.CompareTag("Player") && !collider.isTrigger)
+        {
+            CloseSign();
+        }
+    }
+
+    public void OpenSign()
+    {
+        dialogBox.SetActive(true);
+    }
+
+    public void CloseSign()
+    {
+        dialogBox.SetActive(false);
     }
 
 }

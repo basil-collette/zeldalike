@@ -237,17 +237,21 @@ MonoBehaviour:
     NameCode: 
     Actif: 0
     InventoryIndex: 0
-    SpriteName: 
     Weight: 0
     Description: 
+    TypeName: 
     ItemType: 0
+    SpriteName: 
     Sprite: {fileID: 0}
+    RarityName: 
     Rarity: 0
-    anim: {fileID: 0}
+    WeaponTypeName: 
     weaponType: 0
     attackDelay: 1
     speed: 1
+  direction: {x: 0, y: 0}
   anim: {fileID: 5446324326688491881}
+  attacking: 0
 --- !u!1 &5545115837223209450
 GameObject:
   m_ObjectHideFlags: 0

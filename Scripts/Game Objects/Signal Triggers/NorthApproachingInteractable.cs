@@ -14,7 +14,7 @@ namespace Assets.Scripts.Game_Objects
                 && collider.CompareTag("Player")
                 && !collider.isTrigger)
             {
-                if (DirectionHelper.IsFacingUp(collider.GetComponent<Player>().orientation))
+                if (DirectionHelper.IsFacingUp(collider.GetComponent<Player>().moveOrientation))
                 {
                     enterSignal.Raise();
                     playerInRange = true;
@@ -29,7 +29,7 @@ namespace Assets.Scripts.Game_Objects
                 && collider.CompareTag("Player")
                 && !collider.isTrigger)
             {
-                if (DirectionHelper.IsFacingUp(collider.GetComponent<Player>().orientation))
+                if (DirectionHelper.IsFacingUp(collider.GetComponent<Player>().moveOrientation))
                 {
                     base.OnTriggerEnter2D(collider);
                 }

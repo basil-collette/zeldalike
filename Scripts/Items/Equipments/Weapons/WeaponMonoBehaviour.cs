@@ -14,13 +14,16 @@ namespace Assets.Scripts.Items.Equipments.Weapons
         [HideInInspector] public Vector2 direction;
         [HideInInspector] public Animator anim;
         public bool attacking;
-        protected Animator animator;
+        protected Animator animatorTop;
+        protected Animator animatorLegs;
         protected PlayerInput playerInputs;
         protected CooldownManager cooldownManager;
 
         protected void Start()
         {
-            animator = GetComponentInParent<AliveEntity>().gameObject.GetComponent<Animator>();
+            animatorTop = transform.parent.GetChild(1).GetComponent<Animator>();
+            animatorLegs = transform.parent.GetChild(0).GetComponent<Animator>();
+
             playerInputs = GetComponent<PlayerInput>();
             cooldownManager = GetComponent<CooldownManager>();
             anim = GetComponentInChildren<Animator>();
@@ -38,13 +41,15 @@ namespace Assets.Scripts.Items.Equipments.Weapons
                 if (!attacking)
                 {
                     attacking = true;
-                    animator.SetBool("attacking", true);
+                    animatorTop.SetBool("attacking", true);
+                    animatorLegs.SetBool("attacking", true);
 
                     Attack(direction);
 
                     Action OnEnd = () => {
                         attacking = false;
-                        animator.SetBool("attacking", false);
+                        animatorTop.SetBool("attacking", false);
+                        animatorLegs.SetBool("attacking", false);
                         direction = Vector2.zero;
                     };
 

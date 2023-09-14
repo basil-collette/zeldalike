@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 681855290364770065}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2104972066806732171}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 1143269941
   m_SortingLayer: 6
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a1403911a14efbc41a51d20cdc3edc86, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4396e05a17a1e59468c45e51cc54fe04, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,18 +99,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00052036345, y: -1.903394}
+  m_Offset: {x: 0.00052037835, y: -0.81722695}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 1}
-    oldSize: {x: 0.625, y: 3.125}
+    oldSize: {x: 0.625, y: 1.5625}
     newSize: {x: 0.625, y: 2.1875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3837013, y: 2.46629}
+  m_Size: {x: 0.38370126, y: 1.5138928}
   m_EdgeRadius: 0
 --- !u!114 &2719416895306805354
 MonoBehaviour:
@@ -135,8 +135,8 @@ MonoBehaviour:
       type: {class: KnockBackEffect, ns: , asm: Assembly-CSharp}
       data:
         effectType: 3
-        amount: 1
-        knockTime: 0.3
+        amount: 0.7
+        knockTime: 0.2
     - rid: 1056142084445831175
       type: {class: Effect, ns: , asm: Assembly-CSharp}
       data:
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: -5883394088005127665}
   - component: {fileID: 5689959043588874744}
   m_Layer: 0
-  m_Name: Spear
+  m_Name: Dagger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 2104972066806732171}
   - component: {fileID: 5446324326688491881}
   m_Layer: 0
-  m_Name: Spear Animator
+  m_Name: Dagger Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -295,7 +295,7 @@ Animator:
   m_GameObject: {fileID: 5545115837223209450}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 44a2c89bd525b824092e41d5cfe41e7b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9e8c897cb59a80a4d9ed3120bf0710e5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

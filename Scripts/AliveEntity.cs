@@ -11,7 +11,7 @@ public abstract class AliveEntity : Entity
 
     [HideInInspector] public bool attacking;
     [HideInInspector] public Vector3 direction;
-    [HideInInspector] public Vector3 orientation;
+    [HideInInspector] public Vector3 moveOrientation;
     protected Animator animator;
 
     protected new void Start()

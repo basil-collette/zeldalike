@@ -30,18 +30,23 @@ public class Player : AliveEntity
     CooldownManager cooldownManager;
     WeaponMonoBehaviour _weapon;
     AudioSource audioSource;
+    Animator animatorLegs;
+    Animator animatorTop;
 
     new void Start()
     {
         base.Start();
+
+        animatorLegs = transform.GetChild(0).GetComponent<Animator>();
+        animatorTop = transform.GetChild(1).GetComponent<Animator>();
 
         audioSource = GetComponent<AudioSource>(); audioSource.volume = 0.5f;
         playerInputs = GetComponent<PlayerInput>();
         cooldownManager = GetComponent<CooldownManager>();
 
         transform.position = startingPosition.initalValue;
-        animator.SetFloat("moveX", startingDirection.initalValue.x);
-        animator.SetFloat("moveY", startingDirection.initalValue.y);
+        //animator.SetFloat("moveX", startingDirection.initalValue.x);
+        //animator.SetFloat("moveY", startingDirection.initalValue.y);
 
         SetState(EntityState.walk);
 
@@ -163,8 +168,6 @@ public class Player : AliveEntity
         }
         */
 
-        var weapon = GetComponentInChildren<WeaponMonoBehaviour>();
-
         if (currentEntityState == EntityState.walk)
         {
             if (direction != Vector3.zero)
@@ -185,7 +188,8 @@ public class Player : AliveEntity
 
                 GetComponent<Rigidbody2D>().velocity = new Vector2(direction.x * finalSpeed, direction.y * finalSpeed);
 
-                animator.SetBool("moving", true);
+                animatorTop.SetBool("moving", true);
+                animatorLegs.SetBool("moving", true);
             }
             else
             {
@@ -193,22 +197,43 @@ public class Player : AliveEntity
             }
         }
 
-        if (weapon.attacking)
-        {
-            direction.x = weapon.direction.x;
-            direction.y = weapon.direction.y;
-        }
-
         if (direction != Vector3.zero)
         {
-            animator.SetFloat("moveX", direction.x);
-            animator.SetFloat("moveY", direction.y);
+            animatorLegs.SetFloat("moveX", direction.x);
+            animatorLegs.SetFloat("moveY", direction.y);
+        }
+
+        SetAnimatorTopDirection();
+    }
+
+    void SetAnimatorTopDirection()
+    {
+        var weapon = GetComponentInChildren<WeaponMonoBehaviour>();
+
+        if (weapon != null && weapon.attacking && weapon.direction != Vector2.zero)
+        {
+            animatorTop.SetFloat("lookX", weapon.direction.x);
+            animatorTop.SetFloat("lookY", weapon.direction.y);
+
+            if (direction == Vector3.zero)
+            {
+                animatorLegs.SetFloat("moveX", weapon.direction.x);
+                animatorLegs.SetFloat("moveY", weapon.direction.y);
+            }
+        }
+        else
+        {
+            if (direction != Vector3.zero)
+            {
+                animatorTop.SetFloat("lookX", direction.x);
+                animatorTop.SetFloat("lookY", direction.y);
+            }
         }
     }
 
     public void SetOrientation()
     {
-        this.orientation = this.direction.normalized;
+        this.moveOrientation = this.direction.normalized;
     }
 
     void Dash()
@@ -222,14 +247,20 @@ public class Player : AliveEntity
         if (cooldownManager.IsAvailable("dashCooldown"))
         {
             GetComponent<Health>().enabled = false;
-            animator.SetTrigger("roll");
+            animatorTop.SetTrigger("roll");
+            animatorLegs.SetBool("rolling", true);
             audioSource.clip = rollSound;
             audioSource.Play();
 
             Coroutine rollEffectCoroutine = StartCoroutine(DashEffectCo());
 
             Action OnLoop = () => { /* CreateDashEffect() */ };
-            Action OnEnd = () => { /*SetState(EntityState.walk);*/ StopCoroutine(rollEffectCoroutine); GetComponent<Health>().enabled = true; };
+            Action OnEnd = () => {
+                /*SetState(EntityState.walk);*/
+                StopCoroutine(rollEffectCoroutine);
+                GetComponent<Health>().enabled = true;
+                animatorLegs.SetBool("rolling", false);
+            };
 
             cooldownManager.StartCooldown("dashDuration", dashDuration, OnLoop, OnEnd);
             cooldownManager.StartCooldown("dashCooldown", dashCooldown);
@@ -249,7 +280,9 @@ public class Player : AliveEntity
     {
         yield return new WaitForSeconds(.25f);
 
-        animator.SetBool("attacking", false);
+        //animator.SetBool("attacking", false);
+        animatorTop.SetTrigger("attack");
+        animatorLegs.SetTrigger("attack");
 
         while (currentEntityState == EntityState.unavailable)
         {
@@ -262,7 +295,8 @@ public class Player : AliveEntity
     {
         direction = Vector3.zero;
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-        animator.SetBool("moving", false);
+        animatorTop.SetBool("moving", false);
+        animatorLegs.SetBool("moving", false);
     }
 
     void CreateDashEffect()
@@ -272,13 +306,13 @@ public class Player : AliveEntity
 
     public void RaiseItem()
     {
-        animator.SetBool("receivingItem", true);
+        animatorTop.SetBool("receivingItem", true);
         SetState(EntityState.unavailable);
     }
 
     public void CloseRaiseItem()
     {
-        animator.SetBool("receivingItem", false);
+        animatorTop.SetBool("receivingItem", false);
         SetState(EntityState.walk);
     }
 

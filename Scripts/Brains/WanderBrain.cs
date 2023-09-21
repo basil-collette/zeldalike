@@ -5,6 +5,8 @@ public class WanderBrain : Brain
 {
     public float wanderCooldown = 4;
     public float wanderDuration = 2;
+    public float wanderRadius = 1;
+    public float turnSpeed = 2;
 
     protected Animator animator;
     protected CooldownManager cooldownManager;
@@ -52,6 +54,43 @@ public class WanderBrain : Brain
         SetAnimation(DirectionHelper.GetRelativeAxis(transform.position, targetPos).normalized);
 
         return null;
+    }
+
+    public Vector3 GetWanderingDirection()
+    {
+        Vector3 wanderDirection = Vector3.zero;
+
+        float noise = perlinNoise.Get1DNoiseAtX(Time.time);
+
+        float wanderDelta = 1.0f * Mathf.PI * noise * Time.deltaTime;
+
+        if (GetComponent<Rigidbody2D>().velocity != Vector2.zero)
+        {
+            Vector3 to = transform.position + wanderDirection * 20;
+
+            RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, to);
+            if (hitInfo)
+                wanderDirection = hitInfo.normal;
+        }
+
+        if (wanderDirection.magnitude == 0)
+        {
+            wanderDirection = new Vector2(Mathf.Cos(Random.Range(-Mathf.PI, Mathf.PI)), Mathf.Sin(Random.Range(-Mathf.PI, Mathf.PI)));
+        }
+
+        Vector3 spawnDisplacement = anchorPoisition - transform.position;
+
+        float outerRadius = 2.0f * wanderRadius;
+        float displacementWeight = DirectionHelper.MapValue(spawnDisplacement.magnitude, wanderRadius, outerRadius);
+        float angleDiff = Vector2.Angle(wanderDirection, spawnDisplacement) * displacementWeight;
+
+        angleDiff += wanderDelta;
+        angleDiff = DirectionHelper.WrapAngle(angleDiff, -Mathf.PI, Mathf.PI);
+
+        float rot = Mathf.Clamp(angleDiff, -turnSpeed * Time.deltaTime, turnSpeed * Time.deltaTime);
+
+        return DirectionHelper.RotateVector3DirectionByAngle(wanderDirection, rot);
+        //return wanderDirection * rotation;
     }
 
     protected void SetAnimation(Vector3 direction)

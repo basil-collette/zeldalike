@@ -75,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -374296989
-  m_SortingLayer: 5
+  m_SortingLayerID: 1143269941
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 1306772974, guid: 67a0139ce3d618946851490dd9edb0b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -171,11 +171,18 @@ MonoBehaviour:
   enterSignal: {fileID: 11400000, guid: 5c6f2bf61d6ce8a499ea5ef10264fac3, type: 2}
   staySignal: {fileID: 0}
   exitSignal: {fileID: 11400000, guid: c2c481bd5dec5ef4d84386f2dcc77003, type: 2}
-  content: {fileID: 0}
+  content:
+    rid: -2
   inventory: {fileID: 11400000, guid: 2b27182376eeadf4a85051c113b16f97, type: 2}
   isOpen: 0
-  raiseItem: {fileID: 11400000, guid: 48104b42cea4e114491022a306027b40, type: 2}
   itemNameCode: 
+  itemTypeEnum: 0
+  code: 
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!60 &5754643304858602773
 PolygonCollider2D:
   m_ObjectHideFlags: 0

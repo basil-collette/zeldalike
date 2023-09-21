@@ -16,7 +16,8 @@ namespace Assets.Database.Model.Design
         public string TypeName;
         public ItemTypeEnum ItemType;
 
-        public string SpriteName;
+        public string SpritePath;
+        public float SpriteScale;
         public Sprite Sprite;
 
         public string RarityName;
@@ -24,7 +25,8 @@ namespace Assets.Database.Model.Design
 
         public Item(IDataReader reader) : base(reader)
         {
-            SpriteName = reader["sprite_name"].ToString();
+            SpritePath = reader["sprite_path"].ToString();
+            SpriteScale = float.Parse(reader["sprite_scale"].ToString());
             Weight = float.Parse(reader["weight"].ToString());
             Description = reader["description"].ToString();
             TypeName = reader["item_type"].ToString();
@@ -45,7 +47,7 @@ namespace Assets.Database.Model.Design
         protected void PostInstanciation()
         {
             ItemType = (ItemTypeEnum)Enum.Parse(typeof(ItemTypeEnum), TypeName);
-            Sprite = (SpriteName == null) ? null : Resources.Load<Sprite>($"Art/{SpriteName}");
+            Sprite = (SpritePath == null) ? null : Resources.Load<Sprite>($"Art/{SpritePath}");
             Rarity = (RarityEnum)Enum.Parse(typeof(RarityEnum), RarityName);
         }
 

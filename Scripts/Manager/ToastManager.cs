@@ -16,16 +16,8 @@ public class ToastManager : SignletonGameObject<ToastManager>
     public bool OpacityAppear = false;
     public bool OpacityDisappear = false;
 
-    //RectTransform toastRec;
     List<Toast> Toasts = new List<Toast>();
     bool InProcess = false;
-
-    /*
-    private void Start()
-    {
-        toastRec = ToastBackground.GetComponent<RectTransform>();
-    }
-    */
 
     public void Add(Toast toast)
     {
@@ -144,40 +136,6 @@ public class ToastManager : SignletonGameObject<ToastManager>
         }
         yield return null;
     }
-
-    /*
-    IEnumerator MoveCo(float targetPosX)
-    {
-        toastRec.anchoredPosition = toastRec.anchoredPosition + new Vector2(-finalMovementSpeed, 0);
-
-        moving = true;
-
-        float difference = Math.Abs(parts.anchoredPosition.x - targetPosX);
-        float finalMovementSpeed = (difference < movementSpeed) ? difference : movementSpeed;
-
-        if (targetPosX < parts.anchoredPosition.x)
-        {
-            while (targetPosX < parts.anchoredPosition.x)
-            {
-                parts.anchoredPosition = parts.anchoredPosition + new Vector2(-finalMovementSpeed, 0);
-
-                yield return null;
-            }
-        }
-        else
-        {
-            while (targetPosX > parts.anchoredPosition.x)
-            {
-                parts.anchoredPosition = parts.anchoredPosition + new Vector2(finalMovementSpeed, 0);
-
-                yield return null;
-            }
-        }
-
-        moving = false;
-    }
-    */
-
 }
 
 public class Toast

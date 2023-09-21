@@ -19,5 +19,5 @@ MonoBehaviour:
   cameraParameters:
     Smoothing: 0.05
     IsFixed: 0
-    MinPos: {x: -9.5, y: -0.5}
-    MaxPos: {x: 21.5, y: 22.5}
+    MinPos: {x: -9, y: -0.5}
+    MaxPos: {x: 21, y: 22.5}

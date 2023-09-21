@@ -14,6 +14,7 @@ public class GameData
     public string? inventoryWeapon;
 
     public float playerHealth;
+    public float playerMaxHealth;
 
     public List<string> opennedChestGuids;
 
@@ -24,6 +25,7 @@ public class GameData
     public EventCodes events;
 }
 
+[System.Serializable]
 public class EventCodes
 {
     public List<string> Shop = new List<string>();

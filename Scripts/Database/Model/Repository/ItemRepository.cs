@@ -17,7 +17,8 @@ namespace Assets.Database.Model.Repository
         {
             List<string> fields = new List<string>()
             {
-                "sprite_name",
+                "sprite_path",
+                "sprite_scale",
                 "rarity_code",
                 "weight",
                 "description",
@@ -32,7 +33,8 @@ namespace Assets.Database.Model.Repository
 
         public override string GetTableFields()
         {
-            return "sprite_name VARCHAR(100)," +
+            return "sprite_path VARCHAR(100)," +
+                "sprite_scale FLOAT," +
                 "rarity_code VARCHAR(20)," +
                 "weight DECIMAL(3,2)," +
                 "description VARCHAR(255)," +
@@ -43,19 +45,19 @@ namespace Assets.Database.Model.Repository
         public override void Insert(SqliteConnection dbConn)
         {
             IDbCommand key = dbConn.CreateCommand();
-            key.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/key', 'common', 0, 'Petite Clé', 'consommable', 'Clé', 'key', 1)";
+            key.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/key', 1, 'common', 0, 'Petite Clé', 'consommable', 'Clé', 'key', 1)";
             key.ExecuteNonQuery();
 
             IDbCommand letter = dbConn.CreateCommand();
-            letter.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/letter', 'common', 0, 'Lettre adressée à Mathilde', 'item', 'Lettre', 'letter', 1)";
+            letter.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/letter', 1, 'common', 0, 'Lettre adressée à Mathilde', 'item', 'Lettre', 'letter', 1)";
             letter.ExecuteNonQuery();
 
             IDbCommand arrosoir = dbConn.CreateCommand();
-            arrosoir.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/arrosoir', 'common', 0, 'Arrosoir de Clara', 'quest', 'Arrosoir', 'arrosoir', 1)";
+            arrosoir.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/arrosoir', 1, 'common', 0, 'Arrosoir de Clara', 'quest', 'Arrosoir', 'arrosoir', 1)";
             arrosoir.ExecuteNonQuery();
 
             IDbCommand idCard = dbConn.CreateCommand();
-            idCard.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/id_card', 'common', 0, 'Ma carte d''identité', 'quest', 'Carte d''identité', 'id_card', 1)";
+            idCard.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/id_card', 1, 'common', 0, 'Ma carte d''identité', 'quest', 'Carte d''identité', 'id_card', 1)";
             idCard.ExecuteNonQuery();
         }
 

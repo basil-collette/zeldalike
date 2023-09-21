@@ -112,24 +112,24 @@ public class Health : Hitable
     {
         IsDammaged = true;
 
-        var sr = GetComponent<SpriteRenderer>();
+        var sprites = GetComponentsInChildren<SpriteRenderer>();
 
-        sr.color = new Color(1, 0.3f, 0.3f);
+        Array.ForEach(sprites, x => x.color = new Color(1, 0.3f, 0.3f));
         yield return new WaitForSeconds(0.1f);
 
-        sr.color = new Color(1, 1, 1);
+        Array.ForEach(sprites, x => x.color = new Color(1, 1, 1));
         yield return new WaitForSeconds(0.1f);
 
-        sr.color = new Color(1, 0.3f, 0.3f);
+        Array.ForEach(sprites, x => x.color = new Color(1, 0.3f, 0.3f));
         yield return new WaitForSeconds(0.1f);
 
-        sr.color = new Color(1, 1, 1);
+        Array.ForEach(sprites, x => x.color = new Color(1, 1, 1));
         yield return new WaitForSeconds(0.1f);
 
-        sr.color = new Color(1, 0.3f, 0.3f);
+        Array.ForEach(sprites, x => x.color = new Color(1, 0.3f, 0.3f));
         yield return new WaitForSeconds(0.1f);
 
-        sr.color = new Color(1, 1, 1);
+        Array.ForEach(sprites, x => x.color = new Color(1, 1, 1));
 
         IsDammaged = false;
     }

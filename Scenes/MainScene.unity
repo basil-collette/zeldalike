@@ -1996,7 +1996,7 @@ MonoBehaviour:
   firstLoadedScene: {fileID: 11400000, guid: bd8d67e50fbf37f4e80d7ec87cba8dd1, type: 2}
   CanvaUI: {fileID: 185778902}
   CanvaControls: {fileID: 1413398748}
-  resetBDD: 0
+  resetBDD: 1
   PlayerQuest: {fileID: 11400000, guid: 522e5886dbfe4b54fae8ad4999be818a, type: 2}
   DialogueStates: {fileID: 11400000, guid: 4f7df22c67e059d4d80b2ae0a84b709e, type: 2}
   Inventory: {fileID: 11400000, guid: 2b27182376eeadf4a85051c113b16f97, type: 2}

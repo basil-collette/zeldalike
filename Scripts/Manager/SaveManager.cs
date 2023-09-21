@@ -39,6 +39,8 @@ public class SaveManager : SignletonGameObject<SaveManager>
     {
         GameData gameData = GetGameDataFromRunning();
         WriteSave(gameData);
+
+        FindGameObjectHelper.FindByName("Main Game Manager").GetComponent<ToastManager>().Add(new Toast("La partie à été sauvegardée!", ToastType.Success));
     }
 
     void WriteSave(GameData gameData)
@@ -51,8 +53,6 @@ public class SaveManager : SignletonGameObject<SaveManager>
 
         string jsonData = JsonUtility.ToJson(gameData);
         File.WriteAllText($"{saveFolderPath}/gameData.json", jsonData);
-
-        FindGameObjectHelper.FindByName("Main Game Manager").GetComponent<ToastManager>().Add(new Toast("La partie à été sauvegardée!", ToastType.Success));
     }
 
     public List<string> GetSaveNames()
@@ -89,6 +89,7 @@ public class SaveManager : SignletonGameObject<SaveManager>
             position = player.transform.position,
 
             playerHealth = player.GetComponent<Health>()._health.RuntimeValue,
+            playerMaxHealth = player.GetComponent<Health>()._health.initialValue,
 
             inventoryItems = player.inventory.Items.Select(x => JsonUtility.ToJson(x)).ToList(),
             inventoryHotbars = player.inventory.Hotbars.Select(x => JsonUtility.ToJson(x)).ToList(),
@@ -98,7 +99,9 @@ public class SaveManager : SignletonGameObject<SaveManager>
 
             dialoguesStates = JsonUtility.ToJson(DialogueStates.Get()),
 
-            quests = player.playerQuest.PlayerQuests.Select(x => JsonUtility.ToJson(x)).ToList()
+            quests = player.playerQuest.PlayerQuests.Select(x => JsonUtility.ToJson(x)).ToList(),
+
+            events = GameData.events
         };
     }
 
@@ -114,8 +117,10 @@ public class SaveManager : SignletonGameObject<SaveManager>
             inventoryHotbars = new List<string>(),
             inventoryWeapon = JsonUtility.ToJson(sword),
             playerHealth = 3f,
+            playerMaxHealth = 3f,
             opennedChestGuids = new List<string>(),
-            quests = new List<string>() { JsonUtility.ToJson(Resources.Load<Quest>("ScriptableObjects/quests/Je m'appelle...")) }
+            quests = new List<string>() { JsonUtility.ToJson(Resources.Load<Quest>("ScriptableObjects/quests/Je m'appelle...")) },
+            events = new EventCodes()
         };
 
         Quest[] quests = Resources.LoadAll<Quest>("ScriptableObjects/quests");
@@ -172,7 +177,9 @@ public class SaveManager : SignletonGameObject<SaveManager>
         FindAnyObjectByType<CameraMovement>().CameraParams = currentScene.cameraParameters;
 
         //PLAYER
-        Resources.Load<FloatValue>("ScriptableObjects/Player/Health/PlayerHealth").RuntimeValue = GameData.playerHealth;
+        FloatValue playerHealth = Resources.Load<FloatValue>("ScriptableObjects/Player/Health/PlayerHealth");
+        playerHealth.initialValue = GameData.playerMaxHealth;
+        playerHealth.RuntimeValue = GameData.playerHealth;
         Resources.Load<VectorValue>("ScriptableObjects/Player/position/PlayerPosition").initalValue = GameData.position;
         
         //INVENTORY

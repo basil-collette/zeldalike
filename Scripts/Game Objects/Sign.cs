@@ -9,7 +9,6 @@ public class Sign : MonoBehaviour
 
     private void Start()
     {
-        //dialogBox = GetComponentInChildren<SpriteRenderer>().transform.gameObject;
         dialogBox = transform.GetChild(0).GetChild(0).gameObject;
     }
 

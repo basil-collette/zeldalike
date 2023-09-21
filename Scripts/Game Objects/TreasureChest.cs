@@ -1,5 +1,4 @@
 using Assets.Database.Model.Design;
-using Assets.Database.Model.Repository;
 using Assets.Scripts.Enums;
 using Assets.Scripts.Game_Objects;
 using Assets.Scripts.Manager;
@@ -17,7 +16,7 @@ public class TreasureChest : NorthApproachingInteractable
     public ItemTypeEnum itemTypeEnum = ItemTypeEnum.item;
     public string code;
 
-    GameObject receivedItemContext;
+    Transform receivedItemContext;
 
     void Start()
     {
@@ -28,7 +27,7 @@ public class TreasureChest : NorthApproachingInteractable
             return;
         }
 
-        receivedItemContext = FindAnyObjectByType<Player>().transform.Find("received item").gameObject;
+        receivedItemContext = FindGameObjectHelper.FindByName("Received Item Shadow").transform;
 
         content = ItemManager.GetItem(itemNameCode, itemTypeEnum);
 
@@ -48,33 +47,50 @@ public class TreasureChest : NorthApproachingInteractable
         {
             if (!isOpen)
             {
-                isOpen = true;
-
-                GetComponent<Animator>().SetTrigger("opentrigger");
-
-                exitSignal.Raise(); //to remove the "?" clue
-
-                inventory.AddItem(content);
-
-                receivedItemContext.gameObject.SetActive(true);
-                receivedItemContext.GetComponent<SpriteRenderer>().sprite = content.Sprite;
-
-                FindAnyObjectByType<Player>().RaiseItem();
-
-                SaveManager.GameData.opennedChestGuids.Add(code.ToString());
-
-                FindAnyObjectByType<PauseManager>().ShowPausedInterface("InfoScene", () =>
-                {
-                    FindGameObjectHelper.FindByName("Info Canva").GetComponentInChildren<Text>().text = content.Description;
-                }, true);
+                ObtainItem();
             }
         }
+    }
+
+    void ObtainItem()
+    {
+        isOpen = true;
+
+        GetComponent<Animator>().SetTrigger("opentrigger");
+
+        exitSignal.Raise(); //to remove the "?" clue
+
+        inventory.AddItem(content);
+
+        receivedItemContext.gameObject.SetActive(true);
+
+        Transform receivedItemSprite = receivedItemContext.transform.GetChild(0).transform;
+        receivedItemSprite.GetComponent<SpriteRenderer>().sprite = content.Sprite;
+        receivedItemSprite.localScale = new Vector3(content.SpriteScale, content.SpriteScale, 1);
+        if (itemTypeEnum == ItemTypeEnum.weapon)
+        {
+            receivedItemSprite.rotation = Quaternion.Euler(0, 0, 90);
+            Sprite sprite = receivedItemSprite.GetComponent<SpriteRenderer>().sprite;
+            float height = sprite.rect.height / sprite.pixelsPerUnit;
+            receivedItemSprite.localPosition = new Vector3(-(height * content.SpriteScale) / 2, 0, 0);
+        }
+
+        FindAnyObjectByType<Player>().RaiseItem();
+
+        SaveManager.GameData.opennedChestGuids.Add(code.ToString());
+
+        FindAnyObjectByType<PauseManager>().ShowPausedInterface("InfoScene", () =>
+        {
+            FindGameObjectHelper.FindByName("Info Canva").GetComponentInChildren<Text>().text = content.Description;
+        }, true);
     }
 
     public void ExitRaiseItem()
     {
         FindAnyObjectByType<Player>().CloseRaiseItem();
+
         receivedItemContext.gameObject.SetActive(false);
+
         this.enabled = false;
     }
 

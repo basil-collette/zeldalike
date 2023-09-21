@@ -38,11 +38,11 @@ namespace Assets.Database.Model.Repository
         public sealed override void Insert(SqliteConnection dbConn)
         {
             IDbCommand insertSword = dbConn.CreateCommand();
-            insertSword.CommandText = $"INSERT INTO weapon ({GetQueryFields()}) VALUES ('sword', 1, 1, 'gfx/weapons/sword', 'common', 0, 'Eppee poussiereuse', 'weapon', 'Epee', 'sword', 1)";
+            insertSword.CommandText = $"INSERT INTO weapon ({GetQueryFields()}) VALUES ('sword', 1.5, 1, 'gfx/weapons/sword', 0.7, 'common', 0, 'Eppee poussiereuse', 'weapon', 'Epee', 'sword', 1)";
             insertSword.ExecuteNonQuery();
 
             IDbCommand insertAxe = dbConn.CreateCommand();
-            insertAxe.CommandText = $"INSERT INTO weapon ({GetQueryFields()}) VALUES ('axe', 1, 1, 'gfx/weapons/axe', 'common', 0, 'Hache viking', 'weapon', 'Axe', 'axe', 1)";
+            insertAxe.CommandText = $"INSERT INTO weapon ({GetQueryFields()}) VALUES ('axe', 1.5, 1, 'gfx/weapons/axe', 0.7, 'common', 0, 'Hache viking', 'weapon', 'Axe', 'axe', 1)";
             insertAxe.ExecuteNonQuery();
         }
 

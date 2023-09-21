@@ -67,13 +67,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1776859290621372658}
+  - component: {fileID: 1776859290621372645}
   - component: {fileID: 1776859290621372575}
   - component: {fileID: 1776859290621372574}
   - component: {fileID: 2614354850303950253}
   - component: {fileID: 1776859290621372640}
   - component: {fileID: 1776859290621372643}
   - component: {fileID: 1776859290621372642}
-  - component: {fileID: 1776859290621372645}
   - component: {fileID: 1776859290621372644}
   - component: {fileID: 1776859290621372647}
   - component: {fileID: 1776859290621372646}
@@ -102,6 +102,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1776859290621372645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776859291371688983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c77977f5634191a418c050a845e9cac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorPosition: {x: 0, y: 0, z: 0}
+  currentEntityState: 0
+  moveSpeed: 2.5
+  nearRadius: 1.5
+  imperceptibles: 
+  attacking: 0
+  direction: {x: 0, y: 0, z: 0}
+  moveOrientation: {x: 0, y: 0, z: 0}
+  targetTag: Player
+  target: {fileID: 0}
+  attackRadius: 1.5
+  health: 2
 --- !u!212 &1776859290621372575
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -263,30 +287,6 @@ MonoBehaviour:
   _effectMods: []
   _effects: []
   _timedEffects: []
---- !u!114 &1776859290621372645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1776859291371688983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c77977f5634191a418c050a845e9cac5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorPosition: {x: 0, y: 0, z: 0}
-  currentEntityState: 0
-  moveSpeed: 1.5
-  nearRadius: 1.5
-  imperceptibles: 
-  attacking: 0
-  direction: {x: 0, y: 0, z: 0}
-  orientation: {x: 0, y: 0, z: 0}
-  targetTag: Player
-  target: {fileID: 0}
-  attackRadius: 1.5
-  health: 2
 --- !u!114 &1776859290621372644
 MonoBehaviour:
   m_ObjectHideFlags: 0

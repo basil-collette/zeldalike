@@ -101,7 +101,32 @@ public abstract class DirectionHelper
         float angleUp = Vector3.Angle(direction, Vector3.up);
 
         return Mathf.Min(angleDown, angleRight, angleUp) == angleRight;
+    }
 
+    public static float MapValue(float value, float minValue, float maxValue, bool willClamp = true)
+    {
+        if (maxValue > minValue)
+        {
+            float mappedValue = (value - minValue) / (maxValue - minValue);
+            if (willClamp)
+            {
+                mappedValue = Mathf.Clamp(mappedValue, 0.0f, 1.0f);
+            }
+            return mappedValue;
+        }
+        else
+        {
+            return (value >= minValue) ? 1.0f : 0.0f;
+        }
+    }
+
+    public static float WrapAngle(float angle, float min, float max)
+    {
+        float range = max - min;
+        angle = (angle - min) % range;
+        if (angle < 0)
+            angle += range;
+        return angle + min;
     }
 
     //move to an appropriate place

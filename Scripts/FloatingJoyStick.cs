@@ -83,8 +83,6 @@ public class FloatingJoyStick : MonoBehaviour
     private Vector2 ClampStartPosition(Vector2 startPosition)
     {
         startPosition = new Vector2(startPosition.x - JoystickSizeHalf, startPosition.y - JoystickSizeHalf);
-        Debug.Log(Screen.height);
-        Debug.Log(Camera.main.pixelHeight);
 
         if (startPosition.x < 0)
         {

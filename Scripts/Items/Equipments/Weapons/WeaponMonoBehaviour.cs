@@ -10,14 +10,13 @@ namespace Assets.Scripts.Items.Equipments.Weapons
     public abstract class WeaponMonoBehaviour : MonoBehaviour
     {
         public Weapon weapon;
-
         [HideInInspector] public Vector2 direction;
         [HideInInspector] public Animator anim;
-        public bool attacking;
+        [HideInInspector] public bool attacking;
+
         protected Animator animatorTop;
         protected Animator animatorLegs;
         protected PlayerInput playerInputs;
-        protected CooldownManager cooldownManager;
 
         protected void Start()
         {
@@ -25,10 +24,8 @@ namespace Assets.Scripts.Items.Equipments.Weapons
             animatorLegs = transform.parent.GetChild(0).GetComponent<Animator>();
 
             playerInputs = GetComponent<PlayerInput>();
-            cooldownManager = GetComponent<CooldownManager>();
             anim = GetComponentInChildren<Animator>();
-            anim.speed = weapon.speed;
-            //anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(weapon.animatorName);
+            anim.speed = 1 / weapon.speed;
 
             direction = Vector2.zero;
         }
@@ -41,21 +38,18 @@ namespace Assets.Scripts.Items.Equipments.Weapons
                 if (!attacking)
                 {
                     attacking = true;
-                    animatorTop.SetBool("attacking", true);
-                    animatorLegs.SetBool("attacking", true);
 
                     Attack(direction);
-
-                    Action OnEnd = () => {
-                        attacking = false;
-                        animatorTop.SetBool("attacking", false);
-                        animatorLegs.SetBool("attacking", false);
-                        direction = Vector2.zero;
-                    };
-
-                    cooldownManager.StartCooldown("attackCooldown", weapon.attackDelay, null, OnEnd);
                 }
             }
+        }
+
+        public void OnAnimationEnd()
+        {
+            attacking = false;
+            animatorTop.SetBool("attacking", false);
+            animatorLegs.SetBool("attacking", false);
+            direction = Vector2.zero;
         }
 
         protected abstract void Attack(Vector3 direction);

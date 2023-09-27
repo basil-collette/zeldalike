@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
 
@@ -21,19 +22,19 @@ namespace Assets.Scripts.Manager
             return !Cooldowns.Any(item => item.Name == name);
         }
 
-        public void StartCooldown(string name, float time, Action OnLoop = null, Action OnEnd = null)
+        public void StartCooldown(string name, float time, Action OnEnd = null)
         {
             if (IsAvailable(name))
             {
-                StartCoroutine(CooldownCo(name, time, OnLoop, OnEnd));
+                StartCoroutine(CooldownCo(name, time, OnEnd));
             }
         }
 
-        public void StartOrIncreaseCooldown(string name, float time, Action OnLoop = null, Action OnEnd = null)
+        public void StartOrIncreaseCooldown(string name, float time, Action OnEnd = null)
         {
             if (IsAvailable(name))
             {
-                StartCoroutine(CooldownCo(name, time, OnLoop, OnEnd));
+                StartCoroutine(CooldownCo(name, time, OnEnd));
             }
             else
             {
@@ -47,8 +48,11 @@ namespace Assets.Scripts.Manager
             return Cooldowns.Where(n => n.Name == name).FirstOrDefault();
         }
 
-        IEnumerator CooldownCo(string name, float time, Action OnLoop = null, Action OnEnd = null)
+        IEnumerator CooldownCo(string name, float time, Action OnEnd = null)
         {
+            //Stopwatch stopwatch = new Stopwatch();
+            //stopwatch.Start();
+
             var newCooldown = new Cooldown()
             {
                 Name = name,
@@ -57,22 +61,12 @@ namespace Assets.Scripts.Manager
 
             Cooldowns.Add(newCooldown);
 
-            var cooldown = GetCooldown(name);
-            while (cooldown != null)
-            {
-                OnLoop?.Invoke();
+            yield return new WaitForSeconds(time);
 
-                cooldown.Time -= Time.deltaTime;
+            //stopwatch.Stop();
+            //UnityEngine.Debug.Log(name + " : " + stopwatch.Elapsed.TotalSeconds);
 
-                if (cooldown.Time <= 0)
-                {
-                    Cooldowns.Remove(cooldown);
-                }
-
-                cooldown = GetCooldown(name);
-
-                yield return null;
-            }
+            Cooldowns.Remove(newCooldown);
 
             OnEnd?.Invoke();
         }

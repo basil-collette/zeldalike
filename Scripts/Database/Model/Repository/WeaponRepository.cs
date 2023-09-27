@@ -38,12 +38,20 @@ namespace Assets.Database.Model.Repository
         public sealed override void Insert(SqliteConnection dbConn)
         {
             IDbCommand insertSword = dbConn.CreateCommand();
-            insertSword.CommandText = $"INSERT INTO weapon ({GetQueryFields()}) VALUES ('sword', 1.5, 1, 'gfx/weapons/sword', 0.7, 'common', 0, 'Eppee poussiereuse', 'weapon', 'Epee', 'sword', 1)";
+            insertSword.CommandText = $"INSERT INTO weapon ({GetQueryFields()}) VALUES ('sword', 1.5, 0.5, 'gfx/weapons/sword', 0.7, 'common', 0, 'Eppee poussiereuse', 'weapon', 'Epee', 'sword', 1)";
             insertSword.ExecuteNonQuery();
 
             IDbCommand insertAxe = dbConn.CreateCommand();
-            insertAxe.CommandText = $"INSERT INTO weapon ({GetQueryFields()}) VALUES ('axe', 1.5, 1, 'gfx/weapons/axe', 0.7, 'common', 0, 'Hache viking', 'weapon', 'Axe', 'axe', 1)";
+            insertAxe.CommandText = $"INSERT INTO weapon ({GetQueryFields()}) VALUES ('axe', 2, 1, 'gfx/weapons/axe', 0.7, 'common', 0, 'Hache viking', 'weapon', 'Axe', 'axe', 1)";
             insertAxe.ExecuteNonQuery();
+
+            IDbCommand insertSpear = dbConn.CreateCommand();
+            insertSpear.CommandText = $"INSERT INTO weapon ({GetQueryFields()}) VALUES ('spear', 2, 0.5, 'gfx/weapons/spear', 0.7, 'common', 0, 'Lance spartiate', 'weapon', 'Spear', 'spear', 1)";
+            insertSpear.ExecuteNonQuery();
+
+            IDbCommand insertDagger = dbConn.CreateCommand();
+            insertDagger.CommandText = $"INSERT INTO weapon ({GetQueryFields()}) VALUES ('dagger', 1, 0.2, 'gfx/weapons/dagger', 0.7, 'common', 0, 'Dague perse', 'weapon', 'Dagger', 'dagger', 1)";
+            insertDagger.ExecuteNonQuery();
         }
 
     }

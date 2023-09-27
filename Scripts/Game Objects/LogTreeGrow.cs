@@ -8,7 +8,7 @@ public class LogTreeGrow : Interacting
 
     protected override void OnInteract()
     {
-        throw new System.NotImplementedException();
+        //
     }
 
     void Start()

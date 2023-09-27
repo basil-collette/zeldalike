@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(PlayerInput))]
 public class Player : AliveEntity
 {
     public Inventory inventory;
@@ -174,18 +175,20 @@ public class Player : AliveEntity
             {
                 direction.Normalize();
 
-                //rigidbody.MovePosition(transform.position + (direction.normalized * moveSpeed * Time.fixedDeltaTime));
+                float finalSpeed = dashSpeed;
 
-                float finalSpeed = (cooldownManager.IsAvailable("dashDuration"))
-                    ? moveSpeed
-                    : dashSpeed;
-
-                if (cooldownManager.IsAvailable("dashDuration") && cooldownManager.IsAvailable("walkSoundCooldown"))
+                if (cooldownManager.IsAvailable("dashDuration"))
                 {
-                    audioSource.PlayOneShot(walkSound);
-                    cooldownManager.StartCooldown("walkSoundCooldown", 0.4f);
+                    finalSpeed = moveSpeed;
+
+                    if (cooldownManager.IsAvailable("walkSoundCooldown"))
+                    {
+                        audioSource.PlayOneShot(walkSound);
+                        cooldownManager.StartCooldown("walkSoundCooldown", 0.4f);
+                    }
                 }
 
+                //rigidbody.MovePosition(transform.position + (direction.normalized * finalSpeed * Time.fixedDeltaTime));
                 GetComponent<Rigidbody2D>().velocity = new Vector2(direction.x * finalSpeed, direction.y * finalSpeed);
 
                 animatorTop.SetBool("moving", true);
@@ -252,9 +255,10 @@ public class Player : AliveEntity
             audioSource.clip = rollSound;
             audioSource.Play();
 
+            CooldownButton.buttons.Find(x => x._name == "dash")?.Cooldwon(dashCooldown);
+
             Coroutine rollEffectCoroutine = StartCoroutine(DashEffectCo());
 
-            Action OnLoop = () => { /* CreateDashEffect() */ };
             Action OnEnd = () => {
                 /*SetState(EntityState.walk);*/
                 StopCoroutine(rollEffectCoroutine);
@@ -262,7 +266,7 @@ public class Player : AliveEntity
                 animatorLegs.SetBool("rolling", false);
             };
 
-            cooldownManager.StartCooldown("dashDuration", dashDuration, OnLoop, OnEnd);
+            cooldownManager.StartCooldown("dashDuration", dashDuration, OnEnd);
             cooldownManager.StartCooldown("dashCooldown", dashCooldown);
         }
     }

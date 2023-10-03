@@ -9,28 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 624b60cc4738c144f93860be7ab3d832, type: 3}
+  m_Script: {fileID: 11500000, guid: 348105722c12d554294605c52a682c3a, type: 3}
   m_Name: De quoi suis-je capable
   m_EditorClassIdentifier: 
-  Name: De quoi suis-je capable
-  Description: "Tuer la rose m\xE8re"
-  IsCompleted: 0
-  QuestSteps:
-  - Goals:
-    - rid: 4206153544483209235
-    IsCompleted: 0
-    Rewards:
-      Money: 0
-      Experience: 0
-      ItemsRef: []
+  Name: 
+  Code: 
+  Description: 
+  QuestSteps: []
   references:
     version: 2
-    RefIds:
-    - rid: 4206153544483209235
-      type: {class: KillGoal, ns: , asm: Assembly-CSharp}
-      data:
-        Target: mother_rose
-        Objective: 
-        IsCompleted: 0
-        RequiredAmmount: 1
-        CurrentAmmount: 0
+    RefIds: []

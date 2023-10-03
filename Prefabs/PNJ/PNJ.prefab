@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8507700517257368305}
   - component: {fileID: 7508571655726285290}
   - component: {fileID: 8182379175521755224}
+  - component: {fileID: 193345749990287687}
   m_Layer: 0
   m_Name: PNJ
   m_TagString: Untagged
@@ -103,9 +104,10 @@ MonoBehaviour:
   enterSignal: {fileID: 11400000, guid: 5c6f2bf61d6ce8a499ea5ef10264fac3, type: 2}
   exitSignal: {fileID: 11400000, guid: c2c481bd5dec5ef4d84386f2dcc77003, type: 2}
   Name: Grandma
-  Sprite: {fileID: 0}
   Voice: {fileID: 0}
-  Dialogues: []
+  Sprite: {fileID: 0}
+  Dialogues: {fileID: 0}
+  spriteActionButton: {fileID: 21300000, guid: 53f5ec91c7066024e80054061113fad2, type: 3}
 --- !u!61 &8507700517257368305
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -178,3 +180,31 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &193345749990287687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6672608607016093182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb71e145e5fa45d4083b8051f687de29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 4a136e094f6c3aa408f0871ef5b6db84, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

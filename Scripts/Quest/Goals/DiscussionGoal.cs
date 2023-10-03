@@ -3,6 +3,8 @@ using System;
 [Serializable]
 public class DiscussionGoal : Goal
 {
+    public DiscussionGoal() { Type = "Discussion"; }
+
     protected override void ApplyGoalCheckObserver()
     {
         DialogueManager.OnDiscuss += GoalCheck;

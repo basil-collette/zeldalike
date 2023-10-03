@@ -17,12 +17,12 @@ public class HotbarSlot : InventorySlot
 
     public sealed override void Remove(Item item)
     {
-        ObjectGetterHelper.Inventory.Hotbars.Remove(item as HoldableItem);
+        MainGameManager._inventoryManager._hotbars.Remove(item as HoldableItem);
     }
 
     public sealed override void Add(Item item)
     {
-        ObjectGetterHelper.Inventory.Hotbars.Add(item as HoldableItem);
+        MainGameManager._inventoryManager._hotbars.Add(item as HoldableItem);
     }
 
 }

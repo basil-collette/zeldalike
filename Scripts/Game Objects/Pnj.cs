@@ -10,9 +10,11 @@ public class Pnj : Interacting
     public AudioClip Voice;
     public Sprite Sprite;
     public PNJDialogues Dialogues;
+    [SerializeField] Sprite spriteActionButton;
 
     //[HideInInspector] public List<string> dialogueCodeSaid = new List<string>();
     DialogueManager dialogueManager;
+    GameObject ActionButtonTalk;
 
     void Start()
     {
@@ -21,7 +23,28 @@ public class Pnj : Interacting
 
     protected override void OnInteract()
     {
-        Talk();
+        //Talk();
+    }
+
+    protected sealed override void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Player") && !collider.isTrigger)
+        {
+            base.OnTriggerEnter2D(collider);
+
+            ActionButtonTalk = FindGameObjectHelper.FindByName("Actions Container").GetComponent<ActionButtonsManager>().AddButton(spriteActionButton, Talk);
+        }
+    }
+
+    protected sealed override void OnTriggerExit2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Player") && !collider.isTrigger)
+        {
+            base.OnTriggerExit2D(collider);
+
+            Destroy(ActionButtonTalk);
+            ActionButtonTalk = null;
+        }
     }
 
     public void Talk()
@@ -50,12 +73,12 @@ public class Pnj : Interacting
 
     public bool HaveSaid(string dialogueNameCode)
     {
-        return DialogueStates.HaveSaid(Name, dialogueNameCode);
+        return MainGameManager._dialogStatesManager.HaveSaid(Name, dialogueNameCode);
     }
 
     public void AddSaid(string dialogueNameCode)
     {
-        DialogueStates.AddSaid(Name, dialogueNameCode);
+        MainGameManager._dialogStatesManager.AddSaid(Name, dialogueNameCode);
     }
 
 }

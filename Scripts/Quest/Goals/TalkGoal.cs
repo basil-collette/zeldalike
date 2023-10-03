@@ -3,6 +3,8 @@ using System;
 [System.Serializable]
 public class TalkGoal : Goal
 {
+    public TalkGoal() { Type = "Talk"; }
+
     //public string Target;
 
     protected override void ApplyGoalCheckObserver()
@@ -21,9 +23,9 @@ public class TalkGoal : Goal
 
         /*if (Array.Exists(deathParams, (x) => x == Target))
         {
-            CurrentAmmount++;
+            CurrentAmount++;
 
-            if (CurrentAmmount == RequiredAmmount)
+            if (CurrentAmount == RequiredAmount)
             {
                 IsCompleted = true;
                 DisableGoalCheckObserver();

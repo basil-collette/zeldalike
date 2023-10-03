@@ -6,8 +6,13 @@ public abstract class Goal
     public string Target;
     public string Objective;
     public bool IsCompleted;
-    public int RequiredAmmount;
-    public int CurrentAmmount;
+    public int RequiredAmount;
+    public int CurrentAmount;
+
+    #if UNITY_EDITOR
+        [ShowOnly]
+    #endif
+    public string Type;
 
     public Goal()
     {
@@ -24,13 +29,13 @@ public abstract class Goal
 
     protected virtual void GoalCheck(params object[] observerParams)
     {
-        string[] deathParams = observerParams as string[];
+        string[] goalsParams = observerParams as string[];
 
-        if (Array.Exists(deathParams, (x) => x == Target))
+        if (Array.Exists(goalsParams, (x) => x == Target))
         {
-            CurrentAmmount++;
+            CurrentAmount++;
 
-            if (CurrentAmmount == RequiredAmmount)
+            if (CurrentAmount == RequiredAmount)
             {
                 IsCompleted = true;
                 DisableGoalCheckObserver();

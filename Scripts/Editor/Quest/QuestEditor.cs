@@ -4,12 +4,12 @@ using UnityEditorInternal;
 using UnityEngine;
 
 //[CanEditMultipleObjects()]
-[CustomEditor(typeof(Quest), true)]
+[CustomEditor(typeof(ScriptableQuest), true)]
 public class QuestEditor : Editor
 {
     private ReorderableList _itemList;
 
-    private Quest _quest;
+    private ScriptableQuest _quest;
     private bool _showQuestSteps = true;
     private List<QuestStep> _questStepsSelected;
 
@@ -32,16 +32,16 @@ public class QuestEditor : Editor
 
         serializedObject.Update();
 
-        _quest = target as Quest;
+        _quest = target as ScriptableQuest;
 
         SerializedProperty nameProperty = serializedObject.FindProperty("Name");
         EditorGUILayout.PropertyField(nameProperty, true);
 
+        SerializedProperty codeProperty = serializedObject.FindProperty("Code");
+        EditorGUILayout.PropertyField(codeProperty, true);
+
         SerializedProperty descriptionProperty = serializedObject.FindProperty("Description");
         EditorGUILayout.PropertyField(descriptionProperty, true);
-
-        SerializedProperty isCompletedProperty = serializedObject.FindProperty("IsCompleted");
-        EditorGUILayout.PropertyField(isCompletedProperty, true);
 
         EditorGUILayout.LabelField("Adding");
 
@@ -68,9 +68,9 @@ public class QuestEditor : Editor
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button("Talk"))
+            if (GUILayout.Button("Event"))
             {
-                AddGoal(new TalkGoal());
+                AddGoal(new EventGoal());
             }
         EditorGUILayout.EndHorizontal();
 

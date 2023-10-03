@@ -29,5 +29,22 @@ namespace Assets.Scripts.Manager
 			//var items = Singleton<ItemRepository<Item>>.Instance.GetAll();
 		}
 
+		public static bool DbExists()
+		{
+			using (SqliteConnection connexion = DatabaseHelper.GetConnexion())
+			{
+				string query = "SELECT name FROM sqlite_master WHERE type='table' AND (name='item' OR name='weapon');";
+				var command = new SqliteCommand(query, connexion);
+				command.ExecuteNonQuery();
+				var result = command.ExecuteReader();
+				if (result.HasRows)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
 	}
 }

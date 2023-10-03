@@ -21,8 +21,8 @@ public abstract class AliveEntity : Entity
         this.direction = Vector3.zero;
 
         this.animator = GetComponent<Animator>();
-        animator.SetFloat("moveX", 0);
-        animator.SetFloat("moveY", -1);
+        animator?.SetFloat("moveX", 0);
+        animator?.SetFloat("moveY", -1);
 
         SetState(EntityState.idle);
     }

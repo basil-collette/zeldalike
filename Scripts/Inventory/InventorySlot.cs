@@ -32,12 +32,12 @@ public class InventorySlot : MonoBehaviour, IDropHandler
 
     public virtual void Remove(Item item)
     {
-        ObjectGetterHelper.Inventory.Items.Remove(item);
+        MainGameManager._inventoryManager._items.Remove(item);
     }
 
     public virtual void Add(Item item)
     {
-        ObjectGetterHelper.Inventory.Items.Add(item);
+        MainGameManager._inventoryManager._items.Add(item);
     }
 
 }

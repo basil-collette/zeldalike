@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class TreasureChest : NorthApproachingInteractable
 {
     [HideInInspector] [SerializeReference] public Item content;
-    public Inventory inventory;
+    public InventoryManager inventory;
     public bool isOpen;
     public string itemNameCode;
     public ItemTypeEnum itemTypeEnum = ItemTypeEnum.item;
@@ -20,7 +20,7 @@ public class TreasureChest : NorthApproachingInteractable
 
     void Start()
     {
-        if (SaveManager.GameData.opennedChestGuids.Contains(code))
+        if (MainGameManager._storyEventManager._opennedChests.Contains(code))
         {
             GetComponent<Animator>().SetBool("open", true);
             enabled = false;
@@ -77,7 +77,7 @@ public class TreasureChest : NorthApproachingInteractable
 
         FindAnyObjectByType<Player>().RaiseItem();
 
-        SaveManager.GameData.opennedChestGuids.Add(code.ToString());
+        MainGameManager._storyEventManager.AddOpennedChestsEvent(code.ToString());
 
         FindAnyObjectByType<PauseManager>().ShowPausedInterface("InfoScene", () =>
         {

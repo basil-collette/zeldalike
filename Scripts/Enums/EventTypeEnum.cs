@@ -6,6 +6,8 @@
         StartQuest,
         AddItem,
         RemoveItem,
+        AddMoney,
+        RemoveMoney,
         SetDialogueSaid,
         StartCinematic,
     }

@@ -11,7 +11,7 @@ public class ExperienceDrop : Drop
             Experience = amount
         };
 
-        collider.GetComponent<Player>().inventory.GetReward(reward);
+        MainGameManager._inventoryManager.GetReward(reward);
     }
 
 }

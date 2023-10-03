@@ -34,6 +34,28 @@ MonoBehaviour:
     DialogueContainer: {fileID: 11400000, guid: 836b9b3c31b00a84aabb1f67f7711bdc, type: 2}
     Conditions:
     - rid: 4206153544483209247
+    - rid: 8045117328212885515
+    Priority: 2
+    IsSaid: 0
+  - NameCode: end
+    DialogueContainer: {fileID: 11400000, guid: 3b3360636933b6d4cbcffc13ae56c9fe, type: 2}
+    Conditions:
+    - rid: 8045117328212885525
+    Priority: 2
+    IsSaid: 0
+  - NameCode: merchant-info
+    DialogueContainer: {fileID: 11400000, guid: 94fa0f7e8b8fd5b47bda3b5e5ba18497, type: 2}
+    Conditions:
+    - rid: 8045117328212885518
+    - rid: 8045117328212885521
+    - rid: 8045117328212885524
+    Priority: 2
+    IsSaid: 0
+  - NameCode: after-merchant-info
+    DialogueContainer: {fileID: 11400000, guid: 6dcdf71a911c98148a51e256ef087a20, type: 2}
+    Conditions:
+    - rid: 8045117328212885519
+    - rid: 8045117328212885522
     Priority: 2
     IsSaid: 0
   references:
@@ -59,3 +81,47 @@ MonoBehaviour:
         Type: HaveTalk
         Not: 0
         PNJName: Grandma
+    - rid: 8045117328212885515
+      type: {class: DialogueConditionPossessItem, ns: , asm: Assembly-CSharp}
+      data:
+        TargetCode: idcard
+        Type: PossessItem
+        Not: 1
+    - rid: 8045117328212885518
+      type: {class: DialogueConditionHaveTalk, ns: , asm: Assembly-CSharp}
+      data:
+        TargetCode: merchant-info
+        Type: HaveTalk
+        Not: 1
+        PNJName: grandma
+    - rid: 8045117328212885519
+      type: {class: DialogueConditionHaveTalk, ns: , asm: Assembly-CSharp}
+      data:
+        TargetCode: merchant-info
+        Type: HaveTalk
+        Not: 0
+        PNJName: grandma
+    - rid: 8045117328212885521
+      type: {class: DialogueConditionPossessItem, ns: , asm: Assembly-CSharp}
+      data:
+        TargetCode: diplomas
+        Type: PossessItem
+        Not: 0
+    - rid: 8045117328212885522
+      type: {class: DialogueConditionEndQuest, ns: , asm: Assembly-CSharp}
+      data:
+        TargetCode: mother_rose
+        Type: EndQuest
+        Not: 1
+    - rid: 8045117328212885524
+      type: {class: DialogueConditionEndQuest, ns: , asm: Assembly-CSharp}
+      data:
+        TargetCode: mother_rose
+        Type: EndQuest
+        Not: 1
+    - rid: 8045117328212885525
+      type: {class: DialogueConditionEndQuest, ns: , asm: Assembly-CSharp}
+      data:
+        TargetCode: mother_rose
+        Type: EndQuest
+        Not: 0

@@ -17,18 +17,18 @@ MonoBehaviour:
     PortName: Next
     TargetNodeGuid: 3683f861-b143-446d-84e2-fa2b8b411c26
   NodeDatas:
-  - rid: 4206153544483209216
+  - rid: 8045117328212885507
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 4206153544483209216
+    - rid: 8045117328212885507
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 3683f861-b143-446d-84e2-fa2b8b411c26
         title: Dialogue
         Position: {x: 199, y: 200}
         EntryPoint: 0
-        DialogueText: Tu as repris aux enfants tes papiers ?
+        DialogueText: "Tu as repris aux enfants tes papiers d'identit\xE9 ?"
         DialogueCode: 
         Pnj: {fileID: 4019585777184574299, guid: 77a7f1fd211b43547a731f2d8b7cbabd, type: 3}

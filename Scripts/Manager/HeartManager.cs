@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HeartManager : SignletonGameObject<HeartManager>
+public class HeartManager : SingletonGameObject<HeartManager>
 {
     public Image[] hearts;
     public float maxHearts = 3;

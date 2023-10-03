@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueManager : SignletonGameObject<DialogueManager>
+public class DialogueManager : SingletonGameObject<DialogueManager>
 {
     public static event Action<string[]> OnDiscuss;
 
@@ -105,10 +105,12 @@ public class DialogueManager : SignletonGameObject<DialogueManager>
     {
         switch (node.Type)
         {
-            case EventTypeEnum.StartQuest: PlayerQuest.AddQuest(node.Param); break;
-            case EventTypeEnum.AddItem: Inventory.AddItem(node.Param); break;
-            case EventTypeEnum.RemoveItem: Inventory.StaticRemoveItem(node.Param); break;
-            case EventTypeEnum.SetDialogueSaid: break;
+            case EventTypeEnum.StartQuest: MainGameManager._questbookManager.AddQuest(node.Param); break;
+            case EventTypeEnum.AddItem: MainGameManager._inventoryManager.AddItem(node.Param); break;
+            case EventTypeEnum.RemoveItem: MainGameManager._inventoryManager.RemoveItem(node.Param); break;
+            case EventTypeEnum.AddMoney: MainGameManager._inventoryManager.AddMoney(int.Parse(node.Param)); break;
+            case EventTypeEnum.RemoveMoney: MainGameManager._inventoryManager.RemoveMoney(int.Parse(node.Param)); break;
+            //case EventTypeEnum.SetDialogueSaid: break;
             case EventTypeEnum.StartCinematic: break;
             default: break;
         }

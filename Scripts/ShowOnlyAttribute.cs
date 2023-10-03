@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+using UnityEditor;
 using UnityEngine;
 
 public class ShowOnlyAttribute : PropertyAttribute { }
@@ -8,6 +9,10 @@ public class ShowOnlyDrawer : PropertyDrawer
 {
     public override void OnGUI(Rect position, SerializedProperty prop, GUIContent label)
     {
+        GUI.enabled = false;
+        EditorGUI.PropertyField(position, prop, label);
+        GUI.enabled = true;
+        /*
         string valueStr;
 
         switch (prop.propertyType)
@@ -30,5 +35,7 @@ public class ShowOnlyDrawer : PropertyDrawer
         }
 
         EditorGUI.LabelField(position, label.text, valueStr);
+        */
     }
 }
+#endif

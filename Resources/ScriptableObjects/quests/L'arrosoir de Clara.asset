@@ -9,29 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 624b60cc4738c144f93860be7ab3d832, type: 3}
+  m_Script: {fileID: 11500000, guid: 348105722c12d554294605c52a682c3a, type: 3}
   m_Name: L'arrosoir de Clara
   m_EditorClassIdentifier: 
-  Name: L'arrosoir de Clara
-  Description: Les enfants ne se sont pas contenter de mes papiers, ils ont aussi
-    prit l'arrosoir de Clara
-  IsCompleted: 0
-  QuestSteps:
-  - Goals:
-    - rid: 4206153562263650311
-    IsCompleted: 0
-    Rewards:
-      Money: 50
-      Experience: 0
-      ItemsRef: []
+  Name: 
+  Code: 
+  Description: 
+  QuestSteps: []
   references:
     version: 2
-    RefIds:
-    - rid: 4206153562263650311
-      type: {class: DiscussionGoal, ns: , asm: Assembly-CSharp}
-      data:
-        Target: arrosoir_back
-        Objective: "Ramener l'arrosoir vol\xE9 \xE0 Clara"
-        IsCompleted: 0
-        RequiredAmmount: 1
-        CurrentAmmount: 0
+    RefIds: []

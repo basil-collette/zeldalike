@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public abstract class SignletonGameObject<T> : MonoBehaviour
-    where T : SignletonGameObject<T>
+public abstract class SingletonGameObject<T> : MonoBehaviour
+    where T : SingletonGameObject<T>
 {
     private static T _instance = null;
 

@@ -2,7 +2,7 @@ using Assets.Database.Model.Design;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryManager : SignletonGameObject<InventoryManager>
+public class InventoryGuiManager : SingletonGameObject<InventoryGuiManager>
 {
     public DraggableItem DraggableItemPrefab;
 
@@ -11,13 +11,13 @@ public class InventoryManager : SignletonGameObject<InventoryManager>
     public GameObject HoldedSlot;
     public Text MoneyAmount;
     
-    Inventory Inventory;
+    InventoryManager Inventory;
 
     private void OnEnable()
     {
-        Inventory = Resources.Load<Inventory>("ScriptableObjects/Player/Inventory/Inventory");
+        Inventory = MainGameManager._inventoryManager;
 
-        MoneyAmount.text = Inventory.Money.ToString();
+        MoneyAmount.text = Inventory._money.ToString();
 
         FillSlots();
     }
@@ -29,7 +29,7 @@ public class InventoryManager : SignletonGameObject<InventoryManager>
 
     void FillSlots()
     {
-        foreach (Item item in Inventory.Items)
+        foreach (Item item in Inventory._items)
         {
             DraggableItem draggableItem = Instantiate(DraggableItemPrefab, transform.position, Quaternion.identity);
             Vector3 itemScale = draggableItem.transform.localScale;
@@ -40,7 +40,7 @@ public class InventoryManager : SignletonGameObject<InventoryManager>
             draggableItem.Image.preserveAspect = true;
         }
 
-        foreach (Item item in Inventory.Hotbars)
+        foreach (Item item in Inventory._hotbars)
         {
             DraggableItem hotbarItem = Instantiate(DraggableItemPrefab, transform.position, Quaternion.identity);
             Vector3 hotbarScale = hotbarItem.transform.localScale;
@@ -51,13 +51,13 @@ public class InventoryManager : SignletonGameObject<InventoryManager>
             hotbarItem.Image.preserveAspect = true;
         }
 
-        if (Inventory.Weapon == null || Inventory.Weapon.Id == 0) return;
+        if (Inventory._weapon == null || Inventory._weapon.Id == 0) return;
         DraggableItem weapon = Instantiate(DraggableItemPrefab, transform.position, Quaternion.identity);
         Vector3 weaponScale = weapon.transform.localScale;
         weapon.transform.SetParent(HoldedSlot.transform);
         weapon.transform.localScale = weaponScale;
-        weapon.SetItem(Inventory.Weapon);
-        weapon.Image.sprite = Inventory.Weapon.Sprite;
+        weapon.SetItem(Inventory._weapon);
+        weapon.Image.sprite = Inventory._weapon.Sprite;
         weapon.Image.preserveAspect = true;
     }
 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class BossGameManager : SignletonGameObject<BossGameManager>
+public class BossGameManager : SingletonGameObject<BossGameManager>
 {
     private void Start()
     {

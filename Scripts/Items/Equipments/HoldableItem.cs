@@ -20,7 +20,7 @@ public class HoldableItem : Item
         return holdableItem;
     }
 
-    protected new void PostInstanciation()
+    public new void PostInstanciation()
     {
         base.PostInstanciation();
     }

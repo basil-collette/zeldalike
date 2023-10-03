@@ -20,12 +20,12 @@ public class QuestLog : MonoBehaviour
     public List<GameObject> Items;
 
     int PreviousButtonIndex;
-    PlayerQuest PlayerQuest;
+    QuestbookManager _questbook;
 
     private void OnEnable()
     {
         PreviousButtonIndex = 0;
-        PlayerQuest = FindAnyObjectByType<Player>().playerQuest; //PlayerQuest = FindGameObjectHelper.FindByName("Player").GetComponent<Player>().playerQuest;
+        _questbook = MainGameManager._questbookManager;
         ShowQuestsByState(true);
     }
 
@@ -33,7 +33,7 @@ public class QuestLog : MonoBehaviour
     {
         ClearQuestDesc();
 
-        List<Quest> quests = PlayerQuest.GetQuestsByState(inProgress);
+        List<Quest> quests = MainGameManager._questbookManager.GetQuestsByState(inProgress);
 
         StartCoroutine(SetButtonsColor(inProgress));
 
@@ -77,7 +77,7 @@ public class QuestLog : MonoBehaviour
 
         QuestDetailsText.text = quest.Description;
 
-        QuestStep questStep = PlayerQuest.GetCurrentStep(quest);
+        QuestStep questStep = _questbook.GetCurrentStep(quest);
 
         if (questStep == null) return;
 

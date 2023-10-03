@@ -9,19 +9,18 @@ public class MemoryPartsCarroussel : MonoBehaviour
     public int sizeParts;
     public float movementSpeed = 20;
 
-    Inventory inv;
+    InventoryManager inv;
     int index;
     bool moving;
 
-    void Start()
+    private void OnEnable()
     {
         index = 0;
         moving = false;
 
-        inv = FindGameObjectHelper.FindByName("Player").GetComponent<Player>().inventory;
+        inv = MainGameManager._inventoryManager;
 
         ShowMemoryPart("Identity");
-        ShowMemoryPart("Diplomes");
         ShowMemoryPart("Competences");
     }
 
@@ -30,12 +29,12 @@ public class MemoryPartsCarroussel : MonoBehaviour
         switch (partName)
         {
             case "Competences":
-                ShowMemoryPart(partName, inv.Items.Exists(x => x.NameCode == "competences")); break;
+                ShowMemoryPart(partName, inv._items.Exists(x => x.NameCode == "competences")); break;
             case "Diplomes":
-                ShowMemoryPart(partName, inv.Items.Exists(x => x.NameCode == "diplomes")); break;
+                ShowMemoryPart(partName, inv._items.Exists(x => x.NameCode == "diplomes")); break;
             case "Identity":
             default:
-                ShowMemoryPart(partName, inv.Items.Exists(x => x.NameCode == "id_card")); break;
+                ShowMemoryPart(partName, inv._items.Exists(x => x.NameCode == "id_card")); break;
         }
     }
 

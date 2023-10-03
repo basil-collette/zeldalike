@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PauseManager : SignletonGameObject<PauseManager>
+public class PauseManager : SingletonGameObject<PauseManager>
 {
     static bool IsPaused = false;
 

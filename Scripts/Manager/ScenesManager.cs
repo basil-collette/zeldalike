@@ -16,7 +16,7 @@ class PreloadedScene
     public bool canceled = false;
 }
 
-public class ScenesManager : SignletonGameObject<ScenesManager>
+public class ScenesManager : SingletonGameObject<ScenesManager>
 {
     public GameObject transitionOverlay;
 
@@ -62,8 +62,9 @@ public class ScenesManager : SignletonGameObject<ScenesManager>
 
         transitionOverlay.SetActive(true);
 
-        yield return StartCoroutine(UnLoadSceneCo(currentScene));
-        yield return StartCoroutine(LoadSceneCo(targetScene, LoadSceneMode.Additive));
+        yield return UnLoadSceneCo(currentScene);
+
+        yield return LoadSceneCo(targetScene, LoadSceneMode.Additive);
 
         CameraMovement camera = FindAnyObjectByType<CameraMovement>();
         camera.SetParams(targetScene.cameraParameters, FindAnyObjectByType<Player>().transform);

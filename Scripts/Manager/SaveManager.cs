@@ -1,14 +1,11 @@
-﻿using Assets.Database.Model.Design;
-using Assets.Database.Model.Repository;
-using Assets.Scripts.Enums;
-using Assets.Tools;
+﻿using Assets.Database.Model.Repository;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-public class SaveManager : SignletonGameObject<SaveManager>
+public class SaveManager : SingletonGameObject<SaveManager>
 {
     public static GameData GameData;
     public TargetScene StartScene;
@@ -31,7 +28,7 @@ public class SaveManager : SignletonGameObject<SaveManager>
         if (loadedData != null)
         {
             GameData = loadedData;
-            SetDataToRunning();
+            LoadData();
         }
     }
 
@@ -91,48 +88,37 @@ public class SaveManager : SignletonGameObject<SaveManager>
             playerHealth = player.GetComponent<Health>()._health.RuntimeValue,
             playerMaxHealth = player.GetComponent<Health>()._health.initialValue,
 
-            inventoryItems = player.inventory.Items.Select(x => JsonUtility.ToJson(x)).ToList(),
-            inventoryHotbars = player.inventory.Hotbars.Select(x => JsonUtility.ToJson(x)).ToList(),
-            inventoryWeapon = (player.inventory.Weapon == null || player.inventory.Weapon.Id == 0) ? null : JsonUtility.ToJson(player.inventory.Weapon),
+            inventory = MainGameManager._inventoryManager.ToJsonString(),
 
-            opennedChestGuids = GameData.opennedChestGuids,
+            dialoguesStates = MainGameManager._dialogStatesManager.ToJsonString(),
 
-            dialoguesStates = JsonUtility.ToJson(DialogueStates.Get()),
+            quests = MainGameManager._questbookManager.ToJsonString(),
 
-            quests = player.playerQuest.PlayerQuests.Select(x => JsonUtility.ToJson(x)).ToList(),
-
-            events = GameData.events
+            events = MainGameManager._storyEventManager.ToJsonString()
         };
     }
 
     public void CreateNewSave(string _saveName)
     {
-        Weapon sword = Singleton<WeaponRepository>.Instance.GetByCode("sword");
+        string FIRST_WEAPON_CODE = "sword";
+        MainGameManager._inventoryManager.Set(new InventorySaveModel() { Weapon = Singleton<WeaponRepository>.Instance.GetByCode(FIRST_WEAPON_CODE) });
+
+        string FIRST_QUEST_NAME = "Je m'appelle...";
+        var firstQuest = Resources.Load<ScriptableQuest>($"ScriptableObjects/quests/{FIRST_QUEST_NAME}");
+        MainGameManager._questbookManager.Set(new QuestbookSaveModel() { Quests = { new Quest(firstQuest) } });
+        var test = JsonUtility.ToJson(new StoryEventSaveModel());
 
         GameData gameData = new GameData() {
             saveName = _saveName,
             sceneName = StartScene.libelle,
             position = new Vector3(-2.3f, 1.75f, 0),
-            inventoryItems = new List<string>(),
-            inventoryHotbars = new List<string>(),
-            inventoryWeapon = JsonUtility.ToJson(sword),
+            inventory = MainGameManager._inventoryManager.ToJsonString(),
             playerHealth = 3f,
             playerMaxHealth = 3f,
-            opennedChestGuids = new List<string>(),
-            quests = new List<string>() { JsonUtility.ToJson(Resources.Load<Quest>("ScriptableObjects/quests/Je m'appelle...")) },
-            events = new EventCodes()
+            dialoguesStates = JsonUtility.ToJson(new DialogStatesSaveModel()),
+            quests = MainGameManager._questbookManager.ToJsonString(),
+            events = JsonUtility.ToJson(new StoryEventSaveModel())
         };
-
-        Quest[] quests = Resources.LoadAll<Quest>("ScriptableObjects/quests");
-        foreach (var quest in quests)
-        {
-            quest.IsCompleted = false;
-            quest.QuestSteps.Select(x => {
-                x.IsCompleted = false;
-                x.Goals.Select(y => y.CurrentAmmount = 0);
-                return x;
-            });
-        }
 
         WriteSave(gameData);
     }
@@ -170,7 +156,7 @@ public class SaveManager : SignletonGameObject<SaveManager>
         }
     }
 
-    public void SetDataToRunning()
+    public void LoadData()
     {
         //SCENE
         TargetScene currentScene = Resources.Load<TargetScene>($"Scenes/{GameData.sceneName.Substring(0, GameData.sceneName.Length - 5)}/{GameData.sceneName}");
@@ -181,49 +167,18 @@ public class SaveManager : SignletonGameObject<SaveManager>
         playerHealth.initialValue = GameData.playerMaxHealth;
         playerHealth.RuntimeValue = GameData.playerHealth;
         Resources.Load<VectorValue>("ScriptableObjects/Player/position/PlayerPosition").initalValue = GameData.position;
-        
+
         //INVENTORY
-        Inventory inventory = Resources.Load<Inventory>("ScriptableObjects/Player/Inventory/Inventory");
-        inventory.Items = GameData.inventoryItems.Select(x => GetSerializedItem(x)).ToList();
-        inventory.Hotbars = GameData.inventoryHotbars.Select(x => GetSerializedItem(x) as HoldableItem).ToList();
-        inventory.Weapon = (GameData.inventoryWeapon == null || GameData.inventoryWeapon == string.Empty) ? null : GetSerializedItem(GameData.inventoryWeapon) as Weapon;
+        MainGameManager._inventoryManager.Load(GameData.inventory);
+
+        //Story Events
+        MainGameManager._storyEventManager.Load(GameData.events);
 
         //DIALOGUES STATES
-        DialogueStates ds = Resources.Load<DialogueStates>("ScriptableObjects/Dialogues/DialogueStates");
-        ds.States = new List<SerializableWrappedList<string>>();
-        JsonUtility.FromJsonOverwrite(GameData.dialoguesStates, ds);
+        MainGameManager._dialogStatesManager.Load(GameData.dialoguesStates);
 
         //QUESTS
-        PlayerQuest playerQuest = Resources.Load<PlayerQuest>("ScriptableObjects/Player/Quest/PlayerQuest");
-        playerQuest.PlayerQuests.Clear();
-        for (int i = 0; i < GameData.quests.Count; i++) {
-            TempQuest tempQuest = JsonUtility.FromJson<TempQuest>(GameData.quests[i]);
-            Quest quest = Resources.Load<Quest>($"ScriptableObjects/quests/{tempQuest.Name}");
-            JsonUtility.FromJsonOverwrite(GameData.quests[i], quest);
-
-            playerQuest.AddQuest(quest);
-        }
-
-        //COFFRES
-        //gardé en mémoire dans GameData
-    }
-
-    Item GetSerializedItem(string json)
-    {
-        Item item = Item.InstanciateFromJsonString(json);
-
-        switch (item.ItemType)
-        {
-            case ItemTypeEnum.holdable:
-                return HoldableItem.InstanciateFromJsonString(json);
-
-            case ItemTypeEnum.weapon:
-                return Weapon.InstanciateFromJsonString(json);
-            
-            case ItemTypeEnum.item:
-            default:
-                return item;
-        }
+        MainGameManager._questbookManager.Load(GameData.quests);
     }
 
 }

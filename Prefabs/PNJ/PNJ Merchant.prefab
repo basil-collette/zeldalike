@@ -106,6 +106,7 @@ MonoBehaviour:
   Voice: {fileID: 0}
   Sprite: {fileID: 21300000, guid: f8d5ccf9867b655488d9e866e08fabf0, type: 3}
   Dialogues: {fileID: 0}
+  spriteActionButton: {fileID: -842231574, guid: 67a0139ce3d618946851490dd9edb0b0, type: 3}
 --- !u!61 &2118784087997681559
 BoxCollider2D:
   m_ObjectHideFlags: 0

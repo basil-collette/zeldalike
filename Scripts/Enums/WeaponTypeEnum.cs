@@ -5,6 +5,8 @@
     {
         sword,
         axe,
-        bow
+        bow,
+        spear,
+        dagger
     }
 }

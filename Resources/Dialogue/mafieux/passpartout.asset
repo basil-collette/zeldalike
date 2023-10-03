@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a2d8ae767442a4c8c0177884108faf, type: 3}
+  m_Name: passpartout
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGuid: 89c25f70-7383-45cc-8926-56b511ae42dd
+    PortName: Next
+    TargetNodeGuid: 073c6a1c-e061-4741-b6fd-6eed0e3e07ce
+  - BaseNodeGuid: bf144bce-d074-4325-80c1-86b147081a5b
+    PortName: Une solution ?!
+    TargetNodeGuid: 05fd881c-b7aa-40b6-aeec-ebbec3fa88fd
+  - BaseNodeGuid: 05fd881c-b7aa-40b6-aeec-ebbec3fa88fd
+    PortName: Super !
+    TargetNodeGuid: d38e2011-581d-453f-8ed5-14711c0aa0cd
+  - BaseNodeGuid: d38e2011-581d-453f-8ed5-14711c0aa0cd
+    PortName: Ok
+    TargetNodeGuid: c6d6f34b-f440-4b31-9fbb-8a478a70300b
+  - BaseNodeGuid: 073c6a1c-e061-4741-b6fd-6eed0e3e07ce
+    PortName: Menteur !
+    TargetNodeGuid: bf144bce-d074-4325-80c1-86b147081a5b
+  NodeDatas:
+  - rid: 8045117315667460129
+  - rid: 8045117315667460130
+  - rid: 8045117315667460131
+  - rid: 8045117315667460132
+  - rid: 8045117315667460133
+  ExposedProperties: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 8045117315667460129
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: bf144bce-d074-4325-80c1-86b147081a5b
+        title: Dialogue
+        Position: {x: 200, y: 399}
+        EntryPoint: 0
+        DialogueText: Daccord, c'est moi ! Je les ai vendu au collectionneur qui
+          habite au centre, mais il est toujours en voyage.
+        DialogueCode: 
+        Pnj: {fileID: 4019585777184574299, guid: 313f1c4d2bdec5b428e9b3c1e0752cf4, type: 3}
+    - rid: 8045117315667460130
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: 05fd881c-b7aa-40b6-aeec-ebbec3fa88fd
+        title: Dialogue
+        Position: {x: 200, y: 605}
+        EntryPoint: 0
+        DialogueText: Je pourrai te donner un pass partout.
+        DialogueCode: 
+        Pnj: {fileID: 4019585777184574299, guid: 313f1c4d2bdec5b428e9b3c1e0752cf4, type: 3}
+    - rid: 8045117315667460131
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: d38e2011-581d-453f-8ed5-14711c0aa0cd
+        title: Dialogue
+        Position: {x: 200, y: 799}
+        EntryPoint: 0
+        DialogueText: "Doucement, faut de l'oseille pour \xE7a. Je te le vends pour
+          100 pi\xE8ces !"
+        DialogueCode: mafieupass
+        Pnj: {fileID: 4019585777184574299, guid: 313f1c4d2bdec5b428e9b3c1e0752cf4, type: 3}
+    - rid: 8045117315667460132
+      type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: c6d6f34b-f440-4b31-9fbb-8a478a70300b
+        title: Event
+        Position: {x: 697, y: 799}
+        EntryPoint: 0
+        Type: 0
+        Param: buy-mafieupass
+    - rid: 8045117315667460133
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: 073c6a1c-e061-4741-b6fd-6eed0e3e07ce
+        title: Dialogue
+        Position: {x: 200, y: 200}
+        EntryPoint: 0
+        DialogueText: "Tes dipl\xF4mes ? Pas vu..."
+        DialogueCode: default
+        Pnj: {fileID: 4019585777184574299, guid: 313f1c4d2bdec5b428e9b3c1e0752cf4, type: 3}

@@ -9,15 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 624b60cc4738c144f93860be7ab3d832, type: 3}
+  m_Script: {fileID: 11500000, guid: 348105722c12d554294605c52a682c3a, type: 3}
   m_Name: Je m'appelle...
   m_EditorClassIdentifier: 
-  Name: Je m'appelle...
-  Description: Qui suis-je ? Pas moyen de me souvenir...
-  IsCompleted: 0
+  Name: Je m'apelle...
+  Code: my_name_is
+  Description: 
   QuestSteps:
-  - Goals:
-    - rid: 4206153816023760908
+  - Goals: []
     IsCompleted: 0
     Rewards:
       Money: 0
@@ -25,12 +24,4 @@ MonoBehaviour:
       ItemsRef: []
   references:
     version: 2
-    RefIds:
-    - rid: 4206153816023760908
-      type: {class: CollectGoal, ns: , asm: Assembly-CSharp}
-      data:
-        Target: id_card
-        Objective: "R\xE9cup\xE9rer mes papiers d'identit\xE9"
-        IsCompleted: 0
-        RequiredAmmount: 1
-        CurrentAmmount: 0
+    RefIds: []

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ public class SellManager : MonoBehaviour
 
     void Start()
     {
-        List<string> shop = SaveManager.GameData.events.Shop;
+        List<string> shop = MainGameManager._storyEventManager._shop;
 
         if (shop.Exists(x => x ==  "rope"))
         {

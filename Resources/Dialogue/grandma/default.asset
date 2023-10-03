@@ -17,18 +17,18 @@ MonoBehaviour:
     PortName: Next
     TargetNodeGuid: decb796f-ecbe-4914-b93d-351eaaac81a8
   NodeDatas:
-  - rid: 4206153503839879168
+  - rid: 8045117328212885504
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 4206153503839879168
+    - rid: 8045117328212885504
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: decb796f-ecbe-4914-b93d-351eaaac81a8
         title: Dialogue
-        Position: {x: 241, y: 250}
+        Position: {x: 197, y: 200}
         EntryPoint: 0
-        DialogueText: J'ai les fesses toutes engourdies moi sur ce vieux banc !
+        DialogueText: J'ai les fesses toutes engourdies sur ce vieux banc moi !
         DialogueCode: default
         Pnj: {fileID: 4019585777184574299, guid: 77a7f1fd211b43547a731f2d8b7cbabd, type: 3}

@@ -48,24 +48,27 @@ public class PNJDialoguesEditor : Editor
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button("Possess"))
+            if (GUILayout.Button("Possess Item"))
             {
-                AddCondition(new DialogueConditionPossess());
+                AddCondition(new DialogueConditionPossessItem());
             }
+            if (GUILayout.Button("Possess Money"))
+            {
+                AddCondition(new DialogueConditionPossessMoney());
+            }
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button("Have Talk"))
             {
                 AddCondition(new DialogueConditionHaveTalk());
             }
-        EditorGUILayout.EndHorizontal();
-
-        /*
-        EditorGUILayout.BeginHorizontal();
+            /*
             if (GUILayout.Button("Location"))
             {
                 AddCondition();
-            }
+            }*/
         EditorGUILayout.EndHorizontal();
-        */
 
         GUILayout.Space(2);
 

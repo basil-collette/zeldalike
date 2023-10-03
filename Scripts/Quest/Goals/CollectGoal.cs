@@ -1,14 +1,16 @@
 [System.Serializable]
 public class CollectGoal : Goal
 {
+    public CollectGoal() { Type = "Collect"; }
+
     protected override void ApplyGoalCheckObserver()
     {
-        Inventory.OnObtain += GoalCheck;
+        InventoryManager.OnObtain += GoalCheck;
     }
 
     protected override void DisableGoalCheckObserver()
     {
-        Inventory.OnObtain -= GoalCheck;
+        InventoryManager.OnObtain -= GoalCheck;
     }
 
 }

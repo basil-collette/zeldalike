@@ -1,19 +1,19 @@
 using Assets.Scripts.Manager;
-using UnityEngine;
 using System.IO;
-using Mono.Data.Sqlite;
+using UnityEngine;
 
-public class MainGameManager : SignletonGameObject<MainGameManager>
+public class MainGameManager : SingletonGameObject<MainGameManager>
 {
     public TargetScene firstLoadedScene;
     public GameObject CanvaUI;
     public GameObject CanvaControls;
     public bool resetBDD = false;
 
-    [Header("ScriptableObjects")]
-    public PlayerQuest PlayerQuest;
-    public DialogueStates DialogueStates;
-    public Inventory Inventory;
+    public static QuestbookManager _questbookManager;
+    public static DialogStatesManager _dialogStatesManager;
+    public static InventoryManager _inventoryManager;
+    public static StoryEventManager _storyEventManager;
+
 
     //Assembly.GetAssembly(typeof(BaseRepitory<T>)).GetTypes().FirstOrDefault(testc => testc.isSubsclassOf(typeof(GenericRepitory<T>)));
     //FindAnyObjectByType<ToastManager>().Add(new Toast("La partie à été supprimée!", ToastType.Success));
@@ -22,6 +22,11 @@ public class MainGameManager : SignletonGameObject<MainGameManager>
     {
         //Hide URP Debuger
         UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
+
+        _questbookManager = new QuestbookManager();
+        _dialogStatesManager = new DialogStatesManager();
+        _inventoryManager = new InventoryManager();
+        _storyEventManager = new StoryEventManager();
 
         //Application.targetFrameRate = 10;
 
@@ -55,30 +60,15 @@ public class MainGameManager : SignletonGameObject<MainGameManager>
 
     void InitBDD()
     {
-        if (!DbExists())
+        if (!DatabaseHelper.DbExists())
+        {
             resetBDD = true;
+        }
 
         if (resetBDD)
         {
             DatabaseHelper.ResetTables();
         }
-    }
-
-    bool DbExists()
-    {
-        using (SqliteConnection connexion = DatabaseHelper.GetConnexion())
-        {
-            string query = "SELECT name FROM sqlite_master WHERE type='table' AND (name='item' OR name='weapon');";
-            var command = new SqliteCommand(query, connexion);
-            command.ExecuteNonQuery();
-            var result = command.ExecuteReader();
-            if (result.HasRows)
-            {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     public void StartGame()

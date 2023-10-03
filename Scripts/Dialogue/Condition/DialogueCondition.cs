@@ -5,7 +5,10 @@ using UnityEngine;
 public abstract class DialogueCondition
 {
     public string TargetCode;
-    /*[ShowOnly]*/ public string Type;
+    #if UNITY_EDITOR
+    [ShowOnly]
+    #endif
+    public string Type;
     public bool Not = false;
 
     public abstract bool Verify();
@@ -18,8 +21,7 @@ public class DialogueConditionStartedQuest : DialogueCondition
 
     public override bool Verify()
     {
-        PlayerQuest playerQuest = Resources.Load<PlayerQuest>("ScriptableObjects/Player/Quest/PlayerQuest");
-        bool result = playerQuest.GetQuestByName(TargetCode) != null;
+        bool result = MainGameManager._questbookManager.GetQuestByCode(TargetCode) != null;
         return (Not) ? !result : result;
     }
 }
@@ -31,8 +33,7 @@ public class DialogueConditionEndQuest : DialogueCondition
 
     public override bool Verify()
     {
-        PlayerQuest playerQuest = Resources.Load<PlayerQuest>("ScriptableObjects/Player/Quest/PlayerQuest");
-        var quest = playerQuest.GetQuestByName(TargetCode);
+        var quest = MainGameManager._questbookManager.GetQuestByCode(TargetCode);
         bool result = (quest == null) ? false : quest.IsCompleted;
         return (Not) ? !result : result;
     }
@@ -47,23 +48,38 @@ public class DialogueConditionHaveTalk : DialogueCondition
 
     public override bool Verify()
     {
-        bool result = DialogueStates.HaveSaid(PNJName, TargetCode);
+        bool result = MainGameManager._dialogStatesManager.HaveSaid(PNJName, TargetCode);
         return (Not) ? !result : result;
     }
 }
 
 [Serializable]
-public class DialogueConditionPossess : DialogueCondition
+public class DialogueConditionPossessItem : DialogueCondition
 {
-    public DialogueConditionPossess() { Type = "Possess"; }
+    public DialogueConditionPossessItem() { Type = "PossessItem"; }
 
     public override bool Verify()
     {
-        Inventory inventory = Resources.Load<Inventory>("ScriptableObjects/Player/Inventory/Inventory");
+        InventoryManager inventory = MainGameManager._inventoryManager;
 
-        bool result = (inventory.Items.Exists(x => x.NameCode == TargetCode)
-            || inventory.Hotbars.Exists(x => x.NameCode == TargetCode)
-            || inventory.Weapon?.NameCode == TargetCode);
+        bool result = (inventory._items.Exists(x => x.NameCode == TargetCode)
+            || inventory._hotbars.Exists(x => x.NameCode == TargetCode)
+            || inventory._weapon?.NameCode == TargetCode);
+
+        return (Not) ? !result : result;
+    }
+}
+
+[Serializable]
+public class DialogueConditionPossessMoney : DialogueCondition
+{
+    public int amount;
+
+    public DialogueConditionPossessMoney() { Type = "PossessMoney"; }
+
+    public override bool Verify()
+    {
+        bool result = MainGameManager._inventoryManager._money < amount;
 
         return (Not) ? !result : result;
     }

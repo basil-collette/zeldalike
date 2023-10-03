@@ -10,7 +10,7 @@ public class SellItem : MonoBehaviour
     public string itemNameCode;
     public ItemTypeEnum itemType;
 
-    public Inventory inventory;
+    public InventoryManager inventory;
 
     Item item;
 
@@ -23,9 +23,9 @@ public class SellItem : MonoBehaviour
     {
         Toast toast = new Toast("", ToastType.Success);
 
-        if (inventory.Money > price)
+        if (inventory._money > price)
         {
-            inventory.Money -= price;
+            inventory._money -= price;
             inventory.AddItem(item);
 
             toast.Text = $"{item.NameLibelle} acheté !";

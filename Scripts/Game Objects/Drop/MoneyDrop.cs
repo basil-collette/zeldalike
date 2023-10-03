@@ -11,7 +11,7 @@ public class MoneyDrop : Drop
             Money = amount
         };
 
-        collider.GetComponent<Player>().inventory.GetReward(reward);
+        MainGameManager._inventoryManager.GetReward(reward);
     }
 
 }

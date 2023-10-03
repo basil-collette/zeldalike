@@ -17,7 +17,7 @@ public class PursueBrain : Brain
         targetMoveSpeed = GetComponent<AliveEntity>().moveSpeed;
         animator = GetComponent<Animator>();
         
-        Vector2 collidArea = GetComponent<BoxCollider2D>().size;
+        Vector2 collidArea = GetComponent<CapsuleCollider2D>().size;
         selfColliderSize = Math.Max(collidArea.x, collidArea.y) / 2;
     }
 

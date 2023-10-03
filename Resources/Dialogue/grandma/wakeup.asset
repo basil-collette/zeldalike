@@ -20,31 +20,31 @@ MonoBehaviour:
     PortName: Non...
     TargetNodeGuid: 3173e805-a9ec-4b3c-98ef-cbfe55ee8683
   NodeDatas:
-  - rid: 4206153544483209217
-  - rid: 4206153544483209218
+  - rid: 8045117328212885505
+  - rid: 8045117328212885506
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 4206153544483209217
+    - rid: 8045117328212885505
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: eb0e570e-ec20-4c02-b23a-4422d1e215c1
         title: Dialogue
-        Position: {x: 205, y: 203}
+        Position: {x: 198, y: 200}
         EntryPoint: 0
-        DialogueText: "Tu as l'air chamboul\xE9 mon gar\xE7on. Tu ne sais plus qui
-          tu es ?"
-        DialogueCode: wakeup
+        DialogueText: "Tu as l'air chamboul\xE9 mon gar\xE7on, tu sais plus qui tu
+          es ?"
+        DialogueCode: 
         Pnj: {fileID: 4019585777184574299, guid: 77a7f1fd211b43547a731f2d8b7cbabd, type: 3}
-    - rid: 4206153544483209218
+    - rid: 8045117328212885506
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 3173e805-a9ec-4b3c-98ef-cbfe55ee8683
         title: Dialogue
-        Position: {x: 695, y: 203}
+        Position: {x: 198, y: 398}
         EntryPoint: 0
-        DialogueText: "Les enfants ont jou\xE9 avec tes papiers d'identit\xE9s, \xE7a
-          serait un bon d\xE9but de leur reprendre"
-        DialogueCode: 
+        DialogueText: "Les enfants ont jou\xE9 avec tes papiers d'identit\xE9, \xE7a
+          serait un bon d\xE9but de les r\xE9cup\xE9rer"
+        DialogueCode: wakeup
         Pnj: {fileID: 4019585777184574299, guid: 77a7f1fd211b43547a731f2d8b7cbabd, type: 3}

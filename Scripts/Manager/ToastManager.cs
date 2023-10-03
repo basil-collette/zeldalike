@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ToastManager : SignletonGameObject<ToastManager>
+public class ToastManager : SingletonGameObject<ToastManager>
 {
     public Animator anim;
     public Image ToastBackground;

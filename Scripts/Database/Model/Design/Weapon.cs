@@ -31,7 +31,7 @@ namespace Assets.Database.Model.Design
             return weapon;
         }
 
-        protected new void PostInstanciation()
+        public new void PostInstanciation()
         {
             base.PostInstanciation();
             weaponType = (WeaponTypeEnum)Enum.Parse(typeof(WeaponTypeEnum), WeaponTypeName);

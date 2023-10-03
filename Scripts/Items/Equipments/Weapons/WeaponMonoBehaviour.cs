@@ -9,23 +9,28 @@ namespace Assets.Scripts.Items.Equipments.Weapons
     [Serializable]
     public abstract class WeaponMonoBehaviour : MonoBehaviour
     {
-        public Weapon weapon;
+        public Weapon _weapon;
         [HideInInspector] public Vector2 direction;
         [HideInInspector] public Animator anim;
         [HideInInspector] public bool attacking;
 
-        protected Animator animatorTop;
-        protected Animator animatorLegs;
+        protected Animator animPlayerTop;
+        protected Animator animPlayerLegs;
         protected PlayerInput playerInputs;
+        protected CooldownManager cooldownManager;
 
         protected void Start()
         {
-            animatorTop = transform.parent.GetChild(1).GetComponent<Animator>();
-            animatorLegs = transform.parent.GetChild(0).GetComponent<Animator>();
+            anim = GetComponentInChildren<Animator>();
+            animPlayerTop = transform.parent.GetChild(1).GetComponent<Animator>();
+            animPlayerLegs = transform.parent.GetChild(0).GetComponent<Animator>();
+
+            anim.speed = AttackSpeedModifier;
+            animPlayerTop.SetFloat("attackSpeed", AttackSpeedModifier);
 
             playerInputs = GetComponent<PlayerInput>();
-            anim = GetComponentInChildren<Animator>();
-            anim.speed = 1 / weapon.speed;
+
+            cooldownManager = GetComponent<CooldownManager>();
 
             direction = Vector2.zero;
         }
@@ -40,17 +45,28 @@ namespace Assets.Scripts.Items.Equipments.Weapons
                     attacking = true;
 
                     Attack(direction);
+
+                    anim.SetBool("attacking", true);
+
+                    Action OnAttackEnd = () =>
+                    {
+                        attacking = false;
+
+                        anim.SetTrigger("endCooldown");
+                        anim.SetBool("attacking", false);
+                        animPlayerTop.SetBool("attacking", false);
+                        animPlayerLegs.SetBool("attacking", false);
+                        direction = Vector2.zero;
+                    };
+
+                    cooldownManager.StartCooldown("attackCooldown", _weapon.attackDelay, OnAttackEnd);
+
+                    GetComponentInParent<Player>().AttackAnimation();
                 }
             }
         }
 
-        public void OnAnimationEnd()
-        {
-            attacking = false;
-            animatorTop.SetBool("attacking", false);
-            animatorLegs.SetBool("attacking", false);
-            direction = Vector2.zero;
-        }
+        float AttackSpeedModifier => 1 / _weapon.speed;
 
         protected abstract void Attack(Vector3 direction);
 

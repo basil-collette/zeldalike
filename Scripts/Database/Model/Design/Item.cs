@@ -44,7 +44,7 @@ namespace Assets.Database.Model.Design
             return item;
         }
 
-        protected void PostInstanciation()
+        public void PostInstanciation()
         {
             ItemType = (ItemTypeEnum)Enum.Parse(typeof(ItemTypeEnum), TypeName);
             Sprite = (SpritePath == null) ? null : Resources.Load<Sprite>($"Art/{SpritePath}");

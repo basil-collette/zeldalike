@@ -1,28 +1,30 @@
 using Assets.Database.Model.Design;
 using Assets.Scripts.Enums;
-using Assets.Scripts.Game_Objects;
+using Assets.Scripts.Game_Objects.Inheritable;
 using Assets.Scripts.Manager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
 
-public class TreasureChest : NorthApproachingInteractable
+public class TreasureChest : FacingInteracting
 {
     [HideInInspector] [SerializeReference] public Item content;
-    public InventoryManager inventory;
-    public bool isOpen;
     public string itemNameCode;
     public ItemTypeEnum itemTypeEnum = ItemTypeEnum.item;
     public string code;
 
+    [SerializeField] Sprite spriteActionButton;
+
     Transform receivedItemContext;
+    GameObject ActionButtonOpen;
 
     void Start()
     {
         if (MainGameManager._storyEventManager._opennedChests.Contains(code))
         {
             GetComponent<Animator>().SetBool("open", true);
+            GetComponent<PolygonCollider2D>().enabled = false;
             enabled = false;
             return;
         }
@@ -45,22 +47,62 @@ public class TreasureChest : NorthApproachingInteractable
             && Gamepad.current != null
             && Gamepad.current[GamepadButton.East].wasPressedThisFrame)
         {
-            if (!isOpen)
+            ObtainItem();
+        }
+    }
+
+    protected new void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Player") && !collider.isTrigger)
+        {
+            base.OnTriggerEnter2D(collider);
+
+            if (isFacing)
             {
-                ObtainItem();
+                ActionButtonOpen = FindGameObjectHelper.FindByName("Actions Container").GetComponent<ActionButtonsManager>().AddButton(spriteActionButton, ObtainItem);
             }
+        }
+    }
+
+    protected new void OnTriggerStay2D(Collider2D collider)
+    {
+        base.OnTriggerStay2D(collider);
+
+        if (isFacing)
+        {
+            if (ActionButtonOpen == null)
+            {
+                ActionButtonOpen = FindGameObjectHelper.FindByName("Actions Container").GetComponent<ActionButtonsManager>().AddButton(spriteActionButton, ObtainItem);
+            }
+        }
+        else
+        {
+            Destroy(ActionButtonOpen);
+            ActionButtonOpen = null;
+        }
+    }
+
+    protected new void OnTriggerExit2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Player") && !collider.isTrigger)
+        {
+            base.OnTriggerExit2D(collider);
+
+            Destroy(ActionButtonOpen);
+            ActionButtonOpen = null;
         }
     }
 
     void ObtainItem()
     {
-        isOpen = true;
+        enabled = false;
+        GetComponent<PolygonCollider2D>().enabled = false;
 
         GetComponent<Animator>().SetTrigger("opentrigger");
 
         exitSignal.Raise(); //to remove the "?" clue
 
-        inventory.AddItem(content);
+        MainGameManager._inventoryManager.AddItem(content);
 
         receivedItemContext.gameObject.SetActive(true);
 
@@ -83,6 +125,9 @@ public class TreasureChest : NorthApproachingInteractable
         {
             FindGameObjectHelper.FindByName("Info Canva").GetComponentInChildren<Text>().text = content.Description;
         }, true);
+
+        Destroy(ActionButtonOpen);
+        ActionButtonOpen = null;
     }
 
     public void ExitRaiseItem()
@@ -90,24 +135,11 @@ public class TreasureChest : NorthApproachingInteractable
         FindAnyObjectByType<Player>().CloseRaiseItem();
 
         receivedItemContext.gameObject.SetActive(false);
-
-        this.enabled = false;
     }
 
-    protected new void OnTriggerEnter2D(Collider2D collider)
+    protected override void OnInteract()
     {
-        if (!isOpen)
-        {
-            base.OnTriggerEnter2D(collider);
-        }
-    }
-
-    protected new void OnTriggerStay2D(Collider2D collider)
-    {
-        if (!isOpen)
-        {
-            base.OnTriggerStay2D(collider);
-        }
+        //throw new System.NotImplementedException();
     }
 
 }

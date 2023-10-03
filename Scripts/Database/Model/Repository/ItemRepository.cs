@@ -49,7 +49,7 @@ namespace Assets.Database.Model.Repository
             key.ExecuteNonQuery();
 
             IDbCommand letter = dbConn.CreateCommand();
-            letter.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/letter', 1, 'common', 0, 'Lettre adressée à Mathilde', 'item', 'Lettre', 'letter', 1)";
+            letter.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/letter', 1, 'rare', 0, 'Lettre adressée à Mathilde', 'item', 'Lettre', 'letter', 1)";
             letter.ExecuteNonQuery();
 
             IDbCommand arrosoir = dbConn.CreateCommand();
@@ -59,6 +59,18 @@ namespace Assets.Database.Model.Repository
             IDbCommand idCard = dbConn.CreateCommand();
             idCard.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/id_card', 1, 'common', 0, 'Ma carte d''identité', 'quest', 'Carte d''identité', 'id_card', 1)";
             idCard.ExecuteNonQuery();
+
+            IDbCommand shoes = dbConn.CreateCommand();
+            shoes.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/shoes', 1, 'common', 0, 'Bottes du marchant', 'quest', 'Bottes du marchant', 'shoes', 1)";
+            shoes.ExecuteNonQuery();
+
+            IDbCommand rope = dbConn.CreateCommand();
+            rope.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/rope', 1, 'rare', 0, 'Corde solide', 'quest', 'Corde solide', 'rope', 1)";
+            rope.ExecuteNonQuery();
+
+            IDbCommand darkWoodPlank = dbConn.CreateCommand();
+            darkWoodPlank.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/dark_wood_plank', 1, 'common', 0, 'Planche d''Ecorcique', 'item', 'Planche d''Ecorcique', 'dark_wood_plank', 1)";
+            darkWoodPlank.ExecuteNonQuery();
         }
 
     }

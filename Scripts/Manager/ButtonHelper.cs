@@ -33,6 +33,11 @@ public class ButtonHelper : MonoBehaviour
         FindGameObjectHelper.FindByName("Main Game Manager").GetComponent<MainGameManager>().StartGame();
     }
 
+    public void StartMenuShowOptions()
+    {
+        FindAnyObjectByType<PauseManager>().ShowPausedInterface("StartMenuOptionsScene", null);
+    }
+
     public void EraseSave()
     {
         FindGameObjectHelper.FindByName("Main Game Manager").GetComponent<SaveManager>().EraseSave();
@@ -52,33 +57,6 @@ public class ButtonHelper : MonoBehaviour
     public void Save()
     {
         FindAnyObjectByType<SaveManager>().SaveGame();
-    }
-
-    public void UnlockMemoryPartIdCard()
-    {
-        /*
-        Item idCard = Singleton<ItemRepository<Item>>.Instance.GetByCode("id_card");
-        FindAnyObjectByType<MainGameManager>().Inventory.AddItem(idCard);
-        */
-        FindGameObjectHelper.FindByName("Parts").GetComponent<MemoryPartsCarroussel>().ShowMemoryPart("Identity", true);
-    }
-
-    public void UnlockMemoryPartDiplomas()
-    {
-        /*
-        Item idCard = Singleton<ItemRepository<Item>>.Instance.GetByCode("diplomes");
-        FindAnyObjectByType<MainGameManager>().Inventory.AddItem(idCard);
-        */
-        FindGameObjectHelper.FindByName("Parts").GetComponent<MemoryPartsCarroussel>().ShowMemoryPart("Diplomes", true);
-    }
-
-    public void UnlockMemoryPartCompetences()
-    {
-        /*
-        Item idCard = Singleton<ItemRepository<Item>>.Instance.GetByCode("competences");
-        FindAnyObjectByType<MainGameManager>().Inventory.AddItem(idCard);
-        */
-        FindGameObjectHelper.FindByName("Parts").GetComponent<MemoryPartsCarroussel>().ShowMemoryPart("Competences", true);
     }
 
 }

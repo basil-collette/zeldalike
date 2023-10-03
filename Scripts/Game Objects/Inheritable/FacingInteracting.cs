@@ -18,7 +18,7 @@ namespace Assets.Scripts.Game_Objects.Inheritable
             }
         }
 
-        protected override sealed void OnTriggerEnter2D(Collider2D collider)
+        protected new void OnTriggerEnter2D(Collider2D collider)
         {
             if (collider.CompareTag("Player") && !collider.isTrigger)
             {
@@ -30,7 +30,7 @@ namespace Assets.Scripts.Game_Objects.Inheritable
             }
         }
 
-        protected override sealed void OnTriggerExit2D(Collider2D collision)
+        protected new void OnTriggerExit2D(Collider2D collision)
         {
             exitSignal?.Raise();
 

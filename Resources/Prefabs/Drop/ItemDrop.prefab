@@ -82,7 +82,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.625, y: 2.1875}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -100,20 +100,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c3900aa729a59488d2bedef33e04db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item:
-    Id: 0
-    NameLibelle: 
-    NameCode: 
-    Actif: 0
-    InventoryIndex: 0
-    Weight: 0
-    Description: 
-    TypeName: 
-    ItemType: 0
-    SpriteName: 
-    Sprite: {fileID: 0}
-    RarityName: 
-    Rarity: 0
+  takeSound: {fileID: 0}
+  Item:
+    rid: -2
+  itemNameCode: 
+  itemType: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!95 &722261320638054754
 Animator:
   serializedVersion: 5

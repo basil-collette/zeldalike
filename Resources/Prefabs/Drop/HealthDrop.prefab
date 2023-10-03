@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28f1a1d4d50c4045b90b462d4be99f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  takeSound: {fileID: 0}
   amount: 1
 --- !u!95 &1610850444195115100
 Animator:

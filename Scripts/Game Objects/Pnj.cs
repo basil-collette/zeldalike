@@ -12,7 +12,6 @@ public class Pnj : Interacting
     public PNJDialogues Dialogues;
     [SerializeField] Sprite spriteActionButton;
 
-    //[HideInInspector] public List<string> dialogueCodeSaid = new List<string>();
     DialogueManager dialogueManager;
     GameObject ActionButtonTalk;
 

@@ -3,6 +3,7 @@ using Assets.Scripts.Items.Equipments.Weapons;
 using Assets.Scripts.Manager;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
@@ -278,14 +279,6 @@ public class Player : AliveEntity
         }
     }
 
-    void Imobilize()
-    {
-        direction = Vector3.zero;
-        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-        animatorTop.SetBool("moving", false);
-        animatorLegs.SetBool("moving", false);
-    }
-
     public void RaiseItem()
     {
         animatorTop.SetBool("receivingItem", true);
@@ -296,6 +289,42 @@ public class Player : AliveEntity
     {
         animatorTop.SetBool("receivingItem", false);
         SetState(EntityState.walk);
+    }
+
+    public override sealed void Imobilize()
+    {
+        direction = Vector3.zero;
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        animatorTop.SetBool("moving", false);
+        animatorLegs.SetBool("moving", false);
+    }
+
+    protected override sealed IEnumerator FallCo(Vector3 fallPos, Vector3 respawnPos)
+    {
+        SetState(EntityState.unavailable);
+        Imobilize();
+
+        FindGameObjectHelper.FindByName("Main Sound Manager").GetComponent<SoundManager>().PlayEffect("falling");
+
+        animatorTop.SetTrigger("fall");
+
+        animatorLegs.SetBool("hidden", true);
+
+        while (!animatorTop.GetCurrentAnimatorStateInfo(0).IsName("Fall")) yield return null;
+
+        transform.position = fallPos;
+
+        while (animatorTop.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        {
+            yield return null;
+        }
+
+        animatorLegs.SetBool("hidden", false);
+
+        transform.position = respawnPos;
+        SetState(EntityState.idle);
+
+        GetComponent<Health>().Hit(gameObject, new List<Effect> { new Effect(EffectEnum.neutral, 0.25f) }, "Player");
     }
 
 }

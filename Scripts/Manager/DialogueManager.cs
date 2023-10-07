@@ -13,18 +13,33 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
     public float textAnimPauseSeconds = 0.01f;
 
     DialogueContainer _dialogueContainer;
-    Pnj _pnj;
 
-    public void StartDialogue(Pnj pnj, DialogueReference dialogueRef)
+    public void StartDialogue(DialogueContainer dialogueContainer)
     {
-        _pnj = pnj;
+        _dialogueContainer = dialogueContainer;
+
+        ShowPauseInterface();
+    }
+
+    public void StartDialogue(DialogueReference dialogueRef)
+    {
         _dialogueContainer = dialogueRef.DialogueContainer;
 
-        pauseManager.ShowPausedInterface("DialogueScene", () =>
+        ShowPauseInterface();
+    }
+
+    void ShowPauseInterface()
+    {
+        pauseManager.ShowPausedInterface(new PauseParameter()
         {
-            BaseNodeData node = GraphHelper.GetFirstNode(_dialogueContainer);
-            NextNode(node);
-        }, false, false);
+            InterfaceName = "DialogueScene",
+            OnPauseProcessed = () =>
+            {
+                BaseNodeData node = GraphHelper.GetFirstNode(_dialogueContainer);
+                NextNode(node);
+            },
+            PlaySound = false
+        }) ;
     }
 
     void NextNode(BaseNodeData node)
@@ -67,7 +82,7 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
                         (conn.PortName == string.Empty) ? "continue" : conn.PortName,
                         () =>
                         {
-                            _pnj.AddSaid(node.DialogueCode);
+                            node.Pnj.AddSaid(node.DialogueCode);
                             BaseNodeData nextNode = GraphHelper.GetNodeByGuid(_dialogueContainer, conn.TargetNodeGuid);
                             NextNode(nextNode);
                         }
@@ -78,7 +93,7 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
             {
                 InstanciateChoiceButton("Ok", () =>
                 {
-                    _pnj.AddSaid(node.DialogueCode);
+                    node.Pnj.AddSaid(node.DialogueCode);
                     pauseManager.Resume();
                 });
             }

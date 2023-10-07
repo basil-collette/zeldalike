@@ -18,7 +18,7 @@ public class FlueBrain : Brain
         animator = GetComponent<Animator>();
         cooldownManager = GetComponent<CooldownManager>();
 
-        Vector2 collidArea = GetComponent<BoxCollider2D>().size;
+        Vector2 collidArea = GetComponent<CapsuleCollider2D>().size;
         selfColliderSize = Math.Max(collidArea.x, collidArea.y) / 2;
     }
 

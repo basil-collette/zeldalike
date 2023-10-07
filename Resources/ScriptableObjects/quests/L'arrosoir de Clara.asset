@@ -12,10 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 348105722c12d554294605c52a682c3a, type: 3}
   m_Name: L'arrosoir de Clara
   m_EditorClassIdentifier: 
-  Name: 
-  Code: 
-  Description: 
-  QuestSteps: []
+  Name: L'arrosoir de Clara
+  Code: give_arrosoir_clara
+  Description: "Les enfants ont prit l'arrosoir de Clara en plus de ma carte d'identit\xE9.
+    Il faudrait le trouver pour lui ramener !"
+  QuestSteps:
+  - Goals:
+    - rid: 3230699522260205569
+    IsCompleted: 0
+    Rewards:
+      Money: 5
+      Experience: 0
+      ItemsRef: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3230699522260205569
+      type: {class: DiscussionGoal, ns: , asm: Assembly-CSharp}
+      data:
+        Target: give_arrosoir_clara_end
+        Objective: 
+        IsCompleted: 0
+        RequiredAmount: 0
+        CurrentAmount: 0
+        Type: Discussion

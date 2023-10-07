@@ -19,6 +19,19 @@ public class DialogueGraph : EditorWindow
         window.titleContent = new GUIContent("Dialogue Graph");
     }
 
+    private void OnEnable()
+    {
+        ConstructGraphView();
+        GenerateToolBar();
+        GenerateMiniMap();
+        GenerateBlackBoard();
+    }
+
+    private void OnDisable()
+    {
+        rootVisualElement.Remove(_graphView);
+    }
+
     private void GenerateToolBar()
     {
         var toolbar = new Toolbar();
@@ -40,12 +53,6 @@ public class DialogueGraph : EditorWindow
         var clearButton = new Button(() => ClearGraph()) { text = "Clear Graph" };
         clearButton.style.backgroundColor = new Color(0.5f, 0.1f, 0.1f);
         toolbar.Add(clearButton);
-
-        /*
-        var nodeCreateButton = new Button(() => { _graphView.CreateNode("Dialogue Node"); });
-        nodeCreateButton.text = "Create Node";
-        toolbar.Add(nodeCreateButton);
-        */
 
         rootVisualElement.Add(toolbar);
     }
@@ -118,14 +125,6 @@ public class DialogueGraph : EditorWindow
         }
     }
 
-    private void OnEnable()
-    {
-        ConstructGraphView();
-        GenerateToolBar();
-        GenerateMiniMap();
-        GenerateBlackBoard();
-    }
-
     private void GenerateBlackBoard()
     {
         var blackboard = new Blackboard(_graphView);
@@ -150,11 +149,6 @@ public class DialogueGraph : EditorWindow
         
         _graphView.Add(blackboard);
         _graphView.Blackboard = blackboard;
-    }
-
-    private void OnDisable()
-    {
-        rootVisualElement.Remove(_graphView);
     }
 
     private void ConstructGraphView()

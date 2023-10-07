@@ -1,3 +1,4 @@
+using Assets.Scripts.Enums;
 using System.Runtime.Serialization;
 using UnityEngine;
 
@@ -6,9 +7,9 @@ using UnityEngine;
 [KnownType(typeof(EventNodeData))]
 public class DialogueNodeData : BaseNodeData
 {
-    //public DialogueTypeEnum Type (talk, think)
+    public DialogueTypeEnum Type;
     public string DialogueText;
     public string DialogueCode;
-    //public DialogueNodeSide Side;
+    public DialogueNodeSide Side;
     public Pnj Pnj;
 }

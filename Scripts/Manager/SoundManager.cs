@@ -21,11 +21,6 @@ namespace Assets.Scripts.Manager
         [SerializeField] public float effectVolume = 1;
         [SerializeField] public Sound[] effects;
 
-        private void Start()
-        {
-
-        }
-
         public void OnSceneSwitchSetMusic(string musicName)
         {
             musicSource.Stop();

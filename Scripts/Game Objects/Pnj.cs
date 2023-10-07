@@ -49,7 +49,7 @@ public class Pnj : Interacting
     public void Talk()
     {
         var dialogueRef = GetWantToSay();
-        dialogueManager.StartDialogue(this, dialogueRef);
+        dialogueManager.StartDialogue(dialogueRef);
     }
 
     public DialogueReference GetWantToSay()

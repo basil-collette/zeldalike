@@ -150,27 +150,25 @@ public class DialogueGraphView : GraphView
 
         var dialogueTextField = new TextField("Text");
         dialogueTextField.SetValueWithoutNotify(dialogueNode.DialogueText);
-        dialogueTextField.RegisterValueChangedCallback((evt) =>
-        {
-            dialogueNode.DialogueText = evt.newValue;
-        });
+        dialogueTextField.RegisterValueChangedCallback((evt) => { dialogueNode.DialogueText = evt.newValue; });
         dialogueNode.mainContainer.Add(dialogueTextField);
 
         var dialogueCodeField = new TextField("Code");
         dialogueCodeField.SetValueWithoutNotify(dialogueNode.DialogueCode);
-        dialogueCodeField.RegisterValueChangedCallback((evt) =>
-        {
-            dialogueNode.DialogueCode = evt.newValue;
-        });
+        dialogueCodeField.RegisterValueChangedCallback((evt) => { dialogueNode.DialogueCode = evt.newValue; });
         dialogueNode.mainContainer.Add(dialogueCodeField);
 
-        /*
+        var TypeField = new EnumField();
+        TypeField.Init(DialogueTypeEnum.talk);
+        TypeField.SetValueWithoutNotify(dialogueNode.Type);
+        TypeField.RegisterValueChangedCallback((evt) => dialogueNode.Type = (DialogueTypeEnum)evt.newValue);
+        dialogueNode.mainContainer.Add(TypeField);
+
         var sideField = new EnumField();
         sideField.Init(DialogueNodeSide.left);
         sideField.SetValueWithoutNotify(dialogueNode.Side);
         sideField.RegisterValueChangedCallback((evt) => dialogueNode.Side = (DialogueNodeSide)evt.newValue);
         dialogueNode.mainContainer.Add(sideField);
-        */
 
         var spriteField = new ObjectField
         {

@@ -31,6 +31,8 @@ public class SellItem : MonoBehaviour
             toast.Text = $"{item.NameLibelle} acheté !";
 
             Destroy(gameObject);
+
+            FindGameObjectHelper.FindByName("Main Sound Manager").GetComponent<SoundManager>().PlayEffect("purchase");
         }
         else
         {

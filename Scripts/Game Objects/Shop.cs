@@ -13,7 +13,7 @@ public class Shop : Interacting
 
     void StartPourchase()
     {
-        FindAnyObjectByType<PauseManager>().ShowPausedInterface("ShopScene", null, false, false);
+        FindAnyObjectByType<PauseManager>().ShowPausedInterface(new PauseParameter() { InterfaceName = "ShopScene" });
     }
 
     protected sealed override void OnTriggerEnter2D(Collider2D collider)

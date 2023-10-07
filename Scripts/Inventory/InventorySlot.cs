@@ -40,4 +40,9 @@ public class InventorySlot : MonoBehaviour, IDropHandler
         MainGameManager._inventoryManager._items.Add(item);
     }
 
+    public GameObject GetItem()
+    {
+        return transform.GetChild(0).gameObject;
+    }
+
 }

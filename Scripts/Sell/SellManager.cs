@@ -11,7 +11,8 @@ public class SellManager : MonoBehaviour
     {
         List<string> shop = MainGameManager._storyEventManager._shop;
 
-        if (shop.Exists(x => x ==  "rope"))
+        if (shop.Exists(x => x ==  "rope")
+            && !MainGameManager._inventoryManager._items.Exists(x => x.NameCode == "rope"))
         {
             rope.SetActive(true);
         }

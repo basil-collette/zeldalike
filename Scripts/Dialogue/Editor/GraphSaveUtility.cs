@@ -102,7 +102,8 @@ public class GraphSaveUtility
                     title = nodeCasted.title,
                     DialogueText = nodeCasted.DialogueText,
                     DialogueCode = nodeCasted.DialogueCode,
-                    //Side = nodeCasted.Side,
+                    Side = nodeCasted.Side,
+                    Type = nodeCasted.Type,
                     Pnj = nodeCasted.Pnj
                 });
             }
@@ -224,7 +225,6 @@ public class GraphSaveUtility
                 {
                     _targetGraphView.AddChoicePort(baseNode, "Ok");
                 }
-
             }
             else if (nodeData is EventNodeData)
             {
@@ -274,7 +274,8 @@ public class GraphSaveUtility
             EntryPoint = nodeData.EntryPoint,
             DialogueText = nodeData.DialogueText,
             DialogueCode = nodeData.DialogueCode,
-            //Side = nodeData.Side,
+            Side = nodeData.Side,
+            Type = nodeData.Type,
             Pnj = nodeData.Pnj
         };
     }

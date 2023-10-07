@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Je m'apelle...
   Code: my_name_is
-  Description: 
+  Description: "Je ne me rappelle de rien, qui suis-je ? Retrouver ma carte d'identit\xE9
+    serait un bon d\xE9but"
   QuestSteps:
-  - Goals: []
+  - Goals:
+    - rid: 3230699522260205568
     IsCompleted: 0
     Rewards:
       Money: 0
@@ -24,4 +26,13 @@ MonoBehaviour:
       ItemsRef: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3230699522260205568
+      type: {class: CollectGoal, ns: , asm: Assembly-CSharp}
+      data:
+        Target: id_card
+        Objective: "retrouver carte d'identit\xE9"
+        IsCompleted: 0
+        RequiredAmount: 1
+        CurrentAmount: 0
+        Type: Collect

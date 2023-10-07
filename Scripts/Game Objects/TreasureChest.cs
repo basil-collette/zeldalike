@@ -2,6 +2,7 @@ using Assets.Database.Model.Design;
 using Assets.Scripts.Enums;
 using Assets.Scripts.Game_Objects.Inheritable;
 using Assets.Scripts.Manager;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
@@ -41,7 +42,7 @@ public class TreasureChest : FacingInteracting
         ButtonHelper.exitPause -= ExitRaiseItem;
     }
 
-    void Update()
+    new void Update()
     {
         if (playerInRange
             && Gamepad.current != null
@@ -121,10 +122,12 @@ public class TreasureChest : FacingInteracting
 
         MainGameManager._storyEventManager.AddOpennedChestsEvent(code.ToString());
 
-        FindAnyObjectByType<PauseManager>().ShowPausedInterface("InfoScene", () =>
+        FindAnyObjectByType<PauseManager>().ShowPausedInterface(new PauseParameter()
         {
-            FindGameObjectHelper.FindByName("Info Canva").GetComponentInChildren<Text>().text = content.Description;
-        }, true);
+            InterfaceName = "InfoScene",
+            TransparentOverlay = true,
+            OnPauseProcessed = () => { FindGameObjectHelper.FindByName("Info Canva").GetComponentInChildren<Text>().text = content.Description; }
+        });
 
         Destroy(ActionButtonOpen);
         ActionButtonOpen = null;

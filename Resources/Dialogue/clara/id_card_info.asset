@@ -16,41 +16,21 @@ MonoBehaviour:
   - BaseNodeGuid: 6fa4ec6b-29d0-4db2-b9e2-1c93cb628193
     PortName: Next
     TargetNodeGuid: 26f20caf-49c5-428e-8ee5-f1acfeaa4ecd
-  - BaseNodeGuid: 26f20caf-49c5-428e-8ee5-f1acfeaa4ecd
-    PortName: Compris
-    TargetNodeGuid: 88af22c9-382e-4cba-9454-b845abca6eac
   - BaseNodeGuid: 88af22c9-382e-4cba-9454-b845abca6eac
     PortName: Ok
     TargetNodeGuid: 1122c1f2-4d09-43b1-8ffc-7075c777262d
+  - BaseNodeGuid: 26f20caf-49c5-428e-8ee5-f1acfeaa4ecd
+    PortName: Compris
+    TargetNodeGuid: 88af22c9-382e-4cba-9454-b845abca6eac
   NodeDatas:
-  - rid: 4206153562263650305
-  - rid: 4206153562263650306
-  - rid: 4206153562263650307
+  - rid: 3230699522260205579
+  - rid: 3230699522260205580
+  - rid: 3230699522260205581
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 4206153562263650305
-      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
-      data:
-        Guid: 88af22c9-382e-4cba-9454-b845abca6eac
-        title: Dialogue
-        Position: {x: 896, y: 200}
-        EntryPoint: 0
-        DialogueText: "Si tu peux aussi me ramener l'arrosoir qu'ils m'ont prit,
-          tu serais g\xE9nial !"
-        DialogueCode: 
-        Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
-    - rid: 4206153562263650306
-      type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
-      data:
-        Guid: 1122c1f2-4d09-43b1-8ffc-7075c777262d
-        title: Event
-        Position: {x: 1403, y: 200}
-        EntryPoint: 0
-        Type: 0
-        Param: L'arrosoir de Clara
-    - rid: 4206153562263650307
+    - rid: 3230699522260205579
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 26f20caf-49c5-428e-8ee5-f1acfeaa4ecd
@@ -61,3 +41,23 @@ MonoBehaviour:
           secrette au Nord. Ils l'ont truff\xE9e de pi\xE8ge !"
         DialogueCode: 
         Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
+    - rid: 3230699522260205580
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: 88af22c9-382e-4cba-9454-b845abca6eac
+        title: Dialogue
+        Position: {x: 200, y: 390}
+        EntryPoint: 0
+        DialogueText: "Si tu peux aussi me ramener l'arrosoir qu'ils m'ont prit,
+          tu serais g\xE9nial !"
+        DialogueCode: 
+        Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
+    - rid: 3230699522260205581
+      type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: 1122c1f2-4d09-43b1-8ffc-7075c777262d
+        title: Event
+        Position: {x: 200, y: 599}
+        EntryPoint: 0
+        Type: 0
+        Param: L'arrosoir de Clara

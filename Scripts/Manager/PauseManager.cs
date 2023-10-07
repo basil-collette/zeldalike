@@ -14,6 +14,7 @@ public class PauseManager : SingletonGameObject<PauseManager>
     public GameObject MenuOverlay;
 
     string loadedSceneName;
+    bool playSound = true;
 
     /*
     void Update()
@@ -31,10 +32,7 @@ public class PauseManager : SingletonGameObject<PauseManager>
     }
     */
 
-    public void Resume()
-    {
-        Resume(null);
-    }
+    public void Resume() { Resume(null); }
 
     public void Resume(Action AfterResume = null)
     {
@@ -49,9 +47,12 @@ public class PauseManager : SingletonGameObject<PauseManager>
                 overlay.SetActive(false);
                 //controlsCanva.SetActive(true);
 
-                SoundManager soundManager = GetComponentInChildren<SoundManager>();
-                soundManager.PlayEffect("pause_exit");
-                soundManager.musicSource.Play();
+                if (playSound)
+                {
+                    SoundManager soundManager = GetComponentInChildren<SoundManager>();
+                    soundManager.PlayEffect("pause_exit");
+                    soundManager.musicSource.Play();
+                }
 
                 MenuOverlay.SetActive(false);
 
@@ -64,48 +65,39 @@ public class PauseManager : SingletonGameObject<PauseManager>
         }
     }
 
-    void Pause(bool transparent = false, bool showMenu = false)
+    void Pause(PauseParameter pauseParameter)
     {
         IsPaused = true;
         Time.timeScale = 0f;
 
         overlay.SetActive(true);
-        overlay.GetComponent<Image>().color = (transparent) ? new Color(0, 0, 0, 0) : new Color(0, 0, 0, 0.7f);
+        overlay.GetComponent<Image>().color = (pauseParameter.TransparentOverlay) ? new Color(0, 0, 0, 0) : new Color(0, 0, 0, 0.7f);
 
         //controlsCanva.SetActive(false);
 
-        MenuOverlay.SetActive(showMenu);
+        MenuOverlay.SetActive(pauseParameter.ShowMenu);
 
-        SoundManager soundManager = GetComponentInChildren<SoundManager>();
-        soundManager.musicSource.Stop();
-        soundManager.PlayEffect("pause_enter");
+        if (pauseParameter.PlaySound)
+        {
+            SoundManager soundManager = GetComponentInChildren<SoundManager>();
+            soundManager.musicSource.Stop();
+            soundManager.PlayEffect("pause_enter");
+        }        
     }
 
     public void ShowPausedInterface(string interfaceName)
     {
-        ShowPausedInterface(interfaceName, null);
+        ShowPausedInterface(new PauseParameter() { InterfaceName = interfaceName });
     }
-    public void ShowPausedInterface(string interfaceName, Action OnPauseProcessed, bool transparentOverlay = false, bool showMenu = false)
+    public void ShowPausedInterface(PauseParameter pauseParameter)
     {
-        if (interfaceName == loadedSceneName)
+        if (pauseParameter.InterfaceName == loadedSceneName)
             return;
 
-        loadedSceneName = interfaceName;
+        loadedSceneName = pauseParameter.InterfaceName;
+        playSound = pauseParameter.PlaySound;
 
-        StartCoroutine(SwitchPausedSceneCo(() => {
-            Pause(transparentOverlay, showMenu);
-            OnPauseProcessed?.Invoke();
-        }));
-    }
-
-    public void SwitchPausedInterface(string interfaceName)
-    {
-        if (interfaceName == loadedSceneName)
-            return;
-
-        loadedSceneName = interfaceName;
-
-        StartCoroutine(SwitchPausedSceneCo());
+        StartCoroutine(SwitchPausedSceneCo(pauseParameter));
     }
 
     public bool GetIsPaused()
@@ -113,7 +105,7 @@ public class PauseManager : SingletonGameObject<PauseManager>
         return IsPaused;
     }
 
-    IEnumerator SwitchPausedSceneCo(Action resultCallback = null)
+    IEnumerator SwitchPausedSceneCo(PauseParameter pauseParameter)
     {
         Scene[] scenes = SceneManager.GetAllScenes();
         if (scenes.Length > 2)
@@ -135,7 +127,10 @@ public class PauseManager : SingletonGameObject<PauseManager>
         }
 
         yield return new WaitForFixedUpdate();
-        resultCallback?.Invoke();
+
+        Pause(pauseParameter);
+
+        pauseParameter.OnPauseProcessed?.Invoke();
     }
 
     IEnumerator UnloadPauseSceneCo(Action OnUnloadPauseSceneEnd)
@@ -150,4 +145,15 @@ public class PauseManager : SingletonGameObject<PauseManager>
         OnUnloadPauseSceneEnd?.Invoke();
     }
 
+}
+
+public class PauseParameter
+{
+    public string InterfaceName { get; set; }
+    public Action OnPauseProcessed { get; set; }
+    public bool TransparentOverlay { get; set; } = false;
+    public bool ShowMenu { get; set; } = false;
+    public bool PlaySound { get; set; } = true;
+
+    public PauseParameter() { }
 }

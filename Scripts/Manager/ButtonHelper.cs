@@ -35,7 +35,7 @@ public class ButtonHelper : MonoBehaviour
 
     public void StartMenuShowOptions()
     {
-        FindAnyObjectByType<PauseManager>().ShowPausedInterface("StartMenuOptionsScene", null);
+        FindAnyObjectByType<PauseManager>().ShowPausedInterface(new PauseParameter() { InterfaceName = "StartMenuOptionsScene" });
     }
 
     public void EraseSave()
@@ -51,7 +51,7 @@ public class ButtonHelper : MonoBehaviour
 
     public void ShowPausedInterface(string sceneName)
     {
-        FindAnyObjectByType<PauseManager>().ShowPausedInterface(sceneName, null, false, true);
+        FindAnyObjectByType<PauseManager>().ShowPausedInterface(new PauseParameter() { InterfaceName = sceneName, ShowMenu = true });
     }
 
     public void Save()

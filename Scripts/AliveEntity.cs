@@ -1,4 +1,6 @@
 using Assets.Scripts.Enums;
+using Assets.Scripts.Manager;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -54,6 +56,43 @@ public abstract class AliveEntity : Entity
             rigidbody.constraints = RigidbodyConstraints2D.None;
         }
         */
+    }
+
+    public virtual void Imobilize()
+    {
+        direction = Vector3.zero;
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+
+        animator.SetBool("moving", false);
+    }
+
+    public void Fall(Vector3 fallPos, Vector3 respawnPos)
+    {
+        StartCoroutine(FallCo(fallPos, respawnPos));
+    }
+
+    protected virtual IEnumerator FallCo(Vector3 fallPos, Vector3 respawnPos)
+    {
+        SetState(EntityState.unavailable);
+        Imobilize();
+
+        FindGameObjectHelper.FindByName("Main Sound Manager").GetComponent<SoundManager>().PlayEffect("falling");
+        
+        animator.SetTrigger("fall");
+
+        while (!animator.GetCurrentAnimatorStateInfo(0).IsName("Fall")) yield return null;
+
+        transform.position = fallPos;
+
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        {
+            yield return null;
+        }
+
+        transform.position = respawnPos;
+        SetState(EntityState.idle);
+
+        GetComponent<Health>().Hit(gameObject, new List<Effect> { new Effect(EffectEnum.neutral, 0.25f) }, "Player");
     }
 
 }

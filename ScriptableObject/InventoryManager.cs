@@ -48,6 +48,7 @@ public class InventoryManager : Singleton<StoryEventManager>, ISavable
     {
         if (_items.Count < maxCountItems)
         {
+            content.InventoryIndex = GetFirstFreeIndexSlot();
             _items.Add(content);
             OnObtain?.Invoke(new string[] { content.NameCode });
         }
@@ -77,6 +78,18 @@ public class InventoryManager : Singleton<StoryEventManager>, ISavable
     public void RemoveItem(Item item)
     {
         _items.Remove(item);
+    }
+
+    int GetFirstFreeIndexSlot()
+    {
+        for (int i = 0; i <= _items.Count; i++)
+        {
+            if (!_items.Exists(x => x.InventoryIndex == i))
+            {
+                return i;
+            }
+        }
+        return 0;
     }
 
     public string ToJsonString()

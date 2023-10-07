@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e679b72a61def0e4a805b353f09c96de, type: 3}
   m_Name: CalmTownScene
   m_EditorClassIdentifier: 
-  libelle: CalmTownScene
+  nameLibelle: Calmtown
+  nameCode: CalmTownScene
   needPreload: 0
   scenesNeedingPreloadNames: []
   musicName: fantaisy

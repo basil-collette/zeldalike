@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e679b72a61def0e4a805b353f09c96de, type: 3}
   m_Name: Cave2Scene
   m_EditorClassIdentifier: 
-  libelle: Cave2Scene
+  nameLibelle: 
+  nameCode: Cave2Scene
   needPreload: 0
   scenesNeedingPreloadNames: []
   musicName: 
   cameraParameters:
     Smoothing: 0.05
     IsFixed: 0
-    MinPos: {x: 3.5, y: 6.1}
-    MaxPos: {x: 7.5, y: 18.5}
+    MinPos: {x: 4.5, y: 6.1}
+    MaxPos: {x: 6.5, y: 18.5}

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e679b72a61def0e4a805b353f09c96de, type: 3}
   m_Name: HomeMafieux
   m_EditorClassIdentifier: 
-  libelle: HomeMafieuxScene
+  nameLibelle: Maison du Mafieux
+  nameCode: HomeMafieuxScene
   needPreload: 0
   scenesNeedingPreloadNames: []
   musicName: 

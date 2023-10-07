@@ -110,7 +110,7 @@ public class SaveManager : SingletonGameObject<SaveManager>
 
         GameData gameData = new GameData() {
             saveName = _saveName,
-            sceneName = StartScene.libelle,
+            sceneName = StartScene.nameCode,
             position = new Vector3(-2.3f, 1.75f, 0),
             inventory = MainGameManager._inventoryManager.ToJsonString(),
             playerHealth = 3f,

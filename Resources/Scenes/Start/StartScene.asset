@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e679b72a61def0e4a805b353f09c96de, type: 3}
   m_Name: StartScene
   m_EditorClassIdentifier: 
-  libelle: StartScene
+  nameLibelle: 
+  nameCode: StartScene
   needPreload: 0
   scenesNeedingPreloadNames: []
   musicName: 
   cameraParameters:
     Smoothing: 0.05
     IsFixed: 1
-    CurrentPos: {x: 0, y: 0}
     MinPos: {x: -5, y: -5}
     MaxPos: {x: 5, y: 5}

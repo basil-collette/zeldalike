@@ -43,8 +43,8 @@ public class MainGameManager : SingletonGameObject<MainGameManager>
     {
         ScenesManager scenesManager = GetComponent<ScenesManager>();
         scenesManager.ClearScenes();
-        scenesManager.AdditiveLoadScene(firstLoadedScene.libelle, () => {
-            scenesManager.SetCurrentScene(firstLoadedScene.libelle);
+        scenesManager.AdditiveLoadScene(firstLoadedScene.nameCode, () => {
+            scenesManager.SetCurrentScene(firstLoadedScene.nameCode);
         });
     }
 

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class Hole : MonoBehaviour
 {
     protected void OnTriggerEnter2D(Collider2D collider)

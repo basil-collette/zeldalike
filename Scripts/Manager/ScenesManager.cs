@@ -19,6 +19,7 @@ class PreloadedScene
 public class ScenesManager : SingletonGameObject<ScenesManager>
 {
     public GameObject transitionOverlay;
+    public float sceneNameDuration = 4f;
 
     GameObject textBox;
     Text placeText;
@@ -44,14 +45,14 @@ public class ScenesManager : SingletonGameObject<ScenesManager>
     {
         foreach (PreloadedScene pScene in preloadedScenes)
         {
-            if (!targetScene.scenesNeedingPreloadNames.Contains(pScene.scene.libelle))
+            if (!targetScene.scenesNeedingPreloadNames.Contains(pScene.scene.nameCode))
             {
                 pScene.canceled = true;
             }
         }
 
         //Verify that there are no preloded scene that aren't needed for next scene
-        while (preloadedScenes.Select(pScene => pScene.scene.libelle).Any(a => !targetScene.scenesNeedingPreloadNames.Contains(a)))
+        while (preloadedScenes.Select(pScene => pScene.scene.nameCode).Any(a => !targetScene.scenesNeedingPreloadNames.Contains(a)))
         {
             yield return null;
         }
@@ -73,7 +74,7 @@ public class ScenesManager : SingletonGameObject<ScenesManager>
 
         GetComponentInChildren<SoundManager>().OnSceneSwitchSetMusic(targetScene.musicName);
 
-        _currentScene = targetScene.libelle;
+        _currentScene = targetScene.nameCode;
     }
 
     IEnumerator LoadSceneCo(string targetSceneName, LoadSceneMode loadmode, Action resultCallback = null)
@@ -90,14 +91,14 @@ public class ScenesManager : SingletonGameObject<ScenesManager>
 
     IEnumerator LoadSceneCo(TargetScene targetScene, LoadSceneMode loadmode, Action resultCallback = null)
     {
-        AsyncOperation loadOp = SceneManager.LoadSceneAsync(targetScene.libelle, loadmode);
+        AsyncOperation loadOp = SceneManager.LoadSceneAsync(targetScene.nameCode, loadmode);
 
         while (!loadOp.isDone)
         {
             yield return null;
         }
 
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(targetScene.libelle));
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(targetScene.nameCode));
 
         GetComponentInChildren<SoundManager>().OnSceneSwitchSetMusic(targetScene.musicName);
 
@@ -111,28 +112,28 @@ public class ScenesManager : SingletonGameObject<ScenesManager>
         Action<string> RemovePreloadedSceneCallback,
         Func<int> GetPreloadedScenesCountCallback)
     {
-        AsyncOperation asyncLoadOp = SceneManager.LoadSceneAsync(scene.libelle, LoadSceneMode.Additive);
+        AsyncOperation asyncLoadOp = SceneManager.LoadSceneAsync(scene.nameCode, LoadSceneMode.Additive);
         asyncLoadOp.allowSceneActivation = false;
 
         while (!asyncLoadOp.isDone)
         {
             //Debug.Log(scene.name + " scene is loading progress: " + (asyncLoadOp.progress * 100) + "%");
 
-            if (IsCanceledCallBack(scene.libelle))
+            if (IsCanceledCallBack(scene.nameCode))
             {
                 asyncLoadOp.allowSceneActivation = true;
 
-                yield return StartCoroutine(CancelPreloadCo(scene.libelle, RemovePreloadedSceneCallback));
+                yield return StartCoroutine(CancelPreloadCo(scene.nameCode, RemovePreloadedSceneCallback));
             }
             else
             {
                 if (asyncLoadOp.progress >= 0.9f)
                 {
-                    if (MustUseSceneCallback(scene.libelle))
+                    if (MustUseSceneCallback(scene.nameCode))
                     {
                         CancelPreloadCallback(scene.scenesNeedingPreloadNames);
 
-                        RemovePreloadedSceneCallback(scene.libelle);
+                        RemovePreloadedSceneCallback(scene.nameCode);
 
                         DisableGameObjects(_currentScene);
 
@@ -151,13 +152,13 @@ public class ScenesManager : SingletonGameObject<ScenesManager>
 
                         yield return StartCoroutine(UnLoadSceneCo(currentScene));
 
-                        _currentScene = scene.libelle;
+                        _currentScene = scene.nameCode;
 
                         //fade to transparent here
 
                         yield return null;
 
-                        SceneManager.SetActiveScene(SceneManager.GetSceneByName(scene.libelle));
+                        SceneManager.SetActiveScene(SceneManager.GetSceneByName(scene.nameCode));
                     }
                 }
 
@@ -204,20 +205,20 @@ public class ScenesManager : SingletonGameObject<ScenesManager>
     {
         if (targetScene.needPreload)
         {
-            UsePreloadedScene(targetScene.libelle);
+            UsePreloadedScene(targetScene.nameCode);
         }
         else
         {
             StartCoroutine(SwitchSceneCo(targetScene));
         }
 
-        StartCoroutine(PlaceNameCo(targetScene.libelle));
+        StartCoroutine(PlaceNameCo(targetScene.nameLibelle));
     }
 
     public void PreloadScene(TargetScene scene)
     {
         //Check if allready in preloaded list
-        if (preloadedScenes.Find(pScene => pScene.scene.libelle == scene.libelle) != null)
+        if (preloadedScenes.Find(pScene => pScene.scene.nameCode == scene.nameCode) != null)
             return;
 
         preloadedScenes.Add(new PreloadedScene()
@@ -232,7 +233,7 @@ public class ScenesManager : SingletonGameObject<ScenesManager>
 
     public void UsePreloadedScene(string sceneName)
     {
-        preloadedScenes.Find(pScene => pScene.scene.libelle == sceneName).useScene = true;
+        preloadedScenes.Find(pScene => pScene.scene.nameCode == sceneName).useScene = true;
     }
 
     public void AdditiveLoadScene(string targetSceneName, Action resultCallback = null)
@@ -295,12 +296,12 @@ public class ScenesManager : SingletonGameObject<ScenesManager>
 
     bool IsCanceled(string sceneName)
     {
-        return preloadedScenes.Find(pScene => pScene.scene.libelle == sceneName).canceled;
+        return preloadedScenes.Find(pScene => pScene.scene.nameCode == sceneName).canceled;
     }
 
     bool MustUsePreloadedScene(string sceneName)
     {
-        return preloadedScenes.Find(pScene => pScene.scene.libelle == sceneName).useScene;
+        return preloadedScenes.Find(pScene => pScene.scene.nameCode == sceneName).useScene;
     }
 
     int GetPreloadedScenesCount()
@@ -310,14 +311,14 @@ public class ScenesManager : SingletonGameObject<ScenesManager>
 
     void RemovePreloadedScene(string sceneName)
     {
-        preloadedScenes.Remove(preloadedScenes.Find(pScene => pScene.scene.libelle == sceneName));
+        preloadedScenes.Remove(preloadedScenes.Find(pScene => pScene.scene.nameCode == sceneName));
     }
 
     void CancelPreload(string[] scenesNeedingPreloadNames)
     {
         foreach (PreloadedScene pScene in preloadedScenes)
         {
-            if (!scenesNeedingPreloadNames.Contains(pScene.scene.libelle))
+            if (!scenesNeedingPreloadNames.Contains(pScene.scene.nameCode))
             {
                 pScene.canceled = true;
             }
@@ -350,10 +351,10 @@ public class ScenesManager : SingletonGameObject<ScenesManager>
 
     private IEnumerator PlaceNameCo(string sceneName)
     {
-        placeText.text = TextHelper.Labelize(sceneName).Substring(0, sceneName.Length - 5); ;
+        placeText.text = TextHelper.Labelize(sceneName);
         textBox.SetActive(true);
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(sceneNameDuration);
         textBox.SetActive(false);
     }
 

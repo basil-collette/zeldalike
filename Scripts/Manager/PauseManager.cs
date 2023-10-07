@@ -97,7 +97,17 @@ public class PauseManager : SingletonGameObject<PauseManager>
         loadedSceneName = pauseParameter.InterfaceName;
         playSound = pauseParameter.PlaySound;
 
-        StartCoroutine(SwitchPausedSceneCo(pauseParameter));
+        StartCoroutine(ShowPausedSceneCo(pauseParameter));
+    }
+
+    public void SwitchPausedInterface(string interfaceName)
+    {
+        if (interfaceName == loadedSceneName)
+            return;
+
+        loadedSceneName = interfaceName;
+
+        StartCoroutine(SwitchPausedSceneCo());
     }
 
     public bool GetIsPaused()
@@ -105,7 +115,16 @@ public class PauseManager : SingletonGameObject<PauseManager>
         return IsPaused;
     }
 
-    IEnumerator SwitchPausedSceneCo(PauseParameter pauseParameter)
+    IEnumerator ShowPausedSceneCo(PauseParameter pauseParameter)
+    {
+        yield return SwitchPausedSceneCo();
+
+        Pause(pauseParameter);
+
+        pauseParameter.OnPauseProcessed?.Invoke();
+    }
+
+    IEnumerator SwitchPausedSceneCo()
     {
         Scene[] scenes = SceneManager.GetAllScenes();
         if (scenes.Length > 2)
@@ -127,10 +146,6 @@ public class PauseManager : SingletonGameObject<PauseManager>
         }
 
         yield return new WaitForFixedUpdate();
-
-        Pause(pauseParameter);
-
-        pauseParameter.OnPauseProcessed?.Invoke();
     }
 
     IEnumerator UnloadPauseSceneCo(Action OnUnloadPauseSceneEnd)

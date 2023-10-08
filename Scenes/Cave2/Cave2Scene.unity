@@ -552,7 +552,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6710355217518163565, guid: 72820c953e7dc7444b2fb1ce5c462fee, type: 3}
       propertyPath: playerNextDirection.y
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6792843891688217388, guid: 72820c953e7dc7444b2fb1ce5c462fee, type: 3}
       propertyPath: m_Name

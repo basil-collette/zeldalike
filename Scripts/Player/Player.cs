@@ -127,7 +127,7 @@ public class Player : AliveEntity
     {
         bool hasWeapon = weapon != null && weapon.Id != 0;
 
-        var attackJoystickImage = FindGameObjectHelper.FindByName("WeaponSprite")?.GetComponent<Image>();        
+        var attackJoystickImage = FindGameObjectHelper.FindByName("WeaponSprite")?.GetComponent<Image>();
 
         FindGameObjectHelper.FindByName("Attack joystick container")?.SetActive(hasWeapon);
 
@@ -140,7 +140,6 @@ public class Player : AliveEntity
         WeaponMonoBehaviour weaponMonobehaviour = Resources.Load<WeaponMonoBehaviour>($"Prefabs/Weapons/{weapon.weaponType}");
         weaponMonobehaviour._weapon = weapon;
         WeaponMonoBehaviour weaponMonoBehaviour = Instantiate(weaponMonobehaviour, transform);
-        //weaponMonoBehaviour.transform.parent = gameObject.transform;
         weaponMonoBehaviour.GetComponentInChildren<TriggerHit>(true).attackerTag = "Player";
 
         attackJoystickImage.sprite = weaponMonobehaviour._weapon.Sprite;
@@ -148,11 +147,18 @@ public class Player : AliveEntity
         attackJoystickImage.preserveAspect = true;
 
         _weapon = weaponMonoBehaviour;
+
+        FindGameObjectHelper.FindByName("Attack joystick container").SetActive(true);
     }
 
     public void UnequipWeapon()
     {
         Destroy(_weapon);
+
+        var attackJoystickImage = FindGameObjectHelper.FindByName("WeaponSprite")?.GetComponent<Image>();
+        attackJoystickImage.color = new Color(1, 1, 1, 0);
+
+        FindGameObjectHelper.FindByName("Attack joystick container").SetActive(false);
     }
 
     new void FixedUpdate()
@@ -215,14 +221,16 @@ public class Player : AliveEntity
             animatorLegs.SetFloat("moveY", direction.y);
         }
 
-        if (MainGameManager._inventoryManager._weapon != null && direction != Vector3.zero)
+        if (direction != Vector3.zero)
         {
-            var weapon = GetComponentInChildren<WeaponMonoBehaviour>();
-            if (!weapon.attacking)
+            if (MainGameManager._inventoryManager._weapon != null && MainGameManager._inventoryManager._weapon.Id != 0)
             {
-                animatorTop.SetFloat("lookX", direction.x);
-                animatorTop.SetFloat("lookY", direction.y);
+                var weapon = GetComponentInChildren<WeaponMonoBehaviour>();
+                if (weapon.attacking) return;
             }
+
+            animatorTop.SetFloat("lookX", direction.x);
+            animatorTop.SetFloat("lookY", direction.y);
         }
 
         #endregion

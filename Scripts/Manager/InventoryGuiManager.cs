@@ -1,4 +1,5 @@
 using Assets.Database.Model.Design;
+using Assets.Scripts.Enums;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,8 +33,14 @@ public class InventoryGuiManager : SingletonGameObject<InventoryGuiManager>
             draggableItem.SetItem(item);
             draggableItem.Image.sprite = draggableItem.Item.Sprite;
             draggableItem.Image.preserveAspect = true;
+
+            if (item.ItemType == ItemTypeEnum.weapon)
+            {
+                draggableItem.transform.GetChild(1).transform.rotation = Quaternion.Euler(0, 0, 135);
+            }
         }
 
+        /*
         foreach (Item item in Inventory._hotbars)
         {
             Transform slot = ItemsSlotsContainer.GetChild(item.InventoryIndex).transform;
@@ -43,6 +50,7 @@ public class InventoryGuiManager : SingletonGameObject<InventoryGuiManager>
             hotbarItem.Image.sprite = hotbarItem.Item.Sprite;
             hotbarItem.Image.preserveAspect = true;
         }
+        */
 
         if (Inventory._weapon == null || Inventory._weapon.Id == 0) return;
 
@@ -50,6 +58,8 @@ public class InventoryGuiManager : SingletonGameObject<InventoryGuiManager>
         weapon.SetItem(Inventory._weapon);
         weapon.Image.sprite = Inventory._weapon.Sprite;
         weapon.Image.preserveAspect = true;
+
+        weapon.transform.GetChild(1).transform.rotation = Quaternion.Euler(0, 0, 135);
     }   
 
 }

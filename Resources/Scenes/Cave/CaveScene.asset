@@ -21,4 +21,4 @@ MonoBehaviour:
     Smoothing: 0.05
     IsFixed: 0
     MinPos: {x: 4.5, y: 6.1}
-    MaxPos: {x: 6.5, y: 18.5}
+    MaxPos: {x: 9, y: 15.5}

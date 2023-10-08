@@ -1,8 +1,5 @@
-using Assets.Database.Model.Design;
-using Assets.Database.Model.Repository;
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ButtonHelper : MonoBehaviour
 {
@@ -35,12 +32,7 @@ public class ButtonHelper : MonoBehaviour
 
     public void StartMenuShowOptions()
     {
-        FindAnyObjectByType<PauseManager>().ShowPausedInterface(new PauseParameter() { InterfaceName = "StartMenuOptionsScene" });
-    }
-
-    public void EraseSave()
-    {
-        FindGameObjectHelper.FindByName("Main Game Manager").GetComponent<SaveManager>().EraseSave();
+        FindAnyObjectByType<PauseManager>().ShowPausedInterface(new PauseParameter() { InterfaceName = "StartOptionsScene", TransparentOverlay = true });
     }
 
     public void Resume()
@@ -52,11 +44,6 @@ public class ButtonHelper : MonoBehaviour
     public void ShowPausedInterface(string sceneName)
     {
         FindAnyObjectByType<PauseManager>().ShowPausedInterface(new PauseParameter() { InterfaceName = sceneName, ShowMenu = true });
-    }
-
-    public void Save()
-    {
-        FindAnyObjectByType<SaveManager>().SaveGame();
     }
 
 }

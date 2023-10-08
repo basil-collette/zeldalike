@@ -9,7 +9,7 @@ public class ManagedAudioSource : MonoBehaviour
 
     void Awake()
     {
-        GetComponent<AudioSource>().volume = FindGameObjectHelper.FindByName("Main Sound Manager").GetComponent<SoundManager>().effectVolume;
+        GetComponent<AudioSource>().volume = FindGameObjectHelper.FindByName("Main Sound Manager").GetComponent<SoundManager>().SoundVolume;
     }
 
     public void StartRepetitiveSound(AudioClip clip)

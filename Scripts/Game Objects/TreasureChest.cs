@@ -33,13 +33,6 @@ public class TreasureChest : FacingInteracting
         receivedItemContext = FindGameObjectHelper.FindByName("Received Item Shadow").transform;
 
         content = ItemManager.GetItem(itemNameCode, itemTypeEnum);
-
-        ButtonHelper.exitPause += ExitRaiseItem;
-    }
-
-    private void OnDisable()
-    {
-        ButtonHelper.exitPause -= ExitRaiseItem;
     }
 
     new void Update()
@@ -126,7 +119,7 @@ public class TreasureChest : FacingInteracting
         {
             InterfaceName = "InfoScene",
             TransparentOverlay = true,
-            OnPauseProcessed = () => { FindGameObjectHelper.FindByName("Info Canva").GetComponentInChildren<Text>().text = content.Description; }
+            OnPauseProcessed = () => { FindGameObjectHelper.FindByName("Info Canva").GetComponentInChildren<Text>().text = content.Description; ButtonHelper.exitPause += ExitRaiseItem; }
         });
 
         Destroy(ActionButtonOpen);
@@ -138,6 +131,8 @@ public class TreasureChest : FacingInteracting
         FindAnyObjectByType<Player>().CloseRaiseItem();
 
         receivedItemContext.gameObject.SetActive(false);
+
+        ButtonHelper.exitPause -= ExitRaiseItem;
     }
 
     protected override void OnInteract()

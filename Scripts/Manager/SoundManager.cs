@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scripts.Manager
@@ -11,15 +10,21 @@ namespace Assets.Scripts.Manager
         public AudioClip Clip;
     }
 
-    public class SoundManager : MonoBehaviour
+    public class SoundManager : SingletonGameObject<SoundManager>
     {
         [SerializeField] public AudioSource musicSource;
-        [SerializeField] public float musicVolume = 1;
-        [SerializeField] public Sound[] musics;
+        public float MusicVolume => musicSource.volume;
+        [SerializeField] Sound[] musics;
 
-        [SerializeField] public AudioSource effectSource;
-        [SerializeField] public float effectVolume = 1;
-        [SerializeField] public Sound[] effects;
+        [SerializeField] public AudioSource soundSource;
+        public float SoundVolume => soundSource.volume;
+        [SerializeField] Sound[] sounds;
+
+        private void Start()
+        {
+            Init();
+            Load();
+        }
 
         public void OnSceneSwitchSetMusic(string musicName)
         {
@@ -42,23 +47,31 @@ namespace Assets.Scripts.Manager
         public void SetMusicVolume(float volume)
         {
             musicSource.volume = volume;
+            Save();
+        }
+
+        public void SetSoundVolume(float volume)
+        {
+            soundSource.volume = volume;
+            Save();
         }
 
         public void PlayEffect(string Name)
         {
-            effectSource.PlayOneShot(effects.First(e => e.Name == Name).Clip);
+            soundSource.PlayOneShot(sounds.First(e => e.Name == Name).Clip);
         }
 
         public void PlayEffect(string Name, float currentVolume)
         {
-            effectSource.PlayOneShot(effects.First(e => e.Name == Name).Clip, currentVolume);
+            soundSource.PlayOneShot(sounds.First(e => e.Name == Name).Clip, currentVolume);
         }
 
         public void PlayEffect(AudioClip clip)
         {
-            effectSource.PlayOneShot(clip);
+            soundSource.PlayOneShot(clip);
         }
 
+        /*
         public void SetSoundsVolume(float volume)
         {
             effectVolume = volume;
@@ -71,15 +84,49 @@ namespace Assets.Scripts.Manager
                 obj.GetComponent<AudioSource>().volume = volume;
             }
         }
+        */
 
-        public void TogglePlayMusic()
+        public void SetMutePlayMusic(bool mute)
         {
-            musicSource.mute = !musicSource.mute;
+            musicSource.mute = mute;
+            Save();
         }
 
-        public void TogglePlaySounds(bool play)
+        public void SetMutePlaySounds(bool mute)
         {
-            effectSource.mute = !effectSource.mute;
+            soundSource.mute = mute;
+            Save();
+        }
+
+        public void Init()
+        {
+            if (!PlayerPrefs.HasKey("musicVolume"))
+                PlayerPrefs.SetFloat("musicVolume", 1);
+            if (!PlayerPrefs.HasKey("musicMute"))
+                PlayerPrefs.SetString("musicMute", false.ToString());
+
+            if (!PlayerPrefs.HasKey("soundVolume"))
+                PlayerPrefs.SetFloat("soundVolume", 1);
+            if (!PlayerPrefs.HasKey("soundMute"))
+                PlayerPrefs.SetString("soundMute", false.ToString());
+        }
+
+        public void Load()
+        {
+            musicSource.volume = PlayerPrefs.GetFloat("musicVolume");
+            musicSource.mute = bool.Parse(PlayerPrefs.GetString("musicMute"));
+
+            soundSource.volume = PlayerPrefs.GetFloat("soundVolume");
+            soundSource.mute = bool.Parse(PlayerPrefs.GetString("soundMute"));
+        }
+
+        public void Save()
+        {
+            PlayerPrefs.SetFloat("musicVolume", musicSource.volume);
+            PlayerPrefs.SetString("musicMute", musicSource.mute.ToString());
+            
+            PlayerPrefs.SetFloat("soundVolume", soundSource.volume);
+            PlayerPrefs.SetString("soundMute", soundSource.mute.ToString());
         }
 
         /*

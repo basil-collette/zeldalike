@@ -331,15 +331,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicSource: {fileID: 1285418498}
-  musicVolume: 1
   musics:
   - Name: fantaisy
     Clip: {fileID: 8300000, guid: 0f379b66d91e73048a35d42ecfd42b09, type: 3}
   - Name: danger
     Clip: {fileID: 8300000, guid: 7f31f4c2a6773244bb4ac9a0ce238904, type: 3}
-  effectSource: {fileID: 365544692}
-  effectVolume: 1
-  effects:
+  soundSource: {fileID: 365544692}
+  sounds:
   - Name: short-breath
     Clip: {fileID: 8300000, guid: f11db4559b3ffff45b62e9327fc5535d, type: 3}
   - Name: speed
@@ -1234,7 +1232,7 @@ GameObject:
   - component: {fileID: 365544693}
   - component: {fileID: 365544692}
   m_Layer: 0
-  m_Name: EffectSource
+  m_Name: SoundSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1252,7 +1250,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.55
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1889,6 +1887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionOverlay: {fileID: 1629312697}
+  sceneNameDuration: 4
   _currentScene: 
   playerPositionStorage: {fileID: 11400000, guid: 6998fd47cd0ad4d4eb8a85262c147f3f, type: 2}
   playerDirectionStorage: {fileID: 11400000, guid: a4af571f5e64693489a57bd6f3f27b5b, type: 2}

@@ -53,7 +53,6 @@ MonoBehaviour:
   exitSignal: {fileID: 11400000, guid: c2c481bd5dec5ef4d84386f2dcc77003, type: 2}
   content:
     rid: -2
-  isOpen: 0
   itemNameCode: 
   itemTypeEnum: 0
   code: 
@@ -83,7 +82,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

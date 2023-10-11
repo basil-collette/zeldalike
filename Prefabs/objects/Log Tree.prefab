@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -135,6 +135,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2a207a7d0ad1142a75f39e8fb3000b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  deathEffect: {fileID: 0}
+  lootTable: {fileID: 0}
   hasGrown: 0
   logPrefab: {fileID: 5526710204658623514, guid: 99c914198469e674e883d25e2ffe4122, type: 3}
   maxSpawnCount: 5
@@ -150,4 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 610c32d5f863830478a53ec1378d7e4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enterSignal: {fileID: 0}
+  exitSignal: {fileID: 0}
   hasGrown: 0
+  spriteActionButton: {fileID: 0}

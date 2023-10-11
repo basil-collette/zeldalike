@@ -47,7 +47,7 @@ public class ProjectileAttackBrain : Brain
 
     void ThrowProjectile(Vector3 targetPos)
     {
-        Vector2 collidArea = GetComponent<BoxCollider2D>().size;
+        Vector2 collidArea = GetComponent<CapsuleCollider2D>().size;
 
         Vector3 axis = DirectionHelper.GetAxis(new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"), 0));
 

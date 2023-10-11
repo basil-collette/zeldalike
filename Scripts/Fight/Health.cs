@@ -18,18 +18,18 @@ public class Health : Hitable
 
     public Action _dieOverride;
 
-    bool IsDammaged = false;
+    bool canBeDammaged = true;
 
     private void Start()
     {
-        
+        //Volontairement vide, permet d'avoir le booleen active dans l'editeur
     }
 
     public override void Hit(GameObject attacker, List<Effect> hit, string attackerTag)
     {
         foreach (Effect effect in hit)
         {
-            if (IsDammaged && effect.effectType != EffectEnum.knockback) continue;
+            if (!canBeDammaged && effect.effectType != EffectEnum.knockback) continue;
 
             Effect(attacker.transform.position, effect);
         }
@@ -110,7 +110,7 @@ public class Health : Hitable
 
     IEnumerator ColorDamageCo()
     {
-        IsDammaged = true;
+        canBeDammaged = false;
 
         var sprites = GetComponentsInChildren<SpriteRenderer>();
 
@@ -131,7 +131,7 @@ public class Health : Hitable
 
         Array.ForEach(sprites, x => x.color = new Color(1, 1, 1));
 
-        IsDammaged = false;
+        canBeDammaged = true;
     }
 
     public void Heal(float healAmount)
@@ -139,7 +139,7 @@ public class Health : Hitable
         _health.RuntimeValue += healAmount;
         _health.RuntimeValue = Mathf.Min(_health.RuntimeValue, _health.initialValue);
 
-        FindAnyObjectByType<SoundManager>().PlayEffect("heal");
+        FindAnyObjectByType<SoundManager>().PlayEffect("heal", 0.5f);
 
         if (_healthSignal != null)
         {

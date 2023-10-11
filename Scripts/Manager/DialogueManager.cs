@@ -11,6 +11,8 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
     public PauseManager pauseManager;
     public GameObject dialogueButtonPrefab;
     public float textAnimPauseSeconds = 0.01f;
+    [SerializeField] Sprite thinkingSprite;
+    [SerializeField] Sprite outLoudSprite;
 
     DialogueContainer _dialogueContainer;
 
@@ -62,10 +64,25 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
     {
         ClearButtonsLayout();
 
-        GameObject dialogueCanva = FindGameObjectHelper.FindByName("Dialog Canva");
+        GameObject dialogueBox = FindGameObjectHelper.FindByName("Dialog Box");
+        dialogueBox.GetComponent<Image>().sprite = (node.Type == DialogueTypeEnum.talk) ? outLoudSprite : thinkingSprite;
+        if (node.Type == DialogueTypeEnum.think) dialogueBox.GetComponent<Image>().type = Image.Type.Tiled;
 
-        FindGameObjectHelper.FindByName("Dialogue Name").GetComponent<Text>().text = node.Pnj.Name + ":";
-        FindGameObjectHelper.FindByName("Interlocutor").GetComponent<Image>().sprite = node.Pnj.Sprite;
+        GameObject pnjNameLeft = FindGameObjectHelper.FindByName("PNJ Name Left");
+        pnjNameLeft.SetActive(node.Side == DialogueNodeSide.left);
+        pnjNameLeft.GetComponent<Text>().text = node.Pnj.Name + ":";
+
+        GameObject pnjSpriteLeft = FindGameObjectHelper.FindByName("PNJ Sprite Left");
+        pnjSpriteLeft.SetActive(node.Side == DialogueNodeSide.left && node.Type != DialogueTypeEnum.think);
+        pnjSpriteLeft.GetComponent<Image>().sprite = node.Pnj.Sprite;
+
+        GameObject pnjNameRight = FindGameObjectHelper.FindByName("PNJ Name Right");
+        pnjNameRight.SetActive(node.Side == DialogueNodeSide.right && node.Type != DialogueTypeEnum.think);
+        pnjNameRight.GetComponent<Text>().text = node.Pnj.Name + ":";
+
+        GameObject pnjSpriteRight = FindGameObjectHelper.FindByName("PNJ Sprite Right");
+        pnjSpriteRight.SetActive(node.Side == DialogueNodeSide.right);
+        pnjSpriteRight.GetComponent<Image>().sprite = node.Pnj.Sprite;
 
         var textComp = FindGameObjectHelper.FindByName("Dialogue Text").GetComponent<Text>();
 

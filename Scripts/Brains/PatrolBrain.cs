@@ -4,23 +4,25 @@ using UnityEngine;
 //[CreateAssetMenu(menuName = "ScriptableObject/Brains/Itinirary")]
 public class PatrolBrain : Brain
 {
-    public List<Vector2> steps = new List<Vector2>();
+    public List<Transform> steps = new List<Transform>();
     public int currentStepIndex;
     public bool isLoop = true;
 
     protected AliveEntity entityComp;
+    protected Animator animator;
 
     private void Start()
     {
-        this.entityComp = GetComponent<AliveEntity>();
+        entityComp = GetComponent<AliveEntity>();
+        animator = GetComponent<Animator>();
     }
 
-    public override Vector3? Think(ThinkParam param)
+    public override Vector3? Think(ThinkParam? param)
     {
         //On reach the step
-        if (GetComponent<Rigidbody2D>().position == steps[currentStepIndex])
+        if (GetComponent<Rigidbody2D>().position == (Vector2)steps[currentStepIndex].position)
         {
-            if (currentStepIndex < steps.Count)
+            if (currentStepIndex + 1 < steps.Count)
             {
                 currentStepIndex++;
                 return null;
@@ -32,15 +34,29 @@ public class PatrolBrain : Brain
                 steps.Reverse();
         }
 
-        return steps[currentStepIndex];
+        return steps[currentStepIndex].position;
     }
 
-    public override short? Behave(BehaveParam param)
+    public override short? Behave(BehaveParam? param)
     {
-        transform.position = Vector2.MoveTowards(transform.position, steps[currentStepIndex], entityComp.moveSpeed * Time.fixedDeltaTime);
+        Vector3 targetPos = steps[currentStepIndex].position;
+
+        transform.position = Vector2.MoveTowards(
+            transform.position,
+            targetPos,
+            entityComp.moveSpeed * Time.fixedDeltaTime);
+
+        SetAnimation(DirectionHelper.GetDirection(transform.position, targetPos).normalized);
 
         return null;
     }
+    protected void SetAnimation(Vector3 direction)
+    {
+        animator.SetBool("moving", true);
+        animator.SetFloat("moveX", direction.x);
+        animator.SetFloat("moveY", direction.y);
+    }
+
 
     public void SetStepIndex(int stepIndex)
     {
@@ -60,7 +76,7 @@ public class PatrolBrain : Brain
 
         for (int i = 0; i < steps.Count; i++)
         {
-            if (Vector3.Distance(steps[i], GetComponent<Rigidbody2D>().position) > closestDistance)
+            if (Vector3.Distance(steps[i].position, GetComponent<Rigidbody2D>().position) > closestDistance)
             {
                 closestStepIndex = i;
             }

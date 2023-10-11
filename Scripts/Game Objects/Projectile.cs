@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [System.Serializable]
 public class Projectile : TriggerHit
@@ -22,16 +23,22 @@ public class Projectile : TriggerHit
 
     protected new void OnTriggerEnter2D(Collider2D collider)
     {
+        if (collider is TilemapCollider2D)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         if (!canCollid)
             return;
 
         Hitable hitableCollider = collider.GetComponent<Hitable>();
-
         if (hitableCollider != null && hitableCollider.enabled)
         {
             base.OnHit(hitableCollider);
 
             Destroy(gameObject);
+            return;
         }
     }
 

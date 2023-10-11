@@ -34,11 +34,6 @@ public abstract class AliveEntity : Entity
         GetComponent<Rigidbody2D>().velocity = Vector3.zero;
     }
 
-    protected void FixedUpdate()
-    {
-
-    }
-
     public sealed override bool TargetIsNear(Vector3 targetPosition, float radius = 0)
     {
         radius = (radius == 0) ? nearRadius : radius;

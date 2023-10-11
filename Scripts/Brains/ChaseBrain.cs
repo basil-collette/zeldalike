@@ -6,7 +6,7 @@ public class ChaseBrain : Brain
     public bool needDirectSee = true;
 
     protected Animator animator;
-    protected Vector3 lastPositionKnown;
+    //protected Vector3 lastPositionKnown;
 
     private void Start()
     {
@@ -24,28 +24,26 @@ public class ChaseBrain : Brain
             return Vector3.zero;
         }
 
+        GetComponent<Animator>().SetBool("targeting", true);
+
         Vector3 direction = DirectionHelper.GetDirection(transform.position, targetPos);
-        animator.SetFloat("moveX", direction.x);
-        animator.SetFloat("moveY", direction.y);
 
         if (!needDirectSee)
         {
-            GetComponent<Animator>().SetBool("targeting", true);
+            animator.SetFloat("moveX", direction.x);
+            animator.SetFloat("moveY", direction.y);
             return targetPos;
         }
 
         RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, (targetPos - transform.position), detectionRange);
-        if (hitInfo == false
-            || ReferenceEquals(hitInfo.transform.gameObject, target.gameObject))
+        if (ReferenceEquals(hitInfo.transform.gameObject, target.gameObject))
         {
-            lastPositionKnown = targetPos;
-
-            GetComponent<Animator>().SetBool("targeting", true);
-            return lastPositionKnown;
+            animator.SetFloat("moveX", direction.x);
+            animator.SetFloat("moveY", direction.y);
+            return targetPos;
         }
 
-        GetComponent<Animator>().SetBool("targeting", true);
-        return lastPositionKnown;
+        return Vector3.zero;
     }
 
     public override short? Behave(BehaveParam param)

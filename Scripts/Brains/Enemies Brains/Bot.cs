@@ -41,11 +41,6 @@ public abstract class Bot : AliveEntity
         base.Update();
     }
 
-    protected new void FixedUpdate()
-    {
-        base.FixedUpdate();
-    }
-
     public bool TargetIsOnAttackRadius()
     {
         return base.TargetIsNear(target.position, attackRadius);

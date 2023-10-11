@@ -389,7 +389,7 @@ MonoBehaviour:
   - Name: pause_exit
     Clip: {fileID: 8300000, guid: d8c4a6c1273abce4a9eef8e7f2b7a280, type: 3}
   - Name: heal
-    Clip: {fileID: 8300000, guid: d1895312f4bd9b345b3a7026ae002dfd, type: 3}
+    Clip: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
   - Name: insect_slash
     Clip: {fileID: 8300000, guid: 3becec1909f194046945d85ac1077772, type: 3}
   - Name: dagger
@@ -404,6 +404,8 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: 3bb74539a5523ec4396b8102765e8663, type: 3}
   - Name: purchase
     Clip: {fileID: 8300000, guid: 3db9583d6e159d541823eb43001f8e5f, type: 3}
+  - Name: explosion
+    Clip: {fileID: 8300000, guid: e90014bc14a804245b878546e7bcfcad, type: 3}
 --- !u!4 &119542048
 Transform:
   m_ObjectHideFlags: 0
@@ -1829,7 +1831,7 @@ MonoBehaviour:
   firstLoadedScene: {fileID: 11400000, guid: bd8d67e50fbf37f4e80d7ec87cba8dd1, type: 2}
   CanvaUI: {fileID: 185778902}
   CanvaControls: {fileID: 1413398748}
-  resetBDD: 1
+  resetBDD: 0
 --- !u!114 &712053991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1906,6 +1908,8 @@ MonoBehaviour:
   pauseManager: {fileID: 712053995}
   dialogueButtonPrefab: {fileID: 7483562462869052038, guid: 1f8768b7a2498b94b9511590ee927e8b, type: 3}
   textAnimPauseSeconds: 0.005
+  thinkingSprite: {fileID: 1448973362, guid: 67a0139ce3d618946851490dd9edb0b0, type: 3}
+  outLoudSprite: {fileID: -2088299505, guid: 67a0139ce3d618946851490dd9edb0b0, type: 3}
 --- !u!114 &712053995
 MonoBehaviour:
   m_ObjectHideFlags: 0

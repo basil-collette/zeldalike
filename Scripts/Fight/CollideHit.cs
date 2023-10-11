@@ -13,7 +13,7 @@ public class CollideHit : Hit
     {
         Hitable hitableCollider = collider.gameObject.GetComponent<Hitable>();
 
-        if (hitableCollider != null)
+        if (hitableCollider != null && hitableCollider.enabled)
         {
             base.OnHit(hitableCollider);
         }

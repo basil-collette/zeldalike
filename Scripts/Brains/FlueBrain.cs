@@ -12,10 +12,12 @@ public class FlueBrain : Brain
     protected float selfColliderSize;
     protected bool preferClockwise = true;
     protected CooldownManager cooldownManager;
+    protected AliveEntity aliveEntityComp;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
+        aliveEntityComp = GetComponent<AliveEntity>();
         cooldownManager = GetComponent<CooldownManager>();
 
         Vector2 collidArea = GetComponent<CapsuleCollider2D>().size;
@@ -52,7 +54,7 @@ public class FlueBrain : Brain
         transform.position = Vector2.MoveTowards(
             transform.position,
             targetPos,
-            GetComponent<AliveEntity>().moveSpeed * Time.fixedDeltaTime);
+            aliveEntityComp.moveSpeed * Time.fixedDeltaTime);
 
         SetAnimation(DirectionHelper.GetRelativeAxis(transform.position, targetPos).normalized);
 

@@ -8,13 +8,13 @@ public class PursueBrain : Brain
     public bool avoidObstacle = true;
 
     protected Animator animator;
-    protected float targetMoveSpeed;
+    protected AliveEntity aliveEntity;
     protected float selfColliderSize;
     protected bool preferClockwise = true;
 
     private void Start()
     {
-        targetMoveSpeed = GetComponent<AliveEntity>().moveSpeed;
+        aliveEntity = GetComponent<AliveEntity>();
         animator = GetComponent<Animator>();
         
         Vector2 collidArea = GetComponent<CapsuleCollider2D>().size;
@@ -51,7 +51,7 @@ public class PursueBrain : Brain
         transform.position = Vector2.MoveTowards(
             transform.position,
             targetPos,
-            targetMoveSpeed * Time.fixedDeltaTime);
+            aliveEntity.moveSpeed * Time.fixedDeltaTime);
 
         SetAnimation(DirectionHelper.GetRelativeAxis(transform.position, targetPos).normalized);
 

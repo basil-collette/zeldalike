@@ -26,17 +26,34 @@ public class AttackBrain : Brain
     {
         if (canAttack)
         {
+            canAttack = false;
+
             AttackBehaveParam attackBehaveParam = param as AttackBehaveParam;
 
-            StartCoroutine(AttackCooldownCo(attackBehaveParam.attackDuration));
+            StartCoroutine(AttackCooldownCo(attackBehaveParam.attackDuration, attackBehaveParam.cooldown));
         }
         return null;
     }
 
-    protected IEnumerator AttackCooldownCo(float attackDuration)
+    protected IEnumerator AttackCooldownCo(float attackDuration, float attackCooldown)
     {
-        canAttack = false;
+        
+        animator.SetBool("attacking", true);
+
+        Vector3 direction = DirectionHelper.GetDirection(transform.position, GetComponent<Bot>().target.position).normalized;
+
+        yield return new WaitForSeconds(1);
+
+        GetComponent<Rigidbody2D>().velocity = new Vector2(direction.x * 10, direction.y * 10);
+
         yield return new WaitForSeconds(attackDuration);
+
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        animator.SetBool("attacking", false);
+        GetComponent<AliveEntity>().SetState(EntityState.idle);
+
+        yield return new WaitForSeconds(attackCooldown);
+        
         canAttack = true;
     }
 

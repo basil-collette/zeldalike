@@ -23,7 +23,7 @@ public class LogThinker : Bot
 
     new void Update()
     {
-        if (currentEntityState == EntityState.unavailable)
+        if (currentEntityState == EntityState.unavailable || currentEntityState == EntityState.attack)
             return;
 
         direction = chaseBrain.Think(new TargetThinkParam() { target = this.target }) ?? Vector3.zero;
@@ -67,7 +67,7 @@ public class LogThinker : Bot
         if (currentEntityState == EntityState.unavailable)
             return;
 
-        GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        //GetComponent<Rigidbody2D>().velocity = Vector3.zero;
 
         switch (currentEntityState)
         {
@@ -83,8 +83,8 @@ public class LogThinker : Bot
                 {
                     AttackBehaveParam param = new AttackBehaveParam()
                     {
-                        attackDuration = 1,
-                        cooldown = 1,
+                        attackDuration = 0.4f,
+                        cooldown = 2,
                         attackCollider = this.attackCollider
                     };
                     attackBrain.Behave(param);

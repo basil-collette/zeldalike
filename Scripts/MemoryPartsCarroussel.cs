@@ -21,6 +21,7 @@ public class MemoryPartsCarroussel : MonoBehaviour
         inv = MainGameManager._inventoryManager;
 
         ShowMemoryPart("Identity");
+        ShowMemoryPart("Diplomes");
         ShowMemoryPart("Competences");
     }
 

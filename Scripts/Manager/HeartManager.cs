@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class HeartManager : SingletonGameObject<HeartManager>
 {
     public Image[] hearts;
-    public float maxHearts = 3;
     public FloatValue playerHealth;
 
     public Sprite fullHeart;
@@ -15,22 +14,17 @@ public class HeartManager : SingletonGameObject<HeartManager>
     
     void Start()
     {
-        //playerHealth.RuntimeValue = SaveManager.GameData.playerHealth;
-        InitHearts();
         UpdateHearts();
-    }
-
-    public void InitHearts()
-    {
-        for (int i = 0; i < maxHearts; i++)
-        {
-            hearts[i].gameObject.SetActive(true);
-        }
     }
 
     public void UpdateHearts()
     {
-        for (int i = 0; i < maxHearts; i++)
+        for (int i = 0; i < playerHealth.initialValue; i++)
+        {
+            hearts[i].gameObject.SetActive(true);
+        }
+
+        for (int i = 0; i < playerHealth.initialValue; i++)
         {
             float temp = playerHealth.RuntimeValue - i;
             

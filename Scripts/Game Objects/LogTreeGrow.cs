@@ -4,32 +4,44 @@ using UnityEngine;
 
 public class LogTreeGrow : Interacting
 {
-    public bool hasGrown;
-    public Sprite spriteActionButton;
-
     readonly string EVENT_NAME = "tree_grown";
+    readonly string REQUIRED_ITEM_CODE = "arrosoir";
+
+    [SerializeField] Sprite spriteActionButton;
+    [SerializeField] CircleCollider2D actionButtonZone;
+
     GameObject ActionButtonGrow;
+    LogTreeHit logTreeHit;
 
     void Start()
     {
+        logTreeHit = GetComponent<LogTreeHit>();
+
         if (MainGameManager._storyEventManager._scenario.Exists(x => x == EVENT_NAME))
         {
-            hasGrown = true;
-            this.enabled = false;
+            GetComponent<Animator>().SetBool("grown", true);
+            logTreeHit.enabled = true;
+            enabled = false;
             return;
         }
 
-        //set animator bool de si grow or not
+        logTreeHit.enabled = false;
     }
 
     void Grow()
     {
         MainGameManager._storyEventManager.AddScenarioEvent(EVENT_NAME);
 
-        //trigger animation
-        //enable le component LogTreeHit à la fin de l'animation (dans l'animation directement)
+        GetComponent<Animator>().SetTrigger("grow");
 
-        hasGrown = true;
+        actionButtonZone.enabled = false;
+        Destroy(ActionButtonGrow);
+    }
+
+    public void OnGrowAnimationEnd()
+    {
+        logTreeHit.enabled = true;
+        enabled = false;
     }
 
     protected sealed override void OnTriggerEnter2D(Collider2D collider)
@@ -38,7 +50,10 @@ public class LogTreeGrow : Interacting
         {
             base.OnTriggerEnter2D(collider);
 
-            ActionButtonGrow = FindGameObjectHelper.FindByName("Actions Container").GetComponent<ActionButtonsManager>().AddButton(spriteActionButton, Grow);
+            if (MainGameManager._inventoryManager._items.Exists(x => x.NameCode == REQUIRED_ITEM_CODE))
+            {
+                ActionButtonGrow = FindGameObjectHelper.FindByName("Actions Container").GetComponent<ActionButtonsManager>().AddButton(spriteActionButton, Grow);
+            }
         }
     }
 
@@ -48,7 +63,8 @@ public class LogTreeGrow : Interacting
         {
             base.OnTriggerExit2D(collider);
 
-            Destroy(ActionButtonGrow);
+            if (ActionButtonGrow != null) Destroy(ActionButtonGrow);
+
             ActionButtonGrow = null;
         }
     }

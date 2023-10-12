@@ -89,14 +89,22 @@ public class TreasureChest : FacingInteracting
 
     void ObtainItem()
     {
-        enabled = false;
         GetComponent<PolygonCollider2D>().enabled = false;
 
         GetComponent<Animator>().SetTrigger("opentrigger");
 
         exitSignal.Raise(); //to remove the "?" clue
 
-        MainGameManager._inventoryManager.AddItem(content);
+        Player player = FindAnyObjectByType<Player>();
+
+        if (content.NameCode == "heart")
+        {
+            player.GetComponent<Health>().AddHeartMax();
+        }
+        else
+        {
+            MainGameManager._inventoryManager.AddItem(content);
+        }        
 
         receivedItemContext.gameObject.SetActive(true);
 
@@ -111,7 +119,7 @@ public class TreasureChest : FacingInteracting
             receivedItemSprite.localPosition = new Vector3(-(height * content.SpriteScale) / 2, 0, 0);
         }
 
-        FindAnyObjectByType<Player>().RaiseItem();
+        player.RaiseItem();
 
         MainGameManager._storyEventManager.AddOpennedChestsEvent(code.ToString());
 
@@ -124,6 +132,8 @@ public class TreasureChest : FacingInteracting
 
         Destroy(ActionButtonOpen);
         ActionButtonOpen = null;
+
+        enabled = false;
     }
 
     public void ExitRaiseItem()

@@ -85,8 +85,8 @@ public class SaveManager : SingletonGameObject<SaveManager>
             sceneName = FindAnyObjectByType<ScenesManager>()._currentScene,
             position = player.transform.position,
 
-            playerHealth = player.GetComponent<Health>()._health.RuntimeValue,
-            playerMaxHealth = player.GetComponent<Health>()._health.initialValue,
+            playerHealth = GameData.playerHealth,
+            playerMaxHealth = GameData.playerMaxHealth,
 
             inventory = MainGameManager._inventoryManager.ToJsonString(),
 

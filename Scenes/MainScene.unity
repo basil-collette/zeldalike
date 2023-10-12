@@ -1831,7 +1831,7 @@ MonoBehaviour:
   firstLoadedScene: {fileID: 11400000, guid: bd8d67e50fbf37f4e80d7ec87cba8dd1, type: 2}
   CanvaUI: {fileID: 185778902}
   CanvaControls: {fileID: 1413398748}
-  resetBDD: 0
+  resetBDD: 1
 --- !u!114 &712053991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5117,7 +5117,6 @@ MonoBehaviour:
   - {fileID: 2147245456}
   - {fileID: 1525019177}
   - {fileID: 150480858}
-  maxHearts: 3
   playerHealth: {fileID: 11400000, guid: 7a4b7ca3f9ae54c4896657d98f3264b1, type: 2}
   fullHeart: {fileID: 842296509, guid: 67a0139ce3d618946851490dd9edb0b0, type: 3}
   halfFullHeart: {fileID: -129356532, guid: 67a0139ce3d618946851490dd9edb0b0, type: 3}

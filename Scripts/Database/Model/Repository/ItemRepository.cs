@@ -48,9 +48,15 @@ namespace Assets.Database.Model.Repository
             key.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/key', 1, 'common', 0, 'Petite Clé', 'consommable', 'Clé', 'key', 1)";
             key.ExecuteNonQuery();
 
+            /*
             IDbCommand letter = dbConn.CreateCommand();
             letter.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/letter', 1, 'rare', 0, 'Lettre adressée à Mathilde', 'item', 'Lettre', 'letter', 1)";
             letter.ExecuteNonQuery();
+            */
+
+            IDbCommand heart = dbConn.CreateCommand();
+            heart.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/heart', 1, 'rare', 0, 'Une vie supplémentaire !', 'consommable', 'Heart', 'heart', 1)";
+            heart.ExecuteNonQuery();
 
             IDbCommand arrosoir = dbConn.CreateCommand();
             arrosoir.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/arrosoir', 1, 'common', 0, 'Arrosoir de Clara', 'quest', 'Arrosoir', 'arrosoir', 1)";
@@ -59,6 +65,10 @@ namespace Assets.Database.Model.Repository
             IDbCommand idCard = dbConn.CreateCommand();
             idCard.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/id_card', 1, 'common', 0, 'Ma carte d''identité', 'quest', 'Carte d''identité', 'id_card', 1)";
             idCard.ExecuteNonQuery();
+
+            IDbCommand diplomas = dbConn.CreateCommand();
+            diplomas.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/diplomas', 1, 'common', 0, 'Mes diplômes !', 'quest', 'Diplômes', 'diplomas', 1)";
+            diplomas.ExecuteNonQuery();
 
             IDbCommand shoes = dbConn.CreateCommand();
             shoes.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/shoes', 1, 'common', 0, 'Bottes du marchant', 'quest', 'Bottes du marchant', 'shoes', 1)";

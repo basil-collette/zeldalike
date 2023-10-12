@@ -71,7 +71,7 @@ public class PursueBrain : Brain
         Vector3 direction = DirectionHelper.GetDirection(transform.position, targetPos);
 
         RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, direction, raycastDistance);
-        if (hitInfo.collider == null
+        if (hitInfo.collider == null || hitInfo.collider.isTrigger
             || ReferenceEquals(hitInfo.transform.gameObject, target.gameObject))
         {
             return targetPos;

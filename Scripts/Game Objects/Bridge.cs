@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class Bridge : Interacting
 {
-    InventoryManager inventory;
     public Sprite spriteActionButton;
-
-    bool canBeRepaired = false;
-    bool isRepaired = false;
 
     GameObject ActionButtonRepaire;
 
@@ -17,36 +13,28 @@ public class Bridge : Interacting
 
     private void Start()
     {
-        inventory = MainGameManager._inventoryManager;
-
-        CheckRepairability();
-    }
-
-    void CheckRepairability()
-    {
         if (MainGameManager._storyEventManager._scenario.Exists(x => x == EVENT_NAME))
         {
-            isRepaired = true;
-            this.enabled = false;
+            Destroy(gameObject);
             return;
+        }
+    }
+
+    bool CanBeRepaired()
+    {
+        if (BRIDGE_INGREDIENTS.All(element => MainGameManager._inventoryManager._items.Exists(x => x.NameCode == element)))
+        {
+            return true;
         }
 
-        if (BRIDGE_INGREDIENTS.All(element => inventory._items.Exists(x => x.NameCode == element)))
-        {
-            canBeRepaired = true;
-            return;
-        }
+        return false;
     }
 
     void Repair()
     {
-        CheckRepairability();
-
-        if (!canBeRepaired) return;
-
         foreach (var x in BRIDGE_INGREDIENTS)
         {
-            inventory.RemoveItem(x);
+            MainGameManager._inventoryManager.RemoveItem(x);
         }
 
         MainGameManager._storyEventManager.AddScenarioEvent(EVENT_NAME);
@@ -62,7 +50,10 @@ public class Bridge : Interacting
         {
             base.OnTriggerEnter2D(collider);
 
-            ActionButtonRepaire = FindGameObjectHelper.FindByName("Actions Container").GetComponent<ActionButtonsManager>().AddButton(spriteActionButton, Repair);
+            if (CanBeRepaired())
+            {
+                ActionButtonRepaire = FindGameObjectHelper.FindByName("Actions Container").GetComponent<ActionButtonsManager>().AddButton(spriteActionButton, Repair);
+            }
         }
     }
 
@@ -72,7 +63,7 @@ public class Bridge : Interacting
         {
             base.OnTriggerExit2D(collider);
 
-            Destroy(ActionButtonRepaire);
+            if (ActionButtonRepaire != null) Destroy(ActionButtonRepaire);
             ActionButtonRepaire = null;
         }
     }

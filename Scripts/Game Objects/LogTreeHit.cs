@@ -1,9 +1,10 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LogTreeHit : Hitable
 {
-    public bool hasGrown;
+    [SerializeField] float spawnCooldownDuration;
     public GameObject logPrefab;
     public int maxSpawnCount = 4;
 
@@ -14,9 +15,11 @@ public class LogTreeHit : Hitable
         EffectEnum.pierce
     };
 
+    bool canSpawn = true;
+
     void Start()
     {
-        hasGrown = true;
+        
     }
 
     public override void Effect(Vector3 attackerPos, Effect effect)
@@ -26,11 +29,12 @@ public class LogTreeHit : Hitable
 
     public override void Hit(GameObject attacker, List<Effect> hit, string attackerTag)
     {
-        if (hasGrown
+        if (canSpawn
             && attackerTag == "Player" // prevent the "friendly fire" from enemies 
             && hit.Exists(effect => effectTypeTriggerable.Contains(effect.effectType))
             && SpawnCountNotReached())
         {
+            canSpawn = false;
             SpawnLog();
         }
     }
@@ -44,6 +48,8 @@ public class LogTreeHit : Hitable
     {
         GameObject logSeed = Instantiate(logPrefab, transform.position, Quaternion.identity);
         logSeed.GetComponent<Rigidbody2D>().velocity = GetRandomSeedThrowDirection();
+
+        StartCoroutine(SpawnCooldownCo());
     }
 
     Vector3 GetRandomSeedThrowDirection()
@@ -60,6 +66,13 @@ public class LogTreeHit : Hitable
         relativeDirection.y *= Random.Range(5, 10);
 
         return relativeDirection;
+    }
+
+    IEnumerator SpawnCooldownCo()
+    {
+        yield return new WaitForSeconds(spawnCooldownDuration);
+
+        canSpawn = true;
     }
 
 }

@@ -65,8 +65,12 @@ public class ExplosiveBeanThinker : Bot
             return;
         }
 
-        Imobilize();
-        SetState(EntityState.attack);
+        if (!animator.GetBool("attacking"))
+        {
+            SetState(EntityState.attack);
+            Imobilize();
+            animator.SetTrigger("explode");
+        }        
     }
 
     new void FixedUpdate()
@@ -90,10 +94,7 @@ public class ExplosiveBeanThinker : Bot
                 break;
 
             case EntityState.attack:
-                if (!animator.GetBool("attacking"))
-                {
-                    animator.SetTrigger("explode");
-                }
+                
                 break;
 
             default: break;

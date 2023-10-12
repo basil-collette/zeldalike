@@ -1,71 +1,59 @@
 using Assets.Scripts.Game_Objects.Inheritable;
-using System;
-using System.Collections.Generic;
+using UnityEngine;
 
-public class Door : FacingInteracting
+public class Door : Interacting
 {
-    //public string keyUidString;
-    //public Guid? keyUid;
+    [SerializeField] Sprite spriteActionButton;
 
-    //public List<AliveEntity> enemies = new List<AliveEntity>();
-    //int enemyCountOnStart;
+    readonly string EVENT_NAME = "door_collectioner_open";
 
-    //public Button button;
+    GameObject ActionButtonOpen;
 
     void Start()
     {
-        //keyUid = (keyUidString == string.Empty) ? null : new Guid(keyUidString);
-
-        /*
-        if (enemies.Count > 0)
+        if (MainGameManager._storyEventManager._scenario.Exists(x => x == EVENT_NAME))
         {
-            enemyCountOnStart = enemies.Count;
-        }
-        */
-    }
-
-    /*
-    new void FixedUpdate()
-    {
-        if (enemyCountOnStart > 0
-            && enemies.Count == 0)
-        {
-            DestroyImmediate(this.gameObject);
+            Destroy(gameObject);
+            return;
         }
     }
-    */
 
-    bool ConditionsOfTypesAreCompleted()
+    void Open()
     {
-        /*
-        if (keyUidString != string.Empty
-            && !FindFirstObjectByType<Player>().inventory.Items.Exists(item => item.NameCode == "key" && item.Uid == keyUid))
-        {
-            return false;
-        }
-        */
+        MainGameManager._storyEventManager.AddScenarioEvent(EVENT_NAME);
 
-        /*
-        if (button != null)
-        {
-            return false;
-        }
-        */
+        Destroy(gameObject);
 
-        return true;
+        exitSignal?.Raise();
+    }
+
+    protected sealed override void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Player") && !collider.isTrigger)
+        {
+            base.OnTriggerEnter2D(collider);
+
+            if (MainGameManager._inventoryManager._items.Exists(x => x.NameCode == "key"))
+            {
+                ActionButtonOpen = FindGameObjectHelper.FindByName("Actions Container").GetComponent<ActionButtonsManager>().AddButton(spriteActionButton, Open);
+            }
+        }
+    }
+
+    protected sealed override void OnTriggerExit2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Player") && !collider.isTrigger)
+        {
+            base.OnTriggerExit2D(collider);
+
+            if (ActionButtonOpen != null) Destroy(ActionButtonOpen);
+            ActionButtonOpen = null;
+        }
     }
 
     protected override void OnInteract()
     {
-        if (ConditionsOfTypesAreCompleted())
-        {
-            //remove key from inventory
-            exitSignal?.Raise();
-            DestroyImmediate(this.gameObject);
-        }
-        else
-        {
-            // show message of need conditions
-        }
+        //
     }
+
 }

@@ -103,7 +103,7 @@ public class Health : Hitable
         if (_healthSignal != null)
         {
             _healthSignal.Raise();
-        } 
+        }
 
         CheckDeath();
     }
@@ -171,6 +171,14 @@ public class Health : Hitable
             _dieOverride.Invoke();
         }
     }
+
+    public void AddHeartMax()
+    {
+        _health.initialValue += 1;
+        _health.RuntimeValue += 1;
+
+        if (_healthSignal != null) _healthSignal.Raise();
+    } 
 
     // EFFECT PROCESS _________________________________________________________________ EFFECT PROCESS
 

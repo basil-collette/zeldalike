@@ -32,7 +32,7 @@ public class MemoryPartsCarroussel : MonoBehaviour
             case "Competences":
                 ShowMemoryPart(partName, inv._items.Exists(x => x.NameCode == "competences")); break;
             case "Diplomes":
-                ShowMemoryPart(partName, inv._items.Exists(x => x.NameCode == "diplomes")); break;
+                ShowMemoryPart(partName, inv._items.Exists(x => x.NameCode == "diplomas")); break;
             case "Identity":
             default:
                 ShowMemoryPart(partName, inv._items.Exists(x => x.NameCode == "id_card")); break;

@@ -17,7 +17,7 @@ public class ItemDrop : Drop
 
     protected override bool OnTriggerEnter2DIsPlayer(Collider2D collider)
     {
-        return MainGameManager._inventoryManager.AddItem(Item));
+        return MainGameManager._inventoryManager.AddItem(Item);
     }
 
 }

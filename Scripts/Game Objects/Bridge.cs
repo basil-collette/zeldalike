@@ -39,7 +39,7 @@ public class Bridge : Interacting
     {
         foreach (var x in BRIDGE_INGREDIENTS)
         {
-            MainGameManager._inventoryManager.RemoveItem(x);
+            MainGameManager._inventoryManager.RemoveItem(x.nameCode);
         }
 
         MainGameManager._storyEventManager.AddScenarioEvent(EVENT_NAME);

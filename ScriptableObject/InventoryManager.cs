@@ -10,8 +10,8 @@ public class InventoryManager : Singleton<StoryEventManager>, ISavable
 {
     public static event Action<string[]> OnObtain;
 
-    public int _money = 0;
-    public int _experience = 0;
+    public float _money = 0;
+    public float _experience = 0;
 
     //Weight
     public float _maxWeight = 10f;
@@ -38,25 +38,25 @@ public class InventoryManager : Singleton<StoryEventManager>, ISavable
         }
     }
 
-    public void AddItem(string itemParams)
+    public bool AddItem(string itemParams)
     {
         var item = ItemManager.GetItem(itemParams);
-        AddItem(item);
+        return AddItem(item);
     }
 
-    public void AddItem(Item content)
+    public bool AddItem(Item content)
     {
         if (_items.Count < maxCountItems)
         {
             content.InventoryIndex = GetFirstFreeIndexSlot();
             _items.Add(content);
             OnObtain?.Invoke(new string[] { content.NameCode });
+            return true;
         }
         else
         {
-            // ask for bin an item
-
-            //pause and open inventory scene
+            FindGameObjectHelper.FindByName("Main Game Manager").GetComponent<ToastManager>().Add(new Toast("Inventaire plein!", ToastType.Error));
+            return false;
         }
     }
 
@@ -138,8 +138,8 @@ public class InventoryManager : Singleton<StoryEventManager>, ISavable
 [Serializable]
 public class InventorySaveModel
 {
-    public int Money;
-    public int Experience;
+    public float Money;
+    public float Experience;
     public float MaxWeight = 10f;
     public float CurrentWeight;
     public Weapon? Weapon;

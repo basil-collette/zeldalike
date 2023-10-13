@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LogThinker : Bot
 {
-    protected ChaseBrain chaseBrain;
+    protected DetectorBrain chaseBrain;
     protected SleeperBrain sleeperBrain;
     protected PursueBrain pursueBrain;
     protected AttackBrain attackBrain;
@@ -13,7 +13,7 @@ public class LogThinker : Bot
         base.Start();
 
         attackCollider = transform.GetChild(0).GetComponentInChildren<BoxCollider2D>();
-        chaseBrain = GetComponent<ChaseBrain>();
+        chaseBrain = GetComponent<DetectorBrain>();
         sleeperBrain = GetComponent<SleeperBrain>();
         pursueBrain = GetComponent<PursueBrain>();
         attackBrain = GetComponent<AttackBrain>();

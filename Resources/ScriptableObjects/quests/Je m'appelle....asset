@@ -31,7 +31,7 @@ MonoBehaviour:
       type: {class: CollectGoal, ns: , asm: Assembly-CSharp}
       data:
         Target: id_card
-        Objective: "retrouver carte d'identit\xE9"
+        Objective: "retrouver ma carte d'identit\xE9"
         IsCompleted: 0
         RequiredAmount: 1
         CurrentAmount: 0

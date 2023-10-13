@@ -16,43 +16,47 @@ MonoBehaviour:
   - BaseNodeGuid: 6fa4ec6b-29d0-4db2-b9e2-1c93cb628193
     PortName: Next
     TargetNodeGuid: 26f20caf-49c5-428e-8ee5-f1acfeaa4ecd
-  - BaseNodeGuid: 88af22c9-382e-4cba-9454-b845abca6eac
-    PortName: Ok
-    TargetNodeGuid: 1122c1f2-4d09-43b1-8ffc-7075c777262d
   - BaseNodeGuid: 26f20caf-49c5-428e-8ee5-f1acfeaa4ecd
     PortName: Compris
     TargetNodeGuid: 88af22c9-382e-4cba-9454-b845abca6eac
+  - BaseNodeGuid: 88af22c9-382e-4cba-9454-b845abca6eac
+    PortName: Ok
+    TargetNodeGuid: 1122c1f2-4d09-43b1-8ffc-7075c777262d
   NodeDatas:
-  - rid: 3230699522260205579
-  - rid: 3230699522260205580
-  - rid: 3230699522260205581
+  - rid: 3230699720299511819
+  - rid: 3230699720299511820
+  - rid: 3230699720299511821
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230699522260205579
+    - rid: 3230699720299511819
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 26f20caf-49c5-428e-8ee5-f1acfeaa4ecd
         title: Dialogue
         Position: {x: 200, y: 200}
         EntryPoint: 0
-        DialogueText: "Les enfants ? Ils gardent leurs tr\xE9sors dans leur grotte
-          secrette au Nord. Ils l'ont truff\xE9e de pi\xE8ge !"
+        Type: 0
+        DialogueText: "Les ballegrains ? Ils gardent leur butin dans leur grotte
+          secrette au Nord. Attention \xE7a a l'air dangereux !"
         DialogueCode: 
+        Side: 0
         Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
-    - rid: 3230699522260205580
+    - rid: 3230699720299511820
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 88af22c9-382e-4cba-9454-b845abca6eac
         title: Dialogue
         Position: {x: 200, y: 390}
         EntryPoint: 0
+        Type: 0
         DialogueText: "Si tu peux aussi me ramener l'arrosoir qu'ils m'ont prit,
           tu serais g\xE9nial !"
         DialogueCode: 
+        Side: 0
         Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
-    - rid: 3230699522260205581
+    - rid: 3230699720299511821
       type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 1122c1f2-4d09-43b1-8ffc-7075c777262d

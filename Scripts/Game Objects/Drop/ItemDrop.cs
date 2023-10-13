@@ -15,9 +15,9 @@ public class ItemDrop : Drop
         GetComponent<SpriteRenderer>().sprite = Item.Sprite;
     }
 
-    protected override void OnTriggerEnter2DIsPlayer(Collider2D collider)
+    protected override bool OnTriggerEnter2DIsPlayer(Collider2D collider)
     {
-        MainGameManager._inventoryManager.AddItem(Item);
+        return MainGameManager._inventoryManager.AddItem(Item));
     }
 
 }

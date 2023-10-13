@@ -1,7 +1,12 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Enums;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class ChaseBrain : Brain
+public class DetectorBrain : Brain
 {
+    public List<Sense> senses;
+
     public float detectionRange = 4;
     public bool needDirectSee = true;
 
@@ -51,4 +56,19 @@ public class ChaseBrain : Brain
         return null;
     }
 
+}
+
+[Serializable]
+public class Sense
+{
+    public SenseEnum type;
+    public float distance;
+    public AngleDegree[] schema;
+}
+
+[Serializable]
+public class AngleDegree
+{
+    public float degree;
+    public float angle;
 }

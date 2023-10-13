@@ -8,7 +8,7 @@ public class ExplosiveBeanThinker : Bot
     [SerializeField] float explosionRadius;
     [SerializeField] GameObject explosionEffect;
 
-    protected ChaseBrain chaseBrain;
+    protected DetectorBrain chaseBrain;
     protected PatrolBrain patrolBrain;
     protected PursueBrain pursueBrain;
 
@@ -22,7 +22,7 @@ public class ExplosiveBeanThinker : Bot
     {
         base.Start();
 
-        chaseBrain = GetComponent<ChaseBrain>();
+        chaseBrain = GetComponent<DetectorBrain>();
         patrolBrain = GetComponent<PatrolBrain>();
         pursueBrain = GetComponent<PursueBrain>();
 

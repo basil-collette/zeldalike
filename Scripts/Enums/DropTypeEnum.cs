@@ -3,11 +3,6 @@
     [System.Serializable]
     public enum DropTypeEnum
     {
-        item,
-        consommable,
-        holdable,
-        weapon,
-        quest,
         heart,
         money,
         experience

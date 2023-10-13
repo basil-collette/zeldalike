@@ -177,6 +177,7 @@ public class Health : Hitable
         _health.initialValue += 1;
         _health.RuntimeValue += 1;
 
+        //update hearts ui
         if (_healthSignal != null) _healthSignal.Raise();
     } 
 

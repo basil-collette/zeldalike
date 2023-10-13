@@ -135,10 +135,12 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
 
     void ProcessEvent(EventNodeData node)
     {
+        bool error = false;
+
         switch (node.Type)
         {
             case EventTypeEnum.StartQuest: MainGameManager._questbookManager.AddQuest(node.Param); break;
-            case EventTypeEnum.AddItem: MainGameManager._inventoryManager.AddItem(node.Param); break;
+            case EventTypeEnum.AddItem: if (!MainGameManager._inventoryManager.AddItem(node.Param)) error = true; break;
             case EventTypeEnum.RemoveItem: MainGameManager._inventoryManager.RemoveItem(node.Param); break;
             case EventTypeEnum.AddMoney: MainGameManager._inventoryManager.AddMoney(int.Parse(node.Param)); break;
             case EventTypeEnum.RemoveMoney: MainGameManager._inventoryManager.RemoveMoney(int.Parse(node.Param)); break;
@@ -148,7 +150,7 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
         }
 
         var connections = GraphHelper.GetOutputs(_dialogueContainer, node);
-        if (connections.Count > 0)
+        if (connections.Count > 0 && !error)
         {
             BaseNodeData nextNode = GraphHelper.GetNodeByGuid(_dialogueContainer, connections[0].TargetNodeGuid);
             NextNode(nextNode);

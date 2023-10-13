@@ -2,9 +2,9 @@
 
 public class MoneyDrop : Drop
 {
-    public int amount;
+    public float amount;
 
-    protected override void OnTriggerEnter2DIsPlayer(Collider2D collider)
+    protected override bool OnTriggerEnter2DIsPlayer(Collider2D collider)
     {
         Rewards reward = new Rewards()
         {
@@ -12,6 +12,7 @@ public class MoneyDrop : Drop
         };
 
         MainGameManager._inventoryManager.GetReward(reward);
+        return true;
     }
 
 }

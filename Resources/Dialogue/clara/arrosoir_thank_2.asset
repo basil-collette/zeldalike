@@ -26,15 +26,15 @@ MonoBehaviour:
     PortName: Output
     TargetNodeGuid: 36641a87-f500-41c8-b525-8059d0ed78e3
   NodeDatas:
-  - rid: 3230699522260205586
-  - rid: 3230699522260205587
-  - rid: 3230699522260205588
-  - rid: 3230699522260205589
+  - rid: 3230699720299511815
+  - rid: 3230699720299511816
+  - rid: 3230699720299511817
+  - rid: 3230699720299511818
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230699522260205586
+    - rid: 3230699720299511815
       type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 6edefae9-e4c1-4776-9ccd-39bd80755747
@@ -43,28 +43,32 @@ MonoBehaviour:
         EntryPoint: 0
         Type: 0
         Param: L'arrosoir de Clara
-    - rid: 3230699522260205587
+    - rid: 3230699720299511816
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 136d1f0d-c81d-40fa-a900-70d5f5fc9f2f
         title: Dialogue
         Position: {x: 199, y: 200}
         EntryPoint: 0
-        DialogueText: Mais c'est mon arrosoir que tu as ?! Tu l'a repris aux enfants
+        Type: 0
+        DialogueText: Mais c'est mon arrosoir que tu as ?! Tu l'a repris aux ballegrains
           ?
         DialogueCode: 
+        Side: 0
         Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
-    - rid: 3230699522260205588
+    - rid: 3230699720299511817
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 36641a87-f500-41c8-b525-8059d0ed78e3
         title: Dialogue
         Position: {x: 199, y: 601}
         EntryPoint: 0
-        DialogueText: "Oh mon arrosoiri ! Voici 5 pi\xE8ces pour te remercier"
+        Type: 0
+        DialogueText: "g\xE9niaaaaal ! Voici 5 pi\xE8ces pour te remercier"
         DialogueCode: arrosoir_thank
+        Side: 0
         Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
-    - rid: 3230699522260205589
+    - rid: 3230699720299511818
       type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 0d7640ee-15c0-41b6-a9be-75e8a2578b56

@@ -2,7 +2,7 @@
 
 public class SleeperBrain : Brain
 {
-    protected ChaseBrain chaseBrain;
+    protected DetectorBrain chaseBrain;
     protected Animator animator;
     protected AliveEntity entityComp;
 

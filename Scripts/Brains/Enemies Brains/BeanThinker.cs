@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BeanThinker : Bot
 {
-    protected ChaseBrain chaseBrain;
+    protected DetectorBrain chaseBrain;
     protected FlueBrain flueBrain;
     protected ProjectileAttackBrain projectileAttackBrain;
     protected CooldownManager cooldownManager;
@@ -13,7 +13,7 @@ public class BeanThinker : Bot
     {
         base.Start();
 
-        chaseBrain = GetComponent<ChaseBrain>();
+        chaseBrain = GetComponent<DetectorBrain>();
         flueBrain = GetComponent<FlueBrain>();
         projectileAttackBrain = GetComponent<ProjectileAttackBrain>();
         cooldownManager = GetComponent<CooldownManager>();

@@ -89,22 +89,24 @@ public class TreasureChest : FacingInteracting
 
     void ObtainItem()
     {
-        GetComponent<PolygonCollider2D>().enabled = false;
-
-        GetComponent<Animator>().SetTrigger("opentrigger");
-
-        exitSignal.Raise(); //to remove the "?" clue
-
         Player player = FindAnyObjectByType<Player>();
-
         if (content.NameCode == "heart")
         {
             player.GetComponent<Health>().AddHeartMax();
         }
         else
         {
-            MainGameManager._inventoryManager.AddItem(content);
-        }        
+            if (!MainGameManager._inventoryManager.AddItem(content))
+            {
+                return;
+            }
+        }
+
+        GetComponent<PolygonCollider2D>().enabled = false;
+
+        GetComponent<Animator>().SetTrigger("opentrigger");
+
+        exitSignal.Raise(); //to remove the "?" clue
 
         receivedItemContext.gameObject.SetActive(true);
 

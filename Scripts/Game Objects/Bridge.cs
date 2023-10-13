@@ -9,7 +9,7 @@ public class Bridge : Interacting
     GameObject ActionButtonRepaire;
 
     readonly string EVENT_NAME = "bridge_repaired";
-    readonly string[] BRIDGE_INGREDIENTS = { "rope", "woodplank_dark" };
+    readonly (int amount, string nameCode)[] BRIDGE_INGREDIENTS = { (1, "rope"), (2, "dark_wood_plank") };
 
     private void Start()
     {
@@ -22,12 +22,17 @@ public class Bridge : Interacting
 
     bool CanBeRepaired()
     {
-        if (BRIDGE_INGREDIENTS.All(element => MainGameManager._inventoryManager._items.Exists(x => x.NameCode == element)))
+        foreach(var ingredient in BRIDGE_INGREDIENTS)
         {
-            return true;
+            if (MainGameManager._inventoryManager._items.FindAll(x => x.NameCode == ingredient.nameCode).Count < ingredient.amount)
+            {
+                return false;
+            }
         }
 
-        return false;
+        return true;
+
+        //return BRIDGE_INGREDIENTS.All(element => MainGameManager._inventoryManager._items.Exists(x => x.NameCode == element.nameCode));
     }
 
     void Repair()

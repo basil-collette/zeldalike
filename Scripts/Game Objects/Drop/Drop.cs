@@ -8,12 +8,12 @@ public abstract class Drop : MonoBehaviour
     {
         if (collider.CompareTag("Player") && !collider.isTrigger)
         {
-            OnTriggerEnter2DIsPlayer(collider);
-
-            Destroy(this.gameObject);
+            if (OnTriggerEnter2DIsPlayer(collider)) {
+                Destroy(this.gameObject);
+            }
         }
     }
 
-    protected abstract void OnTriggerEnter2DIsPlayer(Collider2D collider);
+    protected abstract bool OnTriggerEnter2DIsPlayer(Collider2D collider);
 
 }

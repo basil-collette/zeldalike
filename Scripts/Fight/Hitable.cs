@@ -38,39 +38,50 @@ public abstract class Hitable : Effectable
 
         foreach (Loot loot in loots)
         {
-            Drop drop;
+            Drop drop = null;
 
-            switch (loot.type)
+            if (loot is DefaultLoot)
             {
-                case DropTypeEnum.weapon:
-                    drop = Resources.Load<ItemDrop>($"Prefabs/Drop/ItemDrop");
-                    (drop as ItemDrop).Item = Singleton<WeaponRepository>.Instance.GetByCode(loot.lootCodeValue);
-                    break;
+                var currentLoot = (loot as DefaultLoot);
+                switch (currentLoot.Type)
+                {
+                    case DropTypeEnum.heart:
+                        drop = Resources.Load<HealthDrop>($"Prefabs/Drop/HealthDrop");
+                        (drop as HealthDrop).amount = currentLoot.Amount;
+                        break;
 
-                case DropTypeEnum.item:
-                    drop = Resources.Load<ItemDrop>($"Prefabs/Drop/ItemDrop");
-                    (drop as ItemDrop).Item = Singleton<ItemRepository<Item>>.Instance.GetByCode(loot.lootCodeValue);
-                    break;
+                    case DropTypeEnum.experience:
+                        drop = Resources.Load<ExperienceDrop>($"Prefabs/Drop/ExperienceDrop");
+                        (drop as ExperienceDrop).amount = currentLoot.Amount;
+                        break;
 
-                case DropTypeEnum.heart:
-                    drop = Resources.Load<HealthDrop>($"Prefabs/Drop/HealthDrop");
-                    (drop as HealthDrop).amount = int.Parse(loot.lootCodeValue);
-                    break;
+                    case DropTypeEnum.money:
+                        drop = Resources.Load<MoneyDrop>($"Prefabs/Drop/MoneyDrop");
+                        (drop as MoneyDrop).amount = currentLoot.Amount;
+                        break;
 
-                case DropTypeEnum.experience:
-                    drop = Resources.Load<ExperienceDrop>($"Prefabs/Drop/ExperienceDrop");
-                    (drop as ExperienceDrop).amount = int.Parse(loot.lootCodeValue);
-                    break;
-
-                case DropTypeEnum.money:
-                    drop = Resources.Load<MoneyDrop>($"Prefabs/Drop/MoneyDrop");
-                    (drop as MoneyDrop).amount = int.Parse(loot.lootCodeValue);
-                    break;
-
-                default:
-                    return;
+                    default: return;
+                }
             }
+            else if (loot is ItemLoot)
+            {
+                var currentLoot = (loot as ItemLoot);
+                switch ((currentLoot as ItemLoot).Type)
+                {
+                    case ItemTypeEnum.weapon:
+                        drop = Resources.Load<ItemDrop>($"Prefabs/Drop/ItemDrop");
+                        (drop as ItemDrop).Item = Singleton<WeaponRepository>.Instance.GetByCode(currentLoot.NameCode);
+                        break;
 
+                    case ItemTypeEnum.item:
+                        drop = Resources.Load<ItemDrop>($"Prefabs/Drop/ItemDrop");
+                        (drop as ItemDrop).Item = Singleton<ItemRepository<Item>>.Instance.GetByCode(currentLoot.NameCode);
+                        break;
+
+                    default: return;
+                }
+            }
+            
             Instantiate(drop, transform.position, Quaternion.identity);
         }
     }

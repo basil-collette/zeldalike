@@ -4,8 +4,8 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Rewards
 {
-    public int Money;
-    public int Experience;
+    public float Money;
+    public float Experience;
     public List<ItemRef> ItemsRef;
 }
 

@@ -3,50 +3,42 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[System.Serializable]
-public class Loot
-{
-    public string lootCodeValue;
-    public DropTypeEnum type;
-    public float lootWeight;
-}
-
 [CreateAssetMenu(menuName = "ScriptableObject/LootTable")]
-public class LootTable : ScriptableObject, ISerializationCallbackReceiver
+public class LootTable : ScriptableObject
 {
-    public float TotalDropWeight => loots.Sum(x => x.lootWeight);
-    public float TotalLevelWeight => dropAmountLevels.values.Sum(x => x);
+    public float TotalDropWeight => _loots.Sum(x => x.LootWeight);
+    public float TotalAmountOfDropWeight => _lootAmountChances.Sum(x => x.Chance);
 
-    public Loot[] loots;
-    public SerializableDic<int, float> dropAmountLevels = new SerializableDic<int, float>();
+    [SerializeReference] public List<Loot> _loots;
+    public List<LootAmount> _lootAmountChances;
 
     public List<Loot> GetLootsByChanceWheel()
     {
-        float randomDropAmount = Random.Range(0, TotalLevelWeight);
+        float randomDropAmount = Random.Range(0, TotalAmountOfDropWeight);
 
         float traveledWeight = 0;
         int traveledIndex = -1;
         while (traveledWeight < randomDropAmount)
         {
             traveledIndex++;
-            traveledWeight += dropAmountLevels.values.ElementAt(traveledIndex);
+            traveledWeight += _lootAmountChances[traveledIndex].Chance;
         }
 
-        int dropAmount = dropAmountLevels.keys.ElementAt(traveledIndex);
+        int dropAmount = _lootAmountChances[traveledIndex].AmountOfDrops;
 
         List<Loot> lootsResult = new List<Loot>();
 
-        List<Loot> tempLoots = loots.ToList();
+        List<Loot> tempLoots = _loots.ToList();
         for (int i = 0; i < dropAmount; i++)
         {
-            float random = Random.Range(0, tempLoots.Sum(x => x.lootWeight));
+            float random = Random.Range(0, tempLoots.Sum(x => x.LootWeight));
 
             float traveledWeightX = 0;
             int traveledIndexX = -1;
             while (traveledWeightX < random)
             {
                 traveledIndexX++;
-                traveledWeightX += tempLoots.ElementAt(traveledIndexX).lootWeight;
+                traveledWeightX += tempLoots.ElementAt(traveledIndexX).LootWeight;
             }
 
             lootsResult.Add(tempLoots.ElementAt(traveledIndexX));
@@ -58,18 +50,34 @@ public class LootTable : ScriptableObject, ISerializationCallbackReceiver
 
     public float GetPercentileChanceLoot(Loot loot)
     {
-        return loot.lootWeight / TotalDropWeight * 100;
+        return loot.LootWeight / TotalDropWeight * 100;
     }
 
-    public void OnAfterDeserialize()
-    {
-        if (dropAmountLevels.keys.Count == 0)
-            dropAmountLevels.Add(1, 1);
-    }
+}
 
-    public void OnBeforeSerialize()
-    {
+[System.Serializable]
+public abstract class Loot
+{
+    public float LootWeight;
+}
 
-    }
+[System.Serializable]
+public class DefaultLoot : Loot
+{
+    public float Amount;
+    public DropTypeEnum Type;
+}
 
+[System.Serializable]
+public class ItemLoot : Loot
+{
+    public string NameCode;
+    public ItemTypeEnum Type;
+}
+
+[System.Serializable]
+public class LootAmount
+{
+    [Range(0, 10)] public int AmountOfDrops;
+    public float Chance;
 }

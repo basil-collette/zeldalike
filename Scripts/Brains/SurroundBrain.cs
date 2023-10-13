@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SurroundPursueBrain : PursueBrain
+public class SurroundBrain : PursueBrain
 {
 
     public override Vector3? Think(ThinkParam param = null)

@@ -170,12 +170,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitSound: {fileID: 8300000, guid: 7c47b20bb9874304a809dc5580d403ba, type: 3}
-  deathSound: {fileID: 0}
-  deathEffect: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: 2e0cf5b570e66f1498448f5810e02ef1, type: 3}
+  deathEffect: {fileID: 4283853020777935570, guid: b2369b6f3c9dbc8469a715195a499f32, type: 3}
   lootTable: {fileID: 0}
   _health: {fileID: 0}
   _healthSignal: {fileID: 0}
-  OnDeathParam: []
+  OnDeathParam:
+  - explosive_bean
   _effectMods: []
   _effects: []
   _timedEffects: []
@@ -191,7 +192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2fd13184c7b1e47a6a9a90a20936e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 6
+  senses: []
+  detectionRange: 3.5
   needDirectSee: 1
 --- !u!114 &8977701271930261634
 MonoBehaviour:

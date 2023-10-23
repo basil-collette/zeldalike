@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Manager;
-using System.Collections;
 using UnityEngine;
 
 public class ProjectileAttackBrain : Brain
@@ -11,6 +10,7 @@ public class ProjectileAttackBrain : Brain
 
     protected Animator animator;
     protected CooldownManager cooldownManager;
+    protected AttackBehaveParam _attackBehaveParam;
 
     private void Start()
     {
@@ -38,15 +38,24 @@ public class ProjectileAttackBrain : Brain
 
         cooldownManager.StartCooldown("attackCooldown", Cooldown);
 
-        AttackBehaveParam attackBehaveParam = param as AttackBehaveParam;
+        _attackBehaveParam = param as AttackBehaveParam;
 
-        StartCoroutine(AttackCooldownCo(attackBehaveParam));
+        animator.SetBool("attacking", true);
 
         return null;
     }
 
-    void ThrowProjectile(Vector3 targetPos)
+    /// <summary>
+    /// Doit être appelé par l'animator
+    /// </summary>
+    public void ThrowProjectile()
     {
+        Vector3 targetPos = (_attackBehaveParam.targetTransform != null)
+            ? _attackBehaveParam.targetTransform.position
+            : _attackBehaveParam.targetPos;
+
+        _attackBehaveParam = null;
+
         Vector2 collidArea = GetComponent<CapsuleCollider2D>().size;
 
         Vector3 axis = DirectionHelper.GetAxis(new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"), 0));
@@ -54,28 +63,13 @@ public class ProjectileAttackBrain : Brain
         Vector3 instantiatePos = transform.position;
         if (axis == Vector3.left) { instantiatePos.x -= collidArea.x / 2; instantiatePos.y -= collidArea.y / 2; }
         else if (axis == Vector3.right) { instantiatePos.x += collidArea.x / 2; instantiatePos.y -= collidArea.y / 2; }
-        else if(axis == Vector3.up) { instantiatePos.y += collidArea.y / 2; }
-        else if(axis == Vector3.down) { instantiatePos.y -= collidArea.y / 2; }
+        else if (axis == Vector3.up) { instantiatePos.y += collidArea.y / 2; }
+        else if (axis == Vector3.down) { instantiatePos.y -= collidArea.y / 2; }
 
         Projectile instanciateProjectile = Instantiate(projectile, instantiatePos, Quaternion.identity);
-        instanciateProjectile.direction = DirectionHelper.GetDirection(transform.position, targetPos);
+        instanciateProjectile.Init(DirectionHelper.GetDirection(transform.position, targetPos));
 
-        FindGameObjectHelper.FindByName("Main Sound Manager").GetComponent<SoundManager>().PlayEffect(attackClipName);
-    }
-
-    IEnumerator AttackCooldownCo(AttackBehaveParam attackBehaveParam)
-    {
-        animator.SetBool("attacking", true);
-
-        //float durationAnim = attackAnim.length;
-
-        yield return new WaitForSeconds(attackAnim.length);
-
-        Vector3 finalPos = (attackBehaveParam.targetTransform != null)
-            ? attackBehaveParam.targetTransform.position
-            : attackBehaveParam.targetPos;
-
-        ThrowProjectile(finalPos);
+        MainGameManager._soundManager.PlayEffect(attackClipName);
 
         animator.SetBool("attacking", false);
         GetComponent<AliveEntity>().SetState(EntityState.idle);

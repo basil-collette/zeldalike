@@ -16,7 +16,7 @@ MonoBehaviour:
   nameCode: Cave2Scene
   needPreload: 0
   scenesNeedingPreloadNames: []
-  musicName: 
+  musicName: cave
   cameraParameters:
     Smoothing: 0.05
     IsFixed: 0

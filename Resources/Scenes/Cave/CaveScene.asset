@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e679b72a61def0e4a805b353f09c96de, type: 3}
   m_Name: CaveScene
   m_EditorClassIdentifier: 
-  nameLibelle: Grotte des ???
+  nameLibelle: Grotte des ballegrains
   nameCode: CaveScene
   needPreload: 0
   scenesNeedingPreloadNames: []
-  musicName: 
+  musicName: cave
   cameraParameters:
     Smoothing: 0.05
     IsFixed: 0

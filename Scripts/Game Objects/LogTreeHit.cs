@@ -8,11 +8,11 @@ public class LogTreeHit : Hitable
     public GameObject logPrefab;
     public int maxSpawnCount = 4;
 
-    List<EffectEnum> effectTypeTriggerable = new List<EffectEnum>() {
-        EffectEnum.neutral,
-        EffectEnum.slash,
-        EffectEnum.bump,
-        EffectEnum.pierce
+    List<EffectTypeEnum> effectTypeTriggerable = new List<EffectTypeEnum>() {
+        EffectTypeEnum.neutral,
+        EffectTypeEnum.slash,
+        EffectTypeEnum.bump,
+        EffectTypeEnum.pierce
     };
 
     bool canSpawn = true;

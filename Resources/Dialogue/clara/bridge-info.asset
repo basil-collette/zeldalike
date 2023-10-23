@@ -17,18 +17,20 @@ MonoBehaviour:
     PortName: Next
     TargetNodeGuid: ca6ab422-882e-4f9c-abd9-7cf0a23bbf8e
   NodeDatas:
-  - rid: 8045117315667460115
+  - rid: 3230699720299511838
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 8045117315667460115
+    - rid: 3230699720299511838
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: ca6ab422-882e-4f9c-abd9-7cf0a23bbf8e
         title: Dialogue
         Position: {x: 201, y: 200}
         EntryPoint: 0
-        DialogueText: "Pour r\xE9parer le pont, te faudrait du bois et de la corde"
+        Type: 0
+        DialogueText: "Pour r\xE9parer le pont, il te faudrait du bois et de la corde"
         DialogueCode: bridge-info
+        Side: 0
         Pnj: {fileID: 4019585777184574299, guid: 313f1c4d2bdec5b428e9b3c1e0752cf4, type: 3}

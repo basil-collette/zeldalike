@@ -12,10 +12,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 348105722c12d554294605c52a682c3a, type: 3}
   m_Name: De quoi suis-je capable
   m_EditorClassIdentifier: 
-  Name: 
-  Code: 
-  Description: 
-  QuestSteps: []
+  Name: De quoi suis-je capable
+  Code: my_competences
+  Description: "Finalement, je suis bon \xE0 quoi ? Mamie \xE0 parl\xE9 de la Rose
+    M\xE8re au Nord-Est contre qui je devrais me mesurer pour d\xE9couvrir les forces
+    qui sommeilles en moi"
+  QuestSteps:
+  - Goals:
+    - rid: 3230699720299511836
+    - rid: 3230699720299511837
+    IsCompleted: 0
+    Rewards:
+      Money: 0
+      Experience: 0
+      ItemsRef:
+      - ItemCode: competences
+        Amount: 1
+        itemType: 0
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3230699720299511836
+      type: {class: EventGoal, ns: , asm: Assembly-CSharp}
+      data:
+        Target: bridge_repaired
+        Objective: "R\xE9parer le pont du Nord-Est qui m\xE8ne \xE0 la Rose M\xE8re"
+        IsCompleted: 0
+        RequiredAmount: 1
+        CurrentAmount: 0
+        Type: Event
+    - rid: 3230699720299511837
+      type: {class: KillGoal, ns: , asm: Assembly-CSharp}
+      data:
+        Target: rose_mother
+        Objective: "Tuer la Rose M\xE8re"
+        IsCompleted: 0
+        RequiredAmount: 1
+        CurrentAmount: 0
+        Type: Kill

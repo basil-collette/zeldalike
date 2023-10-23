@@ -219,10 +219,7 @@ public class Player : AliveEntity
         {
             animatorLegs.SetFloat("moveX", direction.x);
             animatorLegs.SetFloat("moveY", direction.y);
-        }
 
-        if (direction != Vector3.zero)
-        {
             if (MainGameManager._inventoryManager._weapon != null && MainGameManager._inventoryManager._weapon.Id != 0)
             {
                 var weapon = GetComponentInChildren<WeaponMonoBehaviour>();
@@ -236,21 +233,19 @@ public class Player : AliveEntity
         #endregion
     }
 
-    public void AttackAnimation()
+    public void AttackAnimation(Vector3 weaponDirection)
     {
-        var weapon = GetComponentInChildren<WeaponMonoBehaviour>();
-
         animatorTop.SetBool("attacking", true);
 
-        animatorTop.SetFloat("lookX", weapon.direction.x);
-        animatorTop.SetFloat("lookY", weapon.direction.y);
+        animatorTop.SetFloat("lookX", weaponDirection.x);
+        animatorTop.SetFloat("lookY", weaponDirection.y);
 
         animatorLegs.SetBool("attacking", true);
 
         if (direction == Vector3.zero)
         {
-            animatorLegs.SetFloat("moveX", weapon.direction.x);
-            animatorLegs.SetFloat("moveY", weapon.direction.y);
+            animatorLegs.SetFloat("moveX", weaponDirection.x);
+            animatorLegs.SetFloat("moveY", weaponDirection.y);
         }
     }
 
@@ -312,7 +307,7 @@ public class Player : AliveEntity
         SetState(EntityState.unavailable);
         Imobilize();
 
-        FindGameObjectHelper.FindByName("Main Sound Manager").GetComponent<SoundManager>().PlayEffect("falling");
+        MainGameManager._soundManager.PlayEffect("falling");
 
         animatorTop.SetTrigger("fall");
 
@@ -332,7 +327,7 @@ public class Player : AliveEntity
         transform.position = respawnPos;
         SetState(EntityState.idle);
 
-        GetComponent<Health>().Hit(gameObject, new List<Effect> { new Effect(EffectEnum.neutral, 0.25f) }, "Player");
+        GetComponent<Health>().Hit(gameObject, new List<Effect> { new Effect(EffectTypeEnum.neutral, 0.25f) }, "Player");
     }
 
 }

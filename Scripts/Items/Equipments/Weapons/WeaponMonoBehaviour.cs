@@ -48,6 +48,7 @@ namespace Assets.Scripts.Items.Equipments.Weapons
 
                     anim.SetBool("attacking", true);
 
+                    Vector3 tempDirection = direction;
                     Action OnAttackEnd = () =>
                     {
                         attacking = false;
@@ -56,12 +57,14 @@ namespace Assets.Scripts.Items.Equipments.Weapons
                         anim.SetBool("attacking", false);
                         animPlayerTop.SetBool("attacking", false);
                         animPlayerLegs.SetBool("attacking", false);
+                        animPlayerLegs.SetFloat("moveX", tempDirection.x);
+                        animPlayerLegs.SetFloat("moveY", tempDirection.y);
                         direction = Vector2.zero;
                     };
 
                     cooldownManager.StartCooldown("attackCooldown", _weapon.attackDelay, OnAttackEnd);
 
-                    GetComponentInParent<Player>().AttackAnimation();
+                    GetComponentInParent<Player>().AttackAnimation(direction);
                 }
             }
         }

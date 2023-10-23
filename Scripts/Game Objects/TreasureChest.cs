@@ -2,7 +2,6 @@ using Assets.Database.Model.Design;
 using Assets.Scripts.Enums;
 using Assets.Scripts.Game_Objects.Inheritable;
 using Assets.Scripts.Manager;
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
@@ -102,6 +101,8 @@ public class TreasureChest : FacingInteracting
             }
         }
 
+        MainGameManager._soundManager.PlayEffect("door");
+
         GetComponent<PolygonCollider2D>().enabled = false;
 
         GetComponent<Animator>().SetTrigger("opentrigger");
@@ -129,7 +130,8 @@ public class TreasureChest : FacingInteracting
         {
             InterfaceName = "InfoScene",
             TransparentOverlay = true,
-            OnPauseProcessed = () => { FindGameObjectHelper.FindByName("Info Canva").GetComponentInChildren<Text>().text = content.Description; ButtonHelper.exitPause += ExitRaiseItem; }
+            OnPauseProcessed = () => { FindGameObjectHelper.FindByName("Info Canva").GetComponentInChildren<Text>().text = content.Description; ButtonHelper.exitPause += ExitRaiseItem; },
+            PlaySound = false
         });
 
         Destroy(ActionButtonOpen);

@@ -12,46 +12,42 @@ public class Options : MonoBehaviour
     [SerializeField] GameObject soundOnButton;
     [SerializeField] GameObject soundOffButton;
 
-    SoundManager _soundManager;
-
     void Awake()
     {
-        _soundManager = FindGameObjectHelper.FindByName("Main Sound Manager").GetComponent<SoundManager>();
-
-        musicSlider.value = _soundManager.musicSource.volume;
-        soundSlider.value = _soundManager.soundSource.volume;
+        musicSlider.value = MainGameManager._soundManager.musicSource.volume;
+        soundSlider.value = MainGameManager._soundManager.soundSource.volume;
 
         SetMuteButtons();
     }
 
     void SetMuteButtons()
     {
-        musicOnButton.SetActive(!_soundManager.musicSource.mute);
-        musicOffButton.SetActive(_soundManager.musicSource.mute);
+        musicOnButton.SetActive(!MainGameManager._soundManager.musicSource.mute);
+        musicOffButton.SetActive(MainGameManager._soundManager.musicSource.mute);
 
-        soundOnButton.SetActive(!_soundManager.soundSource.mute);
-        soundOffButton.SetActive(_soundManager.soundSource.mute);
+        soundOnButton.SetActive(!MainGameManager._soundManager.soundSource.mute);
+        soundOffButton.SetActive(MainGameManager._soundManager.soundSource.mute);
     }
 
     public void SetMusicVolume()
     {
-        _soundManager.SetMusicVolume(musicSlider.value);
+        MainGameManager._soundManager.SetMusicVolume(musicSlider.value);
     }
 
     public void SetSoundVolume()
     {
-        _soundManager.SetSoundVolume(soundSlider.value);
+        MainGameManager._soundManager.SetSoundVolume(soundSlider.value);
     }
 
     public void TogglePlayMusic(bool mute)
     {
-        _soundManager.SetMutePlayMusic(mute);
+        MainGameManager._soundManager.SetMutePlayMusic(mute);
         SetMuteButtons();
     }
 
     public void TogglePlaySounds(bool mute)
     {
-        _soundManager.SetMutePlaySounds(mute);
+        MainGameManager._soundManager.SetMutePlaySounds(mute);
         SetMuteButtons();
     }
 
@@ -62,7 +58,7 @@ public class Options : MonoBehaviour
 
     public void EraseSaveGame()
     {
-        FindGameObjectHelper.FindByName("Main Game Manager").GetComponent<SaveManager>().EraseSave();
+        MainGameManager._saveManager.EraseSave();
     }
 
 }

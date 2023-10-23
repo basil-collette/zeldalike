@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class QuestbookManager : Singleton<StoryEventManager>, ISavable
+public class QuestbookManager : Singleton<QuestbookManager>, ISavable
 {
     public List<Quest> _quests = new List<Quest>();
 

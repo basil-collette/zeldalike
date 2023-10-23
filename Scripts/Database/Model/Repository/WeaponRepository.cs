@@ -7,12 +7,12 @@ namespace Assets.Database.Model.Repository
 {
     public sealed class WeaponRepository : ItemRepository<Weapon>
     {
-        public sealed override Weapon DbDataToModel(IDataReader reader)
+        public override Weapon DbDataToModel(IDataReader reader)
         {
             return new Weapon(reader);
         }
 
-        public sealed override List<string> GetFields()
+        public override List<string> GetFields()
         {
             List<string> fields = new List<string>()
             {
@@ -27,7 +27,7 @@ namespace Assets.Database.Model.Repository
             return fields;
         }
 
-        public sealed override string GetTableFields()
+        public override string GetTableFields()
         {
             return "weapon_type VARCHAR(20)," +
                 "attack_delay DECIMAL(3,2)," +
@@ -35,7 +35,7 @@ namespace Assets.Database.Model.Repository
                 base.GetTableFields();
         }
 
-        public sealed override void Insert(SqliteConnection dbConn)
+        public override void FillTable(SqliteConnection dbConn)
         {
             IDbCommand insertSword = dbConn.CreateCommand();
             insertSword.CommandText = $"INSERT INTO weapon ({GetQueryFields()}) VALUES ('sword', 1.5, 0.5, 'gfx/weapons/sword', 0.7, 'common', 0, 'Eppee poussiereuse', 'weapon', 'Epee', 'sword', 1)";

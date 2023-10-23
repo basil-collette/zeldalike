@@ -12,7 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 018eea0aad0c29949af1a069a2e1042b, type: 3}
   m_Name: Bean
   m_EditorClassIdentifier: 
-  loots: []
-  dropLevels:
-    keys: 
-    values: []
+  _loots:
+  - rid: 3230699720299511834
+  - rid: 3230699720299511835
+  _lootAmountChances:
+  - AmountOfDrops: 0
+    Chance: 1
+  - AmountOfDrops: 1
+    Chance: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: 3230699720299511834
+      type: {class: DefaultLoot, ns: , asm: Assembly-CSharp}
+      data:
+        LootWeight: 0.8
+        Amount: 1
+        Type: 1
+    - rid: 3230699720299511835
+      type: {class: DefaultLoot, ns: , asm: Assembly-CSharp}
+      data:
+        LootWeight: 0.2
+        Amount: 0.5
+        Type: 0

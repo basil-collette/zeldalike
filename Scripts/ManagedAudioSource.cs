@@ -1,4 +1,3 @@
-using Assets.Scripts.Manager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +8,7 @@ public class ManagedAudioSource : MonoBehaviour
 
     void Awake()
     {
-        GetComponent<AudioSource>().volume = FindGameObjectHelper.FindByName("Main Sound Manager").GetComponent<SoundManager>().SoundVolume;
+        GetComponent<AudioSource>().volume = MainGameManager._soundManager.SoundVolume;
     }
 
     public void StartRepetitiveSound(AudioClip clip)

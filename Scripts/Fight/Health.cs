@@ -17,6 +17,7 @@ public class Health : Hitable
     public List<Effect> _timedEffects;
 
     public Action _dieOverride;
+    public event Action<float> OnDammaged;
 
     bool canBeDammaged = true;
 
@@ -25,11 +26,16 @@ public class Health : Hitable
         //Volontairement vide, permet d'avoir le booleen active dans l'editeur
     }
 
+    private void OnEnable()
+    {
+        canBeDammaged = true;
+    }
+
     public override void Hit(GameObject attacker, List<Effect> hit, string attackerTag)
     {
         foreach (Effect effect in hit)
         {
-            if (!canBeDammaged && effect.effectType != EffectEnum.knockback) continue;
+            if (!canBeDammaged && effect.effectType != EffectTypeEnum.knockback) continue;
 
             Effect(attacker.transform.position, effect);
         }
@@ -46,30 +52,29 @@ public class Health : Hitable
 
         switch (effect.effectType)
         {
-            case EffectEnum.neutral:
-            case EffectEnum.bump:
-            case EffectEnum.slash:
-            case EffectEnum.pierce:
+            case EffectTypeEnum.neutral:
+            case EffectTypeEnum.bump:
+            case EffectTypeEnum.slash:
+            case EffectTypeEnum.pierce:
                 Dammage(effect);
                 break;
 
-            case EffectEnum.frost:
+            case EffectTypeEnum.frost:
                 float frostAmount = RaiseEffect(effect);
-                if (IsEnaughtEffect(EffectEnum.frost, frostAmount))
+                if (IsEnaughtEffect(EffectTypeEnum.frost, frostAmount))
                     Freeze();
                 break;
 
-            case EffectEnum.poison:
-                //float poisonAmount = RaiseEffect(effect);
-                CycleEffect(effect);
+            case EffectTypeEnum.poison:
+                CycleEffect(effect, 5f, 2f);
                 break;
 
-            case EffectEnum.fire:
+            case EffectTypeEnum.fire:
                 float fireAmount = RaiseEffect(effect);
-                if (IsEnaughtEffect(EffectEnum.fire, fireAmount)) CycleEffect(effect);
+                if (IsEnaughtEffect(EffectTypeEnum.fire, fireAmount)) CycleEffect(effect, 3, 1);
                 break;
 
-            case EffectEnum.knockback:
+            case EffectTypeEnum.knockback:
                 KnockBack(attackerPos, effect);
                 break;
 
@@ -105,6 +110,8 @@ public class Health : Hitable
             _healthSignal.Raise();
         }
 
+        OnDammaged?.Invoke(_health.RuntimeValue);
+
         CheckDeath();
     }
 
@@ -139,7 +146,7 @@ public class Health : Hitable
         _health.RuntimeValue += healAmount;
         _health.RuntimeValue = Mathf.Min(_health.RuntimeValue, _health.initialValue);
 
-        FindAnyObjectByType<SoundManager>().PlayEffect("heal", 0.5f);
+        FindAnyObjectByType<SoundManager>().PlayEffect("heal", 0.1f);
 
         if (_healthSignal != null)
         {
@@ -183,14 +190,14 @@ public class Health : Hitable
 
     // EFFECT PROCESS _________________________________________________________________ EFFECT PROCESS
 
-    protected virtual void CycleEffect(Effect effect, int durationSeconds = 5)
+    protected virtual void CycleEffect(Effect effect, float durationSeconds, float cycleDuration = 1)
     {
         int index = _timedEffects.FindIndex(te => te.effectType == effect.effectType);
         if (index == -1)
         {
-            //timedEffects.Add(new Effect(effect.effectType, durationSeconds));
+            _timedEffects.Add(effect);
 
-            StartCoroutine(CycleEffectCo(effect.effectType));
+            StartCoroutine(CycleEffectCo(effect.effectType, durationSeconds, cycleDuration));
         }
         else
         {
@@ -198,27 +205,63 @@ public class Health : Hitable
         }
     }
 
-    protected virtual IEnumerator CycleEffectCo(EffectEnum effectType)
+    protected virtual IEnumerator CycleEffectCo(EffectTypeEnum effectType, float durationSeconds, float cycleDuration)
     {
-        new WaitForSeconds(1f);
+        GameObject poisonParticlePrefab = GetParticleByEffectType(effectType);
+        StartCoroutine(ShowParticleCo(poisonParticlePrefab));
+
+        yield return new WaitForSeconds(1f);
         int index = _timedEffects.FindIndex(te => te.effectType == effectType);
 
         while (index != -1)
         {
+            StartCoroutine(ShowParticleCo(poisonParticlePrefab));
+
             Dammage(_timedEffects[index]);
 
-            _timedEffects[index].amount--;
+            durationSeconds--;
 
-            if (_timedEffects[index].amount <= 0)
+            if (durationSeconds <= 0)
             {
                 _timedEffects.RemoveAt(index);
             }
 
-            new WaitForSeconds(1f);
+            yield return new WaitForSeconds(cycleDuration);
+
             index = _timedEffects.FindIndex(te => te.effectType == effectType);
         }
 
-        return null;
+        yield return null;
+    }
+
+    GameObject GetParticleByEffectType(EffectTypeEnum effectType)
+    {
+        string path = GetParticlePathByEffectType(effectType);
+
+        return Resources.Load<GameObject>(path); ;
+    }
+
+    string GetParticlePathByEffectType(EffectTypeEnum effectType)
+    {
+        return effectType switch
+        {
+            EffectTypeEnum.poison => "Prefabs/Particle Systems/Poison Particle System",
+            EffectTypeEnum.fire => "Prefabs/Particle Systems/Fire Particle System",
+            _ => string.Empty
+        };
+    }
+
+    IEnumerator ShowParticleCo(GameObject particlePrefab, bool infinite = false)
+    {
+        GameObject particleInstance = Instantiate(particlePrefab, transform);
+
+        particlePrefab.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+
+        if (!infinite)
+        {
+            yield return new WaitForSeconds(0.8f);
+            Destroy(particleInstance);
+        }
     }
 
     protected virtual float RaiseEffect(Effect effect)
@@ -259,19 +302,19 @@ public class Health : Hitable
         }
     }
 
-    protected virtual bool IsEnaughtEffect(EffectEnum effectType)
+    protected virtual bool IsEnaughtEffect(EffectTypeEnum effectType)
     {
         Effect ownedEffect = _effects.Find(effMod => effMod.effectType == effectType);
 
         return IsEnaughtEffect(effectType, ownedEffect.amount);
     }
 
-    protected virtual bool IsEnaughtEffect(EffectEnum effectType, float currentAmount)
+    protected virtual bool IsEnaughtEffect(EffectTypeEnum effectType, float currentAmount)
     {
         return currentAmount >= GetEffectResistance(effectType);
     }
 
-    protected virtual float GetEffectResistance(EffectEnum effectType)
+    protected virtual float GetEffectResistance(EffectTypeEnum effectType)
     {
         float result;
 
@@ -326,7 +369,7 @@ public class Health : Hitable
 [System.Serializable]
 public class EffectModificator
 {
-    public EffectEnum effectType;
+    public EffectTypeEnum effectType;
     public float mod;
 }
 

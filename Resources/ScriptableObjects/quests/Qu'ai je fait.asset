@@ -12,10 +12,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 348105722c12d554294605c52a682c3a, type: 3}
   m_Name: Qu'ai je fait
   m_EditorClassIdentifier: 
-  Name: 
-  Code: 
-  Description: 
-  QuestSteps: []
+  Name: Qu'ai je fait
+  Code: my_diplomas
+  Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+  QuestSteps:
+  - Goals:
+    - rid: 3230699720299511825
+    IsCompleted: 0
+    Rewards:
+      Money: 0
+      Experience: 0
+      ItemsRef: []
+  - Goals:
+    - rid: 3230699720299511827
+    IsCompleted: 0
+    Rewards:
+      Money: 0
+      Experience: 0
+      ItemsRef: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3230699720299511825
+      type: {class: DiscussionGoal, ns: , asm: Assembly-CSharp}
+      data:
+        Target: diplomas_info
+        Objective: "R\xE9cup\xE9rer mes dipl\xF4mes dans la maison du collectioneur"
+        IsCompleted: 0
+        RequiredAmount: 1
+        CurrentAmount: 0
+        Type: Discussion
+    - rid: 3230699720299511827
+      type: {class: CollectGoal, ns: , asm: Assembly-CSharp}
+      data:
+        Target: diplomas
+        Objective: "R\xE9cup\xE9rer mes dipl\xF4mes dans la maison du collectioneur"
+        IsCompleted: 0
+        RequiredAmount: 1
+        CurrentAmount: 0
+        Type: Collect

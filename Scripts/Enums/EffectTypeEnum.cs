@@ -1,5 +1,5 @@
 ﻿[System.Serializable]
-public enum EffectEnum
+public enum EffectTypeEnum
 {
     neutral,
     slash,

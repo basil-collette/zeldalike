@@ -71,6 +71,11 @@ namespace Assets.Scripts.Manager
             soundSource.PlayOneShot(clip);
         }
 
+        public void StopEffect()
+        {
+            soundSource.Stop();
+        }
+
         /*
         public void SetSoundsVolume(float volume)
         {

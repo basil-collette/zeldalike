@@ -12,7 +12,7 @@ public class ItemDrop : Drop
     private void Start()
     {
         Item = ItemManager.GetItem(itemNameCode, itemType);
-        GetComponent<SpriteRenderer>().sprite = Item.Sprite;
+        GetComponentInChildren<SpriteRenderer>().sprite = Item.Sprite;
     }
 
     protected override bool OnTriggerEnter2DIsPlayer(Collider2D collider)

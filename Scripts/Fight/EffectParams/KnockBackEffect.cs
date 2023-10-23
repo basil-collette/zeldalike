@@ -10,7 +10,7 @@ public class KnockBackEffect : Effect
     public static float THRUST = 4f;
 
     public KnockBackEffect(
-        EffectEnum effectType,
+        EffectTypeEnum effectType,
         float amount,
         float knockTime = 0.3f
     ) : base(effectType, amount)

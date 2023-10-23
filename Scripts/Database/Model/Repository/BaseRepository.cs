@@ -7,17 +7,18 @@ using System.Data;
 
 namespace Assets.Database.Model.Repository
 {
-    public abstract class BaseRepository<D> where D : BaseDbData /* D : data row class */
+    public abstract class BaseRepository<T> : IReadRepository<T>, IWriteRepository<T>
+        where T : BaseDbData /* T : data row class */
     {
-        public virtual List<D> GetAll(bool isNested = false)
+        public List<T> GetAll(bool isNested = false)
         {
             try
             {
-                List<D> rows = new List<D>();
+                List<T> rows = new List<T>();
 
                 using (SqliteConnection connexion = DatabaseHelper.GetConnexion())
                 {
-                    var command = new SqliteCommand($"SELECT {string.Join(",", GetFields())} FROM {typeof(D).Name.ToLower()}", connexion);
+                    var command = new SqliteCommand($"SELECT {string.Join(",", GetFields())} FROM {typeof(T).Name.ToLower()}", connexion);
 
                     using (IDataReader reader = command.ExecuteReader())
                     {
@@ -28,7 +29,7 @@ namespace Assets.Database.Model.Repository
                     }
                 }
 
-                return rows ?? new List<D>();
+                return rows ?? new List<T>();
             }
             catch (Exception ex)
             {
@@ -36,7 +37,7 @@ namespace Assets.Database.Model.Repository
             }
         }
 
-        public virtual D GetBy<T>(string fieldName, T fieldValue, bool isNested = false)
+        public T GetBy(string fieldName, T fieldValue, bool isNested = false)
         {
             try
             {
@@ -45,7 +46,7 @@ namespace Assets.Database.Model.Repository
                     string query =
                         "SELECT " +
                             $"{string.Join(",", GetFields())} " +
-                        $"FROM {typeof(D).Name.ToLower()} " +
+                        $"FROM {typeof(T).Name.ToLower()} " +
                         $"WHERE {fieldName} = @Param AND actif = 1 " +
                             "LIMIT 1";
 
@@ -69,7 +70,7 @@ namespace Assets.Database.Model.Repository
             }
         }
 
-        public virtual D GetByMany<T>(Dictionary<string, T> fields, bool isNested = false)
+        public T GetByMany(Dictionary<string, T> fields, bool isNested = false)
         {
             try
             {
@@ -84,7 +85,7 @@ namespace Assets.Database.Model.Repository
                     string query =
                         "SELECT " +
                             $"{string.Join(",", GetFields())} " +
-                        $"FROM {typeof(D).Name.ToLower()} " +
+                        $"FROM {typeof(T).Name.ToLower()} " +
                         $"WHERE {string.Join(" AND ", whereClauses)} AND actif = 1 " +
                             "LIMIT 1";
 
@@ -109,7 +110,7 @@ namespace Assets.Database.Model.Repository
             }
         }
 
-        public virtual D GetByCode(string code, bool isNested = false)
+        public T GetByCode(string code, bool isNested = false)
         {
             try
             {
@@ -118,7 +119,7 @@ namespace Assets.Database.Model.Repository
                     string query =
                         "SELECT " +
                             $"{string.Join(",", GetFields())} " +
-                        $"FROM {typeof(D).Name.ToLower()} " +
+                        $"FROM {typeof(T).Name.ToLower()} " +
                         "WHERE name_code = @Code AND actif = 1 " +
                             "LIMIT 1";
 
@@ -142,7 +143,7 @@ namespace Assets.Database.Model.Repository
             }
         }
 
-        public virtual D GetById(int id, bool isNested = false)
+        public T GetById(int id, bool isNested = false)
         {
             try
             {
@@ -157,14 +158,14 @@ namespace Assets.Database.Model.Repository
             }
         }
 
-        public virtual D ContextualGetById(SqliteConnection dbcon, int id, bool isNested = false)
+        public virtual T ContextualGetById(SqliteConnection dbcon, int id, bool isNested = false)
         {
             try
             {
                 string query =
                     "SELECT " +
                         $"{GetQueryFields()} " +
-                    $"FROM {typeof(D).Name.ToLower()} " +
+                    $"FROM {typeof(T).Name.ToLower()} " +
                     "WHERE id = @Id AND actif = 1 " +
                         "LIMIT 1";
 
@@ -187,7 +188,7 @@ namespace Assets.Database.Model.Repository
             }
         }
 
-        public virtual int Create(D model)
+        public int Create(T model)
         {
             try
             {
@@ -199,7 +200,7 @@ namespace Assets.Database.Model.Repository
                     //Validate(entityToPersist);
 
                     string query =
-                        $"INSERT INTO {typeof(D).Name.ToLower()} " +
+                        $"INSERT INTO {typeof(T).Name.ToLower()} " +
                         $"({GetQueryFields()}) VALUES " +
                         $"({string.Join(",", GetFieldsValues(model))})";
 
@@ -216,7 +217,7 @@ namespace Assets.Database.Model.Repository
             }
         }
 
-        protected virtual int Update(D model)
+        public int Update(T model)
         {
             try
             {
@@ -237,7 +238,7 @@ namespace Assets.Database.Model.Repository
                     //Validate(entityToPersist);
 
                     string query =
-                        $"UPDATE {typeof(D).Name.ToLower()} " +
+                        $"UPDATE {typeof(T).Name.ToLower()} " +
                         $"SET {string.Join("", updates)} " +
                         $"WHERE id = {model.Id}";
 
@@ -261,7 +262,7 @@ namespace Assets.Database.Model.Repository
             }
         }
 
-        public abstract D DbDataToModel(IDataReader reader);
+        public abstract T DbDataToModel(IDataReader reader);
 
         public virtual List<string> GetFields()
         {
@@ -282,7 +283,7 @@ namespace Assets.Database.Model.Repository
             return string.Join(",", finalFields);
         }
 
-        public List<string> GetFieldsValues(D model)
+        public List<string> GetFieldsValues(T model)
         {
             List<string> values = new List<string>();
 
@@ -311,7 +312,7 @@ namespace Assets.Database.Model.Repository
             return values;
         }
 
-        public string GetFieldValue(string fieldName, D model)
+        public string GetFieldValue(string fieldName, T model)
         {
             var value = typeof(Item).GetProperty(fieldName).GetValue(model);
             Type valueType = value.GetType();
@@ -344,27 +345,27 @@ namespace Assets.Database.Model.Repository
             using (var dbConn = DatabaseHelper.GetConnexion())
             {
                 IDbCommand dbcmd2 = dbConn.CreateCommand();
-                dbcmd2.CommandText = $"DROP TABLE IF EXISTS {typeof(D).Name.ToLower()}";
+                dbcmd2.CommandText = $"DROP TABLE IF EXISTS {typeof(T).Name.ToLower()}";
                 dbcmd2.ExecuteNonQuery();
 
                 IDbCommand dbcmd = dbConn.CreateCommand();
-                dbcmd.CommandText = $"CREATE TABLE IF NOT EXISTS {typeof(D).Name.ToLower()} (" +
+                dbcmd.CommandText = $"CREATE TABLE IF NOT EXISTS {typeof(T).Name.ToLower()} (" +
                     GetTableFields() +
                 ")";
                 dbcmd.ExecuteNonQuery();
 
-                Insert(dbConn);
+                FillTable(dbConn);
             }
         }
 
-        public abstract void Insert(SqliteConnection dbConn);
+        public abstract void FillTable(SqliteConnection dbConn);
 
         public void Delete()
         {
             using (var dbConn = DatabaseHelper.GetConnexion())
             {
                 IDbCommand drop_cmd = dbConn.CreateCommand();
-                drop_cmd.CommandText = $"DELETE FROM {typeof(D).Name.ToLower()}";
+                drop_cmd.CommandText = $"DELETE FROM {typeof(T).Name.ToLower()}";
                 drop_cmd.ExecuteNonQuery();
             }                
         }
@@ -374,4 +375,22 @@ namespace Assets.Database.Model.Repository
         */
 
     }
+
+    public interface IReadRepository<T> where T : BaseDbData /* D : data row class */
+    {
+        List<T> GetAll(bool isNested = false);
+        T GetByCode(string code, bool isNested = false);
+        T GetById(int id, bool isNested = false);
+        T DbDataToModel(IDataReader reader);
+    }
+
+    public interface IWriteRepository<T> where T : BaseDbData /* D : data row class */
+    {
+
+        int Create(T model);
+        int Update(T model);
+        void Delete();
+        T DbDataToModel(IDataReader reader);
+    }
+
 }

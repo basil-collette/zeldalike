@@ -21,8 +21,7 @@ public class ScenesManager : SingletonGameObject<ScenesManager>
     public GameObject transitionOverlay;
     public float sceneNameDuration = 4f;
 
-    GameObject textBox;
-    Text placeText;
+    [SerializeField] GameObject textBox;
 
     public string _currentScene = string.Empty;
     List<PreloadedScene> preloadedScenes = new List<PreloadedScene>();
@@ -33,9 +32,6 @@ public class ScenesManager : SingletonGameObject<ScenesManager>
 
     void Start()
     {
-        textBox = FindGameObjectHelper.FindByName("Place Name");
-        placeText = textBox.GetComponentInChildren<Text>();
-
         //StartCoroutine(FadeTransitionCo(fadeToVisible));
     }
 
@@ -351,9 +347,9 @@ public class ScenesManager : SingletonGameObject<ScenesManager>
 
     private IEnumerator PlaceNameCo(string sceneName)
     {
-        placeText.text = TextHelper.Labelize(sceneName);
         textBox.SetActive(true);
-
+        textBox.GetComponentInChildren<Text>().text = TextHelper.Labelize(sceneName);
+        
         yield return new WaitForSeconds(sceneNameDuration);
         textBox.SetActive(false);
     }

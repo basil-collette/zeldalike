@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogStatesManager : Singleton<StoryEventManager>, ISavable
+public class DialogStatesManager : Singleton<DialogStatesManager>, ISavable
 {
     public List<SerializableWrappedList<string>> _states = new List<SerializableWrappedList<string>>();
 

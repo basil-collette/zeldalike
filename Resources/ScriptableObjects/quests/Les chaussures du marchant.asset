@@ -12,10 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 348105722c12d554294605c52a682c3a, type: 3}
   m_Name: Les chaussures du marchant
   m_EditorClassIdentifier: 
-  Name: 
-  Code: 
-  Description: 
-  QuestSteps: []
+  Name: Les chaussures du marchant
+  Code: merchant_shoes
+  Description: "Le mafieux \xE0 raqu\xE9ter les chaussures du marchant \xE0 cause
+    des infos qu'il nous \xE0 donn\xE9."
+  QuestSteps:
+  - Goals:
+    - rid: 3230699720299511828
+    IsCompleted: 0
+    Rewards:
+      Money: 0
+      Experience: 0
+      ItemsRef:
+      - ItemCode: rope
+        Amount: 1
+        itemType: 0
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3230699720299511828
+      type: {class: EventGoal, ns: , asm: Assembly-CSharp}
+      data:
+        Target: shoes_thank
+        Objective: Rendre au marchant ses chaussures
+        IsCompleted: 0
+        RequiredAmount: 1
+        CurrentAmount: 0
+        Type: Event

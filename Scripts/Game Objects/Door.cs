@@ -1,4 +1,5 @@
 using Assets.Scripts.Game_Objects.Inheritable;
+using Assets.Scripts.Manager;
 using UnityEngine;
 
 public class Door : Interacting
@@ -20,6 +21,8 @@ public class Door : Interacting
 
     void Open()
     {
+        MainGameManager._soundManager.PlayEffect("door");
+
         MainGameManager._storyEventManager.AddScenarioEvent(EVENT_NAME);
 
         Destroy(gameObject);

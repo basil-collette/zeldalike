@@ -7,7 +7,7 @@ public class CycleDammageEffect : Effect
     public float duration = 1;
 
     public CycleDammageEffect(
-        EffectEnum effectType,
+        EffectTypeEnum effectType,
         float amout,
         float duration
     ) : base(effectType, amout)

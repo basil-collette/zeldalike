@@ -13,7 +13,9 @@ public class MainGameManager : SingletonGameObject<MainGameManager>
     public static DialogStatesManager _dialogStatesManager;
     public static InventoryManager _inventoryManager;
     public static StoryEventManager _storyEventManager;
-
+    public static SoundManager _soundManager;
+    public static SaveManager _saveManager;
+    public static ToastManager _toastManager;
 
     //Assembly.GetAssembly(typeof(BaseRepitory<T>)).GetTypes().FirstOrDefault(testc => testc.isSubsclassOf(typeof(GenericRepitory<T>)));
     //FindAnyObjectByType<ToastManager>().Add(new Toast("La partie à été supprimée!", ToastType.Success));
@@ -27,6 +29,9 @@ public class MainGameManager : SingletonGameObject<MainGameManager>
         _dialogStatesManager = new DialogStatesManager();
         _inventoryManager = new InventoryManager();
         _storyEventManager = new StoryEventManager();
+        _soundManager = GetComponentInChildren<SoundManager>();
+        _saveManager = GetComponent<SaveManager>();
+        _toastManager = GetComponent<ToastManager>();
 
         //Application.targetFrameRate = 10;
 
@@ -73,8 +78,7 @@ public class MainGameManager : SingletonGameObject<MainGameManager>
 
     public void StartGame()
     {
-        SaveManager saveManager = GetComponent<SaveManager>();
-        saveManager.LoadGame("main");
+        _saveManager.LoadGame("main");
 
         string sceneName = SaveManager.GameData.sceneName;
         string scenePath = $"Scenes/{sceneName.Substring(0, sceneName.Length - 5)}/{sceneName}";

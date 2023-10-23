@@ -103,7 +103,7 @@ public class ExplosiveBeanThinker : Bot
 
     public void ExplodeAttackEnd()
     {
-        FindGameObjectHelper.FindByName("Main Sound Manager").GetComponent<SoundManager>().PlayEffect("explosion");
+        MainGameManager._soundManager.PlayEffect("explosion");
 
         Instantiate(explosionEffect, transform.position, Quaternion.identity);
 

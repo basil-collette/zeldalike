@@ -37,7 +37,7 @@ public class SaveManager : SingletonGameObject<SaveManager>
         GameData gameData = GetGameDataFromRunning();
         WriteSave(gameData);
 
-        FindGameObjectHelper.FindByName("Main Game Manager").GetComponent<ToastManager>().Add(new Toast("La partie à été sauvegardée!", ToastType.Success));
+        MainGameManager._toastManager.Add(new Toast("La partie à été sauvegardée!", ToastType.Success));
     }
 
     void WriteSave(GameData gameData)
@@ -138,7 +138,7 @@ public class SaveManager : SingletonGameObject<SaveManager>
 
             CreateNewSave("main");
 
-            FindGameObjectHelper.FindByName("Main Game Manager").GetComponent<ToastManager>().Add(new Toast("La partie à été supprimée!", ToastType.Success));
+            MainGameManager._toastManager.Add(new Toast("La partie à été supprimée!", ToastType.Success));
         }
     }
 

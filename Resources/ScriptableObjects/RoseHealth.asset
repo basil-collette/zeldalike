@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7466c27c4a0923c4f9aa8b03d50fcb88, type: 3}
   m_Name: RoseHealth
   m_EditorClassIdentifier: 
-  initialValue: 10
-  RuntimeValue: 10
+  initialValue: 5
+  RuntimeValue: 5

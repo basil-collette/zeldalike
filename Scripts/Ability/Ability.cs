@@ -8,4 +8,5 @@ public abstract class Ability : ScriptableObject
 
     public abstract void Activate(GameObject parent);
     public abstract void AfterActivate(GameObject parent);
+
 }

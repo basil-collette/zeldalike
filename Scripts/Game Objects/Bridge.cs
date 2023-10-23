@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Game_Objects.Inheritable;
-using System.Linq;
 using UnityEngine;
 
 public class Bridge : Interacting
@@ -18,6 +17,7 @@ public class Bridge : Interacting
             Destroy(gameObject);
             return;
         }
+
     }
 
     bool CanBeRepaired()

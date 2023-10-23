@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: L'arrosoir de Clara
   Code: give_arrosoir_clara
-  Description: "Les enfants ont prit l'arrosoir de Clara en plus de ma carte d'identit\xE9.
-    Il faudrait le trouver pour lui ramener !"
+  Description: "Les ballegrains ont prit l'arrosoir de Clara en plus de ma carte
+    d'identit\xE9. Il faudrait le trouver pour lui ramener !"
   QuestSteps:
   - Goals:
     - rid: 3230699522260205569
@@ -31,7 +31,7 @@ MonoBehaviour:
       type: {class: DiscussionGoal, ns: , asm: Assembly-CSharp}
       data:
         Target: give_arrosoir_clara_end
-        Objective: 
+        Objective: "ramener \xE0 Clara son arrosoir"
         IsCompleted: 0
         RequiredAmount: 0
         CurrentAmount: 0

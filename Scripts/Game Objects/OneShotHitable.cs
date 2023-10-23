@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class OneShotHitable : Hitable
 {
-    List<EffectEnum> effectTypeTriggerable = new List<EffectEnum>() {
-        EffectEnum.neutral,
-        EffectEnum.slash,
-        EffectEnum.bump,
-        EffectEnum.pierce,
-        EffectEnum.knockback
+    List<EffectTypeEnum> effectTypeTriggerable = new List<EffectTypeEnum>() {
+        EffectTypeEnum.neutral,
+        EffectTypeEnum.slash,
+        EffectTypeEnum.bump,
+        EffectTypeEnum.pierce,
+        EffectTypeEnum.knockback
     };
 
     public override void Hit(GameObject attacker, List<Effect> hit, string attackerTag)

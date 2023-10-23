@@ -1,3 +1,4 @@
+using Assets.Scripts.Manager;
 using UnityEngine;
 
 public class LogThinker : Bot
@@ -87,6 +88,7 @@ public class LogThinker : Bot
                         cooldown = 2,
                         attackCollider = this.attackCollider
                     };
+                    
                     attackBrain.Behave(param);
                 }
                 break;
@@ -97,6 +99,16 @@ public class LogThinker : Bot
 
             default: break;
         }
+    }
+
+    public void PlaySoundLeafSpin()
+    {
+        MainGameManager._soundManager.PlayEffect("leaf_spin", 0.1f);
+    }
+
+    public void StopSoundLeafSpin()
+    {
+        MainGameManager._soundManager.StopEffect();
     }
 
 }

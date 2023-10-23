@@ -71,7 +71,7 @@ public abstract class AliveEntity : Entity
         SetState(EntityState.unavailable);
         Imobilize();
 
-        FindGameObjectHelper.FindByName("Main Sound Manager").GetComponent<SoundManager>().PlayEffect("falling");
+        MainGameManager._soundManager.PlayEffect("falling");
         
         animator.SetTrigger("fall");
 
@@ -87,7 +87,7 @@ public abstract class AliveEntity : Entity
         transform.position = respawnPos;
         SetState(EntityState.idle);
 
-        GetComponent<Health>().Hit(gameObject, new List<Effect> { new Effect(EffectEnum.neutral, 0.25f) }, "Player");
+        GetComponent<Health>().Hit(gameObject, new List<Effect> { new Effect(EffectTypeEnum.neutral, 0.25f) }, "Player");
     }
 
 }

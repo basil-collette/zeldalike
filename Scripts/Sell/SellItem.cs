@@ -32,14 +32,14 @@ public class SellItem : MonoBehaviour
 
             Destroy(gameObject);
 
-            FindGameObjectHelper.FindByName("Main Sound Manager").GetComponent<SoundManager>().PlayEffect("purchase");
+            MainGameManager._soundManager.PlayEffect("purchase");
         }
         else
         {
             toast.Text = "Pas assez d'argent!";
         }
 
-        FindGameObjectHelper.FindByName("Main Game Manager").GetComponent<ToastManager>().Add(toast);
+        MainGameManager._toastManager.Add(toast);
     }
 
 }

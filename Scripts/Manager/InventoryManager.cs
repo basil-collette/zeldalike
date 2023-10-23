@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryManager : Singleton<StoryEventManager>, ISavable
+public class InventoryManager : Singleton<InventoryManager>, ISavable
 {
     public static event Action<string[]> OnObtain;
 
@@ -27,9 +27,13 @@ public class InventoryManager : Singleton<StoryEventManager>, ISavable
 
     public void GetReward(Rewards reward)
     {
-        if (reward.Money != null) _money += reward.Money;
+        if (reward.Money != 0)
+        {
+            _money += reward.Money;
+            MainGameManager._soundManager.PlayEffect("money", 0.2f);
+        }
 
-        if (reward.Experience != null) _experience += reward.Experience;
+        if (reward.Experience != 0) _experience += reward.Experience;
 
         if (reward.ItemsRef == null) return;
         foreach (ItemRef itemRef in reward.ItemsRef)
@@ -55,7 +59,7 @@ public class InventoryManager : Singleton<StoryEventManager>, ISavable
         }
         else
         {
-            FindGameObjectHelper.FindByName("Main Game Manager").GetComponent<ToastManager>().Add(new Toast("Inventaire plein!", ToastType.Error));
+            MainGameManager._toastManager.Add(new Toast("Inventaire plein!", ToastType.Error));
             return false;
         }
     }

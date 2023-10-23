@@ -15,7 +15,7 @@ public class HitEditor : Editor
 
         if (GUILayout.Button("Effect"))
         {
-            hit.effects.Add(new Effect(EffectEnum.neutral, 0));
+            hit.effects.Add(new Effect(EffectTypeEnum.neutral, 0));
 
             EditorUtility.SetDirty(hit);
         }
@@ -24,7 +24,7 @@ public class HitEditor : Editor
         if (GUILayout.Button("KnockBack"))
         {
             KnockBackEffect kbEffect = new KnockBackEffect(
-                EffectEnum.knockback,
+                EffectTypeEnum.knockback,
                 0
             );
 

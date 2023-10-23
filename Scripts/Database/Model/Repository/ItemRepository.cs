@@ -42,7 +42,7 @@ namespace Assets.Database.Model.Repository
                 base.GetTableFields();
         }
 
-        public override void Insert(SqliteConnection dbConn)
+        public override void FillTable(SqliteConnection dbConn)
         {
             IDbCommand key = dbConn.CreateCommand();
             key.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/key', 1, 'common', 0, 'Petite Clé', 'consommable', 'Clé', 'key', 1)";

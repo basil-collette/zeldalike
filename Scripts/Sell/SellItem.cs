@@ -10,9 +10,7 @@ public class SellItem : MonoBehaviour
     public string itemNameCode;
     public ItemTypeEnum itemType;
 
-    public InventoryManager inventory;
-
-    Item item;
+    public Item item;
 
     private void Start()
     {
@@ -21,12 +19,14 @@ public class SellItem : MonoBehaviour
 
     public void Buy()
     {
+        var inventory = MainGameManager._inventoryManager;
         Toast toast = new Toast("", ToastType.Success);
 
-        if (inventory._money > price)
+        if (inventory._money >= price)
         {
             inventory._money -= price;
             inventory.AddItem(item);
+            MainGameManager._storyEventManager.AddShopEvent(item.NameCode);
 
             toast.Text = $"{item.NameLibelle} acheté !";
 

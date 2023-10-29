@@ -30,7 +30,7 @@ MonoBehaviour:
     - rid: 3230699522260205569
       type: {class: DiscussionGoal, ns: , asm: Assembly-CSharp}
       data:
-        Target: give_arrosoir_clara_end
+        Target: arrosoir_thank
         Objective: "ramener \xE0 Clara son arrosoir"
         IsCompleted: 0
         RequiredAmount: 0

@@ -11,7 +11,7 @@ public class QuestbookManager : Singleton<QuestbookManager>, ISavable
     {
         if (!_quests.Any(x => x.Name == questName))
         {
-            _quests.Add(FindQuest(questName));
+            ConcreteAddQuest(FindQuest(questName));
         }
     }
 
@@ -19,8 +19,19 @@ public class QuestbookManager : Singleton<QuestbookManager>, ISavable
     {
         if (!_quests.Any(x => x == quest))
         {
-            _quests.Add(quest);
+            ConcreteAddQuest(quest);
         }
+    }
+
+    void ConcreteAddQuest(Quest quest)
+    {
+        /*
+        quest.QuestSteps.ForEach(step => {
+            step.Goals.ForEach(goal => goal.GoalCheck(new string[] { }));
+        });
+        */
+
+        _quests.Add(quest);
     }
 
     public Quest GetQuestByName(string name)

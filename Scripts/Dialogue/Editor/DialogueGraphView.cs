@@ -188,6 +188,12 @@ public class DialogueGraphView : GraphView
         dialogueNode.mainContainer.Add(audioField);
         */
 
+        foreach (string output in dialogueNode.Outputs)
+        {
+            var generatedPort = GeneratePort(dialogueNode, Direction.Output);
+            generatedPort.portName = output;
+        }
+
         dialogueNode.RefreshExpandedState();
         dialogueNode.RefreshPorts();
         dialogueNode.SetPosition(new Rect(position, defaultNodeSize));

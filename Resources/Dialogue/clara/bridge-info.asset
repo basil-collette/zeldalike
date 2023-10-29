@@ -17,12 +17,12 @@ MonoBehaviour:
     PortName: Next
     TargetNodeGuid: ca6ab422-882e-4f9c-abd9-7cf0a23bbf8e
   NodeDatas:
-  - rid: 3230699720299511838
+  - rid: 3230700037943328774
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230699720299511838
+    - rid: 3230700037943328774
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: ca6ab422-882e-4f9c-abd9-7cf0a23bbf8e
@@ -34,3 +34,6 @@ MonoBehaviour:
         DialogueCode: bridge-info
         Side: 0
         Pnj: {fileID: 4019585777184574299, guid: 313f1c4d2bdec5b428e9b3c1e0752cf4, type: 3}
+        Outputs:
+        - Je vois !
+        Emotion: 0

@@ -146,7 +146,7 @@ public class Health : Hitable
         _health.RuntimeValue += healAmount;
         _health.RuntimeValue = Mathf.Min(_health.RuntimeValue, _health.initialValue);
 
-        FindAnyObjectByType<SoundManager>().PlayEffect("heal", 0.1f);
+        MainGameManager._soundManager.PlayEffect("heal", 0.1f);
 
         if (_healthSignal != null)
         {

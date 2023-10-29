@@ -9,7 +9,7 @@ public static class GraphHelper
         return dialogueContainer.NodeDatas.FirstOrDefault(x => x.Guid == linkFromEntry.TargetNodeGuid);
     }
 
-    public static List<NodeLinkData> GetOutputs(DialogueContainer dialogueContainer, BaseNodeData node)
+    public static List<NodeLinkData> GetConnections(DialogueContainer dialogueContainer, BaseNodeData node)
     {
         return dialogueContainer.NodeLinks.Where(x => x.BaseNodeGuid == node.Guid).ToList();
     }

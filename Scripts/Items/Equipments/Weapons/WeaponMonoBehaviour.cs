@@ -55,10 +55,12 @@ namespace Assets.Scripts.Items.Equipments.Weapons
 
                         anim.SetTrigger("endCooldown");
                         anim.SetBool("attacking", false);
+
                         animPlayerTop.SetBool("attacking", false);
                         animPlayerLegs.SetBool("attacking", false);
                         animPlayerLegs.SetFloat("moveX", tempDirection.x);
                         animPlayerLegs.SetFloat("moveY", tempDirection.y);
+
                         direction = Vector2.zero;
                     };
 

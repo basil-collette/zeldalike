@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a2d8ae767442a4c8c0177884108faf, type: 3}
+  m_Name: mafieux_indice_2
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGuid: ea9d711f-0df2-4a68-a985-d01428a50833
+    PortName: Next
+    TargetNodeGuid: e15093b7-b1ef-4eb4-8280-e152273081f7
+  NodeDatas:
+  - rid: 3230700086584672262
+  ExposedProperties: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 3230700086584672262
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: e15093b7-b1ef-4eb4-8280-e152273081f7
+        title: Dialogue
+        Position: {x: 201, y: 200}
+        EntryPoint: 0
+        Type: 0
+        DialogueText: "Le mafieux veut rien dire sur tes dipl\xF4mes ? Il sait forc\xE9ment
+          quelque chose, tu devrais insister. "
+        DialogueCode: mafieux_indice_2
+        Side: 0
+        Pnj: {fileID: 5616454285522393285, guid: 565688d4d540bf24f84feb804119df1d, type: 3}
+        Outputs:
+        - J'y vais
+        Emotion: 0

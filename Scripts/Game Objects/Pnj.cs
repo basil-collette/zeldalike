@@ -7,7 +7,7 @@ using UnityEngine;
 public class Pnj : Interacting
 {
     public string Name = "Anonymous";
-    public AudioClip Voice;
+    public AudioClip[] Voices;
     public Sprite Sprite;
     public PNJDialogues Dialogues;
     [SerializeField] Sprite spriteActionButton;
@@ -55,7 +55,7 @@ public class Pnj : Interacting
     public DialogueReference GetWantToSay()
     {
         List<DialogueReference> dialogues = Dialogues.Dialogues.AsEnumerable()
-            .Where(x => !x.Conditions.Exists(condition => condition.Verify() == false)).ToList();
+            .Where(x => Condition.VerifyAll(x.Conditions)).ToList();
 
         Priority maxPriority = dialogues.Max(x => x.Priority);
 
@@ -77,7 +77,8 @@ public class Pnj : Interacting
 
     public void AddSaid(string dialogueNameCode)
     {
-        MainGameManager._dialogStatesManager.AddSaid(Name, dialogueNameCode);
+        if (dialogueNameCode != string.Empty)
+            MainGameManager._dialogStatesManager.AddSaid(Name, dialogueNameCode);
     }
 
 }

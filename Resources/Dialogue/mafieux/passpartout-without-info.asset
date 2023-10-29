@@ -17,18 +17,23 @@ MonoBehaviour:
     PortName: Next
     TargetNodeGuid: 073c6a1c-e061-4741-b6fd-6eed0e3e07ce
   NodeDatas:
-  - rid: 8045117315667460128
+  - rid: 3230700037943328798
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 8045117315667460128
+    - rid: 3230700037943328798
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 073c6a1c-e061-4741-b6fd-6eed0e3e07ce
         title: Dialogue
         Position: {x: 201, y: 200}
         EntryPoint: 0
+        Type: 0
         DialogueText: "Tes dipl\xF4mes ? Pas vu..."
         DialogueCode: passpartout-without-info
+        Side: 0
         Pnj: {fileID: 4019585777184574299, guid: 313f1c4d2bdec5b428e9b3c1e0752cf4, type: 3}
+        Outputs:
+        - '>'
+        Emotion: 0

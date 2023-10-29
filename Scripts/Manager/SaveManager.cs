@@ -1,4 +1,5 @@
 ﻿using Assets.Database.Model.Repository;
+using Assets.Tools;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -67,17 +68,6 @@ public class SaveManager : SingletonGameObject<SaveManager>
     public GameData GetGameDataFromRunning()
     {
         Player player = FindAnyObjectByType<Player>();
-
-        PNJDialogues[] dialogues = Resources.LoadAll<PNJDialogues>("ScriptableObjects/Dialogues/PNJ Dialogues/");
-        SerializableDic<string, SerializableDic<string, bool>> dialoguesStates = new SerializableDic<string, SerializableDic<string, bool>>()
-        {
-            keys = dialogues.Select(x => x.name).ToList(),
-            values = dialogues.Select(x => new SerializableDic<string, bool>()
-            {
-                keys = x.Dialogues.Select(y => y.NameCode).ToList(),
-                values = x.Dialogues.Select(y => y.IsSaid).ToList()
-            }).ToList()
-        };
 
         return new GameData() {
             saveName = GameData.saveName,

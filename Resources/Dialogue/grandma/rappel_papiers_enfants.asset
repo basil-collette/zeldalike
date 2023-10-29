@@ -17,12 +17,12 @@ MonoBehaviour:
     PortName: Next
     TargetNodeGuid: 3683f861-b143-446d-84e2-fa2b8b411c26
   NodeDatas:
-  - rid: 3230699720299511824
+  - rid: 3230700037943328814
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230699720299511824
+    - rid: 3230700037943328814
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 3683f861-b143-446d-84e2-fa2b8b411c26
@@ -34,3 +34,6 @@ MonoBehaviour:
         DialogueCode: 
         Side: 0
         Pnj: {fileID: 4019585777184574299, guid: 77a7f1fd211b43547a731f2d8b7cbabd, type: 3}
+        Outputs:
+        - J'y vais !
+        Emotion: 0

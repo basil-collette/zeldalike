@@ -17,18 +17,23 @@ MonoBehaviour:
     PortName: Next
     TargetNodeGuid: 6fd3113d-709d-4602-a307-1bf6cd8cced4
   NodeDatas:
-  - rid: 8045117328212885520
+  - rid: 3230700037943328779
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 8045117328212885520
+    - rid: 3230700037943328779
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 6fd3113d-709d-4602-a307-1bf6cd8cced4
         title: Dialogue
         Position: {x: 199, y: 200}
         EntryPoint: 0
+        Type: 0
         DialogueText: Tu as eu des infos du marchand ?
         DialogueCode: 
+        Side: 0
         Pnj: {fileID: 4019585777184574299, guid: 77a7f1fd211b43547a731f2d8b7cbabd, type: 3}
+        Outputs:
+        - J'y vais !
+        Emotion: 0

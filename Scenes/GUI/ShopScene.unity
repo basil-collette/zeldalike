@@ -968,7 +968,7 @@ GameObject:
   - component: {fileID: 764145844}
   - component: {fileID: 764145845}
   m_Layer: 5
-  m_Name: Sell Item
+  m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1021,7 +1021,21 @@ MonoBehaviour:
   price: 999
   itemNameCode: rope
   itemType: 0
-  inventory: {fileID: 11400000, guid: 2b27182376eeadf4a85051c113b16f97, type: 2}
+  item:
+    Id: 0
+    NameLibelle: 
+    NameCode: 
+    Actif: 0
+    InventoryIndex: 0
+    Weight: 0
+    Description: 
+    TypeName: 
+    ItemType: 0
+    SpritePath: 
+    SpriteScale: 0
+    Sprite: {fileID: 0}
+    RarityName: 
+    Rarity: 0
 --- !u!1 &779476402
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,7 +1048,7 @@ GameObject:
   - component: {fileID: 779476405}
   - component: {fileID: 779476404}
   m_Layer: 5
-  m_Name: Sell Item (1)
+  m_Name: Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1077,9 +1091,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   price: 10
-  itemNameCode: sword
+  itemNameCode: axe
   itemType: 3
-  inventory: {fileID: 11400000, guid: 2b27182376eeadf4a85051c113b16f97, type: 2}
+  item:
+    Id: 0
+    NameLibelle: 
+    NameCode: 
+    Actif: 0
+    InventoryIndex: 0
+    Weight: 0
+    Description: 
+    TypeName: 
+    ItemType: 0
+    SpritePath: 
+    SpriteScale: 0
+    Sprite: {fileID: 0}
+    RarityName: 
+    Rarity: 0
 --- !u!222 &779476405
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1332,7 +1360,7 @@ GameObject:
   - component: {fileID: 938096568}
   - component: {fileID: 938096567}
   m_Layer: 5
-  m_Name: Sell Item
+  m_Name: Heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1374,10 +1402,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cc61a34774a16c4c8adaaed35892715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 10
+  price: 50
   itemNameCode: rope
   itemType: 0
-  inventory: {fileID: 11400000, guid: 2b27182376eeadf4a85051c113b16f97, type: 2}
+  item:
+    Id: 0
+    NameLibelle: 
+    NameCode: 
+    Actif: 0
+    InventoryIndex: 0
+    Weight: 0
+    Description: 
+    TypeName: 
+    ItemType: 0
+    SpritePath: 
+    SpriteScale: 0
+    Sprite: {fileID: 0}
+    RarityName: 
+    Rarity: 0
 --- !u!222 &938096568
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1690,7 +1732,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 50
 --- !u!222 &1549589394
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1787,6 +1829,7 @@ GameObject:
   - component: {fileID: 1701351525}
   - component: {fileID: 1701351527}
   - component: {fileID: 1701351526}
+  - component: {fileID: 1701351528}
   m_Layer: 5
   m_Name: Sell Items Container
   m_TagString: Untagged
@@ -1849,6 +1892,22 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &1701351528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701351524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ad888552c54434f945d3a57102cfd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rope: {fileID: 764145845}
+  heart: {fileID: 938096567}
+  axe: {fileID: 779476404}
+  money: {fileID: 1831763966}
 --- !u!1 &1831763965
 GameObject:
   m_ObjectHideFlags: 0
@@ -1894,7 +1953,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 5
     m_MaxSize: 50
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0

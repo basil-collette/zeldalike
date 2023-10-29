@@ -84,6 +84,15 @@ public class InventoryManager : Singleton<InventoryManager>, ISavable
         _items.Remove(item);
     }
 
+    public bool HasByCode(string itemNameCode)
+    {
+        if (_weapon.NameCode == itemNameCode) return true;
+
+        if (_items.Exists(x => x.NameCode == itemNameCode)) return true;
+
+        return false;
+    }
+
     int GetFirstFreeIndexSlot()
     {
         for (int i = 0; i <= _items.Count; i++)

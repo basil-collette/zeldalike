@@ -10,25 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8a2d8ae767442a4c8c0177884108faf, type: 3}
-  m_Name: end
+  m_Name: shoes_quest_rappel
   m_EditorClassIdentifier: 
   NodeLinks:
-  - BaseNodeGuid: 6fa4ec6b-29d0-4db2-b9e2-1c93cb628193
+  - BaseNodeGuid: ea9d711f-0df2-4a68-a985-d01428a50833
     PortName: Next
-    TargetNodeGuid: ab104e29-a69a-4ff1-813b-a4e81e24f8cf
+    TargetNodeGuid: 52fdeed7-b3ce-42ae-9e4b-3238ef1168ed
   NodeDatas:
-  - rid: 8045117328212885514
+  - rid: 3230700037943328802
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 8045117328212885514
+    - rid: 3230700037943328802
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
-        Guid: ab104e29-a69a-4ff1-813b-a4e81e24f8cf
+        Guid: 52fdeed7-b3ce-42ae-9e4b-3238ef1168ed
         title: Dialogue
         Position: {x: 198, y: 200}
         EntryPoint: 0
-        DialogueText: "Je suis contente que tu ai retrouv\xE9 tes esprits mon petit"
+        Type: 0
+        DialogueText: Tu as repris mes chaussures au Mafieux ?
         DialogueCode: 
-        Pnj: {fileID: 4019585777184574299, guid: 77a7f1fd211b43547a731f2d8b7cbabd, type: 3}
+        Side: 0
+        Pnj: {fileID: 5616454285522393285, guid: 565688d4d540bf24f84feb804119df1d, type: 3}
+        Outputs:
+        - '>'
+        Emotion: 0

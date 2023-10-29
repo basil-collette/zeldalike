@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8a2d8ae767442a4c8c0177884108faf, type: 3}
-  m_Name: wakeup
+  m_Name: grandma_ballegrains_info
   m_EditorClassIdentifier: 
   NodeLinks:
   - BaseNodeGuid: 6fa4ec6b-29d0-4db2-b9e2-1c93cb628193
@@ -19,14 +19,35 @@ MonoBehaviour:
   - BaseNodeGuid: eb0e570e-ec20-4c02-b23a-4422d1e215c1
     PortName: Non...
     TargetNodeGuid: 3173e805-a9ec-4b3c-98ef-cbfe55ee8683
+  - BaseNodeGuid: 3173e805-a9ec-4b3c-98ef-cbfe55ee8683
+    PortName: Les ballegrains ?
+    TargetNodeGuid: 865c9014-0755-4bdd-9fe8-d80c0f1a3e72
   NodeDatas:
-  - rid: 3230699720299511822
-  - rid: 3230699720299511823
+  - rid: 3230700086584672285
+  - rid: 3230700086584672286
+  - rid: 3230700086584672287
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230699720299511822
+    - rid: 3230700086584672285
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: 3173e805-a9ec-4b3c-98ef-cbfe55ee8683
+        title: Dialogue
+        Position: {x: 198, y: 398}
+        EntryPoint: 0
+        Type: 0
+        DialogueText: "J'ai vu les ballegrains avec tes papiers d'identit\xE9, \xE7a
+          serait un bon d\xE9but de les r\xE9cup\xE9rer"
+        DialogueCode: grandma_ballegrains_info
+        Side: 0
+        Pnj: {fileID: 4019585777184574299, guid: 77a7f1fd211b43547a731f2d8b7cbabd, type: 3}
+        Outputs:
+        - Ok
+        - Les ballegrains ?
+        Emotion: 0
+    - rid: 3230700086584672286
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: eb0e570e-ec20-4c02-b23a-4422d1e215c1
@@ -39,16 +60,22 @@ MonoBehaviour:
         DialogueCode: 
         Side: 0
         Pnj: {fileID: 4019585777184574299, guid: 77a7f1fd211b43547a731f2d8b7cbabd, type: 3}
-    - rid: 3230699720299511823
+        Outputs:
+        - Non...
+        Emotion: 0
+    - rid: 3230700086584672287
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
-        Guid: 3173e805-a9ec-4b3c-98ef-cbfe55ee8683
+        Guid: 865c9014-0755-4bdd-9fe8-d80c0f1a3e72
         title: Dialogue
-        Position: {x: 198, y: 398}
+        Position: {x: 198, y: 637}
         EntryPoint: 0
         Type: 0
-        DialogueText: "J'ai vu les ballegrains avec tes papiers d'identit\xE9, \xE7a
-          serait un bon d\xE9but de les r\xE9cup\xE9rer"
-        DialogueCode: wakeup
+        DialogueText: "Oui ce sont des monstres qui attaquent les intrus avec des
+          projectiles. De vrais t\xEAtes de navets !"
+        DialogueCode: 
         Side: 0
         Pnj: {fileID: 4019585777184574299, guid: 77a7f1fd211b43547a731f2d8b7cbabd, type: 3}
+        Outputs:
+        - Ok
+        Emotion: 0

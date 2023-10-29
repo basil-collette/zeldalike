@@ -17,48 +17,82 @@ MonoBehaviour:
     PortName: Next
     TargetNodeGuid: 1a169f27-543a-475f-9ac9-2a9aac1b94ab
   - BaseNodeGuid: 1a169f27-543a-475f-9ac9-2a9aac1b94ab
-    PortName: Oui !
+    PortName: '>'
     TargetNodeGuid: 2bc2de4e-9442-4df5-8a06-7b7a649986e8
   - BaseNodeGuid: 2bc2de4e-9442-4df5-8a06-7b7a649986e8
-    PortName: "O\xF9 est-elle ?"
+    PortName: '>'
     TargetNodeGuid: 43f46476-a10c-4e8b-a459-16f62cde4049
+  - BaseNodeGuid: 43f46476-a10c-4e8b-a459-16f62cde4049
+    PortName: Compris !
+    TargetNodeGuid: 311d0415-1a6d-46a6-9ebc-d67b89a6e7b2
   NodeDatas:
-  - rid: 8045117328212885511
-  - rid: 8045117328212885512
-  - rid: 8045117328212885513
+  - rid: 3230700086584672266
+  - rid: 3230700086584672267
+  - rid: 3230700086584672268
+  - rid: 3230700086584672269
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 8045117328212885511
+    - rid: 3230700086584672266
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 1a169f27-543a-475f-9ac9-2a9aac1b94ab
         title: Dialogue
         Position: {x: 197, y: 200}
         EntryPoint: 0
+        Type: 0
         DialogueText: 'Tu veux savoir de quoi tu es capable ? '
         DialogueCode: 
-        Pnj: {fileID: 4019585777184574299, guid: 77a7f1fd211b43547a731f2d8b7cbabd, type: 3}
-    - rid: 8045117328212885512
+        Side: 0
+        Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
+        Outputs:
+        - '>'
+        Emotion: 0
+    - rid: 3230700086584672267
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 2bc2de4e-9442-4df5-8a06-7b7a649986e8
         title: Dialogue
         Position: {x: 197, y: 401}
         EntryPoint: 0
+        Type: 0
         DialogueText: "Va te mesurer \xE0 la Rose M\xE8re et d\xE9couvre les forces
           qui sommeillent en toi !"
         DialogueCode: 
-        Pnj: {fileID: 4019585777184574299, guid: 77a7f1fd211b43547a731f2d8b7cbabd, type: 3}
-    - rid: 8045117328212885513
+        Side: 0
+        Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
+        Outputs:
+        - '>'
+        Emotion: 0
+    - rid: 3230700086584672268
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 43f46476-a10c-4e8b-a459-16f62cde4049
         title: Dialogue
         Position: {x: 197, y: 600}
         EntryPoint: 0
+        Type: 0
         DialogueText: "Elle se situe au Nord Est du village, mais le pont qui y m\xE8ne
           est cass\xE9..."
         DialogueCode: 
-        Pnj: {fileID: 4019585777184574299, guid: 77a7f1fd211b43547a731f2d8b7cbabd, type: 3}
+        Side: 0
+        Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
+        Outputs:
+        - Compris !
+        Emotion: 0
+    - rid: 3230700086584672269
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: 311d0415-1a6d-46a6-9ebc-d67b89a6e7b2
+        title: Dialogue
+        Position: {x: 197, y: 804}
+        EntryPoint: 0
+        Type: 0
+        DialogueText: "Pour le r\xE9parer, il faudrait du bois et de la corde"
+        DialogueCode: 
+        Side: 0
+        Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
+        Outputs:
+        - Ok
+        Emotion: 0

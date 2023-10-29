@@ -20,23 +20,28 @@ MonoBehaviour:
     PortName: Output
     TargetNodeGuid: 1e0292a7-fec5-443c-b7c0-73231493d2b1
   NodeDatas:
-  - rid: 3230699522260205590
-  - rid: 3230699522260205591
+  - rid: 3230700079674294273
+  - rid: 3230700079674294274
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230699522260205590
+    - rid: 3230700079674294273
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 1e0292a7-fec5-443c-b7c0-73231493d2b1
         title: Dialogue
         Position: {x: 200, y: 393}
         EntryPoint: 0
-        DialogueText: "Oh mon arrosoiri ! Voici 5 pi\xE8ces pour te remercier"
+        Type: 0
+        DialogueText: "Oh mon arrosoir ! Voici 5 pi\xE8ces pour te remercier"
         DialogueCode: arrosoir_thank
+        Side: 0
         Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
-    - rid: 3230699522260205591
+        Outputs:
+        - '>'
+        Emotion: 0
+    - rid: 3230700079674294274
       type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: f2c80eff-cd97-4fb1-b8c7-cab4cf2bb285

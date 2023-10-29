@@ -46,4 +46,19 @@ public class ButtonHelper : MonoBehaviour
         FindAnyObjectByType<PauseManager>().ShowPausedInterface(new PauseParameter() { InterfaceName = sceneName, ShowMenu = true });
     }
 
+    public void UnlockMemoryPartIdCard()
+    {
+        FindGameObjectHelper.FindByName("Parts").GetComponent<MemoryPartsCarroussel>().ShowMemoryPart("Identity", true);
+    }
+
+    public void UnlockMemoryPartDiplomas()
+    {
+        FindGameObjectHelper.FindByName("Parts").GetComponent<MemoryPartsCarroussel>().ShowMemoryPart("Diplomes", true);
+    }
+
+    public void UnlockMemoryPartCompetences()
+    {
+        FindGameObjectHelper.FindByName("Parts").GetComponent<MemoryPartsCarroussel>().ShowMemoryPart("Competences", true);
+    }
+
 }

@@ -17,18 +17,23 @@ MonoBehaviour:
     PortName: Next
     TargetNodeGuid: ca6ab422-882e-4f9c-abd9-7cf0a23bbf8e
   NodeDatas:
-  - rid: 8045117315667460114
+  - rid: 3230700037943328789
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 8045117315667460114
+    - rid: 3230700037943328789
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: ca6ab422-882e-4f9c-abd9-7cf0a23bbf8e
         title: Dialogue
         Position: {x: 201, y: 200}
         EntryPoint: 0
+        Type: 0
         DialogueText: "J'ai un business \xE0 g\xE9rer, d\xE9gage !"
         DialogueCode: default
+        Side: 0
         Pnj: {fileID: 4019585777184574299, guid: 313f1c4d2bdec5b428e9b3c1e0752cf4, type: 3}
+        Outputs:
+        - '>'
+        Emotion: 0

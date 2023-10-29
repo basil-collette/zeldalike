@@ -7,4 +7,6 @@ public class DialogueNode : BaseNode
     public string DialogueCode;
     public DialogueNodeSide Side = DialogueNodeSide.left;
     public Pnj Pnj;
+    public string[] Outputs = new string[] { };
+    public DialogEmotionType Emotion = DialogEmotionType.neutral;
 }

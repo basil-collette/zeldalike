@@ -347,11 +347,23 @@ public class ScenesManager : SingletonGameObject<ScenesManager>
 
     private IEnumerator PlaceNameCo(string sceneName)
     {
-        textBox.SetActive(true);
-        textBox.GetComponentInChildren<Text>().text = TextHelper.Labelize(sceneName);
-        
-        yield return new WaitForSeconds(sceneNameDuration);
-        textBox.SetActive(false);
+        if (sceneName != string.Empty)
+        {
+            textBox.SetActive(true);
+            textBox.GetComponentInChildren<Text>().text = TextHelper.Labelize(sceneName);
+
+            yield return new WaitForSeconds(sceneNameDuration);
+
+            //Si différents, une autre scène à été switchée entre temps, on lui laisse donc son nom affiché
+            if (sceneName.ToLower() == _currentScene.Substring(0, _currentScene.Length - 5).ToLower())
+            {
+                textBox.SetActive(false);
+            }
+        }
+        else
+        {
+            textBox.SetActive(false);
+        }
     }
 
     #endregion

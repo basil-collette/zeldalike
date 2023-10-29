@@ -17,111 +17,69 @@ MonoBehaviour:
     DialogueContainer: {fileID: 11400000, guid: 54f73fdd703996c4790c64f62703d908, type: 2}
     Conditions: []
     Priority: 1
-    IsSaid: 0
-  - NameCode: wakeup
-    DialogueContainer: {fileID: 11400000, guid: 5514dba8a8a49fb478a3876900f8031b, type: 2}
+  - NameCode: grandma_ballegrains_info
+    DialogueContainer: {fileID: 11400000, guid: 33291defae5497e43b0725d010e81cbc, type: 2}
     Conditions:
-    - rid: 4206153503839879173
+    - Type: 2
+      Code: grandma_ballegrains_info
+      Not: 1
+    - Type: 3
+      Code: id_card
+      Not: 1
     Priority: 3
-    IsSaid: 0
-  - NameCode: go_mother_rose
-    DialogueContainer: {fileID: 11400000, guid: 93ca462327834534daf9d4a383757501, type: 2}
-    Conditions:
-    - rid: 4206153544483209245
-    Priority: 3
-    IsSaid: 0
   - NameCode: rappel_id_card
     DialogueContainer: {fileID: 11400000, guid: 836b9b3c31b00a84aabb1f67f7711bdc, type: 2}
     Conditions:
-    - rid: 4206153544483209247
-    - rid: 8045117328212885515
-    Priority: 2
-    IsSaid: 0
-  - NameCode: end
-    DialogueContainer: {fileID: 11400000, guid: 3b3360636933b6d4cbcffc13ae56c9fe, type: 2}
-    Conditions:
-    - rid: 8045117328212885525
-    Priority: 2
-    IsSaid: 0
+    - Type: 2
+      Code: grandma_ballegrains_info
+      Not: 0
+    - Type: 3
+      Code: id_card
+      Not: 1
+    Priority: 3
   - NameCode: merchant-info
     DialogueContainer: {fileID: 11400000, guid: 94fa0f7e8b8fd5b47bda3b5e5ba18497, type: 2}
     Conditions:
-    - rid: 8045117328212885518
-    - rid: 8045117328212885521
-    - rid: 8045117328212885524
-    Priority: 2
-    IsSaid: 0
+    - Type: 3
+      Code: id_card
+      Not: 0
+    - Type: 2
+      Code: merchant-info
+      Not: 1
+    - Type: 2
+      Code: mafieux_indice_2
+      Not: 1
+    Priority: 3
   - NameCode: after-merchant-info
     DialogueContainer: {fileID: 11400000, guid: 6dcdf71a911c98148a51e256ef087a20, type: 2}
     Conditions:
-    - rid: 8045117328212885519
-    - rid: 8045117328212885522
-    Priority: 2
-    IsSaid: 0
-  references:
-    version: 2
-    RefIds:
-    - rid: 4206153503839879173
-      type: {class: DialogueConditionHaveTalk, ns: , asm: Assembly-CSharp}
-      data:
-        TargetCode: wakeup
-        Type: HaveTalk
-        Not: 1
-        PNJName: Grandma
-    - rid: 4206153544483209245
-      type: {class: DialogueConditionStartedQuest, ns: , asm: Assembly-CSharp}
-      data:
-        TargetCode: mother_rose
-        Type: StartedQuest
-        Not: 0
-    - rid: 4206153544483209247
-      type: {class: DialogueConditionHaveTalk, ns: , asm: Assembly-CSharp}
-      data:
-        TargetCode: wakeup
-        Type: HaveTalk
-        Not: 0
-        PNJName: Grandma
-    - rid: 8045117328212885515
-      type: {class: DialogueConditionPossessItem, ns: , asm: Assembly-CSharp}
-      data:
-        TargetCode: idcard
-        Type: PossessItem
-        Not: 1
-    - rid: 8045117328212885518
-      type: {class: DialogueConditionHaveTalk, ns: , asm: Assembly-CSharp}
-      data:
-        TargetCode: merchant-info
-        Type: HaveTalk
-        Not: 1
-        PNJName: grandma
-    - rid: 8045117328212885519
-      type: {class: DialogueConditionHaveTalk, ns: , asm: Assembly-CSharp}
-      data:
-        TargetCode: merchant-info
-        Type: HaveTalk
-        Not: 0
-        PNJName: grandma
-    - rid: 8045117328212885521
-      type: {class: DialogueConditionPossessItem, ns: , asm: Assembly-CSharp}
-      data:
-        TargetCode: diplomas
-        Type: PossessItem
-        Not: 0
-    - rid: 8045117328212885522
-      type: {class: DialogueConditionEndQuest, ns: , asm: Assembly-CSharp}
-      data:
-        TargetCode: mother_rose
-        Type: EndQuest
-        Not: 1
-    - rid: 8045117328212885524
-      type: {class: DialogueConditionEndQuest, ns: , asm: Assembly-CSharp}
-      data:
-        TargetCode: mother_rose
-        Type: EndQuest
-        Not: 1
-    - rid: 8045117328212885525
-      type: {class: DialogueConditionEndQuest, ns: , asm: Assembly-CSharp}
-      data:
-        TargetCode: mother_rose
-        Type: EndQuest
-        Not: 0
+    - Type: 3
+      Code: id_card
+      Not: 0
+    - Type: 2
+      Code: merchant-info
+      Not: 0
+    - Type: 3
+      Code: diplomas
+      Not: 1
+    Priority: 3
+  - NameCode: blue_tree_info
+    DialogueContainer: {fileID: 11400000, guid: bc9510caa3936fc4395883947df3e24c, type: 2}
+    Conditions:
+    - Type: 3
+      Code: diplomas
+      Not: 0
+    - Type: 3
+      Code: competences
+      Not: 1
+    - Type: 2
+      Code: go_mother_rose
+      Not: 0
+    Priority: 3
+  - NameCode: grandma_end
+    DialogueContainer: {fileID: 11400000, guid: 3b3360636933b6d4cbcffc13ae56c9fe, type: 2}
+    Conditions:
+    - Type: 3
+      Code: competences
+      Not: 0
+    Priority: 3

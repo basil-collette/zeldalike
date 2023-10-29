@@ -155,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventNameCode: wake_up
   OnlyOnce: 1
-  dialog: {fileID: 11400000, guid: c039606027fc88f41a242e0fe4e20f4a, type: 2}
+  dialog: {fileID: 11400000, guid: 1c5478331ddc1b4469c45771b83b3332, type: 2}
 --- !u!61 &45885424
 BoxCollider2D:
   m_ObjectHideFlags: 0

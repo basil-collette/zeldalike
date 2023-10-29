@@ -1,3 +1,4 @@
+/*
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditorInternal;
@@ -63,11 +64,6 @@ public class PNJDialoguesEditor : Editor
             {
                 AddCondition(new DialogueConditionHaveTalk());
             }
-            /*
-            if (GUILayout.Button("Location"))
-            {
-                AddCondition();
-            }*/
         EditorGUILayout.EndHorizontal();
 
         GUILayout.Space(2);
@@ -158,3 +154,4 @@ public class PNJDialoguesEditor : Editor
     }
 
 }
+*/

@@ -20,17 +20,17 @@ MonoBehaviour:
     PortName: Compris
     TargetNodeGuid: 88af22c9-382e-4cba-9454-b845abca6eac
   - BaseNodeGuid: 88af22c9-382e-4cba-9454-b845abca6eac
-    PortName: Ok
+    PortName: Je m'en occupe
     TargetNodeGuid: 1122c1f2-4d09-43b1-8ffc-7075c777262d
   NodeDatas:
-  - rid: 3230699720299511819
-  - rid: 3230699720299511820
-  - rid: 3230699720299511821
+  - rid: 3230700083053592576
+  - rid: 3230700083053592577
+  - rid: 3230700083053592578
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230699720299511819
+    - rid: 3230700083053592576
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 26f20caf-49c5-428e-8ee5-f1acfeaa4ecd
@@ -39,11 +39,14 @@ MonoBehaviour:
         EntryPoint: 0
         Type: 0
         DialogueText: "Les ballegrains ? Ils gardent leur butin dans leur grotte
-          secrette au Nord. Attention \xE7a a l'air dangereux !"
+          au Nord. Attention \xE7a a l'air dangereux !"
         DialogueCode: 
         Side: 0
         Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
-    - rid: 3230699720299511820
+        Outputs:
+        - Compris
+        Emotion: 0
+    - rid: 3230700083053592577
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 88af22c9-382e-4cba-9454-b845abca6eac
@@ -56,7 +59,10 @@ MonoBehaviour:
         DialogueCode: 
         Side: 0
         Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
-    - rid: 3230699720299511821
+        Outputs:
+        - Je m'en occupe
+        Emotion: 0
+    - rid: 3230700083053592578
       type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 1122c1f2-4d09-43b1-8ffc-7075c777262d

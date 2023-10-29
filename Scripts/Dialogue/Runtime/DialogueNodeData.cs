@@ -12,4 +12,6 @@ public class DialogueNodeData : BaseNodeData
     public string DialogueCode;
     public DialogueNodeSide Side;
     public Pnj Pnj;
+    public string[] Outputs = new string[] { };
+    public DialogEmotionType Emotion = DialogEmotionType.neutral;
 }

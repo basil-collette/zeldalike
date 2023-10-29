@@ -37,7 +37,7 @@ MonoBehaviour:
       type: {class: DiscussionGoal, ns: , asm: Assembly-CSharp}
       data:
         Target: diplomas_info
-        Objective: "R\xE9cup\xE9rer mes dipl\xF4mes dans la maison du collectioneur"
+        Objective: "R\xE9colter des infos des infos \xE0 ce propos"
         IsCompleted: 0
         RequiredAmount: 1
         CurrentAmount: 0

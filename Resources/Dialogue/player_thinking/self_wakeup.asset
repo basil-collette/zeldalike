@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a2d8ae767442a4c8c0177884108faf, type: 3}
+  m_Name: self_wakeup
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGuid: 6fa4ec6b-29d0-4db2-b9e2-1c93cb628193
+    PortName: Next
+    TargetNodeGuid: 871b0e01-89b4-473a-a508-9072b69e8eb8
+  NodeDatas:
+  - rid: 3230700037943328813
+  ExposedProperties: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 3230700037943328813
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: 871b0e01-89b4-473a-a508-9072b69e8eb8
+        title: Dialogue
+        Position: {x: 201, y: 200}
+        EntryPoint: 0
+        Type: 1
+        DialogueText: Qui suis-je ...?
+        DialogueCode: self_wakeup
+        Side: 1
+        Pnj: {fileID: 2776369148330640803, guid: ffaf55ab1deea8340bf60e61265432d4, type: 3}
+        Outputs:
+        - '>'
+        Emotion: 0

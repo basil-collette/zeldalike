@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a2d8ae767442a4c8c0177884108faf, type: 3}
+  m_Name: mafieux_indice
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGuid: ea9d711f-0df2-4a68-a985-d01428a50833
+    PortName: Next
+    TargetNodeGuid: 0a3972b5-0e12-44da-b900-d7a7cb70ee5c
+  - BaseNodeGuid: 0a3972b5-0e12-44da-b900-d7a7cb70ee5c
+    PortName: '>'
+    TargetNodeGuid: 2770b763-59a3-4f89-8f0e-380b6d91888f
+  NodeDatas:
+  - rid: 3230700086584672264
+  - rid: 3230700086584672265
+  ExposedProperties: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 3230700086584672264
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: 0a3972b5-0e12-44da-b900-d7a7cb70ee5c
+        title: Dialogue
+        Position: {x: 202, y: 200}
+        EntryPoint: 0
+        Type: 0
+        DialogueText: Le mafieux du manoir est mon meilleur client ! Enfin, sauf
+          quand il me fait des coups en douce...
+        DialogueCode: 
+        Side: 0
+        Pnj: {fileID: 5616454285522393285, guid: 565688d4d540bf24f84feb804119df1d, type: 3}
+        Outputs:
+        - '>'
+        Emotion: 0
+    - rid: 3230700086584672265
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: 2770b763-59a3-4f89-8f0e-380b6d91888f
+        title: Dialogue
+        Position: {x: 202, y: 401}
+        EntryPoint: 0
+        Type: 0
+        DialogueText: "Quand il y a une entourloupe, tu peux \xEAtre s\xFBre qu'il
+          est dans le coup !"
+        DialogueCode: mafieux_indice
+        Side: 0
+        Pnj: {fileID: 5616454285522393285, guid: 565688d4d540bf24f84feb804119df1d, type: 3}
+        Outputs:
+        - Ok
+        Emotion: 0

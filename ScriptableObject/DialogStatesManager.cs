@@ -16,6 +16,11 @@ public class DialogStatesManager : Singleton<DialogStatesManager>, ISavable
         return pnjNode.List.Contains(dialogueCode);
     }
 
+    public bool AnyHaveSaid(string dialogueCode)
+    {
+        return _states.Exists(x => x.List.Contains(dialogueCode));
+    }
+
     public void AddSaid(string pnjName, string dialogueCode)
     {
         /*

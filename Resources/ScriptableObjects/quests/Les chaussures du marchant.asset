@@ -18,7 +18,7 @@ MonoBehaviour:
     des infos qu'il nous \xE0 donn\xE9."
   QuestSteps:
   - Goals:
-    - rid: 3230699720299511828
+    - rid: 3230699988887797782
     IsCompleted: 0
     Rewards:
       Money: 0
@@ -30,12 +30,12 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 3230699720299511828
-      type: {class: EventGoal, ns: , asm: Assembly-CSharp}
+    - rid: 3230699988887797782
+      type: {class: DiscussionGoal, ns: , asm: Assembly-CSharp}
       data:
-        Target: shoes_thank
+        Target: shoes_thanks
         Objective: Rendre au marchant ses chaussures
         IsCompleted: 0
         RequiredAmount: 1
         CurrentAmount: 0
-        Type: Event
+        Type: Discussion

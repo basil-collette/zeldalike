@@ -17,32 +17,72 @@ MonoBehaviour:
     DialogueContainer: {fileID: 11400000, guid: a4b46b0f4b5753649ac39c0887d5b98c, type: 2}
     Conditions: []
     Priority: 1
-    IsSaid: 0
   - NameCode: id_card_info
     DialogueContainer: {fileID: 11400000, guid: f53db87bcbe02364b881a6f1599dae49, type: 2}
     Conditions:
-    - rid: 4206153544483209243
-    Priority: 2
-    IsSaid: 0
+    - Type: 2
+      Code: grandma_ballegrains_info
+      Not: 0
+    - Type: 3
+      Code: id_card
+      Not: 1
+    Priority: 3
   - NameCode: arrosoir_thank
     DialogueContainer: {fileID: 11400000, guid: 25a02eab93912ae4daefc5fbbed5b1e4, type: 2}
     Conditions:
-    - rid: 4206153562263650310
+    - Type: 3
+      Code: arrosoir
+      Not: 0
+    - Type: 0
+      Code: give_arrosoir_clara
+      Not: 0
+    - Type: 1
+      Code: give_arrosoir_clara
+      Not: 1
     Priority: 3
-    IsSaid: 0
-  references:
-    version: 2
-    RefIds:
-    - rid: 4206153544483209243
-      type: {class: DialogueConditionHaveTalk, ns: , asm: Assembly-CSharp}
-      data:
-        TargetCode: wakeup
-        Type: HaveTalk
-        Not: 0
-        PNJName: Grandma
-    - rid: 4206153562263650310
-      type: {class: DialogueConditionPossess, ns: , asm: Assembly-CSharp}
-      data:
-        TargetCode: arrosoir
-        Type: Possess
-        Not: 0
+  - NameCode: arrosoir_thank_2
+    DialogueContainer: {fileID: 11400000, guid: 2c8a87bb9d38e2144b655c932d9003be, type: 2}
+    Conditions:
+    - Type: 3
+      Code: arrosoir
+      Not: 0
+    - Type: 0
+      Code: give_arrosoir_clara
+      Not: 1
+    - Type: 1
+      Code: give_arrosoir_clara
+      Not: 1
+    Priority: 3
+  - NameCode: go_mother_rose
+    DialogueContainer: {fileID: 11400000, guid: 102f34823ef5c614a81fd6b70149db6a, type: 2}
+    Conditions:
+    - Type: 2
+      Code: go_mother_rose
+      Not: 1
+    - Type: 3
+      Code: diplomas
+      Not: 0
+    - Type: 3
+      Code: competences
+      Not: 1
+    Priority: 3
+  - NameCode: rappel_go_mother_rose
+    DialogueContainer: {fileID: 11400000, guid: ecef220645dbab441978bd09c10c994d, type: 2}
+    Conditions:
+    - Type: 2
+      Code: go_mother_rose
+      Not: 0
+    - Type: 3
+      Code: competences
+      Not: 1
+    Priority: 2
+  - NameCode: lend_arrosoir
+    DialogueContainer: {fileID: 11400000, guid: 0c7135a9339ab8f48b2812e86fc37092, type: 2}
+    Conditions:
+    - Type: 2
+      Code: blue_tree_info
+      Not: 0
+    - Type: 3
+      Code: arrosoir
+      Not: 1
+    Priority: 3

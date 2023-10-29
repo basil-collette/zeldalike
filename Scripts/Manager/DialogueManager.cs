@@ -1,20 +1,39 @@
 ﻿using Assets.Scripts.Enums;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class DialogueManager : SingletonGameObject<DialogueManager>
 {
     public static event Action<string[]> OnDiscuss;
 
+    public AudioSource dialogAudioSource;
     public PauseManager pauseManager;
     public GameObject dialogueButtonPrefab;
-    public float textAnimPauseSeconds = 0.01f;
     [SerializeField] Sprite thinkingSprite;
     [SerializeField] Sprite outLoudSprite;
 
+    public List<DialogEmotion> _emotions;
+
     DialogueContainer _dialogueContainer;
+    Text textArea;
+
+    void Start()
+    {
+        dialogAudioSource.volume = MainGameManager._soundManager.SoundVolume;
+
+        foreach (DialogEmotionType emotion in Enum.GetValues(typeof(DialogEmotionType)))
+        {
+            if (!_emotions.Exists(x => x.Type == emotion))
+            {
+                _emotions.Add(new DialogEmotion() { Type = emotion });
+            }
+        }
+    }
 
     public void StartDialogue(DialogueContainer dialogueContainer)
     {
@@ -37,11 +56,13 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
             InterfaceName = "DialogueScene",
             OnPauseProcessed = () =>
             {
+                textArea = FindGameObjectHelper.FindByName("Dialogue Text").GetComponent<Text>();
+
                 BaseNodeData node = GraphHelper.GetFirstNode(_dialogueContainer);
                 NextNode(node);
             },
             PlaySound = false
-        }) ;
+        });
     }
 
     void NextNode(BaseNodeData node)
@@ -84,31 +105,41 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
         pnjSpriteRight.SetActive(node.Side == DialogueNodeSide.right);
         pnjSpriteRight.GetComponent<Image>().sprite = node.Pnj.Sprite;
 
-        var textComp = FindGameObjectHelper.FindByName("Dialogue Text").GetComponent<Text>();
-
         OnDiscuss?.Invoke(new string[] { node.DialogueCode });
 
         Action showButtons = () =>
         {
-            var connections = GraphHelper.GetOutputs(_dialogueContainer, node);
-            if (connections.Count > 0)
+            List<NodeLinkData> connections = GraphHelper.GetConnections(_dialogueContainer, node);
+            if (node.Outputs.Length > 0)
             {
-                foreach (var conn in connections)
+                foreach (string output in node.Outputs)
                 {
-                    InstanciateChoiceButton(
-                        (conn.PortName == string.Empty) ? "continue" : conn.PortName,
-                        () =>
-                        {
-                            node.Pnj.AddSaid(node.DialogueCode);
-                            BaseNodeData nextNode = GraphHelper.GetNodeByGuid(_dialogueContainer, conn.TargetNodeGuid);
-                            NextNode(nextNode);
-                        }
-                    );
+                    if (connections.Exists(x => x.PortName == output))
+                    {
+                        InstanciateChoiceButton(
+                            (output == string.Empty) ? ">" : output,
+                            () => {
+                                node.Pnj.AddSaid(node.DialogueCode);
+                                BaseNodeData nextNode = GraphHelper.GetNodeByGuid(_dialogueContainer, connections.Find(x => x.PortName == output).TargetNodeGuid);
+                                NextNode(nextNode);
+                            }
+                        );
+                    }
+                    else
+                    {
+                        InstanciateChoiceButton(
+                            ((output == string.Empty) ? ">" : output),
+                            () => {
+                                node.Pnj.AddSaid(node.DialogueCode);
+                                pauseManager.Resume();
+                            });
+                    }
+
                 }
             }
             else
             {
-                InstanciateChoiceButton("Ok", () =>
+                InstanciateChoiceButton(">", () =>
                 {
                     node.Pnj.AddSaid(node.DialogueCode);
                     pauseManager.Resume();
@@ -116,7 +147,7 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
             }
         };
 
-        StartCoroutine(TextAnimationByLetter(textComp, node.DialogueText, showButtons));
+        StartCoroutine(TextAnimationByLetter(node.DialogueText, node.Pnj.Voices, _emotions.Find(x => x.Type == node.Emotion), showButtons));
     }
 
     void InstanciateChoiceButton(string portName, Action clickAction)
@@ -149,7 +180,7 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
             default: break;
         }
 
-        var connections = GraphHelper.GetOutputs(_dialogueContainer, node);
+        var connections = GraphHelper.GetConnections(_dialogueContainer, node);
         if (connections.Count > 0 && !error)
         {
             BaseNodeData nextNode = GraphHelper.GetNodeByGuid(_dialogueContainer, connections[0].TargetNodeGuid);
@@ -170,21 +201,121 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
         }
     }
 
-    IEnumerator TextAnimationByLetter(Text textComp, string textValue, Action OnEndAnimation)
+    readonly char[] alphabet = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+    readonly char[] pronounced = { 'b', 'c', 'd', 'f', 'g', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'z' };
+    //readonly char[] unpronounced = { 'a', 'e', 'i', 'o', 'u', 'y', 'h' };
+    readonly char questionMark = '?';
+    readonly char affirmativeMark = '!';
+    readonly string suspenseMark = "...";
+
+
+    IEnumerator TextAnimationByLetter(string text, AudioClip[] voices, DialogEmotion emotion, Action OnEndAnimation)
     {
-        textComp.text = "";
+        textArea.text = "";
 
-        foreach (char letter in textValue.ToCharArray())
+        string[] words = text.Split(new Char[] { ' ', '\n', '-' });
+
+        bool lastWasConsonnant = false;
+
+        foreach (string word in words)
         {
-            textComp.text += letter;
+            var charWord = word.ToCharArray();
+            for (int i = 0; i < charWord.Length; i++)
+            {
+                textArea.text += charWord[i];
 
-            //if (typeSound1 && typeSound2)
-                //SoundManager.instance.RandomizeSfx(typeSound1, typeSound2);
+                ManageVoice(i, ref lastWasConsonnant, charWord, voices, emotion);
 
-            yield return new WaitForSecondsRealtime(textAnimPauseSeconds);
+                yield return new WaitForSecondsRealtime(emotion.Speed);
+            }
+
+            textArea.text += " ";
+
+            lastWasConsonnant = false;
+
+            yield return new WaitForSecondsRealtime(emotion.Speed * 2);
         }
 
         OnEndAnimation?.Invoke();
+    }
+
+    void ManageVoice(int index, ref bool lastWasConsonnant, char[] word, AudioClip[] voices, DialogEmotion emotion)
+    {
+        float specialPitch = SpecialPitch(word);
+
+        if (index == 0)
+        {
+            PlayVoiceWithEmotion(word[index], voices, emotion, specialPitch);
+            return;
+        }
+        
+        if (Array.IndexOf(pronounced, word[index]) > -1)
+        {
+            if (!lastWasConsonnant)
+            {
+                PlayVoiceWithEmotion(word[index], voices, emotion, specialPitch);
+            }
+
+            lastWasConsonnant = true;
+        }
+        else
+        {
+            lastWasConsonnant = false;
+        }
+    }
+
+    async void PlayVoiceWithEmotion(char letter, AudioClip[] voices, DialogEmotion emotion, float specialPitch = 0)
+    {
+        AudioClip voice;
+        
+        if (specialPitch == 0)
+        {
+            int hashCode = letter.GetHashCode();
+            int predictableIndex = hashCode % voices.Length;
+
+            voice = voices[predictableIndex];
+
+            dialogAudioSource.pitch = Random.Range(emotion.MinPitch, emotion.MaxPitch);
+
+            int minPitchInt = (int)(emotion.MinPitch * 100);
+            int maxPitchInt = (int)(emotion.MaxPitch * 100);
+            int pitchRangeInt = maxPitchInt - minPitchInt;
+            // cannot divide by 0, so if there is no range then skip the selection
+            if (pitchRangeInt != 0)
+            {
+                int predictablePitchInt = (hashCode % pitchRangeInt) + minPitchInt;
+                float predictablePitch = predictablePitchInt / 100f;
+                dialogAudioSource.pitch = predictablePitch;
+            }
+            else
+            {
+                dialogAudioSource.pitch = emotion.MinPitch;
+            }
+        }
+        else
+        {
+            dialogAudioSource.pitch = specialPitch;
+            voice = voices[Random.Range(0, voices.Length)];
+        }
+
+        dialogAudioSource.Stop();
+        dialogAudioSource.PlayOneShot(voice);
+    }
+
+    float SpecialPitch(char[] word)
+    {
+        if (word.LastOrDefault() == '?') return 1;
+
+        if (word.LastOrDefault() == '!') return 1;
+
+        if (word[word.Length - 1] == '.'
+            && word[word.Length - 2] == '.'
+            && word[word.Length - 3] == '.')
+        {
+            return 1;
+        }
+
+        return 0;
     }
 
 }

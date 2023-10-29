@@ -408,6 +408,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 940426005170916245, guid: a9b5ee4511cbe2640bb469067622f3cc, type: 3}
+      propertyPath: m_Size.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 940426005170916245, guid: a9b5ee4511cbe2640bb469067622f3cc, type: 3}
+      propertyPath: m_Size.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 940426005170916245, guid: a9b5ee4511cbe2640bb469067622f3cc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 41522fe86a23a9447b1f6a956ae56aaf, type: 3}
+    - target: {fileID: 940426005170916245, guid: a9b5ee4511cbe2640bb469067622f3cc, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1280660144310636650, guid: a9b5ee4511cbe2640bb469067622f3cc, type: 3}
       propertyPath: itemNameCode
       value: shoes
@@ -477,25 +493,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 398767275}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd2acb7568efd4946a56e2bcd5d444d4, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c1755d8faaa8a5489cbf39d181ae1d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventNameCode: merchant_search_shoes
-  Not: 0
---- !u!114 &398767277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 398767275}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd2acb7568efd4946a56e2bcd5d444d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventNameCode: merchant_shoes_back
-  Not: 1
+  _conditions:
+  - Type: 6
+    Code: merchant_search_shoes
+    Not: 0
+  - Type: 6
+    Code: merchant_shoes_back
+    Not: 1
 --- !u!1001 &464314253
 PrefabInstance:
   m_ObjectHideFlags: 0

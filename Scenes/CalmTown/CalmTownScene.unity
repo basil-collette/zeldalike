@@ -39332,6 +39332,7 @@ GameObject:
   - component: {fileID: 1056037708}
   - component: {fileID: 1056037707}
   - component: {fileID: 1056037710}
+  - component: {fileID: 1056037711}
   m_Layer: 0
   m_Name: arrosoir
   m_TagString: Untagged
@@ -39454,6 +39455,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.4481468, y: 0.8884125}
   m_EdgeRadius: 0
+--- !u!114 &1056037711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056037706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c1755d8faaa8a5489cbf39d181ae1d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _conditions:
+  - Type: 2
+    Code: arrosoir_thank
+    Not: 1
+  - Type: 3
+    Code: arrosoir
+    Not: 1
 --- !u!1 &1119565815
 GameObject:
   m_ObjectHideFlags: 0
@@ -43255,6 +43275,7 @@ GameObject:
   - component: {fileID: 1393243017}
   - component: {fileID: 1393243016}
   - component: {fileID: 1393243019}
+  - component: {fileID: 1393243020}
   m_Layer: 0
   m_Name: id_card
   m_TagString: Untagged
@@ -43377,6 +43398,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.6572819}
   m_EdgeRadius: 0
+--- !u!114 &1393243020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393243015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c1755d8faaa8a5489cbf39d181ae1d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _conditions:
+  - Type: 3
+    Code: id_card
+    Not: 1
 --- !u!1001 &1422476396
 PrefabInstance:
   m_ObjectHideFlags: 0

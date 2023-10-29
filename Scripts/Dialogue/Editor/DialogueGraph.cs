@@ -50,7 +50,7 @@ public class DialogueGraph : EditorWindow
         saveButton.style.backgroundColor = new Color(0.1f, 0.5f, 0.1f);
         toolbar.Add(saveButton);
 
-        var clearButton = new Button(() => ClearGraph()) { text = "Clear Graph" };
+        var clearButton = new Button(() => ClearGraph()) { text = "New Graph" };
         clearButton.style.backgroundColor = new Color(0.5f, 0.1f, 0.1f);
         toolbar.Add(clearButton);
 

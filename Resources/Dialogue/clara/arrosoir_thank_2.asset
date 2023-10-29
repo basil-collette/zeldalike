@@ -20,21 +20,21 @@ MonoBehaviour:
     PortName: Output
     TargetNodeGuid: 0d7640ee-15c0-41b6-a9be-75e8a2578b56
   - BaseNodeGuid: 136d1f0d-c81d-40fa-a900-70d5f5fc9f2f
-    PortName: Ah ?? Oui !
+    PortName: '>'
     TargetNodeGuid: 6edefae9-e4c1-4776-9ccd-39bd80755747
   - BaseNodeGuid: 0d7640ee-15c0-41b6-a9be-75e8a2578b56
     PortName: Output
     TargetNodeGuid: 36641a87-f500-41c8-b525-8059d0ed78e3
   NodeDatas:
-  - rid: 3230699720299511815
-  - rid: 3230699720299511816
-  - rid: 3230699720299511817
-  - rid: 3230699720299511818
+  - rid: 3230700037943328770
+  - rid: 3230700037943328771
+  - rid: 3230700037943328772
+  - rid: 3230700037943328773
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230699720299511815
+    - rid: 3230700037943328770
       type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 6edefae9-e4c1-4776-9ccd-39bd80755747
@@ -43,7 +43,7 @@ MonoBehaviour:
         EntryPoint: 0
         Type: 0
         Param: L'arrosoir de Clara
-    - rid: 3230699720299511816
+    - rid: 3230700037943328771
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 136d1f0d-c81d-40fa-a900-70d5f5fc9f2f
@@ -56,7 +56,10 @@ MonoBehaviour:
         DialogueCode: 
         Side: 0
         Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
-    - rid: 3230699720299511817
+        Outputs:
+        - '>'
+        Emotion: 0
+    - rid: 3230700037943328772
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 36641a87-f500-41c8-b525-8059d0ed78e3
@@ -68,7 +71,10 @@ MonoBehaviour:
         DialogueCode: arrosoir_thank
         Side: 0
         Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
-    - rid: 3230699720299511818
+        Outputs:
+        - '>'
+        Emotion: 0
+    - rid: 3230700037943328773
       type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 0d7640ee-15c0-41b6-a9be-75e8a2578b56

@@ -76,7 +76,7 @@ public class GraphSaveUtility
         if (!Edges.Any()) return false;
 
         //var connectedPorts = Edges.Where(edge => edge.input.node != null).OrderByDescending(edge => ((BaseNode)(edge.output.node)).EntryPoint).ToArray();
-        var connectedPorts = Edges.Where(x => x.input.node != null).ToArray();
+        var connectedPorts = Edges.ToArray(); //.Where(x => x.input.node != null)
         for (var i = 0; i < connectedPorts.Length; i++)
         {
             var outputNode = connectedPorts[i].output.node as BaseNode;
@@ -95,6 +95,8 @@ public class GraphSaveUtility
             if (nodeData is DialogueNode)
             {
                 DialogueNode nodeCasted = nodeData as DialogueNode;
+                string[] outputs = nodeCasted.outputContainer.Children().Select(x => (x as Port).portName).ToArray();
+
                 dialogueContainer.NodeDatas.Add(new DialogueNodeData
                 {
                     Guid = nodeCasted.Guid,
@@ -104,7 +106,8 @@ public class GraphSaveUtility
                     DialogueCode = nodeCasted.DialogueCode,
                     Side = nodeCasted.Side,
                     Type = nodeCasted.Type,
-                    Pnj = nodeCasted.Pnj
+                    Pnj = nodeCasted.Pnj,
+                    Outputs = outputs
                 });
             }
             else if (nodeData is EventNode)
@@ -188,7 +191,7 @@ public class GraphSaveUtility
 
     private void CreateNodes()
     {
-        foreach (var nodeData in _containerCache.NodeDatas)
+        foreach (BaseNodeData nodeData in _containerCache.NodeDatas)
         {
             BaseNode baseNode = null;
 
@@ -216,14 +219,16 @@ public class GraphSaveUtility
 
             if (nodeData is DialogueNodeData)
             {
-                var nodePorts = _containerCache.NodeLinks.Where(x => x.BaseNodeGuid == nodeData.Guid).ToList();
-                if (nodePorts.Count() > 0)
+                string[] outputPorts = (nodeData as DialogueNodeData).Outputs;
+                var outputConnexions = _containerCache.NodeLinks.Where(x => x.BaseNodeGuid == nodeData.Guid).ToList();
+
+                if (outputPorts.Length > 0)
                 {
-                    nodePorts.ForEach(x => _targetGraphView.AddChoicePort(baseNode, x.PortName));
+                    outputPorts.ToList().ForEach(portName => _targetGraphView.AddChoicePort(baseNode, portName));
                 }
                 else
                 {
-                    _targetGraphView.AddChoicePort(baseNode, "Ok");
+                    _targetGraphView.AddChoicePort(baseNode, ">");
                 }
             }
             else if (nodeData is EventNodeData)
@@ -276,7 +281,8 @@ public class GraphSaveUtility
             DialogueCode = nodeData.DialogueCode,
             Side = nodeData.Side,
             Type = nodeData.Type,
-            Pnj = nodeData.Pnj
+            Pnj = nodeData.Pnj,
+            Outputs = nodeData.Outputs
         };
     }
 

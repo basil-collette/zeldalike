@@ -60,7 +60,6 @@ namespace Assets.Scripts.Manager
         {
             soundSource.PlayOneShot(sounds.First(e => e.Name == Name).Clip);
         }
-
         public void PlayEffect(string Name, float currentVolume)
         {
             soundSource.PlayOneShot(sounds.First(e => e.Name == Name).Clip, currentVolume);
@@ -69,6 +68,10 @@ namespace Assets.Scripts.Manager
         public void PlayEffect(AudioClip clip)
         {
             soundSource.PlayOneShot(clip);
+        }
+        public void PlayEffect(AudioClip clip, float currentVolume)
+        {
+            soundSource.PlayOneShot(clip, currentVolume);
         }
 
         public void StopEffect()

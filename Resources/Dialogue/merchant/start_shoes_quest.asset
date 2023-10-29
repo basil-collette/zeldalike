@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a2d8ae767442a4c8c0177884108faf, type: 3}
+  m_Name: start_shoes_quest
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGuid: ea9d711f-0df2-4a68-a985-d01428a50833
+    PortName: Next
+    TargetNodeGuid: c8af2643-5226-4c57-b158-06d4b1769007
+  - BaseNodeGuid: c8af2643-5226-4c57-b158-06d4b1769007
+    PortName: '>'
+    TargetNodeGuid: 547f71b1-767b-4e8b-8af6-5f475fce4f4f
+  - BaseNodeGuid: 547f71b1-767b-4e8b-8af6-5f475fce4f4f
+    PortName: Ok
+    TargetNodeGuid: 2bc12c91-1d35-4382-801d-255646f0cc3c
+  NodeDatas:
+  - rid: 3230700037943328809
+  - rid: 3230700037943328810
+  - rid: 3230700037943328811
+  ExposedProperties: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 3230700037943328809
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: c8af2643-5226-4c57-b158-06d4b1769007
+        title: Dialogue
+        Position: {x: 201, y: 200}
+        EntryPoint: 0
+        Type: 0
+        DialogueText: "Le mafieux s'est f\xE2ch\xE9 que je l'ai d\xE9nonc\xE9 pour
+          tes dipl\xF4mes, il m'a racketter mes chaussures..."
+        DialogueCode: 
+        Side: 0
+        Pnj: {fileID: 5616454285522393285, guid: 565688d4d540bf24f84feb804119df1d, type: 3}
+        Outputs:
+        - '>'
+        Emotion: 0
+    - rid: 3230700037943328810
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: 547f71b1-767b-4e8b-8af6-5f475fce4f4f
+        title: Dialogue
+        Position: {x: 201, y: 430}
+        EntryPoint: 0
+        Type: 0
+        DialogueText: "Je veux bien t'offrir la corde si tu me les ram\xE8nes !"
+        DialogueCode: 
+        Side: 0
+        Pnj: {fileID: 5616454285522393285, guid: 565688d4d540bf24f84feb804119df1d, type: 3}
+        Outputs:
+        - Ok
+        Emotion: 0
+    - rid: 3230700037943328811
+      type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: 2bc12c91-1d35-4382-801d-255646f0cc3c
+        title: Event
+        Position: {x: 601, y: 430}
+        EntryPoint: 0
+        Type: 0
+        Param: merchant_shoes

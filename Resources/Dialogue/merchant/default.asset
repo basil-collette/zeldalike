@@ -17,18 +17,24 @@ MonoBehaviour:
     PortName: Next
     TargetNodeGuid: a9d3badb-5799-457c-8b2a-6be546d4e85a
   NodeDatas:
-  - rid: 8045116879657238528
+  - rid: 3230700079674294275
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 8045116879657238528
+    - rid: 3230700079674294275
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: a9d3badb-5799-457c-8b2a-6be546d4e85a
         title: Dialogue
         Position: {x: 202, y: 200}
         EntryPoint: 0
-        DialogueText: Les affaires sont les affaires !
+        Type: 0
+        DialogueText: "Tu retrouves tes esprits ? Si tu veux acheter des choses,
+          l'\xE9choppe est ouverte !"
         DialogueCode: default
-        Pnj: {fileID: 0}
+        Side: 0
+        Pnj: {fileID: 5616454285522393285, guid: 565688d4d540bf24f84feb804119df1d, type: 3}
+        Outputs:
+        - '>'
+        Emotion: 0

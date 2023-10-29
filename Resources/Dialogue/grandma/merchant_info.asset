@@ -17,19 +17,24 @@ MonoBehaviour:
     PortName: Next
     TargetNodeGuid: 26023590-046a-4eb1-859f-c345d50297e8
   NodeDatas:
-  - rid: 8045117328212885509
+  - rid: 3230700086584672263
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 8045117328212885509
+    - rid: 3230700086584672263
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 26023590-046a-4eb1-859f-c345d50297e8
         title: Dialogue
         Position: {x: 199, y: 200}
         EntryPoint: 0
-        DialogueText: "C'est d\xE9j\xE0 un bon d\xE9but, pour tes dipl\xF4mes tu
-          devrais voir le marchand, il a toujours de bonnes infos !"
+        Type: 0
+        DialogueText: "C'est d\xE9j\xE0 un bon d\xE9but. Maintenant pour tes dipl\xF4mes
+          tu devrais voir le marchand, il a toujours de bonnes infos !"
         DialogueCode: merchant-info
+        Side: 0
         Pnj: {fileID: 4019585777184574299, guid: 77a7f1fd211b43547a731f2d8b7cbabd, type: 3}
+        Outputs:
+        - '>'
+        Emotion: 0

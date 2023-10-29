@@ -1,31 +1,23 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SellManager : MonoBehaviour
 {
-    public GameObject rope;
-    public GameObject heart;
-    public GameObject axe;
+    public SellItem rope;
+    public SellItem heart;
+    public SellItem axe;
+    public Text money;
 
     void Start()
     {
         List<string> shop = MainGameManager._storyEventManager._shop;
 
-        if (shop.Exists(x => x ==  "rope")
-            && !MainGameManager._inventoryManager._items.Exists(x => x.NameCode == "rope"))
-        {
-            rope.SetActive(true);
-        }
+        rope.gameObject.SetActive(!shop.Exists(x => x == rope.item.NameCode));
+        heart.gameObject.SetActive(!shop.Exists(x => x == heart.item.NameCode));
+        axe.gameObject.SetActive(!shop.Exists(x => x == axe.item.NameCode));
 
-        if (shop.Exists(x => x == "heart"))
-        {
-            heart.SetActive(true);
-        }
-
-        if (shop.Exists(x => x == "axe"))
-        {
-            axe.SetActive(true);
-        }
+        money.text = MainGameManager._inventoryManager._money.ToString();
     }
 
 }

@@ -12,7 +12,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41557f1dd68b702408f566394a1c8457, type: 3}
   m_Name: Merchant
   m_EditorClassIdentifier: 
-  Dialogues: []
-  references:
-    version: 2
-    RefIds: []
+  Dialogues:
+  - NameCode: default
+    DialogueContainer: {fileID: 11400000, guid: 085d6a5a76c6b8a4d9f6a0674f6691f6, type: 2}
+    Conditions: []
+    Priority: 1
+  - NameCode: mafieux_indice
+    DialogueContainer: {fileID: 11400000, guid: 27686549b7d908b4e9575f593a0ea93a, type: 2}
+    Conditions:
+    - Type: 3
+      Code: id_card
+      Not: 0
+    - Type: 2
+      Code: passpartout-without-info
+      Not: 1
+    Priority: 3
+  - NameCode: mafieux_indice_2
+    DialogueContainer: {fileID: 11400000, guid: fa2dc068321554b4caabdbf85889a1e0, type: 2}
+    Conditions:
+    - Type: 2
+      Code: passpartout-without-info
+      Not: 0
+    - Type: 3
+      Code: passpartout
+      Not: 1
+    Priority: 3
+  - NameCode: start_quest_shoes
+    DialogueContainer: {fileID: 11400000, guid: f8bb866d50e507a45aeadac5d55c34cc, type: 2}
+    Conditions:
+    - Type: 3
+      Code: diplomas
+      Not: 0
+    - Type: 0
+      Code: merchant_shoes
+      Not: 1
+    Priority: 3
+  - NameCode: 
+    DialogueContainer: {fileID: 11400000, guid: 4f14275551e467348bae4f4c5b7a134b, type: 2}
+    Conditions:
+    - Type: 0
+      Code: merchant_shoes
+      Not: 0
+    - Type: 1
+      Code: merchant_shoes
+      Not: 1
+    - Type: 3
+      Code: shoes
+      Not: 1
+    Priority: 3
+  - NameCode: shoes_thanks
+    DialogueContainer: {fileID: 11400000, guid: c6d0096b282058a43ba6c65e7c2f961e, type: 2}
+    Conditions:
+    - Type: 3
+      Code: shoes
+      Not: 0
+    Priority: 3

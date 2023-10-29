@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a2d8ae767442a4c8c0177884108faf, type: 3}
+  m_Name: rappel_go_mother_rose
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGuid: 6fa4ec6b-29d0-4db2-b9e2-1c93cb628193
+    PortName: Next
+    TargetNodeGuid: 43f46476-a10c-4e8b-a459-16f62cde4049
+  NodeDatas:
+  - rid: 3230700086584672271
+  ExposedProperties: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 3230700086584672271
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: 43f46476-a10c-4e8b-a459-16f62cde4049
+        title: Dialogue
+        Position: {x: 205, y: 200}
+        EntryPoint: 0
+        Type: 0
+        DialogueText: "La rose m\xE8re se situe au Nord Est du village, mais le pont
+          qui y m\xE8ne est cass\xE9... Pour le r\xE9parer, il faudrait du bois et
+          de la corde"
+        DialogueCode: 
+        Side: 0
+        Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
+        Outputs:
+        - Compris !
+        Emotion: 0

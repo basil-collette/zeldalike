@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a2d8ae767442a4c8c0177884108faf, type: 3}
+  m_Name: shoes_thanks
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGuid: ea9d711f-0df2-4a68-a985-d01428a50833
+    PortName: Next
+    TargetNodeGuid: b017ee3b-82d9-4dc7-89c4-b0ce5e34292a
+  - BaseNodeGuid: b017ee3b-82d9-4dc7-89c4-b0ce5e34292a
+    PortName: Oui
+    TargetNodeGuid: cf9b52b7-5e89-4f88-a052-75c9d30affb6
+  - BaseNodeGuid: cf9b52b7-5e89-4f88-a052-75c9d30affb6
+    PortName: Merci !
+    TargetNodeGuid: 425a171a-15f6-4f34-bc38-5b8973618d0c
+  NodeDatas:
+  - rid: 3230700037943328806
+  - rid: 3230700037943328807
+  - rid: 3230700037943328808
+  ExposedProperties: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 3230700037943328806
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: b017ee3b-82d9-4dc7-89c4-b0ce5e34292a
+        title: Dialogue
+        Position: {x: 200, y: 200}
+        EntryPoint: 0
+        Type: 0
+        DialogueText: Oh tu lui as repris mes chaussures !
+        DialogueCode: 
+        Side: 0
+        Pnj: {fileID: 5616454285522393285, guid: 565688d4d540bf24f84feb804119df1d, type: 3}
+        Outputs:
+        - Oui
+        Emotion: 0
+    - rid: 3230700037943328807
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: cf9b52b7-5e89-4f88-a052-75c9d30affb6
+        title: Dialogue
+        Position: {x: 200, y: 408}
+        EntryPoint: 0
+        Type: 0
+        DialogueText: "Tiens voil\xE0 la corde comme promis."
+        DialogueCode: shoes_thanks
+        Side: 0
+        Pnj: {fileID: 5616454285522393285, guid: 565688d4d540bf24f84feb804119df1d, type: 3}
+        Outputs:
+        - Merci !
+        Emotion: 0
+    - rid: 3230700037943328808
+      type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: 425a171a-15f6-4f34-bc38-5b8973618d0c
+        title: Event
+        Position: {x: 499, y: 408}
+        EntryPoint: 0
+        Type: 2
+        Param: shoes

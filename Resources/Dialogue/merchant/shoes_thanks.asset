@@ -23,14 +23,14 @@ MonoBehaviour:
     PortName: Merci !
     TargetNodeGuid: 425a171a-15f6-4f34-bc38-5b8973618d0c
   NodeDatas:
-  - rid: 3230700037943328806
-  - rid: 3230700037943328807
-  - rid: 3230700037943328808
+  - rid: 3230700125532454942
+  - rid: 3230700125532454943
+  - rid: 3230700125532454944
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230700037943328806
+    - rid: 3230700125532454942
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: b017ee3b-82d9-4dc7-89c4-b0ce5e34292a
@@ -45,7 +45,7 @@ MonoBehaviour:
         Outputs:
         - Oui
         Emotion: 0
-    - rid: 3230700037943328807
+    - rid: 3230700125532454943
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: cf9b52b7-5e89-4f88-a052-75c9d30affb6
@@ -60,12 +60,12 @@ MonoBehaviour:
         Outputs:
         - Merci !
         Emotion: 0
-    - rid: 3230700037943328808
+    - rid: 3230700125532454944
       type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 425a171a-15f6-4f34-bc38-5b8973618d0c
         title: Event
         Position: {x: 499, y: 408}
         EntryPoint: 0
-        Type: 2
+        Type: 3
         Param: shoes

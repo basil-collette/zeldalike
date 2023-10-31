@@ -8,7 +8,7 @@ public class LogTreeGrow : Interacting
     readonly string REQUIRED_ITEM_CODE = "arrosoir";
 
     [SerializeField] Sprite spriteActionButton;
-    [SerializeField] CircleCollider2D actionButtonZone;
+    [SerializeField] CircleCollider2D actionArrosoirButtonZone;
 
     GameObject ActionButtonGrow;
     LogTreeHit logTreeHit;
@@ -22,6 +22,7 @@ public class LogTreeGrow : Interacting
             GetComponent<Animator>().SetBool("grown", true);
             logTreeHit.enabled = true;
             enabled = false;
+            actionArrosoirButtonZone.enabled = false;
             return;
         }
 
@@ -34,7 +35,7 @@ public class LogTreeGrow : Interacting
 
         GetComponent<Animator>().SetTrigger("grow");
 
-        actionButtonZone.enabled = false;
+        actionArrosoirButtonZone.enabled = false;
         Destroy(ActionButtonGrow);
     }
 

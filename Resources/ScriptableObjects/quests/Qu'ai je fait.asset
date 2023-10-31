@@ -18,30 +18,874 @@ MonoBehaviour:
   QuestSteps:
   - Goals:
     - rid: 3230699720299511825
-    IsCompleted: 0
+    IsCompleted: 1
     Rewards:
       Money: 0
       Experience: 0
       ItemsRef: []
     _Quest:
-      Name: 
-      Code: 
-      Description: 
-      IsCompleted: 0
-      QuestSteps: []
+      Name: Qu'ai je fait
+      Code: my_diplomas
+      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+      IsCompleted: 1
+      QuestSteps:
+      - Goals:
+        - rid: 3230699720299511825
+        IsCompleted: 1
+        Rewards:
+          Money: 0
+          Experience: 0
+          ItemsRef: []
+        _Quest:
+          Name: Qu'ai je fait
+          Code: my_diplomas
+          Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+          IsCompleted: 1
+          QuestSteps:
+          - Goals:
+            - rid: 3230699720299511825
+            IsCompleted: 1
+            Rewards:
+              Money: 0
+              Experience: 0
+              ItemsRef: []
+            _Quest:
+              Name: Qu'ai je fait
+              Code: my_diplomas
+              Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+              IsCompleted: 1
+              QuestSteps:
+              - Goals:
+                - rid: 3230699720299511825
+                IsCompleted: 1
+                Rewards:
+                  Money: 0
+                  Experience: 0
+                  ItemsRef: []
+                _Quest:
+                  Name: Qu'ai je fait
+                  Code: my_diplomas
+                  Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                  IsCompleted: 1
+                  QuestSteps:
+                  - Goals:
+                    - rid: 3230699720299511825
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+                  - Goals:
+                    - rid: 3230699720299511827
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+              - Goals:
+                - rid: 3230699720299511827
+                IsCompleted: 1
+                Rewards:
+                  Money: 0
+                  Experience: 0
+                  ItemsRef: []
+                _Quest:
+                  Name: Qu'ai je fait
+                  Code: my_diplomas
+                  Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                  IsCompleted: 1
+                  QuestSteps:
+                  - Goals:
+                    - rid: 3230699720299511825
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+                  - Goals:
+                    - rid: 3230699720299511827
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+          - Goals:
+            - rid: 3230699720299511827
+            IsCompleted: 1
+            Rewards:
+              Money: 0
+              Experience: 0
+              ItemsRef: []
+            _Quest:
+              Name: Qu'ai je fait
+              Code: my_diplomas
+              Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+              IsCompleted: 1
+              QuestSteps:
+              - Goals:
+                - rid: 3230699720299511825
+                IsCompleted: 1
+                Rewards:
+                  Money: 0
+                  Experience: 0
+                  ItemsRef: []
+                _Quest:
+                  Name: Qu'ai je fait
+                  Code: my_diplomas
+                  Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                  IsCompleted: 1
+                  QuestSteps:
+                  - Goals:
+                    - rid: 3230699720299511825
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+                  - Goals:
+                    - rid: 3230699720299511827
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+              - Goals:
+                - rid: 3230699720299511827
+                IsCompleted: 1
+                Rewards:
+                  Money: 0
+                  Experience: 0
+                  ItemsRef: []
+                _Quest:
+                  Name: Qu'ai je fait
+                  Code: my_diplomas
+                  Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                  IsCompleted: 1
+                  QuestSteps:
+                  - Goals:
+                    - rid: 3230699720299511825
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+                  - Goals:
+                    - rid: 3230699720299511827
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+      - Goals:
+        - rid: 3230699720299511827
+        IsCompleted: 1
+        Rewards:
+          Money: 0
+          Experience: 0
+          ItemsRef: []
+        _Quest:
+          Name: Qu'ai je fait
+          Code: my_diplomas
+          Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+          IsCompleted: 1
+          QuestSteps:
+          - Goals:
+            - rid: 3230699720299511825
+            IsCompleted: 1
+            Rewards:
+              Money: 0
+              Experience: 0
+              ItemsRef: []
+            _Quest:
+              Name: Qu'ai je fait
+              Code: my_diplomas
+              Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+              IsCompleted: 1
+              QuestSteps:
+              - Goals:
+                - rid: 3230699720299511825
+                IsCompleted: 1
+                Rewards:
+                  Money: 0
+                  Experience: 0
+                  ItemsRef: []
+                _Quest:
+                  Name: Qu'ai je fait
+                  Code: my_diplomas
+                  Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                  IsCompleted: 1
+                  QuestSteps:
+                  - Goals:
+                    - rid: 3230699720299511825
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+                  - Goals:
+                    - rid: 3230699720299511827
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+              - Goals:
+                - rid: 3230699720299511827
+                IsCompleted: 1
+                Rewards:
+                  Money: 0
+                  Experience: 0
+                  ItemsRef: []
+                _Quest:
+                  Name: Qu'ai je fait
+                  Code: my_diplomas
+                  Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                  IsCompleted: 1
+                  QuestSteps:
+                  - Goals:
+                    - rid: 3230699720299511825
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+                  - Goals:
+                    - rid: 3230699720299511827
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+          - Goals:
+            - rid: 3230699720299511827
+            IsCompleted: 1
+            Rewards:
+              Money: 0
+              Experience: 0
+              ItemsRef: []
+            _Quest:
+              Name: Qu'ai je fait
+              Code: my_diplomas
+              Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+              IsCompleted: 1
+              QuestSteps:
+              - Goals:
+                - rid: 3230699720299511825
+                IsCompleted: 1
+                Rewards:
+                  Money: 0
+                  Experience: 0
+                  ItemsRef: []
+                _Quest:
+                  Name: Qu'ai je fait
+                  Code: my_diplomas
+                  Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                  IsCompleted: 1
+                  QuestSteps:
+                  - Goals:
+                    - rid: 3230699720299511825
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+                  - Goals:
+                    - rid: 3230699720299511827
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+              - Goals:
+                - rid: 3230699720299511827
+                IsCompleted: 1
+                Rewards:
+                  Money: 0
+                  Experience: 0
+                  ItemsRef: []
+                _Quest:
+                  Name: Qu'ai je fait
+                  Code: my_diplomas
+                  Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                  IsCompleted: 1
+                  QuestSteps:
+                  - Goals:
+                    - rid: 3230699720299511825
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+                  - Goals:
+                    - rid: 3230699720299511827
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
   - Goals:
     - rid: 3230699720299511827
-    IsCompleted: 0
+    IsCompleted: 1
     Rewards:
       Money: 0
       Experience: 0
       ItemsRef: []
     _Quest:
-      Name: 
-      Code: 
-      Description: 
-      IsCompleted: 0
-      QuestSteps: []
+      Name: Qu'ai je fait
+      Code: my_diplomas
+      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+      IsCompleted: 1
+      QuestSteps:
+      - Goals:
+        - rid: 3230699720299511825
+        IsCompleted: 1
+        Rewards:
+          Money: 0
+          Experience: 0
+          ItemsRef: []
+        _Quest:
+          Name: Qu'ai je fait
+          Code: my_diplomas
+          Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+          IsCompleted: 1
+          QuestSteps:
+          - Goals:
+            - rid: 3230699720299511825
+            IsCompleted: 1
+            Rewards:
+              Money: 0
+              Experience: 0
+              ItemsRef: []
+            _Quest:
+              Name: Qu'ai je fait
+              Code: my_diplomas
+              Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+              IsCompleted: 1
+              QuestSteps:
+              - Goals:
+                - rid: 3230699720299511825
+                IsCompleted: 1
+                Rewards:
+                  Money: 0
+                  Experience: 0
+                  ItemsRef: []
+                _Quest:
+                  Name: Qu'ai je fait
+                  Code: my_diplomas
+                  Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                  IsCompleted: 1
+                  QuestSteps:
+                  - Goals:
+                    - rid: 3230699720299511825
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+                  - Goals:
+                    - rid: 3230699720299511827
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+              - Goals:
+                - rid: 3230699720299511827
+                IsCompleted: 1
+                Rewards:
+                  Money: 0
+                  Experience: 0
+                  ItemsRef: []
+                _Quest:
+                  Name: Qu'ai je fait
+                  Code: my_diplomas
+                  Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                  IsCompleted: 1
+                  QuestSteps:
+                  - Goals:
+                    - rid: 3230699720299511825
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+                  - Goals:
+                    - rid: 3230699720299511827
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+          - Goals:
+            - rid: 3230699720299511827
+            IsCompleted: 1
+            Rewards:
+              Money: 0
+              Experience: 0
+              ItemsRef: []
+            _Quest:
+              Name: Qu'ai je fait
+              Code: my_diplomas
+              Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+              IsCompleted: 1
+              QuestSteps:
+              - Goals:
+                - rid: 3230699720299511825
+                IsCompleted: 1
+                Rewards:
+                  Money: 0
+                  Experience: 0
+                  ItemsRef: []
+                _Quest:
+                  Name: Qu'ai je fait
+                  Code: my_diplomas
+                  Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                  IsCompleted: 1
+                  QuestSteps:
+                  - Goals:
+                    - rid: 3230699720299511825
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+                  - Goals:
+                    - rid: 3230699720299511827
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+              - Goals:
+                - rid: 3230699720299511827
+                IsCompleted: 1
+                Rewards:
+                  Money: 0
+                  Experience: 0
+                  ItemsRef: []
+                _Quest:
+                  Name: Qu'ai je fait
+                  Code: my_diplomas
+                  Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                  IsCompleted: 1
+                  QuestSteps:
+                  - Goals:
+                    - rid: 3230699720299511825
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+                  - Goals:
+                    - rid: 3230699720299511827
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+      - Goals:
+        - rid: 3230699720299511827
+        IsCompleted: 1
+        Rewards:
+          Money: 0
+          Experience: 0
+          ItemsRef: []
+        _Quest:
+          Name: Qu'ai je fait
+          Code: my_diplomas
+          Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+          IsCompleted: 1
+          QuestSteps:
+          - Goals:
+            - rid: 3230699720299511825
+            IsCompleted: 1
+            Rewards:
+              Money: 0
+              Experience: 0
+              ItemsRef: []
+            _Quest:
+              Name: Qu'ai je fait
+              Code: my_diplomas
+              Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+              IsCompleted: 1
+              QuestSteps:
+              - Goals:
+                - rid: 3230699720299511825
+                IsCompleted: 1
+                Rewards:
+                  Money: 0
+                  Experience: 0
+                  ItemsRef: []
+                _Quest:
+                  Name: Qu'ai je fait
+                  Code: my_diplomas
+                  Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                  IsCompleted: 1
+                  QuestSteps:
+                  - Goals:
+                    - rid: 3230699720299511825
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+                  - Goals:
+                    - rid: 3230699720299511827
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+              - Goals:
+                - rid: 3230699720299511827
+                IsCompleted: 1
+                Rewards:
+                  Money: 0
+                  Experience: 0
+                  ItemsRef: []
+                _Quest:
+                  Name: Qu'ai je fait
+                  Code: my_diplomas
+                  Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                  IsCompleted: 1
+                  QuestSteps:
+                  - Goals:
+                    - rid: 3230699720299511825
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+                  - Goals:
+                    - rid: 3230699720299511827
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+          - Goals:
+            - rid: 3230699720299511827
+            IsCompleted: 1
+            Rewards:
+              Money: 0
+              Experience: 0
+              ItemsRef: []
+            _Quest:
+              Name: Qu'ai je fait
+              Code: my_diplomas
+              Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+              IsCompleted: 1
+              QuestSteps:
+              - Goals:
+                - rid: 3230699720299511825
+                IsCompleted: 1
+                Rewards:
+                  Money: 0
+                  Experience: 0
+                  ItemsRef: []
+                _Quest:
+                  Name: Qu'ai je fait
+                  Code: my_diplomas
+                  Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                  IsCompleted: 1
+                  QuestSteps:
+                  - Goals:
+                    - rid: 3230699720299511825
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+                  - Goals:
+                    - rid: 3230699720299511827
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+              - Goals:
+                - rid: 3230699720299511827
+                IsCompleted: 1
+                Rewards:
+                  Money: 0
+                  Experience: 0
+                  ItemsRef: []
+                _Quest:
+                  Name: Qu'ai je fait
+                  Code: my_diplomas
+                  Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                  IsCompleted: 1
+                  QuestSteps:
+                  - Goals:
+                    - rid: 3230699720299511825
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
+                  - Goals:
+                    - rid: 3230699720299511827
+                    IsCompleted: 1
+                    Rewards:
+                      Money: 0
+                      Experience: 0
+                      ItemsRef: []
+                    _Quest:
+                      Name: Qu'ai je fait
+                      Code: my_diplomas
+                      Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                      IsCompleted: 1
+                      QuestSteps:
+                      - IsCompleted: 1
+                      - IsCompleted: 1
   IsCompleted: 0
   references:
     version: 2
@@ -49,44 +893,922 @@ MonoBehaviour:
     - rid: 3230699720299511825
       type: {class: DiscussionGoal, ns: , asm: Assembly-CSharp}
       data:
-        Target: diplomas_info
+        Target: passpartout_deal
         Objective: "R\xE9colter des infos \xE0 propos de mes dipl\xF4mes"
-        IsCompleted: 0
+        IsCompleted: 1
         RequiredAmount: 1
-        CurrentAmount: 0
+        CurrentAmount: 2
         _QuestStep:
-          Goals: []
-          IsCompleted: 0
+          Goals:
+          - rid: 3230699720299511825
+          IsCompleted: 1
           Rewards:
             Money: 0
             Experience: 0
             ItemsRef: []
           _Quest:
-            Name: 
-            Code: 
-            Description: 
-            IsCompleted: 0
-            QuestSteps: []
+            Name: Qu'ai je fait
+            Code: my_diplomas
+            Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+            IsCompleted: 1
+            QuestSteps:
+            - Goals:
+              - rid: 3230699720299511825
+              IsCompleted: 1
+              Rewards:
+                Money: 0
+                Experience: 0
+                ItemsRef: []
+              _Quest:
+                Name: Qu'ai je fait
+                Code: my_diplomas
+                Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                IsCompleted: 1
+                QuestSteps:
+                - Goals:
+                  - rid: 3230699720299511825
+                  IsCompleted: 1
+                  Rewards:
+                    Money: 0
+                    Experience: 0
+                    ItemsRef: []
+                  _Quest:
+                    Name: Qu'ai je fait
+                    Code: my_diplomas
+                    Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                    IsCompleted: 1
+                    QuestSteps:
+                    - Goals:
+                      - rid: 3230699720299511825
+                      IsCompleted: 1
+                      Rewards:
+                        Money: 0
+                        Experience: 0
+                        ItemsRef: []
+                      _Quest:
+                        Name: Qu'ai je fait
+                        Code: my_diplomas
+                        Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                        IsCompleted: 1
+                        QuestSteps:
+                        - Goals:
+                          - rid: 3230699720299511825
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                        - Goals:
+                          - rid: 3230699720299511827
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                    - Goals:
+                      - rid: 3230699720299511827
+                      IsCompleted: 1
+                      Rewards:
+                        Money: 0
+                        Experience: 0
+                        ItemsRef: []
+                      _Quest:
+                        Name: Qu'ai je fait
+                        Code: my_diplomas
+                        Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                        IsCompleted: 1
+                        QuestSteps:
+                        - Goals:
+                          - rid: 3230699720299511825
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                        - Goals:
+                          - rid: 3230699720299511827
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                - Goals:
+                  - rid: 3230699720299511827
+                  IsCompleted: 1
+                  Rewards:
+                    Money: 0
+                    Experience: 0
+                    ItemsRef: []
+                  _Quest:
+                    Name: Qu'ai je fait
+                    Code: my_diplomas
+                    Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                    IsCompleted: 1
+                    QuestSteps:
+                    - Goals:
+                      - rid: 3230699720299511825
+                      IsCompleted: 1
+                      Rewards:
+                        Money: 0
+                        Experience: 0
+                        ItemsRef: []
+                      _Quest:
+                        Name: Qu'ai je fait
+                        Code: my_diplomas
+                        Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                        IsCompleted: 1
+                        QuestSteps:
+                        - Goals:
+                          - rid: 3230699720299511825
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                        - Goals:
+                          - rid: 3230699720299511827
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                    - Goals:
+                      - rid: 3230699720299511827
+                      IsCompleted: 1
+                      Rewards:
+                        Money: 0
+                        Experience: 0
+                        ItemsRef: []
+                      _Quest:
+                        Name: Qu'ai je fait
+                        Code: my_diplomas
+                        Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                        IsCompleted: 1
+                        QuestSteps:
+                        - Goals:
+                          - rid: 3230699720299511825
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                        - Goals:
+                          - rid: 3230699720299511827
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+            - Goals:
+              - rid: 3230699720299511827
+              IsCompleted: 1
+              Rewards:
+                Money: 0
+                Experience: 0
+                ItemsRef: []
+              _Quest:
+                Name: Qu'ai je fait
+                Code: my_diplomas
+                Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                IsCompleted: 1
+                QuestSteps:
+                - Goals:
+                  - rid: 3230699720299511825
+                  IsCompleted: 1
+                  Rewards:
+                    Money: 0
+                    Experience: 0
+                    ItemsRef: []
+                  _Quest:
+                    Name: Qu'ai je fait
+                    Code: my_diplomas
+                    Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                    IsCompleted: 1
+                    QuestSteps:
+                    - Goals:
+                      - rid: 3230699720299511825
+                      IsCompleted: 1
+                      Rewards:
+                        Money: 0
+                        Experience: 0
+                        ItemsRef: []
+                      _Quest:
+                        Name: Qu'ai je fait
+                        Code: my_diplomas
+                        Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                        IsCompleted: 1
+                        QuestSteps:
+                        - Goals:
+                          - rid: 3230699720299511825
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                        - Goals:
+                          - rid: 3230699720299511827
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                    - Goals:
+                      - rid: 3230699720299511827
+                      IsCompleted: 1
+                      Rewards:
+                        Money: 0
+                        Experience: 0
+                        ItemsRef: []
+                      _Quest:
+                        Name: Qu'ai je fait
+                        Code: my_diplomas
+                        Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                        IsCompleted: 1
+                        QuestSteps:
+                        - Goals:
+                          - rid: 3230699720299511825
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                        - Goals:
+                          - rid: 3230699720299511827
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                - Goals:
+                  - rid: 3230699720299511827
+                  IsCompleted: 1
+                  Rewards:
+                    Money: 0
+                    Experience: 0
+                    ItemsRef: []
+                  _Quest:
+                    Name: Qu'ai je fait
+                    Code: my_diplomas
+                    Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                    IsCompleted: 1
+                    QuestSteps:
+                    - Goals:
+                      - rid: 3230699720299511825
+                      IsCompleted: 1
+                      Rewards:
+                        Money: 0
+                        Experience: 0
+                        ItemsRef: []
+                      _Quest:
+                        Name: Qu'ai je fait
+                        Code: my_diplomas
+                        Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                        IsCompleted: 1
+                        QuestSteps:
+                        - Goals:
+                          - rid: 3230699720299511825
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                        - Goals:
+                          - rid: 3230699720299511827
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                    - Goals:
+                      - rid: 3230699720299511827
+                      IsCompleted: 1
+                      Rewards:
+                        Money: 0
+                        Experience: 0
+                        ItemsRef: []
+                      _Quest:
+                        Name: Qu'ai je fait
+                        Code: my_diplomas
+                        Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                        IsCompleted: 1
+                        QuestSteps:
+                        - Goals:
+                          - rid: 3230699720299511825
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                        - Goals:
+                          - rid: 3230699720299511827
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
         Type: Discussion
     - rid: 3230699720299511827
       type: {class: CollectGoal, ns: , asm: Assembly-CSharp}
       data:
         Target: diplomas
         Objective: "R\xE9cup\xE9rer mes dipl\xF4mes dans la maison du collectioneur"
-        IsCompleted: 0
+        IsCompleted: 1
         RequiredAmount: 1
-        CurrentAmount: 0
+        CurrentAmount: 1
         _QuestStep:
-          Goals: []
-          IsCompleted: 0
+          Goals:
+          - rid: 3230699720299511827
+          IsCompleted: 1
           Rewards:
             Money: 0
             Experience: 0
             ItemsRef: []
           _Quest:
-            Name: 
-            Code: 
-            Description: 
-            IsCompleted: 0
-            QuestSteps: []
+            Name: Qu'ai je fait
+            Code: my_diplomas
+            Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+            IsCompleted: 1
+            QuestSteps:
+            - Goals:
+              - rid: 3230699720299511825
+              IsCompleted: 1
+              Rewards:
+                Money: 0
+                Experience: 0
+                ItemsRef: []
+              _Quest:
+                Name: Qu'ai je fait
+                Code: my_diplomas
+                Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                IsCompleted: 1
+                QuestSteps:
+                - Goals:
+                  - rid: 3230699720299511825
+                  IsCompleted: 1
+                  Rewards:
+                    Money: 0
+                    Experience: 0
+                    ItemsRef: []
+                  _Quest:
+                    Name: Qu'ai je fait
+                    Code: my_diplomas
+                    Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                    IsCompleted: 1
+                    QuestSteps:
+                    - Goals:
+                      - rid: 3230699720299511825
+                      IsCompleted: 1
+                      Rewards:
+                        Money: 0
+                        Experience: 0
+                        ItemsRef: []
+                      _Quest:
+                        Name: Qu'ai je fait
+                        Code: my_diplomas
+                        Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                        IsCompleted: 1
+                        QuestSteps:
+                        - Goals:
+                          - rid: 3230699720299511825
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                        - Goals:
+                          - rid: 3230699720299511827
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                    - Goals:
+                      - rid: 3230699720299511827
+                      IsCompleted: 1
+                      Rewards:
+                        Money: 0
+                        Experience: 0
+                        ItemsRef: []
+                      _Quest:
+                        Name: Qu'ai je fait
+                        Code: my_diplomas
+                        Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                        IsCompleted: 1
+                        QuestSteps:
+                        - Goals:
+                          - rid: 3230699720299511825
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                        - Goals:
+                          - rid: 3230699720299511827
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                - Goals:
+                  - rid: 3230699720299511827
+                  IsCompleted: 1
+                  Rewards:
+                    Money: 0
+                    Experience: 0
+                    ItemsRef: []
+                  _Quest:
+                    Name: Qu'ai je fait
+                    Code: my_diplomas
+                    Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                    IsCompleted: 1
+                    QuestSteps:
+                    - Goals:
+                      - rid: 3230699720299511825
+                      IsCompleted: 1
+                      Rewards:
+                        Money: 0
+                        Experience: 0
+                        ItemsRef: []
+                      _Quest:
+                        Name: Qu'ai je fait
+                        Code: my_diplomas
+                        Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                        IsCompleted: 1
+                        QuestSteps:
+                        - Goals:
+                          - rid: 3230699720299511825
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                        - Goals:
+                          - rid: 3230699720299511827
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                    - Goals:
+                      - rid: 3230699720299511827
+                      IsCompleted: 1
+                      Rewards:
+                        Money: 0
+                        Experience: 0
+                        ItemsRef: []
+                      _Quest:
+                        Name: Qu'ai je fait
+                        Code: my_diplomas
+                        Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                        IsCompleted: 1
+                        QuestSteps:
+                        - Goals:
+                          - rid: 3230699720299511825
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                        - Goals:
+                          - rid: 3230699720299511827
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+            - Goals:
+              - rid: 3230699720299511827
+              IsCompleted: 1
+              Rewards:
+                Money: 0
+                Experience: 0
+                ItemsRef: []
+              _Quest:
+                Name: Qu'ai je fait
+                Code: my_diplomas
+                Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                IsCompleted: 1
+                QuestSteps:
+                - Goals:
+                  - rid: 3230699720299511825
+                  IsCompleted: 1
+                  Rewards:
+                    Money: 0
+                    Experience: 0
+                    ItemsRef: []
+                  _Quest:
+                    Name: Qu'ai je fait
+                    Code: my_diplomas
+                    Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                    IsCompleted: 1
+                    QuestSteps:
+                    - Goals:
+                      - rid: 3230699720299511825
+                      IsCompleted: 1
+                      Rewards:
+                        Money: 0
+                        Experience: 0
+                        ItemsRef: []
+                      _Quest:
+                        Name: Qu'ai je fait
+                        Code: my_diplomas
+                        Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                        IsCompleted: 1
+                        QuestSteps:
+                        - Goals:
+                          - rid: 3230699720299511825
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                        - Goals:
+                          - rid: 3230699720299511827
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                    - Goals:
+                      - rid: 3230699720299511827
+                      IsCompleted: 1
+                      Rewards:
+                        Money: 0
+                        Experience: 0
+                        ItemsRef: []
+                      _Quest:
+                        Name: Qu'ai je fait
+                        Code: my_diplomas
+                        Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                        IsCompleted: 1
+                        QuestSteps:
+                        - Goals:
+                          - rid: 3230699720299511825
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                        - Goals:
+                          - rid: 3230699720299511827
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                - Goals:
+                  - rid: 3230699720299511827
+                  IsCompleted: 1
+                  Rewards:
+                    Money: 0
+                    Experience: 0
+                    ItemsRef: []
+                  _Quest:
+                    Name: Qu'ai je fait
+                    Code: my_diplomas
+                    Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                    IsCompleted: 1
+                    QuestSteps:
+                    - Goals:
+                      - rid: 3230699720299511825
+                      IsCompleted: 1
+                      Rewards:
+                        Money: 0
+                        Experience: 0
+                        ItemsRef: []
+                      _Quest:
+                        Name: Qu'ai je fait
+                        Code: my_diplomas
+                        Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                        IsCompleted: 1
+                        QuestSteps:
+                        - Goals:
+                          - rid: 3230699720299511825
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                        - Goals:
+                          - rid: 3230699720299511827
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                    - Goals:
+                      - rid: 3230699720299511827
+                      IsCompleted: 1
+                      Rewards:
+                        Money: 0
+                        Experience: 0
+                        ItemsRef: []
+                      _Quest:
+                        Name: Qu'ai je fait
+                        Code: my_diplomas
+                        Description: "Il faut que j'en s\xE2che plus sur mon pass\xE9. "
+                        IsCompleted: 1
+                        QuestSteps:
+                        - Goals:
+                          - rid: 3230699720299511825
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
+                        - Goals:
+                          - rid: 3230699720299511827
+                          IsCompleted: 1
+                          Rewards:
+                            Money: 0
+                            Experience: 0
+                            ItemsRef: []
+                          _Quest:
+                            Name: Qu'ai je fait
+                            Code: my_diplomas
+                            Description: "Il faut que j'en s\xE2che plus sur mon
+                              pass\xE9. "
+                            IsCompleted: 1
+                            QuestSteps:
+                            - IsCompleted: 1
+                            - IsCompleted: 1
         Type: Collect

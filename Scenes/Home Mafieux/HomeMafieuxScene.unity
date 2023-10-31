@@ -497,11 +497,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _conditions:
-  - Type: 6
-    Code: merchant_search_shoes
+  - Type: 0
+    Code: merchant_shoes
     Not: 0
-  - Type: 6
-    Code: merchant_shoes_back
+  - Type: 1
+    Code: merchant_shoes
+    Not: 1
+  - Type: 3
+    Code: shoes
     Not: 1
 --- !u!1001 &464314253
 PrefabInstance:

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e679b72a61def0e4a805b353f09c96de, type: 3}
   m_Name: Cave2Scene
   m_EditorClassIdentifier: 
-  nameLibelle: 
+  nameLibelle: Grotte des ballegrains
   nameCode: Cave2Scene
   needPreload: 0
   scenesNeedingPreloadNames: []

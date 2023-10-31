@@ -23,14 +23,14 @@ MonoBehaviour:
     PortName: Ok
     TargetNodeGuid: 2bc12c91-1d35-4382-801d-255646f0cc3c
   NodeDatas:
-  - rid: 3230700037943328809
-  - rid: 3230700037943328810
-  - rid: 3230700037943328811
+  - rid: 3230700130921611264
+  - rid: 3230700130921611265
+  - rid: 3230700130921611266
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230700037943328809
+    - rid: 3230700130921611264
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: c8af2643-5226-4c57-b158-06d4b1769007
@@ -46,7 +46,7 @@ MonoBehaviour:
         Outputs:
         - '>'
         Emotion: 0
-    - rid: 3230700037943328810
+    - rid: 3230700130921611265
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 547f71b1-767b-4e8b-8af6-5f475fce4f4f
@@ -61,7 +61,7 @@ MonoBehaviour:
         Outputs:
         - Ok
         Emotion: 0
-    - rid: 3230700037943328811
+    - rid: 3230700130921611266
       type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 2bc12c91-1d35-4382-801d-255646f0cc3c
@@ -69,4 +69,4 @@ MonoBehaviour:
         Position: {x: 601, y: 430}
         EntryPoint: 0
         Type: 0
-        Param: merchant_shoes
+        Param: Les chaussures du marchant

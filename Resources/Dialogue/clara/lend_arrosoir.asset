@@ -23,14 +23,14 @@ MonoBehaviour:
     PortName: Merci !
     TargetNodeGuid: 0752f174-6c63-45dd-a143-bc9e8c20d109
   NodeDatas:
-  - rid: 3230700086584672272
-  - rid: 3230700086584672273
-  - rid: 3230700086584672274
+  - rid: 3230700125532454963
+  - rid: 3230700125532454964
+  - rid: 3230700125532454965
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230700086584672272
+    - rid: 3230700125532454963
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 1b77cbc5-424a-4ee9-b58e-f4ca3a581ac9
@@ -45,7 +45,7 @@ MonoBehaviour:
         Outputs:
         - J'aurais besoin de ton arrosoir
         Emotion: 0
-    - rid: 3230700086584672273
+    - rid: 3230700125532454964
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: b259b38f-db84-4cea-b204-d01ac3f313a0
@@ -61,12 +61,12 @@ MonoBehaviour:
         Outputs:
         - Merci !
         Emotion: 0
-    - rid: 3230700086584672274
+    - rid: 3230700125532454965
       type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 0752f174-6c63-45dd-a143-bc9e8c20d109
         title: Event
         Position: {x: 702, y: 400}
         EntryPoint: 0
-        Type: 1
-        Param: arrosoir
+        Type: 2
+        Param: item;arrosoir

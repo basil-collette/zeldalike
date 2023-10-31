@@ -62,8 +62,8 @@ MonoBehaviour:
     - Type: 3
       Code: diplomas
       Not: 0
-    - Type: 3
-      Code: competences
+    - Type: 1
+      Code: my_competences
       Not: 1
     Priority: 3
   - NameCode: rappel_go_mother_rose
@@ -72,8 +72,8 @@ MonoBehaviour:
     - Type: 2
       Code: go_mother_rose
       Not: 0
-    - Type: 3
-      Code: competences
+    - Type: 1
+      Code: my_competences
       Not: 1
     Priority: 2
   - NameCode: lend_arrosoir
@@ -85,4 +85,11 @@ MonoBehaviour:
     - Type: 3
       Code: arrosoir
       Not: 1
+    Priority: 3
+  - NameCode: 
+    DialogueContainer: {fileID: 11400000, guid: 03a07b26ce0297d498e83ebe6ef04ecc, type: 2}
+    Conditions:
+    - Type: 1
+      Code: my_competences
+      Not: 0
     Priority: 3

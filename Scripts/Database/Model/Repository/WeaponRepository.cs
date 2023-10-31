@@ -46,11 +46,11 @@ namespace Assets.Database.Model.Repository
             insertAxe.ExecuteNonQuery();
 
             IDbCommand insertSpear = dbConn.CreateCommand();
-            insertSpear.CommandText = $"INSERT INTO weapon ({GetQueryFields()}) VALUES ('spear', 2, 0.5, 'gfx/weapons/spear', 0.7, 'common', 0, 'Lance spartiate', 'weapon', 'Spear', 'spear', 1)";
+            insertSpear.CommandText = $"INSERT INTO weapon ({GetQueryFields()}) VALUES ('spear', 2.2, 0.5, 'gfx/weapons/spear', 0.7, 'common', 0, 'Lance spartiate', 'weapon', 'Spear', 'spear', 1)";
             insertSpear.ExecuteNonQuery();
 
             IDbCommand insertDagger = dbConn.CreateCommand();
-            insertDagger.CommandText = $"INSERT INTO weapon ({GetQueryFields()}) VALUES ('dagger', 0.75, 0.2, 'gfx/weapons/dagger', 0.7, 'common', 0, 'Dague perse', 'weapon', 'Dagger', 'dagger', 1)";
+            insertDagger.CommandText = $"INSERT INTO weapon ({GetQueryFields()}) VALUES ('dagger', 0.75, 0.3, 'gfx/weapons/dagger', 0.7, 'common', 0, 'Dague perse', 'weapon', 'Dagger', 'dagger', 1)";
             insertDagger.ExecuteNonQuery();
         }
 

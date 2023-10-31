@@ -11209,6 +11209,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8790275471801721203, guid: 94d9ef7ab1bb7bd41836cb86d7da93d6, type: 3}
+      propertyPath: exitSignal
+      value: 
+      objectReference: {fileID: 11400000, guid: c2c481bd5dec5ef4d84386f2dcc77003, type: 2}
+    - target: {fileID: -8790275471801721203, guid: 94d9ef7ab1bb7bd41836cb86d7da93d6, type: 3}
+      propertyPath: enterSignal
+      value: 
+      objectReference: {fileID: 11400000, guid: 5c6f2bf61d6ce8a499ea5ef10264fac3, type: 2}
+    - target: {fileID: -8790275471801721203, guid: 94d9ef7ab1bb7bd41836cb86d7da93d6, type: 3}
+      propertyPath: actionArrosoirButtonZone
+      value: 
+      objectReference: {fileID: 2178002228696474824}
     - target: {fileID: 363821747626546031, guid: 94d9ef7ab1bb7bd41836cb86d7da93d6, type: 3}
       propertyPath: force
       value: 10
@@ -11271,3 +11283,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94d9ef7ab1bb7bd41836cb86d7da93d6, type: 3}
+--- !u!58 &2178002228696474824 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 7832872912127970047, guid: 94d9ef7ab1bb7bd41836cb86d7da93d6, type: 3}
+  m_PrefabInstance: {fileID: 2178002228696474823}
+  m_PrefabAsset: {fileID: 0}

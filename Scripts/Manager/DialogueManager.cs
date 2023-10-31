@@ -175,7 +175,7 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
             case EventTypeEnum.AddItem: if (!MainGameManager._inventoryManager.AddItem(node.Param)) error = true; break;
             case EventTypeEnum.RemoveItem: MainGameManager._inventoryManager.RemoveItem(node.Param); break;
             case EventTypeEnum.AddMoney: MainGameManager._inventoryManager.AddMoney(int.Parse(node.Param)); break;
-            case EventTypeEnum.RemoveMoney: MainGameManager._inventoryManager.RemoveMoney(int.Parse(node.Param)); break;
+            case EventTypeEnum.RemoveMoney: if (!MainGameManager._inventoryManager.RemoveMoney(int.Parse(node.Param))) { error = true; }; break;
             //case EventTypeEnum.SetDialogueSaid: break;
             case EventTypeEnum.StartCinematic: break;
             default: break;

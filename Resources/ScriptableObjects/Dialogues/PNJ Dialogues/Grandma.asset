@@ -62,6 +62,9 @@ MonoBehaviour:
     - Type: 3
       Code: diplomas
       Not: 1
+    - Type: 2
+      Code: passpartout_deal
+      Not: 1
     Priority: 3
   - NameCode: blue_tree_info
     DialogueContainer: {fileID: 11400000, guid: bc9510caa3936fc4395883947df3e24c, type: 2}
@@ -75,11 +78,14 @@ MonoBehaviour:
     - Type: 2
       Code: go_mother_rose
       Not: 0
+    - Type: 6
+      Code: tree_grown
+      Not: 1
     Priority: 3
   - NameCode: grandma_end
     DialogueContainer: {fileID: 11400000, guid: 3b3360636933b6d4cbcffc13ae56c9fe, type: 2}
     Conditions:
-    - Type: 3
-      Code: competences
+    - Type: 1
+      Code: my_competences
       Not: 0
     Priority: 3

@@ -13,7 +13,11 @@ public class SellManager : MonoBehaviour
     {
         List<string> shop = MainGameManager._storyEventManager._shop;
 
-        rope.gameObject.SetActive(!shop.Exists(x => x == rope.item.NameCode));
+        bool showRope = !(MainGameManager._inventoryManager.HasByCode("rope")
+            || shop.Exists(x => x == rope.item.NameCode)
+            || MainGameManager._storyEventManager._scenario.Contains("bridge_repaired"));
+
+        rope.gameObject.SetActive(showRope);
         heart.gameObject.SetActive(!shop.Exists(x => x == heart.item.NameCode));
         axe.gameObject.SetActive(!shop.Exists(x => x == axe.item.NameCode));
 

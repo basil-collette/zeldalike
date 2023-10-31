@@ -66,9 +66,8 @@ namespace Assets.Scripts.Manager
         public void PlayEffect(string name, float volume)
         {
             if (soundSource.mute == true) return;
-            float finalVolume = volume * 100 / soundSource.volume;
 
-            soundSource.PlayOneShot(sounds.First(e => e.Name == name).Clip, finalVolume);
+            soundSource.PlayOneShot(sounds.First(e => e.Name == name).Clip, soundSource.volume * volume);
         }
 
         public void PlayEffect(AudioClip clip)
@@ -78,9 +77,8 @@ namespace Assets.Scripts.Manager
         public void PlayEffect(AudioClip clip, float volume)
         {
             if (soundSource.mute == true) return;
-            float finalVolume = volume * 100 / soundSource.volume;
 
-            soundSource.PlayOneShot(clip, finalVolume);
+            soundSource.PlayOneShot(clip, soundSource.volume * volume);
         }
 
         public void StopEffect()

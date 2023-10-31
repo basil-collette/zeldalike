@@ -44,6 +44,6 @@ MonoBehaviour:
       Code: passpartout_deal
       Not: 0
     - Type: 3
-      Code: passpartout
+      Code: key
       Not: 1
     Priority: 3

@@ -10,32 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8a2d8ae767442a4c8c0177884108faf, type: 3}
-  m_Name: blue_tree_info
+  m_Name: clara_end
   m_EditorClassIdentifier: 
   NodeLinks:
   - BaseNodeGuid: 6fa4ec6b-29d0-4db2-b9e2-1c93cb628193
     PortName: Next
-    TargetNodeGuid: ab104e29-a69a-4ff1-813b-a4e81e24f8cf
+    TargetNodeGuid: 1b77cbc5-424a-4ee9-b58e-f4ca3a581ac9
   NodeDatas:
-  - rid: 3230700125532454967
+  - rid: 3230700130921611268
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230700125532454967
+    - rid: 3230700130921611268
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
-        Guid: ab104e29-a69a-4ff1-813b-a4e81e24f8cf
+        Guid: 1b77cbc5-424a-4ee9-b58e-f4ca3a581ac9
         title: Dialogue
-        Position: {x: 198, y: 200}
+        Position: {x: 199, y: 200}
         EntryPoint: 0
         Type: 0
-        DialogueText: "Dans la for\xEAt au Sud-Est il y a un arbre bleu dans lequel
-          dorment les Ecorciques, des vilains monstres qui ressembles \xE0 des so\xFBches
-          d'arbres. Il n'a pas encore pouss\xE9, mais avec un peu d'eau..."
-        DialogueCode: blue_tree_info
+        DialogueText: "Je suis contente que tu es retrouv\xE9 la m\xE9moire Basil
+          !"
+        DialogueCode: 
         Side: 0
-        Pnj: {fileID: 4019585777184574299, guid: 77a7f1fd211b43547a731f2d8b7cbabd, type: 3}
+        Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
         Outputs:
         - '>'
         Emotion: 0

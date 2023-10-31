@@ -74,9 +74,18 @@ public class InventoryManager : Singleton<InventoryManager>, ISavable
         _money += amount;
     }
 
-    public void RemoveMoney(int amount)
+    public bool RemoveMoney(int amount)
     {
-        if (_money > amount) _money -= amount;
+        if (_money > amount)
+        {
+            _money -= amount;
+            return true;
+        }
+
+        Toast toast = new Toast("Pas assez d'argent!", ToastType.Success);
+        MainGameManager._toastManager.Add(toast);
+
+        return false;
     }
 
     public void RemoveItem(Item item)

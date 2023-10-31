@@ -24,8 +24,20 @@ public class SellItem : MonoBehaviour
 
         if (inventory._money >= price)
         {
+            if (item.NameCode == "heart")
+            {
+                FindAnyObjectByType<Player>().GetComponent<Health>().AddHeartMax();
+            }
+            else
+            {
+                if (!MainGameManager._inventoryManager.AddItem(item))
+                {
+                    return;
+                }
+            }
+
             inventory._money -= price;
-            inventory.AddItem(item);
+
             MainGameManager._storyEventManager.AddShopEvent(item.NameCode);
 
             toast.Text = $"{item.NameLibelle} acheté !";

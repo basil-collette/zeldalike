@@ -95,11 +95,9 @@ public class Health : Hitable
     {
         _health.RuntimeValue -= GetModifiedAmount(effect);
 
-        var audioSource = GetComponent<AudioSource>();
-        if (audioSource != null && hitSound != null)
+        if (hitSound != null)
         {
-            audioSource.clip = hitSound;
-            audioSource.Play();
+            MainGameManager._soundManager.PlayEffect(hitSound);
         }
 
         StartCoroutine(ColorDamageCo());

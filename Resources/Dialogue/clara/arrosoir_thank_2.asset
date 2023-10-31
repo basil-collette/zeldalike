@@ -20,7 +20,7 @@ MonoBehaviour:
     PortName: Output
     TargetNodeGuid: 0d7640ee-15c0-41b6-a9be-75e8a2578b56
   - BaseNodeGuid: 136d1f0d-c81d-40fa-a900-70d5f5fc9f2f
-    PortName: '>'
+    PortName: Oui
     TargetNodeGuid: 6edefae9-e4c1-4776-9ccd-39bd80755747
   - BaseNodeGuid: 36641a87-f500-41c8-b525-8059d0ed78e3
     PortName: Merci !
@@ -29,16 +29,16 @@ MonoBehaviour:
     PortName: Output
     TargetNodeGuid: 36641a87-f500-41c8-b525-8059d0ed78e3
   NodeDatas:
-  - rid: 3230700086584672310
-  - rid: 3230700086584672311
-  - rid: 3230700086584672312
-  - rid: 3230700086584672313
-  - rid: 3230700086584672314
+  - rid: 3230700125532454933
+  - rid: 3230700125532454934
+  - rid: 3230700125532454935
+  - rid: 3230700125532454936
+  - rid: 3230700125532454937
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230700086584672310
+    - rid: 3230700125532454933
       type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 6edefae9-e4c1-4776-9ccd-39bd80755747
@@ -47,7 +47,7 @@ MonoBehaviour:
         EntryPoint: 0
         Type: 0
         Param: L'arrosoir de Clara
-    - rid: 3230700086584672311
+    - rid: 3230700125532454934
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 136d1f0d-c81d-40fa-a900-70d5f5fc9f2f
@@ -61,9 +61,9 @@ MonoBehaviour:
         Side: 0
         Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
         Outputs:
-        - '>'
+        - Oui
         Emotion: 0
-    - rid: 3230700086584672312
+    - rid: 3230700125532454935
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 36641a87-f500-41c8-b525-8059d0ed78e3
@@ -78,7 +78,7 @@ MonoBehaviour:
         Outputs:
         - Merci !
         Emotion: 0
-    - rid: 3230700086584672313
+    - rid: 3230700125532454936
       type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 0d7640ee-15c0-41b6-a9be-75e8a2578b56
@@ -87,7 +87,7 @@ MonoBehaviour:
         EntryPoint: 0
         Type: 3
         Param: arrosoir
-    - rid: 3230700086584672314
+    - rid: 3230700125532454937
       type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 960e0ea3-240d-4967-8856-c91d2869a95f

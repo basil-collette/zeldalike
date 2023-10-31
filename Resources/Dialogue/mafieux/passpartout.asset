@@ -26,15 +26,15 @@ MonoBehaviour:
     PortName: "C'est forc\xE9ment toi !"
     TargetNodeGuid: bf144bce-d074-4325-80c1-86b147081a5b
   NodeDatas:
-  - rid: 3230700086584672299
-  - rid: 3230700086584672300
-  - rid: 3230700086584672301
-  - rid: 3230700086584672302
+  - rid: 3230700125532454929
+  - rid: 3230700125532454930
+  - rid: 3230700125532454931
+  - rid: 3230700125532454932
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230700086584672299
+    - rid: 3230700125532454929
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: bf144bce-d074-4325-80c1-86b147081a5b
@@ -44,13 +44,13 @@ MonoBehaviour:
         Type: 0
         DialogueText: Daccord, c'est moi ! Je les ai vendu au collectionneur qui
           habite au centre, mais il est toujours en voyage.
-        DialogueCode: diplomas_info
+        DialogueCode: 
         Side: 0
         Pnj: {fileID: 4019585777184574299, guid: 313f1c4d2bdec5b428e9b3c1e0752cf4, type: 3}
         Outputs:
         - '>'
         Emotion: 0
-    - rid: 3230700086584672300
+    - rid: 3230700125532454930
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 05fd881c-b7aa-40b6-aeec-ebbec3fa88fd
@@ -65,7 +65,7 @@ MonoBehaviour:
         Outputs:
         - Donnes moi en un
         Emotion: 0
-    - rid: 3230700086584672301
+    - rid: 3230700125532454931
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 073c6a1c-e061-4741-b6fd-6eed0e3e07ce
@@ -74,14 +74,14 @@ MonoBehaviour:
         EntryPoint: 0
         Type: 0
         DialogueText: "Tes dipl\xF4mes ? Pas vu..."
-        DialogueCode: default
+        DialogueCode: 
         Side: 0
         Pnj: {fileID: 4019585777184574299, guid: 313f1c4d2bdec5b428e9b3c1e0752cf4, type: 3}
         Outputs:
         - "C'est forc\xE9ment toi !"
         - Ok...
         Emotion: 0
-    - rid: 3230700086584672302
+    - rid: 3230700125532454932
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: d38e2011-581d-453f-8ed5-14711c0aa0cd
@@ -90,7 +90,7 @@ MonoBehaviour:
         EntryPoint: 0
         Type: 0
         DialogueText: "Doucement, faut de l'oseille pour \xE7a. Je te le vends pour
-          100 pi\xE8ces !"
+          10 pi\xE8ces !"
         DialogueCode: passpartout_deal
         Side: 0
         Pnj: {fileID: 4019585777184574299, guid: 313f1c4d2bdec5b428e9b3c1e0752cf4, type: 3}

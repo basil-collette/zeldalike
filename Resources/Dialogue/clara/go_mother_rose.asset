@@ -17,7 +17,7 @@ MonoBehaviour:
     PortName: Next
     TargetNodeGuid: 1a169f27-543a-475f-9ac9-2a9aac1b94ab
   - BaseNodeGuid: 1a169f27-543a-475f-9ac9-2a9aac1b94ab
-    PortName: '>'
+    PortName: Oui
     TargetNodeGuid: 2bc2de4e-9442-4df5-8a06-7b7a649986e8
   - BaseNodeGuid: 2bc2de4e-9442-4df5-8a06-7b7a649986e8
     PortName: '>'
@@ -26,15 +26,15 @@ MonoBehaviour:
     PortName: Compris !
     TargetNodeGuid: 311d0415-1a6d-46a6-9ebc-d67b89a6e7b2
   NodeDatas:
-  - rid: 3230700086584672266
-  - rid: 3230700086584672267
-  - rid: 3230700086584672268
-  - rid: 3230700086584672269
+  - rid: 3230700125532454957
+  - rid: 3230700125532454958
+  - rid: 3230700125532454959
+  - rid: 3230700125532454960
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230700086584672266
+    - rid: 3230700125532454957
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 1a169f27-543a-475f-9ac9-2a9aac1b94ab
@@ -47,9 +47,9 @@ MonoBehaviour:
         Side: 0
         Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
         Outputs:
-        - '>'
+        - Oui
         Emotion: 0
-    - rid: 3230700086584672267
+    - rid: 3230700125532454958
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 2bc2de4e-9442-4df5-8a06-7b7a649986e8
@@ -65,7 +65,7 @@ MonoBehaviour:
         Outputs:
         - '>'
         Emotion: 0
-    - rid: 3230700086584672268
+    - rid: 3230700125532454959
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 43f46476-a10c-4e8b-a459-16f62cde4049
@@ -81,7 +81,7 @@ MonoBehaviour:
         Outputs:
         - Compris !
         Emotion: 0
-    - rid: 3230700086584672269
+    - rid: 3230700125532454960
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 311d0415-1a6d-46a6-9ebc-d67b89a6e7b2
@@ -90,7 +90,7 @@ MonoBehaviour:
         EntryPoint: 0
         Type: 0
         DialogueText: "Pour le r\xE9parer, il faudrait du bois et de la corde"
-        DialogueCode: 
+        DialogueCode: go_mother_rose
         Side: 0
         Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
         Outputs:

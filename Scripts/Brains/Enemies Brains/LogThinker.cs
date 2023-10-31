@@ -1,4 +1,3 @@
-using Assets.Scripts.Manager;
 using UnityEngine;
 
 public class LogThinker : Bot
@@ -7,13 +6,13 @@ public class LogThinker : Bot
     protected SleeperBrain sleeperBrain;
     protected PursueBrain pursueBrain;
     protected AttackBrain attackBrain;
-    protected BoxCollider2D attackCollider;
+    //protected BoxCollider2D attackCollider;
 
     new void Start()
     {
         base.Start();
 
-        attackCollider = transform.GetChild(0).GetComponentInChildren<BoxCollider2D>();
+        //attackCollider = transform.GetChild(0).GetComponentInChildren<BoxCollider2D>();
         chaseBrain = GetComponent<DetectorBrain>();
         sleeperBrain = GetComponent<SleeperBrain>();
         pursueBrain = GetComponent<PursueBrain>();
@@ -51,7 +50,7 @@ public class LogThinker : Bot
         AttackThinkParam para = new AttackThinkParam()
         {
             targetPos = target.position,
-            attackCollider = this.attackCollider
+            //attackCollider = this.attackCollider
         };
         if (attackBrain.Think(para) != Vector3.zero)
         {
@@ -86,7 +85,7 @@ public class LogThinker : Bot
                     {
                         attackDuration = 0.4f,
                         cooldown = 2,
-                        attackCollider = this.attackCollider
+                        //attackCollider = this.attackCollider
                     };
                     
                     attackBrain.Behave(param);
@@ -103,7 +102,7 @@ public class LogThinker : Bot
 
     public void PlaySoundLeafSpin()
     {
-        MainGameManager._soundManager.PlayEffect("leaf_spin", 0.1f);
+        MainGameManager._soundManager.PlayEffect("leaf_spin", 0.25f);
     }
 
     public void StopSoundLeafSpin()

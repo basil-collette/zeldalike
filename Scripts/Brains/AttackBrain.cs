@@ -17,7 +17,7 @@ public class AttackBrain : Brain
     {
         AttackThinkParam attackThinkParam = param as AttackThinkParam;
 
-        DirectionHelper.PointTo(attackThinkParam.attackCollider.transform, attackThinkParam.targetPos, -90);
+        //DirectionHelper.PointTo(attackThinkParam.attackCollider.transform, attackThinkParam.targetPos, -90);
 
         return (canAttack) ? attackThinkParam.targetPos : Vector3.zero;
     }

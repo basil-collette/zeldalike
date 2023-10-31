@@ -25,10 +25,14 @@ MonoBehaviour:
     Rewards:
       Money: 0
       Experience: 0
-      ItemsRef:
-      - ItemCode: competences
-        Amount: 1
-        itemType: 0
+      ItemsRef: []
+    _Quest:
+      Name: 
+      Code: 
+      Description: 
+      IsCompleted: 0
+      QuestSteps: []
+  IsCompleted: 0
   references:
     version: 2
     RefIds:
@@ -40,6 +44,19 @@ MonoBehaviour:
         IsCompleted: 0
         RequiredAmount: 1
         CurrentAmount: 0
+        _QuestStep:
+          Goals: []
+          IsCompleted: 0
+          Rewards:
+            Money: 0
+            Experience: 0
+            ItemsRef: []
+          _Quest:
+            Name: 
+            Code: 
+            Description: 
+            IsCompleted: 0
+            QuestSteps: []
         Type: Event
     - rid: 3230699720299511837
       type: {class: KillGoal, ns: , asm: Assembly-CSharp}
@@ -49,4 +66,17 @@ MonoBehaviour:
         IsCompleted: 0
         RequiredAmount: 1
         CurrentAmount: 0
+        _QuestStep:
+          Goals: []
+          IsCompleted: 0
+          Rewards:
+            Money: 0
+            Experience: 0
+            ItemsRef: []
+          _Quest:
+            Name: 
+            Code: 
+            Description: 
+            IsCompleted: 0
+            QuestSteps: []
         Type: Kill

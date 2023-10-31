@@ -24,6 +24,7 @@ public class ScenesManager : SingletonGameObject<ScenesManager>
     [SerializeField] GameObject textBox;
 
     public string _currentScene = string.Empty;
+    string _currentSceneLibelle = string.Empty;
     List<PreloadedScene> preloadedScenes = new List<PreloadedScene>();
 
     //To keep it in memory
@@ -71,6 +72,7 @@ public class ScenesManager : SingletonGameObject<ScenesManager>
         GetComponentInChildren<SoundManager>().OnSceneSwitchSetMusic(targetScene.musicName);
 
         _currentScene = targetScene.nameCode;
+        _currentSceneLibelle = targetScene.nameLibelle;
     }
 
     IEnumerator LoadSceneCo(string targetSceneName, LoadSceneMode loadmode, Action resultCallback = null)
@@ -355,7 +357,7 @@ public class ScenesManager : SingletonGameObject<ScenesManager>
             yield return new WaitForSeconds(sceneNameDuration);
 
             //Si différents, une autre scène à été switchée entre temps, on lui laisse donc son nom affiché
-            if (sceneName.ToLower() == _currentScene.Substring(0, _currentScene.Length - 5).ToLower())
+            if (sceneName.ToLower() == _currentSceneLibelle.ToLower())
             {
                 textBox.SetActive(false);
             }

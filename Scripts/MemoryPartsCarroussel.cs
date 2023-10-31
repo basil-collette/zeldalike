@@ -30,7 +30,7 @@ public class MemoryPartsCarroussel : MonoBehaviour
         switch (partName)
         {
             case "Competences":
-                ShowMemoryPart(partName, inv._items.Exists(x => x.NameCode == "competences")); break;
+                ShowMemoryPart(partName, MainGameManager._storyEventManager._scenario.Exists(x => x == "defeated_rose_mother")); break;
             case "Diplomes":
                 ShowMemoryPart(partName, inv._items.Exists(x => x.NameCode == "diplomas")); break;
             case "Identity":

@@ -28,7 +28,6 @@ public class Player : AliveEntity
     PlayerInput playerInputs;
     CooldownManager cooldownManager;
     WeaponMonoBehaviour _weapon;
-    AudioSource audioSource;
     Animator animatorLegs;
     Animator animatorTop;
 
@@ -39,11 +38,15 @@ public class Player : AliveEntity
         animatorLegs = transform.GetChild(0).GetComponent<Animator>();
         animatorTop = transform.GetChild(1).GetComponent<Animator>();
 
-        audioSource = GetComponent<AudioSource>(); audioSource.volume = 0.5f;
         playerInputs = GetComponent<PlayerInput>();
         cooldownManager = GetComponent<CooldownManager>();
 
         transform.position = startingPosition.initalValue;
+        direction = startingDirection.initalValue;
+        animatorLegs.SetFloat("moveX", direction.x);
+        animatorLegs.SetFloat("moveY", direction.y);
+        animatorTop.SetFloat("lookX", direction.x);
+        animatorTop.SetFloat("lookY", direction.y);
 
         animatorLegs.SetFloat("moveX", startingDirection.initalValue.x);
         animatorLegs.SetFloat("moveY", startingDirection.initalValue.y);
@@ -194,7 +197,7 @@ public class Player : AliveEntity
 
                     if (cooldownManager.IsAvailable("walkSoundCooldown"))
                     {
-                        audioSource.PlayOneShot(walkSound);
+                        MainGameManager._soundManager.PlayEffect(walkSound);
                         cooldownManager.StartCooldown("walkSoundCooldown", 0.4f);
                     }
                 }
@@ -267,8 +270,8 @@ public class Player : AliveEntity
             GetComponent<Health>().enabled = false;
             animatorTop.SetTrigger("roll");
             animatorLegs.SetBool("rolling", true);
-            audioSource.clip = rollSound;
-            audioSource.Play();
+
+            MainGameManager._soundManager.PlayEffect(rollSound);
 
             CooldownButton.buttons.Find(x => x._name == "dash")?.Cooldwon(dashCooldown);
 

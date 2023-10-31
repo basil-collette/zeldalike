@@ -4,6 +4,7 @@
     public enum EventTypeEnum
     {
         StartQuest,
+        EndQuest,
         AddItem,
         RemoveItem,
         AddMoney,

@@ -72,9 +72,6 @@ public class RoseMotherThinker : Bot
 
         GetComponent<Animator>().SetTrigger("die");
         StartCoroutine(OnDeathCo());
-
-        //this.gameObject.SetActive(false);
-        //Destroy(this.gameObject);
     }
 
     public IEnumerator OnDeathCo()
@@ -109,7 +106,9 @@ public class RoseMotherThinker : Bot
     void OnDeathAnimationEnd()
     {
         //play victory music
-        //FindAnyObjectByType<DialogueManager>().StartDialogue(successDialog);
+        FindAnyObjectByType<DialogueManager>().StartDialogue(successDialog);
+
+        MainGameManager._storyEventManager.AddScenarioEvent("defeated_rose_mother");
 
         Destroy(gameObject);
     }

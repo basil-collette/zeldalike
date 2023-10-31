@@ -130,7 +130,7 @@ public class TreasureChest : FacingInteracting
         {
             InterfaceName = "InfoScene",
             TransparentOverlay = true,
-            OnPauseProcessed = () => { FindGameObjectHelper.FindByName("Info Canva").GetComponentInChildren<Text>().text = content.Description; ButtonHelper.exitPause += ExitRaiseItem; },
+            OnPauseProcessed = () => { FindGameObjectHelper.FindByName("Info Canva").GetComponentInChildren<Text>().text = content.Description; EventHelper.exitPause += ExitRaiseItem; },
             PlaySound = false
         });
 
@@ -146,7 +146,7 @@ public class TreasureChest : FacingInteracting
 
         receivedItemContext.gameObject.SetActive(false);
 
-        ButtonHelper.exitPause -= ExitRaiseItem;
+        EventHelper.exitPause -= ExitRaiseItem;
     }
 
     protected override void OnInteract()

@@ -8,13 +8,11 @@ public class Spike : MonoBehaviour
     public float openDuration = 2f;
     public float delay = 0f;
 
-    AudioSource audioSource;
     Animator anim;
     BoxCollider2D collider;    
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
         collider = GetComponent<BoxCollider2D>();
 
@@ -39,7 +37,9 @@ public class Spike : MonoBehaviour
 
             anim.SetBool("open", true);
             anim.SetBool("ready", false);
-            audioSource.Play();
+
+            MainGameManager._soundManager.PlayEffect("dagger");
+
             collider.enabled = true;
             yield return new WaitForSeconds(openDuration);
         }

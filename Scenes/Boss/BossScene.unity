@@ -299,7 +299,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 133018716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.014, y: -0.488, z: 0}
+  m_LocalPosition: {x: 0.014, y: 0, z: 0}
   m_LocalScale: {x: 0.12, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -615,7 +615,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 561919782}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.028, y: 5.6, z: 0}
+  m_LocalPosition: {x: -0.028, y: 4.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8451,8 +8451,8 @@ MonoBehaviour:
   spikePrefab: {fileID: 2499732588002178698, guid: 77e7fe37696958842a634fbda1aa8d44, type: 3}
   plantDestroyEffect: {fileID: 1754856564518679879, guid: 5cde592efb0af834295d01b44b746375, type: 3}
   explosionSmokeEffect: {fileID: 4283853020777935570, guid: 3dfcc848a16125b428ab5f74868e6b7f, type: 3}
-  successDialog: {fileID: 0}
-  gentleLittleOne: {fileID: 0}
+  successDialog: {fileID: 11400000, guid: 53cd9b78babbb6f4bb7bf118766c621b, type: 2}
+  gentleLittleOne: {fileID: 561919782}
 --- !u!114 &1554134220
 MonoBehaviour:
   m_ObjectHideFlags: 0

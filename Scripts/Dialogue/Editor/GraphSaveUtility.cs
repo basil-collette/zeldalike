@@ -106,6 +106,7 @@ public class GraphSaveUtility
                     DialogueCode = nodeCasted.DialogueCode,
                     Side = nodeCasted.Side,
                     Type = nodeCasted.Type,
+                    Emotion = nodeCasted.Emotion,
                     Pnj = nodeCasted.Pnj,
                     Outputs = outputs
                 });
@@ -281,6 +282,7 @@ public class GraphSaveUtility
             DialogueCode = nodeData.DialogueCode,
             Side = nodeData.Side,
             Type = nodeData.Type,
+            Emotion = nodeData.Emotion,
             Pnj = nodeData.Pnj,
             Outputs = nodeData.Outputs
         };

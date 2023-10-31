@@ -20,13 +20,13 @@ MonoBehaviour:
     PortName: Output
     TargetNodeGuid: 1e0292a7-fec5-443c-b7c0-73231493d2b1
   NodeDatas:
-  - rid: 3230700079674294273
-  - rid: 3230700079674294274
+  - rid: 3230700086584672308
+  - rid: 3230700086584672309
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230700079674294273
+    - rid: 3230700086584672308
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 1e0292a7-fec5-443c-b7c0-73231493d2b1
@@ -41,12 +41,12 @@ MonoBehaviour:
         Outputs:
         - '>'
         Emotion: 0
-    - rid: 3230700079674294274
+    - rid: 3230700086584672309
       type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: f2c80eff-cd97-4fb1-b8c7-cab4cf2bb285
         title: Event
         Position: {x: 200, y: 200}
         EntryPoint: 0
-        Type: 2
+        Type: 3
         Param: arrosoir

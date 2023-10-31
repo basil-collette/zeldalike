@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 [Serializable]
 public abstract class Goal
@@ -8,6 +9,7 @@ public abstract class Goal
     public bool IsCompleted;
     public int RequiredAmount;
     public int CurrentAmount;
+    [HideInInspector] public QuestStep _QuestStep;
 
     #if UNITY_EDITOR
         [ShowOnly]
@@ -35,9 +37,10 @@ public abstract class Goal
         {
             CurrentAmount++;
 
-            if (CurrentAmount == RequiredAmount)
+            if (CurrentAmount >= RequiredAmount)
             {
                 IsCompleted = true;
+                _QuestStep.VerifyIfCompleted();
                 DisableGoalCheckObserver();
             }
         }
@@ -45,4 +48,5 @@ public abstract class Goal
 
     protected abstract void ApplyGoalCheckObserver();
     protected abstract void DisableGoalCheckObserver();
+
 }

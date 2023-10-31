@@ -5,23 +5,21 @@ public class TalkGoal : Goal
 {
     public TalkGoal() { Type = "Talk"; }
 
-    //public string Target;
-
     protected override void ApplyGoalCheckObserver()
     {
-        //Health.OnDeath += GoalCheck;
+        DialogueManager.OnDiscuss += GoalCheck;
     }
 
     protected override void DisableGoalCheckObserver()
     {
-        //Health.OnDeath -= GoalCheck;
+        DialogueManager.OnDiscuss -= GoalCheck;
     }
 
     protected override void GoalCheck(params object[] observerParams)
     {
-        string[] deathParams = observerParams as string[];
+        string[] discussParams = observerParams as string[];
 
-        /*if (Array.Exists(deathParams, (x) => x == Target))
+        if (Array.Exists(discussParams, (x) => x == Target))
         {
             CurrentAmount++;
 
@@ -30,7 +28,7 @@ public class TalkGoal : Goal
                 IsCompleted = true;
                 DisableGoalCheckObserver();
             }
-        }*/
+        }
     }
 
 }

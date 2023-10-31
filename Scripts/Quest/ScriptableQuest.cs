@@ -8,6 +8,7 @@ public class ScriptableQuest : ScriptableObject
     public string Code;
     public string Description;
     public List<QuestStep> QuestSteps;
+    public bool IsCompleted;
 }
 
 [System.Serializable]
@@ -26,5 +27,35 @@ public class Quest
         Description = quest.Description;
         IsCompleted = false;
         QuestSteps = quest.QuestSteps;
+
+        Init();
     }
+
+    public void Init()
+    {
+        foreach (QuestStep questStep in QuestSteps)
+        {
+            questStep._Quest = this;
+
+            foreach (Goal goal in questStep.Goals)
+            {
+                goal._QuestStep = questStep;
+            }
+        }
+    }
+
+    public bool VerifyIfCompleted()
+    {
+        if (QuestSteps.Exists(x => !x.IsCompleted))
+        {
+            IsCompleted = false;
+        }
+        else
+        {
+            IsCompleted = true;
+        }
+
+        return IsCompleted;
+    }
+
 } 

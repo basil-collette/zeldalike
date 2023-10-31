@@ -13,44 +13,39 @@ public class QuestLog : MonoBehaviour
     public RectTransform ListTransform;
     public Text QuestDetailsText;
     public Text QuestObjectiveText;
-    public Button[] QuestButtons;
+    [SerializeField] GameObject InProgressButton;
+    [SerializeField] GameObject CompletedButton;
 
     public GameObject RewardXP;
     public GameObject RewardGold;
     public List<GameObject> Items;
 
+    Button[] QuestButtons;
     int PreviousButtonIndex;
-    QuestbookManager _questbook;
+    QuestManager _questbook;
 
     private void OnEnable()
     {
         PreviousButtonIndex = 0;
-        _questbook = MainGameManager._questbookManager;
-        ShowQuestsByState(true);
+        _questbook = MainGameManager._questManager;
+        ShowQuestsByState(false);
     }
 
-    public void ShowQuestsByState(bool inProgress)
+    public void ShowQuestsByState(bool completed)
     {
         ClearQuestDesc();
 
-        List<Quest> quests = MainGameManager._questbookManager.GetQuestsByState(inProgress);
+        List<Quest> quests = MainGameManager._questManager.GetQuestsByState(completed);
 
-        StartCoroutine(SetButtonsColor(inProgress));
+        InProgressButton.GetComponent<Button>().interactable = completed;
+        CompletedButton.GetComponent<Button>().interactable = !completed;
 
         SetQuestListContainer(quests);
 
-        QuestButtons[0].onClick.Invoke();
-    }
-
-    IEnumerator SetButtonsColor(bool inProgress)
-    {
-        while (transform.Find("InProgress Button") == null)
+        if (QuestButtons.Length > 0)
         {
-            yield return new WaitForEndOfFrame();
+            QuestButtons[0].onClick.Invoke();
         }
-
-        transform.Find("InProgress Button").GetComponent<Button>().image.color = (inProgress) ? new Color(1, 1, 1, 1f) : new Color(0.6f, 0.6f, 0.6f, 1f);
-        transform.Find("Completed Button").GetComponent<Button>().image.color = (inProgress) ? new Color(0.6f, 0.6f, 0.6f, 1f) : new Color(1, 1, 1, 1f);
     }
 
     void SetQuestListContainer(List<Quest> quests)
@@ -119,6 +114,7 @@ public class QuestLog : MonoBehaviour
 
     void ClearQuestDesc()
     {
+        QuestDetailsText.text = string.Empty;
         QuestObjectiveText.text = string.Empty;
         RewardXP.SetActive(false);
         RewardGold.SetActive(false);
@@ -130,7 +126,7 @@ public class QuestLog : MonoBehaviour
 
     void SetQuestSelectionColor(Button button, bool isSelected)
     {
-        //button.image.color = (isSelected) ? Color.green : new Color(0, 0, 0, 0);
+        button.GetComponent<Image>().color = (isSelected) ? new Color(1, 1, 1, 0.27f) : new Color(0, 0, 0, 0);
         button.transform.Find("Selected").gameObject.SetActive(isSelected);
     }
 

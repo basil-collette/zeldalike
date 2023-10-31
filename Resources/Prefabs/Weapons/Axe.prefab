@@ -141,7 +141,7 @@ MonoBehaviour:
       type: {class: Effect, ns: , asm: Assembly-CSharp}
       data:
         effectType: 1
-        amount: 1.25
+        amount: 1.5
 --- !u!1 &4113696305313600802
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53a0442bceacda649afb2c1830b21c7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon:
+  _weapon:
     Id: 0
     NameLibelle: 
     NameCode: 
@@ -241,14 +241,15 @@ MonoBehaviour:
     Description: 
     TypeName: 
     ItemType: 0
-    SpriteName: 
+    SpritePath: 
+    SpriteScale: 0
     Sprite: {fileID: 0}
     RarityName: 
     Rarity: 0
     WeaponTypeName: 
     weaponType: 0
-    attackDelay: 1
-    speed: 1
+    attackDelay: 0
+    speed: 0
   direction: {x: 0, y: 0}
   anim: {fileID: 5446324326688491881}
   attacking: 0

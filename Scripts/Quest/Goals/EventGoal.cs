@@ -5,12 +5,17 @@ public class EventGoal : Goal
 
     protected override void ApplyGoalCheckObserver()
     {
-        //EventManager.OnEvent += GoalCheck;
+        StoryEventManager.OnEvent += GoalCheck;
     }
 
     protected override void DisableGoalCheckObserver()
     {
-        //EventManager.OnEvent -= GoalCheck;
+        StoryEventManager.OnEvent -= GoalCheck;
+    }
+
+    void GoalCheck(string eventName)
+    {
+        base.GoalCheck(new string[] { eventName });
     }
 
 }

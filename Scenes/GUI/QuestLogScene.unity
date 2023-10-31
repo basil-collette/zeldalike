@@ -318,7 +318,8 @@ MonoBehaviour:
   ListTransform: {fileID: 1468360808}
   QuestDetailsText: {fileID: 1965904806}
   QuestObjectiveText: {fileID: 2111303309}
-  QuestButtons: []
+  InProgressButton: {fileID: 885088869}
+  CompletedButton: {fileID: 220353166}
   RewardXP: {fileID: 1690448226}
   RewardGold: {fileID: 1703410391}
   Items:
@@ -659,7 +660,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &220353169
 MonoBehaviour:
@@ -1870,7 +1871,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &885088872
 MonoBehaviour:

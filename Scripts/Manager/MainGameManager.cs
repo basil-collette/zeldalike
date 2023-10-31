@@ -9,7 +9,7 @@ public class MainGameManager : SingletonGameObject<MainGameManager>
     public GameObject CanvaControls;
     public bool resetBDD = false;
 
-    public static QuestbookManager _questbookManager;
+    public static QuestManager _questManager;
     public static DialogStatesManager _dialogStatesManager;
     public static InventoryManager _inventoryManager;
     public static StoryEventManager _storyEventManager;
@@ -17,15 +17,12 @@ public class MainGameManager : SingletonGameObject<MainGameManager>
     public static SaveManager _saveManager;
     public static ToastManager _toastManager;
 
-    //Assembly.GetAssembly(typeof(BaseRepitory<T>)).GetTypes().FirstOrDefault(testc => testc.isSubsclassOf(typeof(GenericRepitory<T>)));
-    //FindAnyObjectByType<ToastManager>().Add(new Toast("La partie à été supprimée!", ToastType.Success));
-
     void Start()
     {
         //Hide URP Debuger
         UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
 
-        _questbookManager = new QuestbookManager();
+        _questManager = new QuestManager();
         _dialogStatesManager = new DialogStatesManager();
         _inventoryManager = new InventoryManager();
         _storyEventManager = new StoryEventManager();
@@ -42,6 +39,25 @@ public class MainGameManager : SingletonGameObject<MainGameManager>
         GetComponent<SaveManager>().InitSave();
 
         ShowMenuScene();
+
+        /*
+        MethodInfo info = GetType().GetMethod(nameof(Test));
+        Action<string> action = (Action<string>)Delegate.CreateDelegate(typeof(Action<string>), this, info);
+        OnCompleted.AddListener(() => action.Invoke("value"));
+        */
+
+        //Assembly.GetAssembly(typeof(BaseRepitory<T>)).GetTypes().FirstOrDefault(testc => testc.isSubsclassOf(typeof(GenericRepitory<T>)));
+        //FindAnyObjectByType<ToastManager>().Add(new Toast("La partie à été supprimée!", ToastType.Success));
+    }
+
+    public void Test(string param)
+    {
+        Debug.Log("success : " + param);
+    }
+
+    public void Test2()
+    {
+        Debug.Log("success");
     }
 
     public void ShowMenuScene()

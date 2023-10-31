@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class QuestbookManager : Singleton<QuestbookManager>, ISavable
+public class QuestManager : Singleton<QuestManager>, ISavable
 {
     public List<Quest> _quests = new List<Quest>();
 
@@ -11,7 +11,8 @@ public class QuestbookManager : Singleton<QuestbookManager>, ISavable
     {
         if (!_quests.Any(x => x.Name == questName))
         {
-            ConcreteAddQuest(FindQuest(questName));
+            Quest quest = new Quest(Resources.Load<ScriptableQuest>($"ScriptableObjects/quests/{questName}"));
+            ConcreteAddQuest(quest);
         }
     }
 
@@ -44,10 +45,10 @@ public class QuestbookManager : Singleton<QuestbookManager>, ISavable
         return _quests.FirstOrDefault(x => x.Code == code);
     }
 
-    public List<Quest> GetQuestsByState(bool inProgress)
+    public List<Quest> GetQuestsByState(bool completed)
     {
         return _quests.AsEnumerable<Quest>()
-            .Where(x => x.QuestSteps.LastOrDefault().IsCompleted != inProgress)
+            .Where(x => x.IsCompleted == completed)
             .ToList();
     }
 
@@ -61,9 +62,9 @@ public class QuestbookManager : Singleton<QuestbookManager>, ISavable
         return quest.QuestSteps.FirstOrDefault(x => !x.IsCompleted);
     }
 
-    public Quest FindQuest(string questName)
+    public Quest GetQuest(string questName)
     {
-        return new Quest(Resources.Load<ScriptableQuest>($"ScriptableObjects/quests/{questName}"));
+        return _quests.Find(x => x.Name == questName);
     }
 
     public string ToJsonString()
@@ -87,6 +88,11 @@ public class QuestbookManager : Singleton<QuestbookManager>, ISavable
     public void Set(QuestbookSaveModel saveModel)
     {
         _quests = saveModel.Quests;
+
+        foreach (Quest quest in _quests)
+        {
+            quest.Init();
+        }
     }
 
 }

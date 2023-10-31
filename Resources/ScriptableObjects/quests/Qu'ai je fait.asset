@@ -23,6 +23,12 @@ MonoBehaviour:
       Money: 0
       Experience: 0
       ItemsRef: []
+    _Quest:
+      Name: 
+      Code: 
+      Description: 
+      IsCompleted: 0
+      QuestSteps: []
   - Goals:
     - rid: 3230699720299511827
     IsCompleted: 0
@@ -30,6 +36,13 @@ MonoBehaviour:
       Money: 0
       Experience: 0
       ItemsRef: []
+    _Quest:
+      Name: 
+      Code: 
+      Description: 
+      IsCompleted: 0
+      QuestSteps: []
+  IsCompleted: 0
   references:
     version: 2
     RefIds:
@@ -37,10 +50,23 @@ MonoBehaviour:
       type: {class: DiscussionGoal, ns: , asm: Assembly-CSharp}
       data:
         Target: diplomas_info
-        Objective: "R\xE9colter des infos des infos \xE0 ce propos"
+        Objective: "R\xE9colter des infos \xE0 propos de mes dipl\xF4mes"
         IsCompleted: 0
         RequiredAmount: 1
         CurrentAmount: 0
+        _QuestStep:
+          Goals: []
+          IsCompleted: 0
+          Rewards:
+            Money: 0
+            Experience: 0
+            ItemsRef: []
+          _Quest:
+            Name: 
+            Code: 
+            Description: 
+            IsCompleted: 0
+            QuestSteps: []
         Type: Discussion
     - rid: 3230699720299511827
       type: {class: CollectGoal, ns: , asm: Assembly-CSharp}
@@ -50,4 +76,17 @@ MonoBehaviour:
         IsCompleted: 0
         RequiredAmount: 1
         CurrentAmount: 0
+        _QuestStep:
+          Goals: []
+          IsCompleted: 0
+          Rewards:
+            Money: 0
+            Experience: 0
+            ItemsRef: []
+          _Quest:
+            Name: 
+            Code: 
+            Description: 
+            IsCompleted: 0
+            QuestSteps: []
         Type: Collect

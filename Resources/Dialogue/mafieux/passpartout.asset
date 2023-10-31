@@ -20,21 +20,21 @@ MonoBehaviour:
     PortName: '>'
     TargetNodeGuid: 05fd881c-b7aa-40b6-aeec-ebbec3fa88fd
   - BaseNodeGuid: 05fd881c-b7aa-40b6-aeec-ebbec3fa88fd
-    PortName: '>'
+    PortName: Donnes moi en un
     TargetNodeGuid: d38e2011-581d-453f-8ed5-14711c0aa0cd
   - BaseNodeGuid: 073c6a1c-e061-4741-b6fd-6eed0e3e07ce
-    PortName: '>'
+    PortName: "C'est forc\xE9ment toi !"
     TargetNodeGuid: bf144bce-d074-4325-80c1-86b147081a5b
   NodeDatas:
-  - rid: 3230700066005319680
-  - rid: 3230700066005319681
-  - rid: 3230700066005319682
-  - rid: 3230700066005319683
+  - rid: 3230700086584672299
+  - rid: 3230700086584672300
+  - rid: 3230700086584672301
+  - rid: 3230700086584672302
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230700066005319680
+    - rid: 3230700086584672299
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: bf144bce-d074-4325-80c1-86b147081a5b
@@ -50,7 +50,7 @@ MonoBehaviour:
         Outputs:
         - '>'
         Emotion: 0
-    - rid: 3230700066005319681
+    - rid: 3230700086584672300
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 05fd881c-b7aa-40b6-aeec-ebbec3fa88fd
@@ -58,14 +58,14 @@ MonoBehaviour:
         Position: {x: 200, y: 605}
         EntryPoint: 0
         Type: 0
-        DialogueText: Je pourrai te donner un pass partout.
+        DialogueText: Je pourrai te donner un pass partout pour entrer dans sa maison.
         DialogueCode: 
         Side: 0
         Pnj: {fileID: 4019585777184574299, guid: 313f1c4d2bdec5b428e9b3c1e0752cf4, type: 3}
         Outputs:
-        - '>'
+        - Donnes moi en un
         Emotion: 0
-    - rid: 3230700066005319682
+    - rid: 3230700086584672301
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 073c6a1c-e061-4741-b6fd-6eed0e3e07ce
@@ -78,9 +78,10 @@ MonoBehaviour:
         Side: 0
         Pnj: {fileID: 4019585777184574299, guid: 313f1c4d2bdec5b428e9b3c1e0752cf4, type: 3}
         Outputs:
-        - '>'
+        - "C'est forc\xE9ment toi !"
+        - Ok...
         Emotion: 0
-    - rid: 3230700066005319683
+    - rid: 3230700086584672302
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: d38e2011-581d-453f-8ed5-14711c0aa0cd

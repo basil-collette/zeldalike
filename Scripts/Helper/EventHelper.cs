@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class ButtonHelper : MonoBehaviour
+public class EventHelper : MonoBehaviour
 {
     public static event Action exitPause;
 
@@ -44,6 +44,11 @@ public class ButtonHelper : MonoBehaviour
     public void ShowPausedInterface(string sceneName)
     {
         FindAnyObjectByType<PauseManager>().ShowPausedInterface(new PauseParameter() { InterfaceName = sceneName, ShowMenu = true });
+    }
+
+    public void AddQuest(string questName)
+    {
+        MainGameManager._questManager.AddQuest(questName);
     }
 
     public void UnlockMemoryPartIdCard()

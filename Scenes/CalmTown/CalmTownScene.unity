@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5279470461182036744, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
       propertyPath: itemNameCode
-      value: dagger
+      value: axe
       objectReference: {fileID: 0}
     - target: {fileID: 5279470461182036744, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
       propertyPath: itemTypeEnum
@@ -7582,7 +7582,7 @@ Transform:
   m_Children:
   - {fileID: 2241498}
   - {fileID: 2025760439}
-  - {fileID: 1148534784}
+  - {fileID: 1088068837}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -39352,7 +39352,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c3900aa729a59488d2bedef33e04db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  takeSound: {fileID: 0}
+  takeSound: {fileID: 8300000, guid: 33118a3dc4b04e641b417bf1e8b90348, type: 3}
+  _dropEventName: 
   Item:
     rid: -2
   itemNameCode: arrosoir
@@ -39474,6 +39475,76 @@ MonoBehaviour:
   - Type: 3
     Code: arrosoir
     Not: 1
+--- !u!1001 &1088068836
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 274212595}
+    m_Modifications:
+    - target: {fileID: 4760630308533716130, guid: 915207851b3c28644b0cec2763560351, type: 3}
+      propertyPath: _amount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4760630308533716130, guid: 915207851b3c28644b0cec2763560351, type: 3}
+      propertyPath: _eventOpenCode
+      value: calmtown_behind_merchant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639947409967598753, guid: 915207851b3c28644b0cec2763560351, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639947409967598753, guid: 915207851b3c28644b0cec2763560351, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639947409967598753, guid: 915207851b3c28644b0cec2763560351, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639947409967598753, guid: 915207851b3c28644b0cec2763560351, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.30323344
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639947409967598753, guid: 915207851b3c28644b0cec2763560351, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639947409967598753, guid: 915207851b3c28644b0cec2763560351, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639947409967598753, guid: 915207851b3c28644b0cec2763560351, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639947409967598753, guid: 915207851b3c28644b0cec2763560351, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639947409967598753, guid: 915207851b3c28644b0cec2763560351, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639947409967598753, guid: 915207851b3c28644b0cec2763560351, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639947409967598753, guid: 915207851b3c28644b0cec2763560351, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639947409967598783, guid: 915207851b3c28644b0cec2763560351, type: 3}
+      propertyPath: m_Name
+      value: money chess
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 915207851b3c28644b0cec2763560351, type: 3}
+--- !u!4 &1088068837 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5639947409967598753, guid: 915207851b3c28644b0cec2763560351, type: 3}
+  m_PrefabInstance: {fileID: 1088068836}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1119565815
 GameObject:
   m_ObjectHideFlags: 0
@@ -40752,80 +40823,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!1001 &1148534783
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 274212595}
-    m_Modifications:
-    - target: {fileID: 5279470461182036744, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
-      propertyPath: code
-      value: calmtown_behind_merchant
-      objectReference: {fileID: 0}
-    - target: {fileID: 5279470461182036744, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
-      propertyPath: itemNameCode
-      value: spear
-      objectReference: {fileID: 0}
-    - target: {fileID: 5279470461182036744, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
-      propertyPath: itemTypeEnum
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5639947409967598753, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5639947409967598753, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 11.19
-      objectReference: {fileID: 0}
-    - target: {fileID: 5639947409967598753, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -4.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 5639947409967598753, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.30323344
-      objectReference: {fileID: 0}
-    - target: {fileID: 5639947409967598753, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5639947409967598753, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5639947409967598753, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5639947409967598753, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5639947409967598753, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5639947409967598753, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5639947409967598753, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5639947409967598783, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
-      propertyPath: m_Name
-      value: chess (2)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
---- !u!4 &1148534784 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5639947409967598753, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
-  m_PrefabInstance: {fileID: 1148534783}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1167530006
 GameObject:
   m_ObjectHideFlags: 0
@@ -43274,8 +43271,10 @@ GameObject:
   - component: {fileID: 1393243018}
   - component: {fileID: 1393243017}
   - component: {fileID: 1393243016}
+  - component: {fileID: 1393243021}
   - component: {fileID: 1393243019}
   - component: {fileID: 1393243020}
+  - component: {fileID: 1393243022}
   m_Layer: 0
   m_Name: id_card
   m_TagString: Untagged
@@ -43295,7 +43294,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c3900aa729a59488d2bedef33e04db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  takeSound: {fileID: 0}
+  takeSound: {fileID: 8300000, guid: 33118a3dc4b04e641b417bf1e8b90348, type: 3}
+  _dropEventName: id_card_pickedup
   Item:
     rid: -2
   itemNameCode: id_card
@@ -43414,6 +43414,46 @@ MonoBehaviour:
   - Type: 3
     Code: id_card
     Not: 1
+--- !u!114 &1393243021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393243015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f6ad4ad94af7be44a130256287a2151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _eventName: id_card_pickedup
+  _event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1393243022}
+        m_TargetAssemblyTypeName: ButtonHelper, Assembly-CSharp
+        m_MethodName: AddQuest
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Qu'ai je fait
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1393243022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393243015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e484a5a591cf04189ee95d201499ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1422476396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44424,7 +44464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5279470461182036744, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
       propertyPath: itemNameCode
-      value: axe
+      value: spear
       objectReference: {fileID: 0}
     - target: {fileID: 5279470461182036744, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
       propertyPath: itemTypeEnum

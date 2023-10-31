@@ -414,6 +414,9 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: 519b4b8da99a39043bc8d15bdf363e7d, type: 3}
   - Name: door
     Clip: {fileID: 8300000, guid: 2ab81ebf3519d5e4894062ae1a1b0dd0, type: 3}
+  - Name: bag
+    Clip: {fileID: 8300000, guid: 33118a3dc4b04e641b417bf1e8b90348, type: 3}
+  dialogSource: {fileID: 1460741052}
 --- !u!4 &119542048
 Transform:
   m_ObjectHideFlags: 0
@@ -1922,25 +1925,25 @@ MonoBehaviour:
   outLoudSprite: {fileID: -2088299505, guid: 67a0139ce3d618946851490dd9edb0b0, type: 3}
   _emotions:
   - Type: 0
-    MinPitch: 0.5
-    MaxPitch: 2
-    Speed: 0.01
+    MinPitch: 1
+    MaxPitch: 1.75
+    Speed: 0.04
   - Type: 1
-    MinPitch: 0.5
-    MaxPitch: 2
-    Speed: 0.01
+    MinPitch: 0.8
+    MaxPitch: 1.2
+    Speed: 0.07
   - Type: 2
-    MinPitch: 0.5
-    MaxPitch: 2
-    Speed: 0.01
+    MinPitch: 1.5
+    MaxPitch: 2.5
+    Speed: 0.02
   - Type: 3
-    MinPitch: 0.5
+    MinPitch: 0.8
     MaxPitch: 2
-    Speed: 0.01
+    Speed: 0.03
   - Type: 4
-    MinPitch: 0.5
+    MinPitch: 1.5
     MaxPitch: 2
-    Speed: 0.01
+    Speed: 0.05
 --- !u!114 &712053995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1991,6 +1994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartScene: {fileID: 11400000, guid: 72a82ac3cfa29ae47a7340871a89319d, type: 2}
+  _healthSignal: {fileID: 11400000, guid: 4010a70832e8d3a4da0fe997c30f6daf, type: 2}
 --- !u!114 &712053998
 MonoBehaviour:
   m_ObjectHideFlags: 0

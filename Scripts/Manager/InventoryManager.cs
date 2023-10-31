@@ -66,7 +66,7 @@ public class InventoryManager : Singleton<InventoryManager>, ISavable
 
     public void RemoveItem(string itemName)
     {
-        _items.Remove(_items.Find(x => x.NameLibelle == itemName));
+        _items.Remove(_items.Find(x => x.NameCode == itemName));
     }
 
     public void AddMoney(int amount)

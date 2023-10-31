@@ -20,6 +20,8 @@ namespace Assets.Scripts.Manager
         public float SoundVolume => soundSource.volume;
         [SerializeField] Sound[] sounds;
 
+        [SerializeField] public AudioSource dialogSource;
+
         private void Start()
         {
             Init();
@@ -53,25 +55,32 @@ namespace Assets.Scripts.Manager
         public void SetSoundVolume(float volume)
         {
             soundSource.volume = volume;
+            dialogSource.volume = volume;
             Save();
         }
 
-        public void PlayEffect(string Name)
+        public void PlayEffect(string name)
         {
-            soundSource.PlayOneShot(sounds.First(e => e.Name == Name).Clip);
+            soundSource.PlayOneShot(sounds.First(e => e.Name == name).Clip);
         }
-        public void PlayEffect(string Name, float currentVolume)
+        public void PlayEffect(string name, float volume)
         {
-            soundSource.PlayOneShot(sounds.First(e => e.Name == Name).Clip, currentVolume);
+            if (soundSource.mute == true) return;
+            float finalVolume = volume * 100 / soundSource.volume;
+
+            soundSource.PlayOneShot(sounds.First(e => e.Name == name).Clip, finalVolume);
         }
 
         public void PlayEffect(AudioClip clip)
         {
             soundSource.PlayOneShot(clip);
         }
-        public void PlayEffect(AudioClip clip, float currentVolume)
+        public void PlayEffect(AudioClip clip, float volume)
         {
-            soundSource.PlayOneShot(clip, currentVolume);
+            if (soundSource.mute == true) return;
+            float finalVolume = volume * 100 / soundSource.volume;
+
+            soundSource.PlayOneShot(clip, finalVolume);
         }
 
         public void StopEffect()
@@ -103,6 +112,7 @@ namespace Assets.Scripts.Manager
         public void SetMutePlaySounds(bool mute)
         {
             soundSource.mute = mute;
+            dialogSource.mute = mute;
             Save();
         }
 
@@ -126,6 +136,9 @@ namespace Assets.Scripts.Manager
 
             soundSource.volume = PlayerPrefs.GetFloat("soundVolume");
             soundSource.mute = bool.Parse(PlayerPrefs.GetString("soundMute"));
+
+            dialogSource.volume = soundSource.volume;
+            dialogSource.mute = soundSource.mute;
         }
 
         public void Save()

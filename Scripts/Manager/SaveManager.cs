@@ -1,15 +1,13 @@
 ﻿using Assets.Database.Model.Repository;
-using Assets.Tools;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 public class SaveManager : SingletonGameObject<SaveManager>
 {
     public static GameData GameData;
     public TargetScene StartScene;
+    [SerializeField] Signal _healthSignal;
 
     void Start()
     {
@@ -68,21 +66,25 @@ public class SaveManager : SingletonGameObject<SaveManager>
     public GameData GetGameDataFromRunning()
     {
         Player player = FindAnyObjectByType<Player>();
+        FloatValue playerHealth = Resources.Load<FloatValue>("ScriptableObjects/Player/Health/PlayerHealth");
+
+        Animator animPlayer = player.transform.GetChild(1).GetComponent<Animator>();
 
         return new GameData() {
             saveName = GameData.saveName,
 
             sceneName = FindAnyObjectByType<ScenesManager>()._currentScene,
             position = player.transform.position,
+            direction = new Vector3(animPlayer.GetFloat("lookX"), animPlayer.GetFloat("lookY")),
 
-            playerHealth = GameData.playerHealth,
-            playerMaxHealth = GameData.playerMaxHealth,
+            playerHealth = playerHealth.RuntimeValue,
+            playerMaxHealth = playerHealth.initialValue,
 
             inventory = MainGameManager._inventoryManager.ToJsonString(),
 
             dialoguesStates = MainGameManager._dialogStatesManager.ToJsonString(),
 
-            quests = MainGameManager._questbookManager.ToJsonString(),
+            quests = MainGameManager._questManager.ToJsonString(),
 
             events = MainGameManager._storyEventManager.ToJsonString()
         };
@@ -95,18 +97,18 @@ public class SaveManager : SingletonGameObject<SaveManager>
 
         string FIRST_QUEST_NAME = "Je m'appelle...";
         var firstQuest = Resources.Load<ScriptableQuest>($"ScriptableObjects/quests/{FIRST_QUEST_NAME}");
-        MainGameManager._questbookManager.Set(new QuestbookSaveModel() { Quests = { new Quest(firstQuest) } });
-        var test = JsonUtility.ToJson(new StoryEventSaveModel());
+        MainGameManager._questManager.Set(new QuestbookSaveModel() { Quests = { new Quest(firstQuest) } });
 
         GameData gameData = new GameData() {
             saveName = _saveName,
             sceneName = StartScene.nameCode,
             position = new Vector3(-2.3f, 1.75f, 0),
+            direction = new Vector3(0, -1, 0),
             inventory = MainGameManager._inventoryManager.ToJsonString(),
             playerHealth = 3f,
             playerMaxHealth = 3f,
             dialoguesStates = JsonUtility.ToJson(new DialogStatesSaveModel()),
-            quests = MainGameManager._questbookManager.ToJsonString(),
+            quests = MainGameManager._questManager.ToJsonString(),
             events = JsonUtility.ToJson(new StoryEventSaveModel())
         };
 
@@ -129,6 +131,20 @@ public class SaveManager : SingletonGameObject<SaveManager>
             CreateNewSave("main");
 
             MainGameManager._toastManager.Add(new Toast("La partie à été supprimée!", ToastType.Success));
+
+            FloatValue playerHealth = Resources.Load<FloatValue>("ScriptableObjects/Player/Health/PlayerHealth");
+            playerHealth.RuntimeValue = 3f;
+            playerHealth.initialValue = 3f;
+
+            VectorValue playerDirection = Resources.Load<VectorValue>("ScriptableObjects/Player/position/PlayerDirection");
+            playerDirection.initalValue = new Vector3(0, -1, 0);
+
+            _healthSignal.Raise();
+
+            foreach (Transform actionButton in GameObject.Find("Actions Container").transform)
+            {
+                Destroy(actionButton.gameObject);
+            }
         }
     }
 
@@ -156,7 +172,9 @@ public class SaveManager : SingletonGameObject<SaveManager>
         FloatValue playerHealth = Resources.Load<FloatValue>("ScriptableObjects/Player/Health/PlayerHealth");
         playerHealth.initialValue = GameData.playerMaxHealth;
         playerHealth.RuntimeValue = GameData.playerHealth;
+
         Resources.Load<VectorValue>("ScriptableObjects/Player/position/PlayerPosition").initalValue = GameData.position;
+        Resources.Load<VectorValue>("ScriptableObjects/Player/position/PlayerDirection").initalValue = GameData.direction;
 
         //INVENTORY
         MainGameManager._inventoryManager.Load(GameData.inventory);
@@ -168,7 +186,7 @@ public class SaveManager : SingletonGameObject<SaveManager>
         MainGameManager._dialogStatesManager.Load(GameData.dialoguesStates);
 
         //QUESTS
-        MainGameManager._questbookManager.Load(GameData.quests);
+        MainGameManager._questManager.Load(GameData.quests);
     }
 
 }

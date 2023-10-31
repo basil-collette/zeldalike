@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class GameData
@@ -8,6 +7,7 @@ public class GameData
 
     public string sceneName;
     public Vector3 position;
+    public Vector3 direction;
 
     public string inventory;
 

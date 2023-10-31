@@ -50,7 +50,7 @@ namespace Assets.Database.Model.Repository
             insertSpear.ExecuteNonQuery();
 
             IDbCommand insertDagger = dbConn.CreateCommand();
-            insertDagger.CommandText = $"INSERT INTO weapon ({GetQueryFields()}) VALUES ('dagger', 1, 0.15, 'gfx/weapons/dagger', 0.7, 'common', 0, 'Dague perse', 'weapon', 'Dagger', 'dagger', 1)";
+            insertDagger.CommandText = $"INSERT INTO weapon ({GetQueryFields()}) VALUES ('dagger', 0.75, 0.2, 'gfx/weapons/dagger', 0.7, 'common', 0, 'Dague perse', 'weapon', 'Dagger', 'dagger', 1)";
             insertDagger.ExecuteNonQuery();
         }
 

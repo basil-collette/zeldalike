@@ -4,13 +4,67 @@ using UnityEngine;
 
 public class StoryEventManager : Singleton<StoryEventManager>, ISavable
 {
+    public static event Action<string> OnEvent;
+
     public List<string> _shop = new List<string>();
     public List<string> _scenario = new List<string>();
     public List<string> _mapDiscovery = new List<string>();
     public List<string> _opennedChests = new List<string>();
     //public List<string> Tutorial = new List<string>();
 
-    public StoryEventSaveModel Get() {
+    public void TriggerEvent(string eventName)
+    {
+        OnEvent?.Invoke(eventName );
+    }
+
+    public void AddShopEvent(string eventName)
+    {
+        if (!_shop.Exists(x => x == eventName))
+        {
+            _shop.Add(eventName);
+            OnEvent?.Invoke(eventName);
+        }
+    }
+
+    public void AddScenarioEvent(string eventName)
+    {
+        if (!_scenario.Exists(x => x == eventName))
+        {
+            _scenario.Add(eventName);
+            OnEvent?.Invoke(eventName);
+        }
+    }
+
+    public void AddMapDiscoveryEvent(string eventName)
+    {
+        if (!_mapDiscovery.Exists(x => x == eventName))
+        {
+            _mapDiscovery.Add(eventName);
+            OnEvent?.Invoke(eventName);
+        }
+    }
+
+    public void AddOpennedChestsEvent(string eventName)
+    {
+        if (!_opennedChests.Exists(x => x == eventName))
+        {
+            _opennedChests.Add(eventName);
+            OnEvent?.Invoke(eventName);
+        }
+    }
+
+    /*
+    public static void AddTutorialEvent(string eventName)
+    {
+        if (!Tutorial.Exists(x => x == eventName))
+        {
+            Tutorial.Add(eventName);
+        }
+    }
+    */
+
+    public StoryEventSaveModel Get()
+    {
         return new StoryEventSaveModel
         {
             Shop = _shop,
@@ -28,48 +82,6 @@ public class StoryEventManager : Singleton<StoryEventManager>, ISavable
         _opennedChests = saveModel.OpennedChests;
     }
 
-    public void AddShopEvent(string eventName)
-    {
-        if (!_shop.Exists(x => x == eventName))
-        {
-            _shop.Add(eventName);
-        }
-    }
-
-    public void AddScenarioEvent(string eventName)
-    {
-        if (!_scenario.Exists(x => x == eventName))
-        {
-            _scenario.Add(eventName);
-        }
-    }
-
-    public void AddMapDiscoveryEvent(string eventName)
-    {
-        if (!_mapDiscovery.Exists(x => x == eventName))
-        {
-            _mapDiscovery.Add(eventName);
-        }
-    }
-
-    public void AddOpennedChestsEvent(string eventName)
-    {
-        if (!_opennedChests.Exists(x => x == eventName))
-        {
-            _opennedChests.Add(eventName);
-        }
-    }
-
-    /*
-    public static void AddTutorialEvent(string eventName)
-    {
-        if (!Tutorial.Exists(x => x == eventName))
-        {
-            Tutorial.Add(eventName);
-        }
-    }
-    */
-
     public string ToJsonString()
     {
         return JsonUtility.ToJson(Get());
@@ -79,6 +91,7 @@ public class StoryEventManager : Singleton<StoryEventManager>, ISavable
     {
         Set(JsonUtility.FromJson<StoryEventSaveModel>(json));
     }
+
 }
 
 [Serializable]

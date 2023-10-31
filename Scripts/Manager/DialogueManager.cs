@@ -170,7 +170,8 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
 
         switch (node.Type)
         {
-            case EventTypeEnum.StartQuest: MainGameManager._questbookManager.AddQuest(node.Param); break;
+            case EventTypeEnum.StartQuest: MainGameManager._questManager.AddQuest(node.Param); break;
+            case EventTypeEnum.EndQuest: MainGameManager._questManager.GetQuest(node.Param).IsCompleted = true; break;
             case EventTypeEnum.AddItem: if (!MainGameManager._inventoryManager.AddItem(node.Param)) error = true; break;
             case EventTypeEnum.RemoveItem: MainGameManager._inventoryManager.RemoveItem(node.Param); break;
             case EventTypeEnum.AddMoney: MainGameManager._inventoryManager.AddMoney(int.Parse(node.Param)); break;
@@ -202,29 +203,30 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
     }
 
     readonly char[] alphabet = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
-    readonly char[] pronounced = { 'b', 'c', 'd', 'f', 'g', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'z' };
+    readonly char[] pronounced = { 'b', 'c', 'd', 'f', 'g', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'z', 'ç' };
     //readonly char[] unpronounced = { 'a', 'e', 'i', 'o', 'u', 'y', 'h' };
     readonly char questionMark = '?';
     readonly char affirmativeMark = '!';
     readonly string suspenseMark = "...";
 
-
     IEnumerator TextAnimationByLetter(string text, AudioClip[] voices, DialogEmotion emotion, Action OnEndAnimation)
     {
         textArea.text = "";
 
-        string[] words = text.Split(new Char[] { ' ', '\n', '-' });
+        string[] words = text.Split(new Char[] { ' ', '\n', '-', });
 
         bool lastWasConsonnant = false;
 
         foreach (string word in words)
         {
+            var loweredCharWord = word.ToLower().ToCharArray();
             var charWord = word.ToCharArray();
             for (int i = 0; i < charWord.Length; i++)
             {
                 textArea.text += charWord[i];
 
-                ManageVoice(i, ref lastWasConsonnant, charWord, voices, emotion);
+                if (voices.Length > 0 && alphabet.Contains(loweredCharWord[i]))
+                    ManageVoice(i, ref lastWasConsonnant, loweredCharWord, voices, emotion);
 
                 yield return new WaitForSecondsRealtime(emotion.Speed);
             }
@@ -241,19 +243,30 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
 
     void ManageVoice(int index, ref bool lastWasConsonnant, char[] word, AudioClip[] voices, DialogEmotion emotion)
     {
-        float specialPitch = SpecialPitch(word);
+        word = word.Where(x => x != ',' && x != '.').ToArray();
+
+        if (index >= word.Length - 1)
+            return;
+
+        //float specialPitch = SpecialPitch(word);
+
+        bool isPronunced = pronounced.Contains(word[index]);
 
         if (index == 0)
         {
-            PlayVoiceWithEmotion(word[index], voices, emotion, specialPitch);
+            PlayVoiceWithEmotion(word[index], voices, emotion);
+
+            if (isPronunced)
+                lastWasConsonnant = true;
+
             return;
         }
         
-        if (Array.IndexOf(pronounced, word[index]) > -1)
+        if (isPronunced)
         {
             if (!lastWasConsonnant)
             {
-                PlayVoiceWithEmotion(word[index], voices, emotion, specialPitch);
+                PlayVoiceWithEmotion(word[index], voices, emotion);
             }
 
             lastWasConsonnant = true;

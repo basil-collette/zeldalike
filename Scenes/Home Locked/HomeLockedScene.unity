@@ -4306,7 +4306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5279470461182036744, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
       propertyPath: code
-      value: diplomas
+      value: get_diplomas
       objectReference: {fileID: 0}
     - target: {fileID: 5279470461182036744, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
       propertyPath: itemNameCode
@@ -4362,6 +4362,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
+--- !u!1 &1237131646 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5639947409967598783, guid: a1ce1a9ee80a69248b76d02e392ac763, type: 3}
+  m_PrefabInstance: {fileID: 1237131645}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1237131647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237131646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e484a5a591cf04189ee95d201499ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1237131648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237131646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f6ad4ad94af7be44a130256287a2151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _eventName: get_diplomas
+  _event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1237131647}
+        m_TargetAssemblyTypeName: ButtonHelper, Assembly-CSharp
+        m_MethodName: AddQuest
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: De quoi suis-je capable
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1307978512
 GameObject:
   m_ObjectHideFlags: 0

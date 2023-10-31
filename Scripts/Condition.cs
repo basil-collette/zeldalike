@@ -15,11 +15,11 @@ public class Condition
         switch (Type)
         {
             case Type.StartedQuest:
-                result = MainGameManager._questbookManager.GetQuestByCode(Code) != null;
+                result = MainGameManager._questManager.GetQuestByCode(Code) != null;
                 break;
 
             case Type.EndQuest:
-                var quest = MainGameManager._questbookManager.GetQuestByCode(Code);
+                var quest = MainGameManager._questManager.GetQuestByCode(Code);
                 result = (quest == null) ? false : quest.IsCompleted;
                 break;
 

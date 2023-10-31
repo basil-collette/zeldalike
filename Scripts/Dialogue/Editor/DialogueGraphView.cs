@@ -23,6 +23,7 @@ public class DialogueGraphView : GraphView
         this.AddManipulator(new ContentDragger());
         this.AddManipulator(new SelectionDragger());
         this.AddManipulator(new RectangleSelector());
+        //this.AddManipulator(new ClickSelector());
 
         var grid = new GridBackground();
         Insert(0, grid);
@@ -169,6 +170,12 @@ public class DialogueGraphView : GraphView
         sideField.SetValueWithoutNotify(dialogueNode.Side);
         sideField.RegisterValueChangedCallback((evt) => dialogueNode.Side = (DialogueNodeSide)evt.newValue);
         dialogueNode.mainContainer.Add(sideField);
+
+        var emotionField = new EnumField();
+        emotionField.Init(DialogEmotionType.neutral);
+        emotionField.SetValueWithoutNotify(dialogueNode.Emotion);
+        emotionField.RegisterValueChangedCallback((evt) => dialogueNode.Emotion = (DialogEmotionType)evt.newValue);
+        dialogueNode.mainContainer.Add(emotionField);
 
         var spriteField = new ObjectField
         {

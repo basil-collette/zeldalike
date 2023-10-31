@@ -16,14 +16,14 @@ public class WeaponSlot : InventorySlot
     public sealed override void Remove(Item item)
     {
         MainGameManager._inventoryManager._weapon = null;
-        FindGameObjectHelper.FindByName("Player").GetComponent<Player>().UnequipWeapon();
+        FindAnyObjectByType<Player>().UnequipWeapon();
     }
 
     public sealed override void Add(Item item)
     {
         Weapon weapon = item as Weapon;
         MainGameManager._inventoryManager._weapon = weapon;
-        FindGameObjectHelper.FindByName("Player").GetComponent<Player>().EquipWeapon(weapon);
+        FindAnyObjectByType<Player>().EquipWeapon(weapon);
     }
 
 }

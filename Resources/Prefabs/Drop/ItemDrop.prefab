@@ -48,7 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c3900aa729a59488d2bedef33e04db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  takeSound: {fileID: 0}
+  takeSound: {fileID: 8300000, guid: 33118a3dc4b04e641b417bf1e8b90348, type: 3}
+  _dropEventName: 
   Item:
     rid: -2
   itemNameCode: 

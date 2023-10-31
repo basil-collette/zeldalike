@@ -617,6 +617,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spike
       objectReference: {fileID: 0}
+    - target: {fileID: 2620916254900420309, guid: b79ee1b15de2a064690ded460265414d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2620916254900420313, guid: b79ee1b15de2a064690ded460265414d, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -661,7 +665,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2620916254900420314, guid: b79ee1b15de2a064690ded460265414d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b79ee1b15de2a064690ded460265414d, type: 3}
 --- !u!4 &197495774 stripped
 Transform:

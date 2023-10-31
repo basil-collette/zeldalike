@@ -61,6 +61,7 @@ namespace Assets.Scripts.Manager
 
         public void PlayEffect(string name)
         {
+            if (soundSource.mute == true) return;
             soundSource.PlayOneShot(sounds.First(e => e.Name == name).Clip);
         }
         public void PlayEffect(string name, float volume)
@@ -72,6 +73,7 @@ namespace Assets.Scripts.Manager
 
         public void PlayEffect(AudioClip clip)
         {
+            if (soundSource.mute == true) return;
             soundSource.PlayOneShot(clip);
         }
         public void PlayEffect(AudioClip clip, float volume)

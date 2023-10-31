@@ -1843,7 +1843,7 @@ MonoBehaviour:
   firstLoadedScene: {fileID: 11400000, guid: bd8d67e50fbf37f4e80d7ec87cba8dd1, type: 2}
   CanvaUI: {fileID: 185778902}
   CanvaControls: {fileID: 1413398748}
-  resetBDD: 1
+  resetBDD: 0
 --- !u!114 &712053991
 MonoBehaviour:
   m_ObjectHideFlags: 0

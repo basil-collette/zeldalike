@@ -46,6 +46,11 @@ namespace Assets.Scripts.Manager
             musicSource.Play();
         }
 
+        public void StopMusic()
+        {
+            musicSource.Stop();
+        }
+
         public void SetMusicVolume(float volume)
         {
             musicSource.volume = volume;
@@ -82,6 +87,22 @@ namespace Assets.Scripts.Manager
 
             soundSource.PlayOneShot(clip, soundSource.volume * volume);
         }
+
+        /*
+        public void PlayEffect(AudioClip clip, float volume, float pitch)
+        {
+            if (soundSource.mute == true) return;
+            float originalPitch = soundSource.pitch;
+
+            if (pitch != null)
+            {
+                soundSource.pitch = (float)pitch;
+            }
+            soundSource.PlayOneShot(clip, soundSource.volume * volume);
+
+            soundSource.pitch = originalPitch;
+        }
+        */
 
         public void StopEffect()
         {

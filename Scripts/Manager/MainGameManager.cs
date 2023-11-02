@@ -62,6 +62,8 @@ public class MainGameManager : SingletonGameObject<MainGameManager>
 
     public void ShowMenuScene()
     {
+        _soundManager.StopMusic();
+
         ScenesManager scenesManager = GetComponent<ScenesManager>();
         scenesManager.ClearScenes();
         scenesManager.AdditiveLoadScene(firstLoadedScene.nameCode, () => {

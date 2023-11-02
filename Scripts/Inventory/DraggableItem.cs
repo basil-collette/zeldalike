@@ -82,6 +82,8 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         (Color, Color) colors = GetColors();
         Background.color = colors.Item1;
         Shadow.color = colors.Item2;
+
+        Slot.GetComponent<InventorySlot>().Add(Item);
     }
 
 }

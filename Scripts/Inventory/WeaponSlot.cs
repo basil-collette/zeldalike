@@ -1,18 +1,9 @@
 using Assets.Database.Model.Design;
+using Assets.Scripts.Enums;
 using UnityEngine.EventSystems;
 
 public class WeaponSlot : InventorySlot
 {
-    public sealed override void OnDrop(PointerEventData eventData)
-    {
-        DraggableItem draggedItem = eventData.pointerDrag.GetComponent<DraggableItem>();
-
-        if (draggedItem.Item is Weapon)
-        {
-            DropProcess(draggedItem);
-        }
-    }
-
     public sealed override void Remove(Item item)
     {
         MainGameManager._inventoryManager._weapon = null;
@@ -24,6 +15,11 @@ public class WeaponSlot : InventorySlot
         Weapon weapon = item as Weapon;
         MainGameManager._inventoryManager._weapon = weapon;
         FindAnyObjectByType<Player>().EquipWeapon(weapon);
+    }
+
+    public sealed override bool CanBeDraggedHere(DraggableItem draggedItem)
+    {
+        return draggedItem.Item.ItemType == ItemTypeEnum.weapon;
     }
 
 }

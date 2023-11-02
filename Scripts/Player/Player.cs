@@ -197,7 +197,9 @@ public class Player : AliveEntity
 
                     if (cooldownManager.IsAvailable("walkSoundCooldown"))
                     {
-                        MainGameManager._soundManager.PlayEffect(walkSound);
+                        float volume = UnityEngine.Random.Range(0.7f, 1.3f);
+                        //float pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+                        MainGameManager._soundManager.PlayEffect(walkSound, volume);
                         cooldownManager.StartCooldown("walkSoundCooldown", 0.4f);
                     }
                 }

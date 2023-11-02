@@ -8,7 +8,10 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     {
         DraggableItem draggedItem = eventData.pointerDrag.GetComponent<DraggableItem>();
 
-        DropProcess(draggedItem);
+        if (CanBeDraggedHere(draggedItem))
+        {
+            DropProcess(draggedItem);
+        }
     }
 
     protected void DropProcess(DraggableItem draggedItem)
@@ -16,6 +19,11 @@ public class InventorySlot : MonoBehaviour, IDropHandler
         if (transform.childCount != 0)
         {
             DraggableItem currentItem = transform.GetChild(0).GetComponent<DraggableItem>();
+
+            if (!draggedItem.Slot.GetComponent<InventorySlot>().CanBeDraggedHere(currentItem))
+            {
+                return;
+            }
 
             Remove(currentItem.Item);
             draggedItem.Slot.GetComponent<InventorySlot>().Add(currentItem.Item);
@@ -27,7 +35,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
         draggedItem.Slot = transform;
         draggedItem.Item.InventoryIndex = transform.GetSiblingIndex();
 
-        Add(draggedItem.Item);
+        //Add(draggedItem.Item);
     }
 
     public virtual void Remove(Item item)
@@ -43,6 +51,11 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     public GameObject GetItem()
     {
         return transform.GetChild(0).gameObject;
+    }
+
+    public virtual bool CanBeDraggedHere(DraggableItem draggedItem)
+    {
+        return true;
     }
 
 }

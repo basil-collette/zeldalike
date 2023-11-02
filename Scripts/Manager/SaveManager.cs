@@ -141,10 +141,14 @@ public class SaveManager : SingletonGameObject<SaveManager>
 
             _healthSignal.Raise();
 
-            foreach (Transform actionButton in GameObject.Find("Actions Container").transform)
+            var actionContainer = GameObject.Find("Actions Container");
+            if (actionContainer != null)
             {
-                Destroy(actionButton.gameObject);
-            }
+                foreach (Transform actionButton in actionContainer.transform)
+                {
+                    Destroy(actionButton.gameObject);
+                }
+            }            
         }
     }
 

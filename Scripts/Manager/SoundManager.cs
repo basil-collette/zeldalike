@@ -3,13 +3,6 @@ using UnityEngine;
 
 namespace Assets.Scripts.Manager
 {
-    [System.Serializable]
-    public class Sound
-    {
-        public string Name;
-        public AudioClip Clip;
-    }
-
     public class SoundManager : SingletonGameObject<SoundManager>
     {
         [SerializeField] public AudioSource musicSource;
@@ -88,41 +81,25 @@ namespace Assets.Scripts.Manager
             soundSource.PlayOneShot(clip, soundSource.volume * volume);
         }
 
-        /*
-        public void PlayEffect(AudioClip clip, float volume, float pitch)
+        public void PlaySoundIndependently(AudioClip clip, float pitch)
         {
-            if (soundSource.mute == true) return;
-            float originalPitch = soundSource.pitch;
-
-            if (pitch != null)
-            {
-                soundSource.pitch = (float)pitch;
-            }
-            soundSource.PlayOneShot(clip, soundSource.volume * volume);
-
-            soundSource.pitch = originalPitch;
+            PlaySoundIndependently(clip, pitch, soundSource.volume);
         }
-        */
+        public void PlaySoundIndependently(AudioClip clip, float pitch, float volume)
+        {
+            AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.clip = clip;
+            audioSource.pitch = pitch;
+            audioSource.volume = volume;
+            
+            audioSource.Play();
+            Destroy(audioSource, clip.length);
+        }
 
         public void StopEffect()
         {
             soundSource.Stop();
         }
-
-        /*
-        public void SetSoundsVolume(float volume)
-        {
-            effectVolume = volume;
-
-            foreach (var obj in FindObjectsOfType<AudioSource>())
-            {
-                if (obj.name == "MusicSource")
-                    break;
-
-                obj.GetComponent<AudioSource>().volume = volume;
-            }
-        }
-        */
 
         public void SetMutePlayMusic(bool mute)
         {
@@ -192,4 +169,12 @@ namespace Assets.Scripts.Manager
         */
 
     }
+
+    [System.Serializable]
+    public class Sound
+    {
+        public string Name;
+        public AudioClip Clip;
+    }
+
 }

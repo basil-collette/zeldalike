@@ -21,6 +21,7 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
 
     DialogueContainer _dialogueContainer;
     Text textArea;
+    bool accelerate = false;
 
     void Start()
     {
@@ -209,6 +210,11 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
     readonly char affirmativeMark = '!';
     readonly string suspenseMark = "...";
 
+    public void Accelerate()
+    {
+        accelerate = true;
+    }
+
     IEnumerator TextAnimationByLetter(string text, AudioClip[] voices, DialogEmotion emotion, Action OnEndAnimation)
     {
         textArea.text = "";
@@ -223,6 +229,14 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
             var charWord = word.ToCharArray();
             for (int i = 0; i < charWord.Length; i++)
             {
+                if (accelerate)
+                {
+                    textArea.text = text;
+                    accelerate = false;
+                    OnEndAnimation?.Invoke();
+                    yield break;
+                }
+
                 textArea.text += charWord[i];
 
                 if (voices.Length > 0 && alphabet.Contains(loweredCharWord[i]))

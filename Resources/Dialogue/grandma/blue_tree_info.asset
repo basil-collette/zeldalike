@@ -17,12 +17,12 @@ MonoBehaviour:
     PortName: Next
     TargetNodeGuid: ab104e29-a69a-4ff1-813b-a4e81e24f8cf
   NodeDatas:
-  - rid: 3230700125532454967
+  - rid: 9067565842195808272
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230700125532454967
+    - rid: 9067565842195808272
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: ab104e29-a69a-4ff1-813b-a4e81e24f8cf
@@ -31,7 +31,7 @@ MonoBehaviour:
         EntryPoint: 0
         Type: 0
         DialogueText: "Dans la for\xEAt au Sud-Est il y a un arbre bleu dans lequel
-          dorment les Ecorciques, des vilains monstres qui ressembles \xE0 des so\xFBches
+          dorment les Ecorciques, des vilains monstres qui ressemble \xE0 des souches
           d'arbres. Il n'a pas encore pouss\xE9, mais avec un peu d'eau..."
         DialogueCode: blue_tree_info
         Side: 0

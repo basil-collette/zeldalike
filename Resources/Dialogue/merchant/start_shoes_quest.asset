@@ -23,14 +23,14 @@ MonoBehaviour:
     PortName: Ok
     TargetNodeGuid: 2bc12c91-1d35-4382-801d-255646f0cc3c
   NodeDatas:
-  - rid: 3230700130921611264
-  - rid: 3230700130921611265
-  - rid: 3230700130921611266
+  - rid: 9067565842195808290
+  - rid: 9067565842195808291
+  - rid: 9067565842195808292
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230700130921611264
+    - rid: 9067565842195808290
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: c8af2643-5226-4c57-b158-06d4b1769007
@@ -46,7 +46,7 @@ MonoBehaviour:
         Outputs:
         - '>'
         Emotion: 0
-    - rid: 3230700130921611265
+    - rid: 9067565842195808291
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 547f71b1-767b-4e8b-8af6-5f475fce4f4f
@@ -54,14 +54,14 @@ MonoBehaviour:
         Position: {x: 201, y: 430}
         EntryPoint: 0
         Type: 0
-        DialogueText: "Je veux bien t'offrir la corde si tu me les ram\xE8nes !"
+        DialogueText: "Je veux bien t'offrir ma corde si tu me les ram\xE8nes !"
         DialogueCode: 
         Side: 0
         Pnj: {fileID: 5616454285522393285, guid: 565688d4d540bf24f84feb804119df1d, type: 3}
         Outputs:
         - Ok
         Emotion: 0
-    - rid: 3230700130921611266
+    - rid: 9067565842195808292
       type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 2bc12c91-1d35-4382-801d-255646f0cc3c

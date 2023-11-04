@@ -2,7 +2,7 @@
 
 public abstract class Drop : MonoBehaviour
 {
-    public AudioClip takeSound;
+    //public AudioClip takeSound;
     public string _dropEventName;
 
     protected void OnTriggerEnter2D(Collider2D collider)
@@ -13,8 +13,10 @@ public abstract class Drop : MonoBehaviour
 
                 Destroy(this.gameObject);
 
+                /*
                 if (takeSound != null)
                     MainGameManager._soundManager.PlayEffect(takeSound);
+                */
 
                 if (_dropEventName != string.Empty)
                     MainGameManager._storyEventManager.AddScenarioEvent(_dropEventName);

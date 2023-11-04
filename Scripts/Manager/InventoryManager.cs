@@ -29,8 +29,7 @@ public class InventoryManager : Singleton<InventoryManager>, ISavable
     {
         if (reward.Money != 0)
         {
-            _money += reward.Money;
-            MainGameManager._soundManager.PlayEffect("money", 0.2f);
+            AddMoney((int)reward.Money);
         }
 
         if (reward.Experience != 0) _experience += reward.Experience;
@@ -55,6 +54,7 @@ public class InventoryManager : Singleton<InventoryManager>, ISavable
             content.InventoryIndex = GetFirstFreeIndexSlot();
             _items.Add(content);
             OnObtain?.Invoke(new string[] { content.NameCode });
+            MainGameManager._soundManager.PlayEffect("bag");
             return true;
         }
         else
@@ -67,11 +67,13 @@ public class InventoryManager : Singleton<InventoryManager>, ISavable
     public void RemoveItem(string itemName)
     {
         _items.Remove(_items.Find(x => x.NameCode == itemName));
+        MainGameManager._soundManager.PlayEffect("bag");
     }
 
     public void AddMoney(int amount)
     {
         _money += amount;
+        MainGameManager._soundManager.PlayEffect("money");
     }
 
     public bool RemoveMoney(int amount)
@@ -79,6 +81,7 @@ public class InventoryManager : Singleton<InventoryManager>, ISavable
         if (_money > amount)
         {
             _money -= amount;
+            MainGameManager._soundManager.PlayEffect("money");
             return true;
         }
 

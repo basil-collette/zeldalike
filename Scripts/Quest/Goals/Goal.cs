@@ -8,7 +8,7 @@ public abstract class Goal
     public string Objective;
     public bool IsCompleted;
     public int RequiredAmount;
-    public int CurrentAmount;
+    public int CurrentAmount = 1;
     [HideInInspector] public QuestStep _QuestStep;
 
     #if UNITY_EDITOR

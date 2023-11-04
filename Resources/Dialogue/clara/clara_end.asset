@@ -17,12 +17,12 @@ MonoBehaviour:
     PortName: Next
     TargetNodeGuid: 1b77cbc5-424a-4ee9-b58e-f4ca3a581ac9
   NodeDatas:
-  - rid: 3230700130921611268
+  - rid: 9067565842195808265
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230700130921611268
+    - rid: 9067565842195808265
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 1b77cbc5-424a-4ee9-b58e-f4ca3a581ac9
@@ -30,7 +30,7 @@ MonoBehaviour:
         Position: {x: 199, y: 200}
         EntryPoint: 0
         Type: 0
-        DialogueText: "Je suis contente que tu es retrouv\xE9 la m\xE9moire Basil
+        DialogueText: "Je suis contente que tu aies retrouv\xE9 la m\xE9moire Basil
           !"
         DialogueCode: 
         Side: 0

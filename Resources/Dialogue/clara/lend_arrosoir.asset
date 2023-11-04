@@ -23,14 +23,14 @@ MonoBehaviour:
     PortName: Merci !
     TargetNodeGuid: 0752f174-6c63-45dd-a143-bc9e8c20d109
   NodeDatas:
-  - rid: 3230700125532454963
-  - rid: 3230700125532454964
-  - rid: 3230700125532454965
+  - rid: 9067565842195808269
+  - rid: 9067565842195808270
+  - rid: 9067565842195808271
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230700125532454963
+    - rid: 9067565842195808269
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 1b77cbc5-424a-4ee9-b58e-f4ca3a581ac9
@@ -45,28 +45,28 @@ MonoBehaviour:
         Outputs:
         - J'aurais besoin de ton arrosoir
         Emotion: 0
-    - rid: 3230700125532454964
+    - rid: 9067565842195808270
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: b259b38f-db84-4cea-b204-d01ac3f313a0
         title: Dialogue
-        Position: {x: 199, y: 400}
+        Position: {x: 199, y: 419}
         EntryPoint: 0
         Type: 0
-        DialogueText: "Tu veux que je te pr\xEAte mon arrosoir ? Biens\xFBre Basil,
-          prends le !"
+        DialogueText: "Tu veux que je te pr\xEAte mon arrosoir ? Bien s\xFBr Basil,
+          prends-le !"
         DialogueCode: 
         Side: 0
         Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
         Outputs:
         - Merci !
         Emotion: 0
-    - rid: 3230700125532454965
+    - rid: 9067565842195808271
       type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 0752f174-6c63-45dd-a143-bc9e8c20d109
         title: Event
-        Position: {x: 702, y: 400}
+        Position: {x: 688, y: 419}
         EntryPoint: 0
         Type: 2
         Param: item;arrosoir

@@ -17,12 +17,12 @@ MonoBehaviour:
     PortName: Next
     TargetNodeGuid: ab104e29-a69a-4ff1-813b-a4e81e24f8cf
   NodeDatas:
-  - rid: 3230700037943328781
+  - rid: 9067565842195808276
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230700037943328781
+    - rid: 9067565842195808276
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: ab104e29-a69a-4ff1-813b-a4e81e24f8cf
@@ -30,7 +30,7 @@ MonoBehaviour:
         Position: {x: 198, y: 200}
         EntryPoint: 0
         Type: 0
-        DialogueText: "Je suis contente que tu ai retrouv\xE9 tes esprits mon petit"
+        DialogueText: "Je suis contente que tu ait retrouv\xE9 tes esprits mon petit"
         DialogueCode: 
         Side: 0
         Pnj: {fileID: 4019585777184574299, guid: 77a7f1fd211b43547a731f2d8b7cbabd, type: 3}

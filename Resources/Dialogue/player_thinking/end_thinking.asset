@@ -17,12 +17,12 @@ MonoBehaviour:
     PortName: Next
     TargetNodeGuid: 871b0e01-89b4-473a-a508-9072b69e8eb8
   NodeDatas:
-  - rid: 3230700125532454917
+  - rid: 9067565842195808293
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230700125532454917
+    - rid: 9067565842195808293
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 871b0e01-89b4-473a-a508-9072b69e8eb8
@@ -31,7 +31,7 @@ MonoBehaviour:
         EntryPoint: 0
         Type: 1
         DialogueText: "Voil\xE0 de quoi je suis capable... J'avais peur de ne pas
-          \xEAtre \xE0 la hauteur mais avec le temps n\xE9c\xE9ssaire j'ai su y arriver"
+          \xEAtre \xE0 la hauteur mais avec le temps n\xE9cessaire j'ai su y arriver"
         DialogueCode: end_thinking
         Side: 1
         Pnj: {fileID: 2776369148330640803, guid: ffaf55ab1deea8340bf60e61265432d4, type: 3}

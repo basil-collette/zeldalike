@@ -1,9 +1,11 @@
 ﻿using Assets.Scripts.Game_Objects.Inheritable;
+using System.Collections;
 using UnityEngine;
 
 public class Bridge : Interacting
 {
     public Sprite spriteActionButton;
+    [SerializeField] AudioClip _repaireSound;
 
     GameObject ActionButtonRepaire;
 
@@ -17,7 +19,6 @@ public class Bridge : Interacting
             Destroy(gameObject);
             return;
         }
-
     }
 
     bool CanBeRepaired()
@@ -45,11 +46,20 @@ public class Bridge : Interacting
             }
         }
 
-        MainGameManager._storyEventManager.AddScenarioEvent(EVENT_NAME);
+        StartCoroutine(RepaireCo());
+    }
 
-        Destroy(gameObject);
+    IEnumerator RepaireCo()
+    {
+        MainGameManager._storyEventManager.AddScenarioEvent(EVENT_NAME);
+        MainGameManager._soundManager.PlayEffect(_repaireSound);
+
+        Destroy(ActionButtonRepaire);
+
+        yield return new WaitForSeconds(_repaireSound.length);
 
         exitSignal?.Raise();
+        Destroy(gameObject);
     }
 
     protected sealed override void OnTriggerEnter2D(Collider2D collider)

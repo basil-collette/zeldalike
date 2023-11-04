@@ -29,25 +29,16 @@ MonoBehaviour:
     PortName: Output
     TargetNodeGuid: 36641a87-f500-41c8-b525-8059d0ed78e3
   NodeDatas:
-  - rid: 3230700125532454933
-  - rid: 3230700125532454934
-  - rid: 3230700125532454935
-  - rid: 3230700125532454936
-  - rid: 3230700125532454937
+  - rid: 9067565842195808260
+  - rid: 9067565842195808261
+  - rid: 9067565842195808262
+  - rid: 9067565842195808263
+  - rid: 9067565842195808264
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230700125532454933
-      type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
-      data:
-        Guid: 6edefae9-e4c1-4776-9ccd-39bd80755747
-        title: Event
-        Position: {x: 199, y: 399}
-        EntryPoint: 0
-        Type: 0
-        Param: L'arrosoir de Clara
-    - rid: 3230700125532454934
+    - rid: 9067565842195808260
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 136d1f0d-c81d-40fa-a900-70d5f5fc9f2f
@@ -55,7 +46,7 @@ MonoBehaviour:
         Position: {x: 199, y: 200}
         EntryPoint: 0
         Type: 0
-        DialogueText: Mais c'est mon arrosoir que tu as ?! Tu l'a repris aux ballegrains
+        DialogueText: Mais c'est mon arrosoir que tu as ?! Tu l'as repris aux ballegrains
           ?
         DialogueCode: 
         Side: 0
@@ -63,7 +54,7 @@ MonoBehaviour:
         Outputs:
         - Oui
         Emotion: 0
-    - rid: 3230700125532454935
+    - rid: 9067565842195808261
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 36641a87-f500-41c8-b525-8059d0ed78e3
@@ -78,16 +69,25 @@ MonoBehaviour:
         Outputs:
         - Merci !
         Emotion: 0
-    - rid: 3230700125532454936
+    - rid: 9067565842195808262
+      type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: 6edefae9-e4c1-4776-9ccd-39bd80755747
+        title: Event
+        Position: {x: 199, y: 429}
+        EntryPoint: 0
+        Type: 0
+        Param: L'arrosoir de Clara
+    - rid: 9067565842195808263
       type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 0d7640ee-15c0-41b6-a9be-75e8a2578b56
         title: Event
-        Position: {x: 396, y: 399}
+        Position: {x: 396, y: 429}
         EntryPoint: 0
         Type: 3
         Param: arrosoir
-    - rid: 3230700125532454937
+    - rid: 9067565842195808264
       type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 960e0ea3-240d-4967-8856-c91d2869a95f

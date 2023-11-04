@@ -23,14 +23,14 @@ MonoBehaviour:
     PortName: Je m'en occupe
     TargetNodeGuid: 1122c1f2-4d09-43b1-8ffc-7075c777262d
   NodeDatas:
-  - rid: 3230700083053592576
-  - rid: 3230700083053592577
-  - rid: 3230700083053592578
+  - rid: 9067565842195808266
+  - rid: 9067565842195808267
+  - rid: 9067565842195808268
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230700083053592576
+    - rid: 9067565842195808266
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 26f20caf-49c5-428e-8ee5-f1acfeaa4ecd
@@ -46,15 +46,15 @@ MonoBehaviour:
         Outputs:
         - Compris
         Emotion: 0
-    - rid: 3230700083053592577
+    - rid: 9067565842195808267
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 88af22c9-382e-4cba-9454-b845abca6eac
         title: Dialogue
-        Position: {x: 200, y: 390}
+        Position: {x: 200, y: 425}
         EntryPoint: 0
         Type: 0
-        DialogueText: "Si tu peux aussi me ramener l'arrosoir qu'ils m'ont prit,
+        DialogueText: "Si tu peux aussi me ramener l'arrosoir qu'ils m'ont pris,
           tu serais g\xE9nial !"
         DialogueCode: 
         Side: 0
@@ -62,12 +62,12 @@ MonoBehaviour:
         Outputs:
         - Je m'en occupe
         Emotion: 0
-    - rid: 3230700083053592578
+    - rid: 9067565842195808268
       type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 1122c1f2-4d09-43b1-8ffc-7075c777262d
         title: Event
-        Position: {x: 200, y: 599}
+        Position: {x: 200, y: 649}
         EntryPoint: 0
         Type: 0
         Param: L'arrosoir de Clara

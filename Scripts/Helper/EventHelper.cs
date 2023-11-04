@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class EventHelper : MonoBehaviour
 {
@@ -44,6 +46,11 @@ public class EventHelper : MonoBehaviour
     public void ShowPausedInterface(string sceneName)
     {
         FindAnyObjectByType<PauseManager>().ShowPausedInterface(new PauseParameter() { InterfaceName = sceneName, ShowMenu = true });
+    }
+
+    public void AccelerateDialog()
+    {
+        FindAnyObjectByType<DialogueManager>().Accelerate();
     }
 
     public void AddQuest(string questName)

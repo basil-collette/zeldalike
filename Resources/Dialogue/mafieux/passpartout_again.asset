@@ -19,27 +19,23 @@ MonoBehaviour:
   - BaseNodeGuid: 2b849e30-32ff-431e-afe0-86199115acc4
     PortName: "J'ach\xE8te !"
     TargetNodeGuid: a6775956-d5a8-43ac-8c6e-f297369597c2
-  - BaseNodeGuid: 2b849e30-32ff-431e-afe0-86199115acc4
-    PortName: Non merci
-    TargetNodeGuid: f0dfd075-372f-456c-a9ab-491df4d3d7c5
   - BaseNodeGuid: a6775956-d5a8-43ac-8c6e-f297369597c2
     PortName: Output
     TargetNodeGuid: 5a1298af-c905-4d4c-95db-6f3c373af0d9
   NodeDatas:
-  - rid: 3230700125532454945
-  - rid: 3230700125532454946
-  - rid: 3230700125532454947
-  - rid: 3230700125532454948
+  - rid: 9067565842195808287
+  - rid: 9067565842195808288
+  - rid: 9067565842195808289
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 3230700125532454945
+    - rid: 9067565842195808287
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 2b849e30-32ff-431e-afe0-86199115acc4
         title: Dialogue
-        Position: {x: 202, y: 200}
+        Position: {x: 200, y: 200}
         EntryPoint: 0
         Type: 0
         DialogueText: "Tu veux le passpartout pour 10 pi\xE8ces d'or ?"
@@ -50,30 +46,21 @@ MonoBehaviour:
         - "J'ach\xE8te !"
         - Non merci
         Emotion: 0
-    - rid: 3230700125532454946
-      type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
-      data:
-        Guid: 5a1298af-c905-4d4c-95db-6f3c373af0d9
-        title: Event
-        Position: {x: 797, y: 200}
-        EntryPoint: 0
-        Type: 2
-        Param: item;key
-    - rid: 3230700125532454947
-      type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
-      data:
-        Guid: f0dfd075-372f-456c-a9ab-491df4d3d7c5
-        title: Event
-        Position: {x: 601, y: 401}
-        EntryPoint: 0
-        Type: 7
-        Param: 
-    - rid: 3230700125532454948
+    - rid: 9067565842195808288
       type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: a6775956-d5a8-43ac-8c6e-f297369597c2
         title: Event
-        Position: {x: 601, y: 200}
+        Position: {x: 579, y: 200}
         EntryPoint: 0
         Type: 5
         Param: 10
+    - rid: 9067565842195808289
+      type: {class: EventNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: 5a1298af-c905-4d4c-95db-6f3c373af0d9
+        title: Event
+        Position: {x: 765, y: 200}
+        EntryPoint: 0
+        Type: 2
+        Param: item;key

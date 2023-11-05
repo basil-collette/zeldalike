@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 using Random = UnityEngine.Random;
@@ -66,7 +65,7 @@ public class RoseMotherThinker : Bot
         GameObject.Find("Wall").GetComponent<Animator>().SetTrigger("open");
         GameObject.Find("Scene Transition").GetComponent<BoxCollider2D>().enabled = true;
 
-        MainGameManager._soundManager.musicSource.mute = true;
+        MainGameManager._soundManager.StopMusic();
 
         StopAllCoroutines();
 
@@ -98,6 +97,8 @@ public class RoseMotherThinker : Bot
 
         MainGameManager._soundManager.PlayEffect("teleport");
 
+        yield return new WaitForSeconds(0.1f);
+
         Invoke(nameof(OnDeathAnimationEnd), 2f);
 
         gameObject.SetActive(false);
@@ -105,7 +106,8 @@ public class RoseMotherThinker : Bot
 
     void OnDeathAnimationEnd()
     {
-        //play victory music
+        MainGameManager._soundManager.PlayMusic("peacefull");
+
         FindAnyObjectByType<DialogueManager>().StartDialogue(successDialog);
 
         MainGameManager._storyEventManager.AddScenarioEvent("defeated_rose_mother");

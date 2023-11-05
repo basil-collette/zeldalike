@@ -16,21 +16,21 @@ MonoBehaviour:
   - BaseNodeGuid: 6fa4ec6b-29d0-4db2-b9e2-1c93cb628193
     PortName: Next
     TargetNodeGuid: eb0e570e-ec20-4c02-b23a-4422d1e215c1
-  - BaseNodeGuid: 3173e805-a9ec-4b3c-98ef-cbfe55ee8683
-    PortName: Ok
-    TargetNodeGuid: 865c9014-0755-4bdd-9fe8-d80c0f1a3e72
   - BaseNodeGuid: eb0e570e-ec20-4c02-b23a-4422d1e215c1
     PortName: Non...
     TargetNodeGuid: 3173e805-a9ec-4b3c-98ef-cbfe55ee8683
+  - BaseNodeGuid: 3173e805-a9ec-4b3c-98ef-cbfe55ee8683
+    PortName: Les ballegrains ?
+    TargetNodeGuid: 865c9014-0755-4bdd-9fe8-d80c0f1a3e72
   NodeDatas:
-  - rid: 9067565842195808273
-  - rid: 9067565842195808274
-  - rid: 9067565842195808275
+  - rid: 9067565866522771456
+  - rid: 9067565866522771457
+  - rid: 9067565866522771458
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 9067565842195808273
+    - rid: 9067565866522771456
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: eb0e570e-ec20-4c02-b23a-4422d1e215c1
@@ -46,7 +46,23 @@ MonoBehaviour:
         Outputs:
         - Non...
         Emotion: 0
-    - rid: 9067565842195808274
+    - rid: 9067565866522771457
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: 865c9014-0755-4bdd-9fe8-d80c0f1a3e72
+        title: Dialogue
+        Position: {x: 198, y: 663}
+        EntryPoint: 0
+        Type: 0
+        DialogueText: "Oui ce sont des monstres qui attaquent les intrus avec des
+          projectiles. De vraies t\xEAtes de navets !"
+        DialogueCode: 
+        Side: 0
+        Pnj: {fileID: 4019585777184574299, guid: 77a7f1fd211b43547a731f2d8b7cbabd, type: 3}
+        Outputs:
+        - Ok
+        Emotion: 0
+    - rid: 9067565866522771458
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 3173e805-a9ec-4b3c-98ef-cbfe55ee8683
@@ -62,20 +78,4 @@ MonoBehaviour:
         Outputs:
         - Ok
         - Les ballegrains ?
-        Emotion: 0
-    - rid: 9067565842195808275
-      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
-      data:
-        Guid: 865c9014-0755-4bdd-9fe8-d80c0f1a3e72
-        title: Dialogue
-        Position: {x: 198, y: 663}
-        EntryPoint: 0
-        Type: 0
-        DialogueText: "Oui ce sont des monstres qui attaquent les intrus avec des
-          projectiles. De vraies t\xEAtes de navets !"
-        DialogueCode: 
-        Side: 0
-        Pnj: {fileID: 4019585777184574299, guid: 77a7f1fd211b43547a731f2d8b7cbabd, type: 3}
-        Outputs:
-        - Ok
         Emotion: 0

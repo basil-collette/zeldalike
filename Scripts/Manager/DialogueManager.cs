@@ -36,11 +36,11 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
         }
     }
 
-    public void StartDialogue(DialogueContainer dialogueContainer)
+    public void StartDialogue(DialogueContainer dialogueContainer, Action OnLoaded = null)
     {
         _dialogueContainer = dialogueContainer;
 
-        ShowPauseInterface();
+        ShowPauseInterface(OnLoaded);
     }
 
     public void StartDialogue(DialogueReference dialogueRef)
@@ -50,13 +50,15 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
         ShowPauseInterface();
     }
 
-    void ShowPauseInterface()
+    void ShowPauseInterface(Action OnLoaded = null)
     {
         pauseManager.ShowPausedInterface(new PauseParameter()
         {
             InterfaceName = "DialogueScene",
             OnPauseProcessed = () =>
             {
+                OnLoaded?.Invoke();
+
                 textArea = FindGameObjectHelper.FindByName("Dialogue Text").GetComponent<Text>();
 
                 BaseNodeData node = GraphHelper.GetFirstNode(_dialogueContainer);
@@ -215,6 +217,12 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
         accelerate = true;
     }
 
+    public void Resume()
+    {
+        StopAllCoroutines();
+        FindAnyObjectByType<PauseManager>().Resume();
+    }
+
     IEnumerator TextAnimationByLetter(string text, AudioClip[] voices, DialogEmotion emotion, Action OnEndAnimation)
     {
         textArea.text = "";
@@ -243,6 +251,14 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
                     ManageVoice(i, ref lastWasConsonnant, loweredCharWord, voices, emotion);
 
                 yield return new WaitForSecondsRealtime(emotion.Speed);
+            }
+
+            if (accelerate)
+            {
+                textArea.text = text;
+                accelerate = false;
+                OnEndAnimation?.Invoke();
+                yield break;
             }
 
             textArea.text += " ";

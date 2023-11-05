@@ -32,10 +32,10 @@ namespace Assets.Scripts.Manager
             }
         }
 
-        public void PlayMusic(string Name)
+        public void PlayMusic(string name)
         {
             musicSource.Stop();
-            musicSource.clip = musics.First(music => music.Name == Name).Clip;
+            musicSource.clip = musics.First(music => music.Name == name).Clip;
             musicSource.Play();
         }
 
@@ -117,7 +117,7 @@ namespace Assets.Scripts.Manager
         public void Init()
         {
             if (!PlayerPrefs.HasKey("musicVolume"))
-                PlayerPrefs.SetFloat("musicVolume", 1);
+                PlayerPrefs.SetFloat("musicVolume", 0.5f);
             if (!PlayerPrefs.HasKey("musicMute"))
                 PlayerPrefs.SetString("musicMute", false.ToString());
 
@@ -147,26 +147,6 @@ namespace Assets.Scripts.Manager
             PlayerPrefs.SetFloat("soundVolume", soundSource.volume);
             PlayerPrefs.SetString("soundMute", soundSource.mute.ToString());
         }
-
-        /*
-        public void StartRepetitiveSound(AudioClip clip)
-        {
-            repetitivesSounds.Add(clip);
-            StartCoroutine(RepetitiveSoundCo(clip));
-        }
-
-        IEnumerator RepetitiveSoundCo(string clipname)
-        {
-            var sound = effects.FirstOrDefault(c => c.Name == clipname);
-            while (sound != null)
-            {
-                effectSource.PlayOneShot(sound.Clip);
-
-                sound = effects.FirstOrDefault(c => c.Name == clipname);
-                yield return null;
-            }
-        }
-        */
 
     }
 

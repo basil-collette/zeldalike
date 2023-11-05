@@ -16,7 +16,7 @@ MonoBehaviour:
   nameCode: ForestScene
   needPreload: 0
   scenesNeedingPreloadNames: []
-  musicName: 
+  musicName: forest
   cameraParameters:
     Smoothing: 0.05
     IsFixed: 0

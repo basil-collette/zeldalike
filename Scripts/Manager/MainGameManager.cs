@@ -68,6 +68,7 @@ public class MainGameManager : SingletonGameObject<MainGameManager>
         scenesManager.ClearScenes();
         scenesManager.AdditiveLoadScene(firstLoadedScene.nameCode, () => {
             scenesManager.SetCurrentScene(firstLoadedScene.nameCode);
+            _soundManager.PlayMusic(firstLoadedScene.musicName);
         });
     }
 

@@ -80,7 +80,7 @@ public class PauseManager : SingletonGameObject<PauseManager>
         if (pauseParameter.PlaySound)
         {
             SoundManager soundManager = GetComponentInChildren<SoundManager>();
-            soundManager.musicSource.Stop();
+            soundManager.musicSource.Pause();
             soundManager.PlayEffect("pause_enter");
         }        
     }

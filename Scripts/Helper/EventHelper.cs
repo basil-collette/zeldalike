@@ -53,6 +53,11 @@ public class EventHelper : MonoBehaviour
         FindAnyObjectByType<DialogueManager>().Accelerate();
     }
 
+    public void ResumeFromDialog()
+    {
+        FindAnyObjectByType<DialogueManager>().Resume();
+    }
+
     public void AddQuest(string questName)
     {
         MainGameManager._questManager.AddQuest(questName);

@@ -338,6 +338,12 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: 7f31f4c2a6773244bb4ac9a0ce238904, type: 3}
   - Name: cave
     Clip: {fileID: 8300000, guid: 487732c40e70db8499b1d93dc4680935, type: 3}
+  - Name: forest
+    Clip: {fileID: 8300000, guid: f9bd17cfefb6f9e4f80755a8128d126e, type: 3}
+  - Name: adventure
+    Clip: {fileID: 8300000, guid: 76af1381d57a7be49b23d74269aa04a5, type: 3}
+  - Name: peacefull
+    Clip: {fileID: 8300000, guid: 75c64ec88ad156b4990c05654cb47ff6, type: 3}
   soundSource: {fileID: 365544692}
   sounds:
   - Name: short-breath

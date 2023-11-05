@@ -16,7 +16,7 @@ MonoBehaviour:
   nameCode: StartScene
   needPreload: 0
   scenesNeedingPreloadNames: []
-  musicName: 
+  musicName: adventure
   cameraParameters:
     Smoothing: 0.05
     IsFixed: 1

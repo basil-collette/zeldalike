@@ -16,13 +16,17 @@ MonoBehaviour:
   - BaseNodeGuid: 6fa4ec6b-29d0-4db2-b9e2-1c93cb628193
     PortName: Next
     TargetNodeGuid: 871b0e01-89b4-473a-a508-9072b69e8eb8
+  - BaseNodeGuid: 871b0e01-89b4-473a-a508-9072b69e8eb8
+    PortName: '>'
+    TargetNodeGuid: e0830755-9eb6-4b48-84a8-385e631b6d9d
   NodeDatas:
-  - rid: 9067565842195808293
+  - rid: 9067565866522771469
+  - rid: 9067565866522771470
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 9067565842195808293
+    - rid: 9067565866522771469
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 871b0e01-89b4-473a-a508-9072b69e8eb8
@@ -33,6 +37,21 @@ MonoBehaviour:
         DialogueText: "Voil\xE0 de quoi je suis capable... J'avais peur de ne pas
           \xEAtre \xE0 la hauteur mais avec le temps n\xE9cessaire j'ai su y arriver"
         DialogueCode: end_thinking
+        Side: 1
+        Pnj: {fileID: 2776369148330640803, guid: ffaf55ab1deea8340bf60e61265432d4, type: 3}
+        Outputs:
+        - '>'
+        Emotion: 0
+    - rid: 9067565866522771470
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: e0830755-9eb6-4b48-84a8-385e631b6d9d
+        title: Dialogue
+        Position: {x: 201, y: 429}
+        EntryPoint: 0
+        Type: 1
+        DialogueText: "\xC0 pr\xE9sent je me rappelle de tout !"
+        DialogueCode: 
         Side: 1
         Pnj: {fileID: 2776369148330640803, guid: ffaf55ab1deea8340bf60e61265432d4, type: 3}
         Outputs:

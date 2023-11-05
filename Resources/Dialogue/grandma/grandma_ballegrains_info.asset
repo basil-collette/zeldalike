@@ -20,17 +20,17 @@ MonoBehaviour:
     PortName: Non...
     TargetNodeGuid: 3173e805-a9ec-4b3c-98ef-cbfe55ee8683
   - BaseNodeGuid: 3173e805-a9ec-4b3c-98ef-cbfe55ee8683
-    PortName: Les ballegrains ?
+    PortName: Ok
     TargetNodeGuid: 865c9014-0755-4bdd-9fe8-d80c0f1a3e72
   NodeDatas:
-  - rid: 9067565866522771456
-  - rid: 9067565866522771457
-  - rid: 9067565866522771458
+  - rid: 9067565866522771471
+  - rid: 9067565866522771472
+  - rid: 9067565866522771473
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 9067565866522771456
+    - rid: 9067565866522771471
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: eb0e570e-ec20-4c02-b23a-4422d1e215c1
@@ -38,15 +38,15 @@ MonoBehaviour:
         Position: {x: 198, y: 200}
         EntryPoint: 0
         Type: 0
-        DialogueText: "Tu as l'air chamboul\xE9 mon gar\xE7on, tu sais plus qui tu
-          es ?"
+        DialogueText: "Tu as l'air chamboul\xE9 mon gar\xE7on, tu sane is plus qui
+          tu es ?"
         DialogueCode: 
         Side: 0
         Pnj: {fileID: 4019585777184574299, guid: 77a7f1fd211b43547a731f2d8b7cbabd, type: 3}
         Outputs:
         - Non...
         Emotion: 0
-    - rid: 9067565866522771457
+    - rid: 9067565866522771472
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 865c9014-0755-4bdd-9fe8-d80c0f1a3e72
@@ -62,7 +62,7 @@ MonoBehaviour:
         Outputs:
         - Ok
         Emotion: 0
-    - rid: 9067565866522771458
+    - rid: 9067565866522771473
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 3173e805-a9ec-4b3c-98ef-cbfe55ee8683

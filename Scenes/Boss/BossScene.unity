@@ -8989,7 +8989,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb059cbe11b736746aa9351ef5d49ca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitSound: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: dc845b6743fc48648aabc4f466d351da, type: 3}
   deathSound: {fileID: 0}
   deathEffect: {fileID: 0}
   lootTable: {fileID: 0}

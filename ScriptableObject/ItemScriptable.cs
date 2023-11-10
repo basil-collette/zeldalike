@@ -10,6 +10,7 @@ public class ItemScriptable : DbDataScriptable
     public ItemTypeEnum ItemType;
 
     public float SpriteScale;
+    public string SpritePath;
     public Sprite Sprite;
 
     public RarityEnum Rarity;

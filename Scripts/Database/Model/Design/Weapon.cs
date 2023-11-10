@@ -20,33 +20,5 @@ namespace Assets.Database.Model.Design
             speed = weaponScriptable.Speed;
         }
 
-        /*
-        public Weapon(IDataReader reader) : base(reader)
-        {
-            WeaponTypeName = reader["weapon_type"].ToString();
-            attackDelay = float.Parse(reader["attack_delay"].ToString());
-            speed = float.Parse(reader["speed"].ToString());
-
-            PostInstanciation();
-        }
-        */
-
-        public static new Weapon InstanciateFromJsonString(string json)
-        {
-            Weapon weapon = JsonUtility.FromJson<Weapon>(json);
-
-            //weapon.PostInstanciation();
-
-            return weapon;
-        }
-
-        /*
-        public new void PostInstanciation()
-        {
-            base.PostInstanciation();
-            weaponType = (WeaponTypeEnum)Enum.Parse(typeof(WeaponTypeEnum), WeaponTypeName);
-        }
-        */
-
     }
 }

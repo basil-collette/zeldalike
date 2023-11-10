@@ -20,17 +20,17 @@ MonoBehaviour:
     PortName: Non...
     TargetNodeGuid: 3173e805-a9ec-4b3c-98ef-cbfe55ee8683
   - BaseNodeGuid: 3173e805-a9ec-4b3c-98ef-cbfe55ee8683
-    PortName: Ok
+    PortName: Les ballegrains ?
     TargetNodeGuid: 865c9014-0755-4bdd-9fe8-d80c0f1a3e72
   NodeDatas:
-  - rid: 9067565979050442752
-  - rid: 9067565979050442753
-  - rid: 9067565979050442754
+  - rid: 9067565988980457472
+  - rid: 9067565988980457473
+  - rid: 9067565988980457474
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 9067565979050442752
+    - rid: 9067565988980457472
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: eb0e570e-ec20-4c02-b23a-4422d1e215c1
@@ -46,7 +46,7 @@ MonoBehaviour:
         Outputs:
         - Non...
         Emotion: 0
-    - rid: 9067565979050442753
+    - rid: 9067565988980457473
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 865c9014-0755-4bdd-9fe8-d80c0f1a3e72
@@ -62,7 +62,7 @@ MonoBehaviour:
         Outputs:
         - Ok
         Emotion: 0
-    - rid: 9067565979050442754
+    - rid: 9067565988980457474
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 3173e805-a9ec-4b3c-98ef-cbfe55ee8683
@@ -76,6 +76,6 @@ MonoBehaviour:
         Side: 0
         Pnj: {fileID: 4019585777184574299, guid: 77a7f1fd211b43547a731f2d8b7cbabd, type: 3}
         Outputs:
-        - Ok
         - Les ballegrains ?
+        - Ok
         Emotion: 0

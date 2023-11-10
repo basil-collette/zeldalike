@@ -160,11 +160,13 @@ public class GraphSaveUtility
     {
         for (var i = 0; i < Nodes.Count; i++)
         {
-            var connections = _containerCache.NodeLinks.Where(x => x.BaseNodeGuid == Nodes[i].Guid).ToList();
+            List<NodeLinkData> connections = _containerCache.NodeLinks.Where(x => x.BaseNodeGuid == Nodes[i].Guid).ToList();
             for (var j = 0; j < connections.Count; j++)
             {
                 var targetNodeGuid = connections[j].TargetNodeGuid;
                 var targetNode = Nodes.First(x => x.Guid == targetNodeGuid);
+
+                //find the correct Port by name
 
                 LinkNodes(Nodes[i].outputContainer[j].Q<Port>(), (Port)targetNode.inputContainer[0]);
 

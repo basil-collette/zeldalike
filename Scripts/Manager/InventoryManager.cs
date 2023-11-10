@@ -136,7 +136,6 @@ public class InventoryManager : Singleton<InventoryManager>, ISavable
             MaxWeight = _maxWeight,
             CurrentWeight = _currentWeight,
             Weapon = _weapon,
-            //Hotbars = _hotbars,
             Items = _items,
         };
     }
@@ -149,13 +148,10 @@ public class InventoryManager : Singleton<InventoryManager>, ISavable
         _currentWeight = saveModel.CurrentWeight;
 
         _weapon = saveModel.Weapon;
-        //_weapon?.PostInstanciation();
-
-        //_hotbars = saveModel.Hotbars;
-        //_hotbars.ForEach(x => x.PostInstanciation());
+        _weapon?.PostInstanciation();
 
         _items = saveModel.Items;
-        //_items.ForEach(x => x.PostInstanciation());
+        _items.ForEach(x => x.PostInstanciation());
     }
 
 }
@@ -168,6 +164,5 @@ public class InventorySaveModel
     public float MaxWeight = 10f;
     public float CurrentWeight;
     public Weapon? Weapon;
-    //public List<HoldableItem> Hotbars = new List<HoldableItem>();
     [SerializeReference] public List<Item> Items = new List<Item>();
 }

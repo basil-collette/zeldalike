@@ -22,10 +22,12 @@ namespace Assets.Scripts.Manager
             switch (type)
             {
                 case ItemTypeEnum.weapon:
-                    return Singleton<WeaponRepository>.Instance.GetByCode(itemName);
+                    var weapon = Singleton<WeaponRepository>.Instance.GetByCode(itemName);
+                    return new Weapon(weapon);
 
                 case ItemTypeEnum.item:
-                    return Singleton<ItemRepository<Item>>.Instance.GetByCode(itemName);
+                    var itemData = Singleton<ItemRepository<ItemScriptable, Item>>.Instance.GetByCode(itemName);
+                    return new Item(itemData);
 
                 default: return null;
             }

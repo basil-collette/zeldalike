@@ -34,7 +34,7 @@ public class MainGameManager : SingletonGameObject<MainGameManager>
 
         InitLocalDataFolder();
 
-        InitBDD();
+        //InitBDD();
 
         GetComponent<SaveManager>().InitSave();
 
@@ -82,9 +82,10 @@ public class MainGameManager : SingletonGameObject<MainGameManager>
         }
     }
 
+    /*
     void InitBDD()
     {
-        if (!DatabaseHelper.DbExists())
+        if (!DatabaseHelper.DbExists("item") || !DatabaseHelper.DbExists("weapon"))
         {
             resetBDD = true;
         }
@@ -94,6 +95,7 @@ public class MainGameManager : SingletonGameObject<MainGameManager>
             DatabaseHelper.ResetTables();
         }
     }
+    */
 
     public void StartGame()
     {

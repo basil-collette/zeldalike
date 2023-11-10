@@ -1,13 +1,21 @@
 ﻿using Assets.Database.Model.Design;
-using Mono.Data.Sqlite;
 using System;
-using System.Collections.Generic;
-using System.Data;
 
 namespace Assets.Database.Model.Repository
 {
-    public class ItemRepository<T> : BaseRepository<T> where T : Item
+    public class ItemRepository<T, M> : BaseRepository<T, M>
+        where T : ItemScriptable
+        where M : Item
     {
+        public ItemRepository() : base("Item") { }
+        public ItemRepository(string folderName) : base(folderName) { }
+
+        public override M DbDataToModel(T data)
+        {
+            return (M)Activator.CreateInstance(typeof(M), data);
+        }
+
+        /*
         public override T DbDataToModel(IDataReader reader)
         {
             return (T)Activator.CreateInstance(typeof(T), reader);
@@ -48,11 +56,11 @@ namespace Assets.Database.Model.Repository
             key.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/key', 1, 'common', 0, 'Petite Clé', 'consommable', 'Clé', 'key', 1)";
             key.ExecuteNonQuery();
 
-            /*
-            IDbCommand letter = dbConn.CreateCommand();
-            letter.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/letter', 1, 'rare', 0, 'Lettre adressée à Mathilde', 'item', 'Lettre', 'letter', 1)";
-            letter.ExecuteNonQuery();
-            */
+            
+            //IDbCommand letter = dbConn.CreateCommand();
+            //letter.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/letter', 1, 'rare', 0, 'Lettre adressée à Mathilde', 'item', 'Lettre', 'letter', 1)";
+            //letter.ExecuteNonQuery();
+            
 
             IDbCommand heart = dbConn.CreateCommand();
             heart.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/heart', 1, 'rare', 0, 'Une vie supplémentaire !', 'consommable', 'Heart', 'heart', 1)";
@@ -82,6 +90,7 @@ namespace Assets.Database.Model.Repository
             darkWoodPlank.CommandText = $"INSERT INTO item ({GetQueryFields()}) VALUES ('gfx/items/dark_wood_plank', 1, 'common', 0, 'Planche d''Ecorcique', 'item', 'Planche d''Ecorcique', 'dark_wood_plank', 1)";
             darkWoodPlank.ExecuteNonQuery();
         }
+        */
 
     }
 }

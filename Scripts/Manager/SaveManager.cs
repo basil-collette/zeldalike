@@ -1,4 +1,5 @@
-﻿using Assets.Database.Model.Repository;
+﻿using Assets.Database.Model.Design;
+using Assets.Database.Model.Repository;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -93,7 +94,8 @@ public class SaveManager : SingletonGameObject<SaveManager>
     public void CreateNewSave(string _saveName)
     {
         string FIRST_WEAPON_CODE = "sword";
-        MainGameManager._inventoryManager.Set(new InventorySaveModel() { Weapon = Singleton<WeaponRepository>.Instance.GetByCode(FIRST_WEAPON_CODE) });
+        var weapon = new Weapon(Singleton<WeaponRepository>.Instance.GetByCode(FIRST_WEAPON_CODE));
+        MainGameManager._inventoryManager.Set(new InventorySaveModel() { Weapon = weapon });
 
         string FIRST_QUEST_NAME = "Je m'appelle...";
         var firstQuest = Resources.Load<ScriptableQuest>($"ScriptableObjects/quests/{FIRST_QUEST_NAME}");

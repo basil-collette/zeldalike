@@ -23,6 +23,16 @@ namespace Assets.Database.Model.Design
         public string RarityName;
         public RarityEnum Rarity;
 
+        public Item(ItemScriptable itemScriptable) : base (itemScriptable)
+        {
+            Weight = itemScriptable.Weight;
+            Description = itemScriptable.Description;
+            ItemType = itemScriptable.ItemType;
+            SpriteScale = itemScriptable.SpriteScale;
+            Sprite = itemScriptable.Sprite;
+            Rarity = itemScriptable.Rarity;
+        }
+/*
         public Item(IDataReader reader) : base(reader)
         {
             SpritePath = reader["sprite_path"].ToString();
@@ -33,23 +43,24 @@ namespace Assets.Database.Model.Design
             RarityName = reader["rarity_code"].ToString();
 
             PostInstanciation();
-        }        
+        }        */
 
         public static Item InstanciateFromJsonString(string json)
         {
             Item item = JsonUtility.FromJson<Item>(json);
 
-            item.PostInstanciation();
+            //item.PostInstanciation();
 
             return item;
         }
 
+        /*
         public void PostInstanciation()
         {
             ItemType = (ItemTypeEnum)Enum.Parse(typeof(ItemTypeEnum), TypeName);
             Sprite = (SpritePath == null) ? null : Resources.Load<Sprite>($"Art/{SpritePath}");
             Rarity = (RarityEnum)Enum.Parse(typeof(RarityEnum), RarityName);
         }
-
+        */
     }
 }

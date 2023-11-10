@@ -13,6 +13,14 @@ namespace Assets.Database.Model.Design
         public float attackDelay = 1;
         public float speed = 1; //1 is the animator normal speed
 
+        public Weapon(WeaponScriptable weaponScriptable) : base(weaponScriptable)
+        {
+            weaponType = weaponScriptable.WeaponType;
+            attackDelay = weaponScriptable.AttackDelay;
+            speed = weaponScriptable.Speed;
+        }
+
+        /*
         public Weapon(IDataReader reader) : base(reader)
         {
             WeaponTypeName = reader["weapon_type"].ToString();
@@ -21,21 +29,24 @@ namespace Assets.Database.Model.Design
 
             PostInstanciation();
         }
+        */
 
         public static new Weapon InstanciateFromJsonString(string json)
         {
             Weapon weapon = JsonUtility.FromJson<Weapon>(json);
 
-            weapon.PostInstanciation();
+            //weapon.PostInstanciation();
 
             return weapon;
         }
 
+        /*
         public new void PostInstanciation()
         {
             base.PostInstanciation();
             weaponType = (WeaponTypeEnum)Enum.Parse(typeof(WeaponTypeEnum), WeaponTypeName);
         }
+        */
 
     }
 }

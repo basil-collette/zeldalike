@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf8f430ea36fb9143be9ab3df9e593e8, type: 3}
+  m_Name: id_card
+  m_EditorClassIdentifier: 
+  Id: 4
+  NameLibelle: "Carte d'identit\xE9"
+  NameCode: id_card
+  Actif: 1
+  Weight: 0
+  Description: "Ma carte d''identit\xE9"
+  ItemType: 0
+  SpriteScale: 1
+  Sprite: {fileID: 21300000, guid: 5356964897957b047988dcb74b0aa132, type: 3}
+  Rarity: 1

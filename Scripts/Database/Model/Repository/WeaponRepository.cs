@@ -1,17 +1,22 @@
 ﻿using Assets.Database.Model.Design;
-using Mono.Data.Sqlite;
-using System.Collections.Generic;
-using System.Data;
 
 namespace Assets.Database.Model.Repository
 {
-    public sealed class WeaponRepository : ItemRepository<Weapon>
+    public sealed class WeaponRepository : ItemRepository<WeaponScriptable, Weapon>
     {
+        public WeaponRepository() : base ("Weapon") { }
+
+        public override Weapon DbDataToModel(WeaponScriptable data)
+        {
+            return new Weapon(data);
+        }
+
+        /*
         public override Weapon DbDataToModel(IDataReader reader)
         {
             return new Weapon(reader);
         }
-
+        
         public override List<string> GetFields()
         {
             List<string> fields = new List<string>()
@@ -53,6 +58,7 @@ namespace Assets.Database.Model.Repository
             insertDagger.CommandText = $"INSERT INTO weapon ({GetQueryFields()}) VALUES ('dagger', 0.75, 0.3, 'gfx/weapons/dagger', 0.7, 'common', 0, 'Dague perse', 'weapon', 'Dagger', 'dagger', 1)";
             insertDagger.ExecuteNonQuery();
         }
+        */
 
     }
 }

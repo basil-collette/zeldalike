@@ -12,6 +12,7 @@ namespace Assets.Database.Model.Design
         public string NameCode;
         public bool Actif;
 
+        /*
         public BaseDbData(IDataReader reader, Guid? uid = null)
         {
             Id = int.Parse(reader["id"].ToString());
@@ -20,10 +21,14 @@ namespace Assets.Database.Model.Design
             NameCode = reader["name_code"].ToString();
             Actif = bool.Parse(reader["actif"].ToString());
         }
+        */
 
-        public BaseDbData() : base()
+        public BaseDbData(DbDataScriptable dbDataScriptable) : base()
         {
-
+            Id = dbDataScriptable.Id;
+            NameLibelle = dbDataScriptable.NameLibelle;
+            NameCode = dbDataScriptable.NameCode;
+            Actif = dbDataScriptable.Actif;
         }
 
     }

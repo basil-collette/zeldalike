@@ -149,13 +149,13 @@ public class InventoryManager : Singleton<InventoryManager>, ISavable
         _currentWeight = saveModel.CurrentWeight;
 
         _weapon = saveModel.Weapon;
-        _weapon?.PostInstanciation();
+        //_weapon?.PostInstanciation();
 
         //_hotbars = saveModel.Hotbars;
         //_hotbars.ForEach(x => x.PostInstanciation());
 
         _items = saveModel.Items;
-        _items.ForEach(x => x.PostInstanciation());
+        //_items.ForEach(x => x.PostInstanciation());
     }
 
 }

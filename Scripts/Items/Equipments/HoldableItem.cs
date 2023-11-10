@@ -3,10 +3,9 @@ using System.Data;
 using UnityEngine;
 
 [System.Serializable]
-public class HoldableItem : Item
-{
-
-    public HoldableItem(IDataReader reader) : base(reader)
+public class HoldableItem
+{ 
+    /*public HoldableItem(IDataReader reader) : base(reader)
     {
         PostInstanciation();
     }
@@ -23,6 +22,6 @@ public class HoldableItem : Item
     public new void PostInstanciation()
     {
         base.PostInstanciation();
-    }
+    }*/
 
 }

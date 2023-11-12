@@ -20,6 +20,7 @@ MonoBehaviour:
   Description: Lance spartiate
   ItemType: 3
   SpriteScale: 0.7
+  SpritePath: gfx/weapons/spear
   Sprite: {fileID: 21300000, guid: a1403911a14efbc41a51d20cdc3edc86, type: 3}
   Rarity: 1
   WeaponType: 3

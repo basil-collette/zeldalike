@@ -20,6 +20,7 @@ MonoBehaviour:
   Description: Hache viking
   ItemType: 3
   SpriteScale: 0.7
+  SpritePath: gfx/weapons/axe
   Sprite: {fileID: 21300000, guid: 8b1d02507942b234cbdb6a451f893f61, type: 3}
   Rarity: 1
   WeaponType: 1

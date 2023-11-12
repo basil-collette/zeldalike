@@ -20,5 +20,6 @@ MonoBehaviour:
   Description: "Une vie suppl\xE9mentaire !"
   ItemType: 0
   SpriteScale: 1
+  SpritePath: gfx/items/heart
   Sprite: {fileID: 21300000, guid: 1dfec6bc1e2a7014491f58a3e108bbfc, type: 3}
   Rarity: 1

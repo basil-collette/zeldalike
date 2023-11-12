@@ -20,5 +20,6 @@ MonoBehaviour:
   Description: "Mes dipl\xF4mes !"
   ItemType: 4
   SpriteScale: 1
+  SpritePath: gfx/items/diplomas
   Sprite: {fileID: 21300000, guid: ae91e5fcfbef9894fa4b7d5aa60786bd, type: 3}
   Rarity: 1

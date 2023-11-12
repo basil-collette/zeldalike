@@ -20,5 +20,6 @@ MonoBehaviour:
   Description: Passpartout du Mafieux
   ItemType: 0
   SpriteScale: 1
+  SpritePath: gfx/items/key
   Sprite: {fileID: 21300000, guid: 5c926dd0e324ed8459c7b0f4bc3d3f05, type: 3}
   Rarity: 0

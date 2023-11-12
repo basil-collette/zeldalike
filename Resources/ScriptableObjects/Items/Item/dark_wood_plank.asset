@@ -20,5 +20,6 @@ MonoBehaviour:
   Description: Planche d''Ecorcique
   ItemType: 0
   SpriteScale: 1
+  SpritePath: gfx/items/dark_wood_plank
   Sprite: {fileID: 21300000, guid: 98a27d6338b41024daebc0c7e9cffb90, type: 3}
   Rarity: 0

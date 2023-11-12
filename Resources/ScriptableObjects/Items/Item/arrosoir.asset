@@ -20,5 +20,6 @@ MonoBehaviour:
   Description: Arrosoir de Clara
   ItemType: 4
   SpriteScale: 1
+  SpritePath: gfx/items/arrosoir
   Sprite: {fileID: 21300000, guid: 4fdb56645f8440b4183728da4a5b6ca4, type: 3}
   Rarity: 1

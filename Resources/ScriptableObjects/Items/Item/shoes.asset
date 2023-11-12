@@ -20,5 +20,6 @@ MonoBehaviour:
   Description: Bottes du marchant
   ItemType: 4
   SpriteScale: 1
+  SpritePath: gfx/items/shoes
   Sprite: {fileID: 21300000, guid: 41522fe86a23a9447b1f6a956ae56aaf, type: 3}
   Rarity: 1

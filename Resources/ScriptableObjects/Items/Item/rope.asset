@@ -20,5 +20,6 @@ MonoBehaviour:
   Description: Corde solide
   ItemType: 4
   SpriteScale: 1
+  SpritePath: gfx/items/rope
   Sprite: {fileID: 21300000, guid: 34da5399219f54d42af0a02ea627aecb, type: 3}
   Rarity: 0

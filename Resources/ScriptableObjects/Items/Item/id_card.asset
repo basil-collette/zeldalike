@@ -20,5 +20,6 @@ MonoBehaviour:
   Description: "Ma carte d''identit\xE9"
   ItemType: 0
   SpriteScale: 1
+  SpritePath: gfx/items/id_card
   Sprite: {fileID: 21300000, guid: 5356964897957b047988dcb74b0aa132, type: 3}
   Rarity: 1

@@ -78,7 +78,7 @@ public class InventoryManager : Singleton<InventoryManager>, ISavable
 
     public bool RemoveMoney(int amount)
     {
-        if (_money > amount)
+        if (_money >= amount)
         {
             _money -= amount;
             MainGameManager._soundManager.PlayEffect("money");

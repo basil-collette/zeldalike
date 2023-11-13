@@ -3569,8 +3569,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -35, y: -25}
-  m_SizeDelta: {x: 570, y: 700}
+  m_AnchoredPosition: {x: -35, y: -30}
+  m_SizeDelta: {x: 590, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2142244050
 MonoBehaviour:
@@ -3605,13 +3605,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Multipassionn\xE9, j'ai appris sur internet les diff\xE9rents basiques
-    du jeu et d'Unity (custom editor, syst\xE8me de dialogue, syst\xE8me de qu\xEAte,
-    syst\xE8me de sauvegarde, syst\xE8me de loot al\xE9atoire, l'animations, base
-    de donn\xE9e sqlite, inventaire...)\n\nJ'ai compos\xE9 les musiques sur l'application
-    Bandlab et les sprites sur Paint.net (la roulade du player, le boss, le monstre
-    cracheur)\n\nla plus part des assets graphiques et des effects sonores ont \xE9t\xE9
-    trouv\xE9s sur le net, \xE9tant libres de droits"
+  m_Text: "J'ai appris sur internet les diff\xE9rents basiques du jeu et d'Unity
+    (custom editor, dialogue, qu\xEAte, sauvegarde, loot al\xE9atoire, l'animations,
+    base de donn\xE9e sqlite, inventaire, shader...)\n\nJ'ai compos\xE9 les musiques
+    sur l'application Bandlab et certains sprites sur Paint.net (la roulade du player,
+    le boss, le monstre ballegrain)\n\nla plus part des assets graphiques et des
+    effects sonores ont \xE9t\xE9 trouv\xE9s sur le net, \xE9tant libres de droits"
 --- !u!222 &2142244051
 CanvasRenderer:
   m_ObjectHideFlags: 0

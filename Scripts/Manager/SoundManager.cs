@@ -24,10 +24,11 @@ namespace Assets.Scripts.Manager
         public void OnSceneSwitchSetMusic(string musicName)
         {
             musicSource.Stop();
+            musicSource.clip = null;
 
             if (musicName != null && musicName != string.Empty)
             {
-                musicSource.clip = musics.First(music => music.Name == musicName).Clip;
+                musicSource.clip = musics.FirstOrDefault(music => music.Name == musicName).Clip;
                 musicSource.Play();
             }
         }

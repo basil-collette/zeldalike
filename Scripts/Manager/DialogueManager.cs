@@ -21,7 +21,9 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
 
     DialogueContainer _dialogueContainer;
     Text textArea;
-    bool accelerate = false;
+
+    string _currentText = string.Empty;
+    Action OnEndAnimation;
 
     void Start()
     {
@@ -150,6 +152,8 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
             }
         };
 
+        _currentText = node.DialogueText;
+        OnEndAnimation = showButtons;
         StartCoroutine(TextAnimationByLetter(node.DialogueText, node.Pnj.Voices, _emotions.Find(x => x.Type == node.Emotion), showButtons));
     }
 
@@ -203,6 +207,8 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
         {
             Destroy(child.gameObject);
         }
+
+        OnEndAnimation = null;
     }
 
     readonly char[] alphabet = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
@@ -214,7 +220,10 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
 
     public void Accelerate()
     {
-        accelerate = true;
+        StopAllCoroutines();
+        textArea.text = _currentText;
+        OnEndAnimation?.Invoke();
+        OnEndAnimation = null;
     }
 
     public void Resume()
@@ -237,28 +246,12 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
             var charWord = word.ToCharArray();
             for (int i = 0; i < charWord.Length; i++)
             {
-                if (accelerate)
-                {
-                    textArea.text = text;
-                    accelerate = false;
-                    OnEndAnimation?.Invoke();
-                    yield break;
-                }
-
                 textArea.text += charWord[i];
 
                 if (voices.Length > 0 && alphabet.Contains(loweredCharWord[i]))
                     ManageVoice(i, ref lastWasConsonnant, loweredCharWord, voices, emotion);
 
                 yield return new WaitForSecondsRealtime(emotion.Speed);
-            }
-
-            if (accelerate)
-            {
-                textArea.text = text;
-                accelerate = false;
-                OnEndAnimation?.Invoke();
-                yield break;
             }
 
             textArea.text += " ";

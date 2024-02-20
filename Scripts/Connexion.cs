@@ -9,6 +9,11 @@ public class Connexion : MonoBehaviour
     [SerializeField] InputField identifierInput;
     [SerializeField] InputField passwordInput;
 
+    public void StartWithoutConnecting()
+    {
+        FindGameObjectHelper.FindByName("Main Game Manager").GetComponent<MainGameManager>().StartGame();
+    }
+
     public void TryConnect()
     {
         Dictionary<string, string> data = new Dictionary<string, string>() {

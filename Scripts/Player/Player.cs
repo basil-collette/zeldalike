@@ -9,7 +9,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(PlayerInput))]
 public class Player : AliveEntity
 {
     [Header("Position Settings")]
@@ -38,7 +37,7 @@ public class Player : AliveEntity
         animatorLegs = transform.GetChild(0).GetComponent<Animator>();
         animatorTop = transform.GetChild(1).GetComponent<Animator>();
 
-        playerInputs = GetComponent<PlayerInput>();
+        playerInputs = FindAnyObjectByType<PlayerInput>();
         cooldownManager = GetComponent<CooldownManager>();
 
         transform.position = startingPosition.initalValue;
@@ -68,43 +67,33 @@ public class Player : AliveEntity
 
         SetState(EntityState.idle);
 
-        direction = Vector3.zero;
-
         if (Gamepad.current != null && Gamepad.current[GamepadButton.South].wasPressedThisFrame)
         {
             Dash();
             return;
         }
 
-        //Grab TODO ajouter un boutton action pour ca ou autre bouton comme le dash ?
-        /*
-        if (Gamepad.current != null && Gamepad.current[GamepadButton.East].isPressed)
+        if (cooldownManager.IsAvailable("dashDuration"))
         {
-            /*
-            if (currentEntityState != EntityState.unavailable)
+            direction = Vector3.zero;
+
+            direction.x = Input.GetAxis("Horizontal");
+            direction.y = Input.GetAxis("Vertical");
+
+            Vector2 joystickInput = playerInputs.actions["Move"].ReadValue<Vector2>();
+            if (joystickInput != Vector2.zero)
             {
-                SetState(EntityState.attack);
+                direction.x = joystickInput.x;
+                direction.y = joystickInput.y;
             }
-            return;
-            *//*
-        }
-        */
-
-        direction.x = Input.GetAxis("Horizontal");
-        direction.y = Input.GetAxis("Vertical");
-
-        Vector2 joystickInput = playerInputs.actions["Move"].ReadValue<Vector2>();
-        if (joystickInput != Vector2.zero)
-        {
-            direction.x = joystickInput.x;
-            direction.y = joystickInput.y;
         }
 
         if (direction != Vector3.zero)
         {
             SetState(EntityState.walk);
             SetOrientation();
-        } else
+        }
+        else
         {
             Imobilize();
         }
@@ -270,6 +259,11 @@ public class Player : AliveEntity
 
         if (cooldownManager.IsAvailable("dashCooldown"))
         {
+            _weapon.EndAttack();
+
+            if (direction == Vector3.zero)
+                direction = moveOrientation;
+
             GetComponent<Health>().enabled = false;
             animatorTop.SetTrigger("roll");
             animatorLegs.SetBool("rolling", true);
@@ -290,6 +284,8 @@ public class Player : AliveEntity
 
     public void RaiseItem()
     {
+        _weapon.EndAttack();
+
         animatorTop.SetBool("receivingItem", true);
         SetState(EntityState.unavailable);
     }
@@ -312,6 +308,8 @@ public class Player : AliveEntity
     {
         SetState(EntityState.unavailable);
         Imobilize();
+
+        _weapon.EndAttack();
 
         MainGameManager._soundManager.PlayEffect("falling");
 

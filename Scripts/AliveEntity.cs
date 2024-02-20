@@ -63,6 +63,10 @@ public abstract class AliveEntity : Entity
 
     public void Fall(Vector3 fallPos, Vector3 respawnPos)
     {
+        Vector3 dir = DirectionHelper.GetDirection(transform.position, fallPos).normalized;
+
+        GetComponent<Rigidbody2D>().velocity = dir;
+
         StartCoroutine(FallCo(fallPos, respawnPos));
     }
 

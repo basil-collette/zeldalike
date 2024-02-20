@@ -19,6 +19,8 @@ namespace Assets.Scripts.Items.Equipments.Weapons
         protected PlayerInput playerInputs;
         protected CooldownManager cooldownManager;
 
+        Vector3 tempDirection;
+
         protected void Start()
         {
             anim = GetComponentInChildren<Animator>();
@@ -28,7 +30,7 @@ namespace Assets.Scripts.Items.Equipments.Weapons
             anim.speed = AttackSpeedModifier;
             animPlayerTop.SetFloat("attackSpeed", AttackSpeedModifier);
 
-            playerInputs = GetComponent<PlayerInput>();
+            playerInputs = FindAnyObjectByType<PlayerInput>();
 
             cooldownManager = GetComponent<CooldownManager>();
 
@@ -48,23 +50,9 @@ namespace Assets.Scripts.Items.Equipments.Weapons
 
                     anim.SetBool("attacking", true);
 
-                    Vector3 tempDirection = direction;
-                    Action OnAttackEnd = () =>
-                    {
-                        attacking = false;
+                    tempDirection = direction;
 
-                        anim.SetTrigger("endCooldown");
-                        anim.SetBool("attacking", false);
-
-                        animPlayerTop.SetBool("attacking", false);
-                        animPlayerLegs.SetBool("attacking", false);
-                        animPlayerLegs.SetFloat("moveX", tempDirection.x);
-                        animPlayerLegs.SetFloat("moveY", tempDirection.y);
-
-                        direction = Vector2.zero;
-                    };
-
-                    cooldownManager.StartCooldown("attackCooldown", _weapon.attackDelay, OnAttackEnd);
+                    cooldownManager.StartCooldown("attackCooldown", _weapon.attackDelay, EndAttack);
 
                     GetComponentInParent<Player>().AttackAnimation(direction);
                 }
@@ -74,6 +62,24 @@ namespace Assets.Scripts.Items.Equipments.Weapons
         float AttackSpeedModifier => 1 / _weapon.speed;
 
         protected abstract void Attack(Vector3 direction);
+
+        public void EndAttack()
+        {
+            if (!attacking) return;
+
+            attacking = false;
+
+            anim.SetTrigger("endCooldown");
+            anim.SetBool("attacking", false);
+            transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+
+            animPlayerTop.SetBool("attacking", false);
+            animPlayerLegs.SetBool("attacking", false);
+            animPlayerLegs.SetFloat("moveX", tempDirection.x);
+            animPlayerLegs.SetFloat("moveY", tempDirection.y);
+
+            direction = Vector2.zero;
+        }
 
     }
 }

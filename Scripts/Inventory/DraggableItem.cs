@@ -86,4 +86,16 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         Slot.GetComponent<InventorySlot>().Add(Item);
     }
 
+    public void OnClick()
+    {
+        //EquipmentGuiManager.Instance.SetInfoVisible(true, GetInfoText());
+
+        
+    }
+
+    public void ThrowBin()
+    {
+        Slot.GetComponent<InventorySlot>().Remove(Item);
+    }
+
 }

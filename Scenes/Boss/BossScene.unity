@@ -9502,9 +9502,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1973114275}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40a5f66f0e4fe3b42a7045baa46517bc, type: 3}
+  m_Script: {fileID: 11500000, guid: cfe0c763f98dd0a41afc85f117e9a688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _door: {fileID: 1608495761}
+  _gentleLittleOne: {fileID: 561919782}
+  _roseMother: {fileID: 1554134215}
 --- !u!1 &2064539973
 GameObject:
   m_ObjectHideFlags: 0
@@ -13073,7 +13076,7 @@ Grid:
   m_GameObject: {fileID: 2079344753}
   m_Enabled: 1
   m_CellSize: {x: 1, y: 1, z: 0}
-  m_CellGap: {x: -0.0001, y: -0.0001, z: 0}
+  m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
 --- !u!4 &2079344755

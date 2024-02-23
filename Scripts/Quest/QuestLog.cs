@@ -13,8 +13,8 @@ public class QuestLog : MonoBehaviour
     public RectTransform ListTransform;
     public Text QuestDetailsText;
     public Text QuestObjectiveText;
-    [SerializeField] GameObject InProgressButton;
-    [SerializeField] GameObject CompletedButton;
+    [SerializeField] Button InProgressButton;
+    [SerializeField] Button CompletedButton;
 
     public GameObject RewardXP;
     public GameObject RewardGold;
@@ -37,8 +37,8 @@ public class QuestLog : MonoBehaviour
 
         List<Quest> quests = MainGameManager._questManager.GetQuestsByState(completed);
 
-        InProgressButton.GetComponent<Button>().interactable = completed;
-        CompletedButton.GetComponent<Button>().interactable = !completed;
+        InProgressButton.interactable = completed;
+        CompletedButton.interactable = !completed;
 
         SetQuestListContainer(quests);
 
@@ -64,20 +64,8 @@ public class QuestLog : MonoBehaviour
         }
     }
 
-    void ShowQuestDesc(int index, Button button, Quest quest)
+    private void ShowRewards(QuestStep questStep)
     {
-        SetQuestSelectionColor(QuestButtons[PreviousButtonIndex], false);
-        SetQuestSelectionColor(button, true);
-        PreviousButtonIndex = index;
-
-        QuestDetailsText.text = quest.Description;
-
-        QuestStep questStep = _questbook.GetCurrentStep(quest);
-
-        if (questStep == null) return;
-
-        QuestObjectiveText.text = string.Join("\n", questStep.Goals.AsEnumerable<Goal>().Select(x => x.Objective));
-
         bool haveRewardXP = questStep.Rewards.Experience != null && questStep.Rewards.Experience != 0;
         RewardXP.SetActive(haveRewardXP);
         if (haveRewardXP)
@@ -91,7 +79,7 @@ public class QuestLog : MonoBehaviour
         {
             RewardGold.transform.Find("Text GoldValue").GetComponent<Text>().text = questStep.Rewards.Money.ToString();
         }
-        
+
         for (int i = 0; i < 3; i++)
         {
             bool haveItemReward = questStep.Rewards.ItemsRef.Count() >= i + 1;
@@ -112,12 +100,31 @@ public class QuestLog : MonoBehaviour
         }
     }
 
+    void ShowQuestDesc(int index, Button button, Quest quest)
+    {
+        SetQuestSelectionColor(QuestButtons[PreviousButtonIndex], false);
+        SetQuestSelectionColor(button, true);
+        PreviousButtonIndex = index;
+
+        QuestDetailsText.text = quest.Description;
+
+        QuestStep questStep = _questbook.GetCurrentStep(quest);
+
+        if (questStep == null)
+            return;
+
+        QuestObjectiveText.text = string.Join("\n", questStep.Goals.AsEnumerable<Goal>().Select(x => x.Objective));
+
+        ShowRewards(questStep);
+    }
+
     void ClearQuestDesc()
     {
         QuestDetailsText.text = string.Empty;
         QuestObjectiveText.text = string.Empty;
         RewardXP.SetActive(false);
         RewardGold.SetActive(false);
+
         for (int i = 0; i < 3; i++)
         {
             Items[i].SetActive(false);

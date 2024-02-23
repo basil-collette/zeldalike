@@ -150,6 +150,7 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
                     pauseManager.Resume();
                 });
             }
+            OnEndAnimation = null;
         };
 
         _currentText = node.DialogueText;
@@ -223,7 +224,6 @@ public class DialogueManager : SingletonGameObject<DialogueManager>
         StopAllCoroutines();
         textArea.text = _currentText;
         OnEndAnimation?.Invoke();
-        OnEndAnimation = null;
     }
 
     public void Resume()

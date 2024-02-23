@@ -15,19 +15,38 @@ MonoBehaviour:
   NodeLinks:
   - BaseNodeGuid: 6fa4ec6b-29d0-4db2-b9e2-1c93cb628193
     PortName: Next
+    TargetNodeGuid: a1bab636-6610-43a0-8a96-28e44f0fa928
+  - BaseNodeGuid: a1bab636-6610-43a0-8a96-28e44f0fa928
+    PortName: '>'
     TargetNodeGuid: 1b77cbc5-424a-4ee9-b58e-f4ca3a581ac9
   NodeDatas:
-  - rid: 9067565842195808265
+  - rid: 6584844816851140608
+  - rid: 6584844816851140609
   ExposedProperties: []
   references:
     version: 2
     RefIds:
-    - rid: 9067565842195808265
+    - rid: 6584844816851140608
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: a1bab636-6610-43a0-8a96-28e44f0fa928
+        title: Dialogue
+        Position: {x: 221, y: 200}
+        EntryPoint: 0
+        Type: 0
+        DialogueText: "Tu as vaincu la Rose M\xE8re, tu es incroyable"
+        DialogueCode: 
+        Side: 0
+        Pnj: {fileID: 4285200054937639855, guid: 4b677102ee9f66448976d97d85dd2f17, type: 3}
+        Outputs:
+        - '>'
+        Emotion: 0
+    - rid: 6584844816851140609
       type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
       data:
         Guid: 1b77cbc5-424a-4ee9-b58e-f4ca3a581ac9
         title: Dialogue
-        Position: {x: 199, y: 200}
+        Position: {x: 221, y: 457}
         EntryPoint: 0
         Type: 0
         DialogueText: "Je suis contente que tu aies retrouv\xE9 la m\xE9moire Basil

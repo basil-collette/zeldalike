@@ -318,8 +318,8 @@ MonoBehaviour:
   ListTransform: {fileID: 1468360808}
   QuestDetailsText: {fileID: 1965904806}
   QuestObjectiveText: {fileID: 2111303309}
-  InProgressButton: {fileID: 885088869}
-  CompletedButton: {fileID: 220353166}
+  InProgressButton: {fileID: 885088871}
+  CompletedButton: {fileID: 220353168}
   RewardXP: {fileID: 1690448226}
   RewardGold: {fileID: 1703410391}
   Items:
@@ -3532,7 +3532,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 577497538}
   m_HandleRect: {fileID: 577497537}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

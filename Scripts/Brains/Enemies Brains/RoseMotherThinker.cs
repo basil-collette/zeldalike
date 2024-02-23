@@ -16,8 +16,7 @@ public class RoseMotherThinker : Bot
     [SerializeField] DialogueContainer successDialog;
     [SerializeField] GameObject gentleLittleOne;
 
-    ObjectPool<Projectile> _spikeProjectilePool;
-    
+    ObjectPool<Projectile> _spikeProjectilePool;    
 
     new void Start()
     {

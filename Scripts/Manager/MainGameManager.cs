@@ -50,16 +50,6 @@ public class MainGameManager : SingletonGameObject<MainGameManager>
         //FindAnyObjectByType<ToastManager>().Add(new Toast("La partie à été supprimée!", ToastType.Success));
     }
 
-    public void Test(string param)
-    {
-        Debug.Log("success : " + param);
-    }
-
-    public void Test2()
-    {
-        Debug.Log("success");
-    }
-
     public void ShowMenuScene()
     {
         _soundManager.StopMusic();

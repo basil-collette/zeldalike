@@ -3569,8 +3569,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -35, y: -30}
-  m_SizeDelta: {x: 590, y: 700}
+  m_AnchoredPosition: {x: -35, y: 0}
+  m_SizeDelta: {x: 590, y: 750}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2142244050
 MonoBehaviour:
@@ -3594,7 +3594,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 35
+    m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -3605,12 +3605,14 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "J'ai appris sur internet les diff\xE9rents basiques du jeu et d'Unity
-    (custom editor, dialogue, qu\xEAte, sauvegarde, loot al\xE9atoire, l'animations,
-    base de donn\xE9e sqlite, inventaire, shader...)\n\nJ'ai compos\xE9 les musiques
-    sur l'application Bandlab et certains sprites sur Paint.net (la roulade du player,
-    le boss, le monstre ballegrain)\n\nla plus part des assets graphiques et des
-    effects sonores ont \xE9t\xE9 trouv\xE9s sur le net, \xE9tant libres de droits"
+  m_Text: "Voici mon premier jeu ! J'ai appris et r\xE9alis\xE9 ce jeu en m'autoformant
+    sur le net, en l'espace de 7 mois.\nJ'ai exp\xE9rimenter les custom editor, dialogue,
+    qu\xEAte, sauvegarde, loot al\xE9atoire, l'animations, base de donn\xE9e sqlite,
+    inventaire, shader, object pooling...)\nDans d'autres r\xE9alisations : multi
+    threding, multiplayer, chargement dynamique de chunk, g\xE9n\xE9ration proc\xE9durale...\n\nJ'ai
+    compos\xE9 les musiques sur l'application Bandlab et certains sprites sur Paint.net
+    (la roulade du player, le boss, le monstre ballegrain)\n\nla plus part des assets
+    graphiques et des effects sonores sont trouv\xE9s sur le net, libres de droits"
 --- !u!222 &2142244051
 CanvasRenderer:
   m_ObjectHideFlags: 0

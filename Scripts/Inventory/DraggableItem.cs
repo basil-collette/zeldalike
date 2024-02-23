@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Assets.Database.Model.Design;
 using Assets.Scripts.Enums;
+using Assets.Scripts.Inventory;
 
 public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -88,14 +89,17 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnClick()
     {
-        //EquipmentGuiManager.Instance.SetInfoVisible(true, GetInfoText());
+        if (Item.ItemType == ItemTypeEnum.weapon
+            || Item.ItemType == ItemTypeEnum.quest)
+            return;
 
-        
+        FindAnyObjectByType<DeleteWindowManager>().Show(ThrowBin);
     }
 
     public void ThrowBin()
     {
-        Slot.GetComponent<InventorySlot>().Remove(Item);
+        MainGameManager._inventoryManager._items.Remove(Item);
+        Destroy(gameObject);
     }
 
 }

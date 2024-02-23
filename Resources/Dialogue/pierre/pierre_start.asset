@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a2d8ae767442a4c8c0177884108faf, type: 3}
+  m_Name: pierre_start
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGuid: 1178d935-de5f-4bb4-aef6-e56b9584d265
+    PortName: Next
+    TargetNodeGuid: 6adb9da3-fe3f-4f1a-98d2-79b8497d87e9
+  NodeDatas:
+  - rid: 6584844827862761474
+  ExposedProperties: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 6584844827862761474
+      type: {class: DialogueNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        Guid: 6adb9da3-fe3f-4f1a-98d2-79b8497d87e9
+        title: Dialogue
+        Position: {x: 204, y: 200}
+        EntryPoint: 0
+        Type: 0
+        DialogueText: "Avec ta main droite, tu peux continuellement viser sans rel\xE2cher.
+          Tu attaqueras en boucle !"
+        DialogueCode: 
+        Side: 0
+        Pnj: {fileID: 4285200054937639855, guid: 2f1978b1510dd0f4d98937d2e3f04567, type: 3}
+        Outputs:
+        - Ok
+        Emotion: 0

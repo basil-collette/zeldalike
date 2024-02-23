@@ -7611,6 +7611,7 @@ Transform:
   - {fileID: 389359345}
   - {fileID: 2135352510}
   - {fileID: 1549990300}
+  - {fileID: 1950948526}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -45258,6 +45259,94 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 017ce04168406624cb93def416dbeede, type: 3}
+--- !u!1001 &1950948525
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 208924113}
+    m_Modifications:
+    - target: {fileID: 3180381479997400498, guid: 2f1978b1510dd0f4d98937d2e3f04567, type: 3}
+      propertyPath: m_Name
+      value: PNJ Pierre
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764940237436043527, guid: 2f1978b1510dd0f4d98937d2e3f04567, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764940237436043527, guid: 2f1978b1510dd0f4d98937d2e3f04567, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764940237436043527, guid: 2f1978b1510dd0f4d98937d2e3f04567, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764940237436043527, guid: 2f1978b1510dd0f4d98937d2e3f04567, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764940237436043527, guid: 2f1978b1510dd0f4d98937d2e3f04567, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764940237436043527, guid: 2f1978b1510dd0f4d98937d2e3f04567, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764940237436043527, guid: 2f1978b1510dd0f4d98937d2e3f04567, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764940237436043527, guid: 2f1978b1510dd0f4d98937d2e3f04567, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764940237436043527, guid: 2f1978b1510dd0f4d98937d2e3f04567, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764940237436043527, guid: 2f1978b1510dd0f4d98937d2e3f04567, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764940237436043527, guid: 2f1978b1510dd0f4d98937d2e3f04567, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2f1978b1510dd0f4d98937d2e3f04567, type: 3}
+--- !u!4 &1950948526 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5764940237436043527, guid: 2f1978b1510dd0f4d98937d2e3f04567, type: 3}
+  m_PrefabInstance: {fileID: 1950948525}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1950948527 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3180381479997400498, guid: 2f1978b1510dd0f4d98937d2e3f04567, type: 3}
+  m_PrefabInstance: {fileID: 1950948525}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1950948528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950948527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e278957f91cb1bd498f872b670ae9666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _datas:
+  - Position: {x: 21.85, y: 7.65, z: 0}
+    EventName: defeated_rose_mother
+  - Position: {x: 0, y: -10.14, z: 0}
+    EventName: blue_tree_info
+  - Position: {x: 9.27, y: -7.41, z: 0}
+    EventName: diplomas
+  - Position: {x: -2.4, y: -3, z: 0}
+    EventName: id_card
 --- !u!1001 &1983928729
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45513,7 +45602,7 @@ Grid:
   m_GameObject: {fileID: 2068633539}
   m_Enabled: 1
   m_CellSize: {x: 1, y: 1, z: 0}
-  m_CellGap: {x: -0.001, y: -0.001, z: 0}
+  m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
 --- !u!4 &2068633541

@@ -23,13 +23,6 @@ public class DialogStatesManager : Singleton<DialogStatesManager>, ISavable
 
     public void AddSaid(string pnjName, string dialogueCode)
     {
-        /*
-        Task.Run(() =>
-        {
-            
-        });
-        */
-
         if (dialogueCode != null && dialogueCode != string.Empty
             && !HaveSaid(pnjName, dialogueCode))
         {
